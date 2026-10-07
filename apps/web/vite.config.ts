@@ -86,6 +86,7 @@ function offlineApp(): Plugin {
         '/manifest.webmanifest',
       ];
       const hash = createHash('sha256');
+      hash.update(serviceWorkerSource('version', []));
       for (const file of bibleFiles)
         hash.update(readFileSync(new URL(`public/bible/${file}`, import.meta.url)));
       for (const item of Object.values(bundle))

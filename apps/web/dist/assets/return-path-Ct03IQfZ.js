@@ -1,1 +1,0 @@
-const t="ebenezer.afterSignIn",n=new Set(["/welcome?step=account"]),s="/settings";function r(e){try{n.has(e)&&sessionStorage.setItem(t,e)}catch{}}function a(){try{const e=sessionStorage.getItem(t);if(sessionStorage.removeItem(t),e&&n.has(e))return e}catch{}return s}export{r,a as t};

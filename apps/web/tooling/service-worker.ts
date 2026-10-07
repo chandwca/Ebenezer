@@ -48,7 +48,16 @@ self.addEventListener('fetch', event => {
       (url.pathname.startsWith('/auth/') && url.pathname !== '/auth/callback') || url.pathname === '/health') return;
   // Callback navigation may use the static app shell; never cache a callback URL/code or Auth response.
   if (request.mode === 'navigate') {
-    event.respondWith(caches.open(CACHE).then(cache => cache.match('/index.html')).then(response => response || fetch(request)));
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const response = await cache.match('/index.html') || await fetch(request);
+      // Pages redirects /index.html to /. Safari rejects redirected navigation responses
+      // served by a worker; preserve the content without the original redirect metadata.
+      if (response.redirected) return new Response(response.body, {
+        status: response.status, statusText: response.statusText, headers: response.headers,
+      });
+      return response;
+    })());
     return;
   }
   if (!ASSETS.includes(url.pathname) && !url.pathname.startsWith('/assets/')) return;

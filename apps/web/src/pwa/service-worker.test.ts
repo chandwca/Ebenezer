@@ -33,6 +33,23 @@ function setup() {
   return { handlers, scope, caches, addAll, network };
 }
 describe('offline service worker', () => {
+  it('removes redirect metadata from the cached shell for Safari navigation', async () => {
+    const { handlers, caches } = setup();
+    const shell = new Response('app shell', { headers: { 'Content-Type': 'text/html' } });
+    Object.defineProperty(shell, 'redirected', { value: true });
+    (await caches.open()).match.mockResolvedValueOnce(shell);
+    let response: Promise<Response> | undefined;
+    handlers.fetch({
+      request: { url: 'https://example.test/', method: 'GET', mode: 'navigate' },
+      respondWith: (promise: Promise<Response>) => {
+        response = promise;
+      },
+    });
+    const result = await response!;
+    expect(result.redirected).toBe(false);
+    expect(result.headers.get('Content-Type')).toBe('text/html');
+    expect(await result.text()).toBe('app shell');
+  });
   it('precaches the complete build and does not skip waiting during install', async () => {
     const { handlers, addAll, scope } = setup();
     let work: Promise<unknown> | undefined;
