@@ -33,6 +33,15 @@ const TogetherPage = React.lazy(() =>
 const BibleSearchPage = React.lazy(() =>
   import('./pages/bible-search').then((module) => ({ default: module.BibleSearchPage })),
 );
+const WordPage = React.lazy(() =>
+  import('./pages/word').then((module) => ({ default: module.WordPage })),
+);
+const PackPage = React.lazy(() =>
+  import('./pages/pack').then((module) => ({ default: module.PackPage })),
+);
+const SendPage = React.lazy(() =>
+  import('./pages/send').then((module) => ({ default: module.SendPage })),
+);
 const NotificationPage = React.lazy(() =>
   import('./pages/notification').then((module) => ({ default: module.NotificationPage })),
 );
@@ -83,6 +92,15 @@ function AppContent() {
       </React.Suspense>
     );
   if (location.pathname === '/' && !preferences) return <LoadingState />;
+  if (location.pathname.startsWith('/w/') || location.pathname.startsWith('/p/'))
+    return (
+      <React.Suspense fallback={<LoadingState />}>
+        <Routes>
+          <Route path="/w/:moment" element={<WordPage key={location.pathname} />} />
+          <Route path="/p/:pack" element={<PackPage key={location.pathname} />} />
+        </Routes>
+      </React.Suspense>
+    );
 
   return (
     <AppShell dark={dark} toggleTheme={toggleTheme}>
@@ -96,6 +114,7 @@ function AppContent() {
             element={<NotificationPage key={location.pathname} />}
           />
           <Route path="/bible-search" element={<BibleSearchPage />} />
+          <Route path="/send" element={<SendPage />} />
           <Route path="/story" element={<StoryPage />} />
           <Route path="/community" element={<TogetherPage />} />
           <Route path="/pray/:token" element={<PrayPage key={location.pathname} />} />

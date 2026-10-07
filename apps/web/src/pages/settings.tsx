@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Moon, ShieldCheck, Sun } from 'lucide-react';
+import { Moon, Sun, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ContentLayout } from '@/components/ui/content-layout';
 import { PageHeading } from '@/components/ui/page-heading';
@@ -13,29 +14,25 @@ export function SettingsPage({ dark, toggleTheme }: { dark: boolean; toggleTheme
   const { t } = useTranslation('settings');
   return (
     <>
-      <PageHeading eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+      <PageHeading title={t('title')} />
       <ContentLayout>
-        <AccountCard />
         <ProfileForm />
         <ReminderPreferences />
-        <PreferenceCard
-          title={t('language.title')}
-          description={t('language.description')}
-          note={t('language.available')}
-        >
+        <PreferenceCard title={t('language.title')}>
           <LanguageSelect id="settings-language" />
         </PreferenceCard>
-        <PreferenceCard title={t('appearance.title')} description={t('appearance.description')}>
+        <PreferenceCard title={t('appearance.title')}>
           <Button variant="outline" onClick={toggleTheme}>
             {dark ? <Sun /> : <Moon />}
             {t(dark ? 'appearance.switchLight' : 'appearance.switchDark')}
           </Button>
         </PreferenceCard>
-        <PreferenceCard
-          icon={ShieldCheck}
-          title={t('privacy.title')}
-          description={t('privacy.description')}
-        />
+        <PreferenceCard icon={Users} title={t('together.title')}>
+          <Button asChild variant="outline">
+            <Link to="/community">{t('together.open')}</Link>
+          </Button>
+        </PreferenceCard>
+        <AccountCard hideWhenUnavailable />
       </ContentLayout>
     </>
   );

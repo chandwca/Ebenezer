@@ -8,7 +8,19 @@
   }
   body {
     margin: 0;
-    background: var(--background);
+    background-color: var(--background);
+    background-image:
+      radial-gradient(
+        60rem 28rem at 85% -8%,
+        color-mix(in oklch, var(--teal) 16%, transparent),
+        transparent
+      ),
+      radial-gradient(
+        42rem 24rem at -8% 6%,
+        color-mix(in oklch, var(--gold) 13%, transparent),
+        transparent
+      );
+    background-repeat: no-repeat;
     color: var(--foreground);
     font-family: var(--font-sans);
     line-height: 1.65;
@@ -44,10 +56,24 @@
 .mobile-nav {
   padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
 }
+.bg-hero {
+  background-image:
+    radial-gradient(110% 90% at 100% 0%, #00e0c6aa, transparent 58%),
+    radial-gradient(90% 80% at 0% 100%, #ff9f1c55, transparent 60%),
+    linear-gradient(140deg, #006e80, #04212e 60%, #020f1a);
+}
+.night-sky {
+  background-color: #020d14;
+  background-image:
+    radial-gradient(90% 60% at 50% 100%, #00e0c655, transparent 70%),
+    radial-gradient(70% 45% at 50% 0%, #1b6fe055, transparent 70%),
+    linear-gradient(180deg, #06394a, #020d14 70%);
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    animation-iteration-count: 1 !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;

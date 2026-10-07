@@ -12,14 +12,14 @@
     "description": "Un lugar para los días luminosos, los días difíciles y todas las formas en que has recibido ayuda.",
     "heading": "Espacio para tu primera piedra",
     "text": "Tus piedras guardadas aparecerán aquí cuando el diario local esté listo. Tu diario original no se ha importado ni modificado.",
-    "empty": "Coloca tu primera piedra. Se guardará en este dispositivo."
+    "empty": "Pon tu primera piedra."
   },
   "tower": {
     "view": "Vista de tu historia",
     "tower": "Torre",
     "list": "Diario",
     "tools": "Copias de seguridad",
-    "heading": "Hasta aquí me ha ayudado el Señor.",
+    "heading": "Mi historia",
     "description": "Cada piedra guarda una Escritura y un recuerdo. Toca una para recordar.",
     "hardDays": "Días difíciles",
     "mixedDays": "Días mixtos",
@@ -238,7 +238,9 @@
     "eyebrow": "Tu camino con el Señor",
     "localMessage": "Aquí hay espacio para los días difíciles y los luminosos. El amor de Dios no se mide por lo fácil que fue tu día. Al mirar atrás, trae tu gratitud, tus preguntas y lo que sigue pendiente.",
     "gathering": "Un momento con tu camino…",
-    "aiNote": "Escrito con IA de Google a partir de tus piedras: sus días, versículos, pensamientos y reflexiones."
+    "aiNote": "Escrito con IA de Google a partir de tus piedras: sus días, versículos, pensamientos y reflexiones.",
+    "ask": "Escribe una reflexión con IA",
+    "disclosure": "Envía las palabras de tus piedras recientes a Google AI, solo cuando lo pulsas. Si no, nada sale de este dispositivo."
   },
   "evening": {
     "eyebrow": "Trae tu día",

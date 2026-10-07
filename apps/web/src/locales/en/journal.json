@@ -12,14 +12,14 @@
     "description": "A place for bright days, hard days, and all the ways you have been helped.",
     "heading": "Room for your first stone",
     "text": "Your saved stones will appear here once the local journal is built. Your original journal has not been imported or changed.",
-    "empty": "Set your first stone. It will be saved on this device."
+    "empty": "Set your first stone."
   },
   "tower": {
     "view": "Your story view",
     "tower": "Tower",
     "list": "Journal",
     "tools": "Backups",
-    "heading": "Thus far, the Lord has helped me.",
+    "heading": "My story",
     "description": "Every stone holds a Scripture and a memory. Tap one to remember.",
     "hardDays": "Hard days",
     "mixedDays": "Mixed days",
@@ -238,7 +238,9 @@
     "eyebrow": "Your walk with the Lord",
     "localMessage": "There is room here for both the hard days and the bright ones. God’s love is not measured by how easy your day felt. As you look back, bring Him your gratitude, your questions, and what still feels unfinished.",
     "gathering": "Taking a moment with your journey…",
-    "aiNote": "Written with Google AI from your stones: their days, verses, thoughts and reflections."
+    "aiNote": "Written with Google AI from your stones: their days, verses, thoughts and reflections.",
+    "ask": "Write me a reflection with AI",
+    "disclosure": "Sends the words of your recent stones to Google AI, only when you tap. Skip it and nothing leaves this device."
   },
   "evening": {
     "eyebrow": "Bring your day",

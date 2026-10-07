@@ -27,7 +27,7 @@ export function StoryViewSwitcher({
             className={cn(
               'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl text-sm font-semibold transition-[background-color,color,box-shadow] motion-reduce:transition-none',
               view === value
-                ? 'bg-card text-foreground shadow-[0_2px_8px_-2px_#173b4d26]'
+                ? 'bg-card text-foreground shadow-[0_2px_8px_-2px_#062a3326]'
                 : 'text-muted-foreground hover:text-foreground',
             )}
           >

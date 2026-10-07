@@ -55,7 +55,6 @@ describe('notification continuation', () => {
     fireEvent.change(screen.getByRole('textbox'), {
       target: { value: 'I can bring my questions.' },
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Carry this today' }));
     await waitFor(async () =>
       expect((await db.preferences.get('notification:thought:2026-10-07'))?.value).toBe(
         'I can bring my questions.',

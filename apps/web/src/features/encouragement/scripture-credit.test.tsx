@@ -73,10 +73,7 @@ describe('YouVersion Scripture display', () => {
           source: 'prepared',
         }}
         thought=""
-        thoughtSaved={false}
-        savingThought={false}
         onThoughtChange={() => {}}
-        onCarry={() => {}}
       />,
     );
     expect(screen.getByText('Scripture from YouVersion')).toBeTruthy();

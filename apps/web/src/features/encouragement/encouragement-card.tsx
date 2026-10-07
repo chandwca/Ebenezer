@@ -12,6 +12,7 @@ import {
 import { journal } from '@/db/repositories';
 import { cityWeather } from './weather';
 import { useStudentProfile } from '@/features/profile/use-student-profile';
+import { useAutosave } from '@/hooks/use-autosave';
 import { useOnlineStatus } from '@/hooks/use-online-status';
 import { publicRequest } from '@/lib/api/client';
 
@@ -32,8 +33,6 @@ function AccountEncouragement({ language }: { language: EncouragementRequest['la
   const [weather, setWeather] = React.useState<Awaited<ReturnType<typeof cityWeather>>>();
   const [thought, setThought] = React.useState('');
   const [carriedThought, setCarriedThought] = React.useState('');
-  const [savingThought, setSavingThought] = React.useState(false);
-  const [thoughtSaved, setThoughtSaved] = React.useState(false);
   const lockedDay = React.useRef('');
   const weatherController = React.useRef<AbortController | undefined>(undefined);
   const city = profile?.profile?.city;
@@ -64,7 +63,6 @@ function AccountEncouragement({ language }: { language: EncouragementRequest['la
           if (active) {
             setCarriedThought(stored.thought);
             setThought(stored.thought);
-            setThoughtSaved(true);
           }
         }
         // One Word per day: once shown, keep it so Today and the evening tell the same story.
@@ -162,12 +160,13 @@ function AccountEncouragement({ language }: { language: EncouragementRequest['la
       });
     return () => request.abort();
   }, [loadedDay, day, online, contextKey]);
-  async function carryThought() {
-    if (!thought.trim() || savingThought) return;
-    setSavingThought(true);
-    try {
+  useAutosave(
+    thought,
+    async (value) => {
+      const trimmed = value.trim();
       const saved = await journal.getPreference('today:morningWord');
       const existing = typeof saved?.value === 'string' ? JSON.parse(saved.value) : {};
+      if (!trimmed && !existing.thought) return;
       await journal.setPreference(
         'today:morningWord',
         JSON.stringify({
@@ -175,29 +174,19 @@ function AccountEncouragement({ language }: { language: EncouragementRequest['la
           date: day,
           input,
           scripture: result?.snapshot,
-          thought: thought.trim(),
+          thought: trimmed,
         }),
       );
-      setCarriedThought(thought.trim());
-      setThoughtSaved(true);
-    } catch {
-      setThoughtSaved(false);
-    } finally {
-      setSavingThought(false);
-    }
-  }
+      setCarriedThought(trimmed);
+    },
+    loadedDay === day,
+  );
   return (
     <EncouragementPanel
       input={input}
       result={result}
       thought={thought}
-      thoughtSaved={thoughtSaved}
-      savingThought={savingThought}
-      onThoughtChange={(value) => {
-        setThought(value);
-        setThoughtSaved(false);
-      }}
-      onCarry={() => void carryThought()}
+      onThoughtChange={setThought}
     />
   );
 }

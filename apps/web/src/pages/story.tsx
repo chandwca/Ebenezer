@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useTranslation } from 'react-i18next';
-import { Layers } from 'lucide-react';
 import { journal } from '@/db/repositories';
 import type { Stone } from '@/db/database';
 import { Alert } from '@/components/ui/alert';
-import { EmptyState } from '@/components/ui/empty-state';
+import { Disclosure } from '@/components/ui/disclosure';
 import { PageHeading } from '@/components/ui/page-heading';
 import { StoneTower } from '@/components/ui/stone-tower';
 import { StoneDetail } from '@/components/ui/stone-detail';
@@ -35,15 +34,8 @@ export function StoryPage() {
   const selected = stones.find((stone) => stone.id === selectedId);
   return (
     <>
-      <PageHeading
-        eyebrow={t('story.eyebrow')}
-        title={t('tower.heading')}
-        description={t('tower.description')}
-      />
+      <PageHeading hidden title={t('tower.heading')} />
       {justSaved && <ReminderPrompt placement="after-stone" />}
-      {!editing && result && !result.failed && stones.length > 0 && (
-        <JourneySummary stones={result.stones} />
-      )}
       {notice && <Alert variant={notice.error ? 'error' : 'success'}>{t(notice.key)}</Alert>}
       {editing ? (
         <StoneEditor
@@ -59,15 +51,14 @@ export function StoryPage() {
       ) : result.failed ? (
         <Alert>{t('errors:storageUnavailable')}</Alert>
       ) : stones.length ? (
-        <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
+        <>
+          <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
+          <Disclosure label={t('summary.eyebrow')}>
+            <JourneySummary stones={result.stones} />
+          </Disclosure>
+        </>
       ) : (
-        <EmptyState
-          icon={Layers}
-          title={t('story.heading')}
-          description={t('story.empty')}
-          action={t('form.begin')}
-          to="/reflection"
-        />
+        <StoneTower stones={[]} onOpen={() => undefined} />
       )}
       {selected && (
         <StoneDetail

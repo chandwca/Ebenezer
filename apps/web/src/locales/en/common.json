@@ -1,24 +1,19 @@
 {
-  "brandTagline": "A little remembrance",
   "navigation": {
     "today": "Today",
-    "story": "My story",
+    "story": "My stones",
     "community": "Together",
     "settings": "Settings",
     "reflection": "Reflection",
-    "bibleSearch": "Bible search"
+    "bibleSearch": "Bible search",
+    "send": "Send"
   },
   "mainNavigation": "Main navigation",
   "mobileNavigation": "Mobile navigation",
   "skipContent": "Skip to content",
-  "dailyWalk": "Your daily walk",
-  "sidebarTitle": "Small stones. A lasting story.",
-  "sidebarDescription": "Remember what has carried you this far.",
-  "headerTagline": "Walk the path. Set a stone.",
   "preview": "Foundation preview",
   "backToday": "Back to Today",
   "returnToday": "Return to Today",
-  "footer": "A space for Scripture, reflection, and remembrance.",
   "stepOf": "Step {{current}} of {{total}} · {{step}}",
   "steps": {
     "feel": "Feel",
