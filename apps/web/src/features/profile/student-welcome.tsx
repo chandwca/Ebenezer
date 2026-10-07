@@ -8,11 +8,9 @@ import { ContentLayout } from '@/components/ui/content-layout';
 import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert';
 import { EntryOptions } from '@/components/ui/entry-options';
-import { WelcomeReminders } from '@/components/ui/welcome-reminders';
 import { AccountCard } from '@/features/account/account-card';
 import { useAuth } from '@/features/auth/auth-provider';
 import { ProfileForm } from './profile-form';
-import { journeySteps } from '@/lib/journey';
 
 type Step = 'start' | 'profile' | 'account';
 const ACCOUNT_RETURN = '/welcome?step=account';
@@ -50,54 +48,41 @@ export function StudentWelcome({
     }
   }
   const copy = {
-    start: ['today:entry.title', 'today:entry.description', 'today:entry.stepOne'],
-    profile: ['today:entry.profileTitle', 'today:entry.profileDescription', 'today:entry.stepTwo'],
-    account: ['today:entry.accountTitle', 'today:entry.accountDescription', 'today:entry.stepTwo'],
+    start: ['today:entry.title', 'today:entry.description'],
+    profile: ['today:entry.profileTitle', 'today:entry.profileDescription'],
+    account: ['today:entry.accountTitle', 'today:entry.accountDescription'],
   }[step];
   return (
     <OnboardingLayout
       dark={dark}
       toggleTheme={toggleTheme}
       themeLabel={t(dark ? 'settings:appearance.labelLight' : 'settings:appearance.labelDark')}
-      eyebrow={t('today:entry.eyebrow')}
       visualTitle={t('today:entry.visualTitle')}
-      visualNote={t('today:entry.visualNote')}
       title={t(copy[0])}
       description={t(copy[1])}
-      pathLabels={journeySteps.map((name) => t(`common:steps.${name}`))}
-      stepLabel={t(copy[2])}
     >
       <ContentLayout>
         {step === 'start' && (
           <>
-            <WelcomeReminders
-              items={['loved', 'provided', 'together'].map((name) => ({
-                title: t(`today:entry.reminders.${name}.title`),
-                description: t(`today:entry.reminders.${name}.description`),
-              }))}
-            />
             <EntryOptions
               label={t('today:entry.choose')}
               options={[
                 {
-                  icon: UserPlus,
-                  title: t('today:entry.options.account.title'),
-                  description: t('today:entry.options.account.description'),
-                  onSelect: () => setStep('account'),
+                  icon: Compass,
+                  title: t('today:entry.options.explore.title'),
+                  onSelect: () => void enter(),
                   emphasis: true,
+                  disabled: busy,
                 },
                 {
                   icon: MapPin,
                   title: t('today:entry.options.local.title'),
-                  description: t('today:entry.options.local.description'),
                   onSelect: () => setStep('profile'),
                 },
                 {
-                  icon: Compass,
-                  title: t('today:entry.options.explore.title'),
-                  description: t('today:entry.options.explore.description'),
-                  onSelect: () => void enter(),
-                  disabled: busy,
+                  icon: UserPlus,
+                  title: t('today:entry.options.account.title'),
+                  onSelect: () => setStep('account'),
                 },
               ]}
             />

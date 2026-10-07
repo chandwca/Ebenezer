@@ -96,6 +96,8 @@ function SummarySession({ body }: { body: string }) {
   const [result, setResult] = React.useState(() => cache.get(body));
   const [busy, setBusy] = React.useState(false);
   const [attempt, setAttempt] = React.useState(0);
+  const [asked, setAsked] = React.useState(false);
+  const { t } = useTranslation('journal');
   const language = JSON.parse(body).language;
 
   React.useEffect(() => {
@@ -118,7 +120,7 @@ function SummarySession({ body }: { body: string }) {
   }, [body]);
 
   React.useEffect(() => {
-    if (!online || cache.has(body)) return;
+    if (!asked || !online || cache.has(body)) return;
     const controller = new AbortController();
     let retry: ReturnType<typeof setTimeout> | undefined;
     setBusy(true);
@@ -153,6 +155,21 @@ function SummarySession({ body }: { body: string }) {
       controller.abort();
       clearTimeout(retry);
     };
-  }, [body, online, attempt]);
-  return <RemembrancePanel busy={busy} result={result} language={language} />;
+  }, [body, online, attempt, asked]);
+  return (
+    <RemembrancePanel
+      busy={busy}
+      result={result}
+      language={language}
+      consent={
+        asked || !online || cache.has(body)
+          ? undefined
+          : {
+              label: t('summary.ask'),
+              note: t('summary.disclosure'),
+              onRequest: () => setAsked(true),
+            }
+      }
+    />
+  );
 }

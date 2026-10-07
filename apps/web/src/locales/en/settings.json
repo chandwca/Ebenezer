@@ -1,10 +1,7 @@
 {
-  "eyebrow": "Make yourself at home",
-  "title": "Your preferences.",
-  "description": "A quieter space, shaped around you.",
+  "title": "Settings.",
   "appearance": {
     "title": "Appearance",
-    "description": "Choose the light or dark theme.",
     "switchLight": "Switch to light",
     "switchDark": "Switch to dark",
     "labelLight": "Switch to light theme",
@@ -12,17 +9,11 @@
   },
   "language": {
     "title": "Language",
-    "label": "Application language",
-    "description": "Choose your language. Switching keeps your current screen and entered text.",
-    "available": "English and Spanish are bundled with the application."
-  },
-  "privacy": {
-    "title": "Your journal, your choice",
-    "description": "Your journal is saved on this device. Optional private cloud sync, account settings, and backups will follow in later stages."
+    "label": "Application language"
   },
   "profile": {
     "title": "A little about you",
-    "description": "Make this space feel like yours. These details stay on your device.",
+    "description": "Stays on this device.",
     "name": "What should we call you?",
     "city": "Where do you live now?",
     "saved": "Preferences saved on this device.",
@@ -31,21 +22,20 @@
     "chennai": "Chennai",
     "lagos": "Lagos",
     "chicago": "Chicago",
-    "nameHint": "A first name or nickname—whatever feels right to you.",
-    "cityHint": "Your city or town is enough.",
+    "nameHint": "A first name or nickname.",
+    "cityHint": "City or town.",
     "namePlaceholder": "For example, Alex",
     "cityPlaceholder": "For example, Melbourne"
   },
   "reminders": {
-    "title": "A gentle reminder, twice a day",
+    "title": "Get a Word each day",
     "morning": "Breathe in the Word",
     "evening": "Bring your day to Jesus",
     "privacy": "Discreet reminders are on by default. Scripture previews are optional. Your journal is never shown in notifications.",
-    "turnOn": "Turn on reminders",
+    "turnOn": "Turn on",
     "turningOn": "Turning on…",
     "notNow": "Not now",
-    "changeLater": "Change times anytime in Settings.",
-    "confirmed": "Reminders are on. We’ll meet you tomorrow at {{time}}.",
+    "confirmed": "Reminder on for {{time}}.",
     "install": {
       "title": "Get reminders on your iPhone",
       "steps": [
@@ -101,5 +91,9 @@
       "missing": "The original notification passage is no longer available on this device. You can open Today to choose a new reading.",
       "loading": "Opening your passage…"
     }
+  },
+  "together": {
+    "title": "Prayer circle",
+    "open": "Open"
   }
 }

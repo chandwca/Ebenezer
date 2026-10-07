@@ -183,11 +183,7 @@ export function EveningReflection({ draft }: { draft: Draft }) {
   const name = profile?.profile?.name;
   return (
     <>
-      <PageHeading
-        eyebrow={t('evening.eyebrow')}
-        title={name ? t('evening.titleNamed', { name }) : t('evening.title')}
-        description={t('evening.description')}
-      />
+      <PageHeading title={name ? t('evening.titleNamed', { name }) : t('evening.title')} />
 
       <StoryChapter eyebrow={t('evening.chapters.morning')} current={stage === 0}>
         <MorningRecall

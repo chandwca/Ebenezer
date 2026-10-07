@@ -6,12 +6,14 @@ import settingsEn from '@/locales/en/settings.json';
 import journalEn from '@/locales/en/journal.json';
 import communityEn from '@/locales/en/community.json';
 import errorsEn from '@/locales/en/errors.json';
+import wordEn from '@/locales/en/word.json';
 import commonEs from '@/locales/es/common.json';
 import todayEs from '@/locales/es/today.json';
 import settingsEs from '@/locales/es/settings.json';
 import journalEs from '@/locales/es/journal.json';
 import communityEs from '@/locales/es/community.json';
 import errorsEs from '@/locales/es/errors.json';
+import wordEs from '@/locales/es/word.json';
 import accountEn from '@/locales/en/account.json';
 import accountEs from '@/locales/es/account.json';
 
@@ -26,6 +28,7 @@ export const resources = {
     journal: journalEn,
     community: communityEn,
     errors: errorsEn,
+    word: wordEn,
   },
   es: {
     account: accountEs,
@@ -36,5 +39,6 @@ export const resources = {
     journal: journalEs,
     community: communityEs,
     errors: errorsEs,
+    word: wordEs,
   },
 };

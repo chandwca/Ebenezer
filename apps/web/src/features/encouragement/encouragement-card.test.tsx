@@ -70,7 +70,7 @@ it('always shows a verse while the morning Word is still loading', async () => {
   );
   const bundled = morningPassage(morningContext(new Date()));
   expect(await screen.findByText(`“${bundled.text}”`)).toBeTruthy();
-  expect(screen.getByText('A thought to carry')).toBeTruthy();
+  expect(screen.getByRole('textbox')).toBeTruthy();
 });
 
 it('keeps gentle encouragement visible without errors or retry controls when AI fails', async () => {

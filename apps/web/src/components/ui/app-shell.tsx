@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check, Layers, Leaf, Moon, Settings, Sun, Users } from 'lucide-react';
+import { Layers, Moon, Send, Settings, Sun } from 'lucide-react';
 import { PwaStatus } from './pwa-status';
 import { Button } from './button';
 import { LanguageSelect } from './language-select';
@@ -10,22 +10,16 @@ import { cn } from '@/lib/utils';
 
 const navigation = [
   { to: '/', label: 'navigation.today', icon: Sun },
+  { to: '/send', label: 'navigation.send', icon: Send },
   { to: '/story', label: 'navigation.story', icon: Layers },
-  { to: '/community', label: 'navigation.community', icon: Users },
-  { to: '/settings', label: 'navigation.settings', icon: Settings },
 ];
+const settingsLink = { to: '/settings', label: 'navigation.settings', icon: Settings };
 
 export function Brand() {
-  const { t } = useTranslation('common');
   return (
     <Link to="/" className="flex items-center gap-3">
       <StoneMark />
-      <span className="font-display text-xl font-bold tracking-tight">
-        Ebenezer
-        <span className="mt-0.5 block font-sans text-[10px] uppercase tracking-[.2em] text-muted-foreground">
-          {t('common:brandTagline')}
-        </span>
-      </span>
+      <span className="font-display text-xl font-bold tracking-tight">Ebenezer</span>
     </Link>
   );
 }
@@ -58,16 +52,18 @@ export function AppShell({
     const titleKey =
       location.pathname === '/auth/callback'
         ? 'account:callback.title'
-        : (navigation.find((item) => item.to === location.pathname)?.label ??
+        : ([...navigation, settingsLink].find((item) => item.to === location.pathname)?.label ??
           (location.pathname === '/bible-search'
             ? 'navigation.bibleSearch'
-            : location.pathname.startsWith('/notification/')
-              ? 'settings:reminders.settings.title'
-              : location.pathname.startsWith('/pray/')
-                ? 'community:pray.pageTitle'
-                : location.pathname === '/reflection'
-                  ? 'navigation.reflection'
-                  : 'errors:notFound'));
+            : location.pathname === '/community'
+              ? 'navigation.community'
+              : location.pathname.startsWith('/notification/')
+                ? 'settings:reminders.settings.title'
+                : location.pathname.startsWith('/pray/')
+                  ? 'community:pray.pageTitle'
+                  : location.pathname === '/reflection'
+                    ? 'navigation.reflection'
+                    : 'errors:notFound'));
     document.title = `${t(titleKey)} · Ebenezer`;
   }, [location.pathname, t]);
   React.useEffect(() => {
@@ -84,10 +80,7 @@ export function AppShell({
       </a>
       <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r bg-card p-7 md:flex">
         <Brand />
-        <p className="mt-10 text-[10px] font-semibold uppercase tracking-[.18em] text-muted-foreground">
-          {t('common:dailyWalk')}
-        </p>
-        <nav aria-label={t('mainNavigation')} className="mt-4 space-y-2">
+        <nav aria-label={t('mainNavigation')} className="mt-10 space-y-2">
           {navigation.map(({ to, label, icon: Icon }) => (
             <NavLink
               end={to === '/'}
@@ -107,29 +100,23 @@ export function AppShell({
             </NavLink>
           ))}
         </nav>
-        <div className="mt-auto rounded-2xl bg-secondary/50 p-4">
-          <Leaf size={19} className="text-teal" />
-          <p className="mt-3 font-display text-base font-semibold tracking-tight">
-            {t('common:sidebarTitle')}
-          </p>
-          <p className="mt-2 text-xs leading-5 text-muted-foreground">
-            {t('common:sidebarDescription')}
-          </p>
-        </div>
       </aside>
       <div className="md:ml-64">
         <header
           ref={headerRef}
-          className="sticky top-0 z-30 flex min-h-24 flex-wrap items-center justify-between gap-3 border-b bg-background px-5 py-4 sm:px-9"
+          className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-3 border-b bg-background px-5 py-3 sm:px-9"
         >
           <div className="md:hidden">
             <Brand />
           </div>
-          <p className="hidden text-sm text-muted-foreground md:block">
-            {t('common:headerTagline')}
-          </p>
+          <span className="hidden md:block" />
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSelect id="header-language" />
+            <Button asChild variant="ghost" size="icon">
+              <NavLink to={settingsLink.to} aria-label={t(settingsLink.label)}>
+                <Settings />
+              </NavLink>
+            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -147,18 +134,15 @@ export function AppShell({
           ref={headingRef}
           tabIndex={-1}
           id="main-content"
-          className="mx-auto max-w-6xl scroll-mt-[calc(var(--app-header-height,6rem)+1.5rem)] px-5 py-9 pb-32 outline-none sm:px-9 md:pb-12"
+          className="mx-auto max-w-6xl scroll-mt-[calc(var(--app-header-height,4rem)+1.5rem)] px-5 py-8 pb-32 outline-none sm:px-9 md:pb-12"
         >
-          <PwaStatus />
+          <PwaStatus showInstall={location.pathname === '/settings'} />
           {children}
-          <footer className="mt-10 flex items-center gap-2 border-t pt-5 text-xs text-muted-foreground">
-            <Check size={14} /> {t('common:footer')}
-          </footer>
         </main>
       </div>
       <nav
         aria-label={t('mobileNavigation')}
-        className="mobile-nav fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t bg-card/95 px-2 pt-2 backdrop-blur md:hidden"
+        className="mobile-nav fixed inset-x-0 bottom-0 z-20 grid grid-cols-3 border-t bg-card/95 px-2 pt-2 backdrop-blur md:hidden"
       >
         {navigation.map(({ to, label, icon: Icon }) => (
           <NavLink

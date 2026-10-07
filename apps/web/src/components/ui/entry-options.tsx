@@ -10,7 +10,7 @@ export function EntryOptions({
   options: {
     icon: LucideIcon;
     title: string;
-    description: string;
+    description?: string;
     onSelect: () => void;
     emphasis?: boolean;
     disabled?: boolean;
@@ -41,14 +41,16 @@ export function EntryOptions({
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-sm font-semibold">{title}</span>
-            <span
-              className={cn(
-                'mt-0.5 block text-xs leading-5',
-                emphasis ? 'text-gold-foreground/80' : 'text-muted-foreground',
-              )}
-            >
-              {description}
-            </span>
+            {description && (
+              <span
+                className={cn(
+                  'mt-0.5 block text-xs leading-5',
+                  emphasis ? 'text-gold-foreground/80' : 'text-muted-foreground',
+                )}
+              >
+                {description}
+              </span>
+            )}
           </span>
           <ChevronRight
             size={18}
