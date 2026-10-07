@@ -1,0 +1,280 @@
+{
+  "reflection": {
+    "eyebrow": "Un paso a la vez",
+    "title": "Recorre el camino.",
+    "description": "Una conversación guiada con la Escritura, tu día y las personas que caminan contigo.",
+    "heading": "Tu reflexión empieza aquí",
+    "text": "La siguiente etapa añadirá el formulario guiado, la selección de Escritura y los borradores guardados. Esta vista previa todavía no guarda entradas del diario."
+  },
+  "story": {
+    "eyebrow": "Tu propio libro de recuerdos",
+    "title": "Cada piedra tiene una historia.",
+    "description": "Un lugar para los días luminosos, los días difíciles y todas las formas en que has recibido ayuda.",
+    "heading": "Espacio para tu primera piedra",
+    "text": "Tus piedras guardadas aparecerán aquí cuando el diario local esté listo. Tu diario original no se ha importado ni modificado.",
+    "empty": "Coloca tu primera piedra. Se guardará en este dispositivo."
+  },
+  "tower": {
+    "view": "Vista de tu historia",
+    "tower": "Torre",
+    "list": "Diario",
+    "tools": "Búsqueda, filtros y copias de seguridad",
+    "heading": "Hasta aquí me ha ayudado el Señor.",
+    "description": "Cada piedra guarda una Escritura y un recuerdo. Toca una para recordar.",
+    "hardDays": "Días difíciles",
+    "mixedDays": "Días mixtos",
+    "brightDays": "Días luminosos",
+    "label": "Tu torre de recuerdos, con las piedras más antiguas abajo",
+    "open": "Abrir piedra: {{date}} · {{tone}} · {{reference}} · {{memory}}",
+    "order_one": "{{count}} piedra · Las más antiguas abajo, las más recientes arriba",
+    "order_other": "{{count}} piedras · Las más antiguas abajo, las más recientes arriba",
+    "remember": "Necesito recordar",
+    "latest": "Vuelve a tu piedra más reciente en esta vista.",
+    "close": "Cerrar recuerdo",
+    "chapter": "Leer el capítulo en línea",
+    "referenceOnly": "Esta referencia bíblica está guardada. El texto del pasaje no está incluido en esta vista del diario.",
+    "encouragement": "Hasta aquí, Dios te ha ayudado. Él sigue siendo el mismo Dios hoy.",
+    "song": "Una canción para ese día"
+  },
+  "form": {
+    "memoryLabel": "¿Dónde te encontraste con Dios?",
+    "memoryPlaceholder": "Hoy Dios…",
+    "feel": "¿Cómo te sientes?",
+    "passage": "La Escritura que quiero llevar conmigo",
+    "choose": "Elige una opción",
+    "confirmRead": "He leído este pasaje",
+    "confirmReadError": "Lee el pasaje y confírmalo antes de continuar.",
+    "readNote": "La Escritura se muestra en inglés (KJV).",
+    "readContext": "Lee despacio y piensa en lo que este pasaje te dice hoy.",
+    "stood": "¿Qué te llamó la atención?",
+    "learned": "¿Qué aprendiste?",
+    "questions": "¿Qué preguntas tienes?",
+    "thoughts": "¿Qué piensas?",
+    "prayer": "¿Cómo podemos orar por ti?",
+    "reflectionRequired": "Escribe al menos una respuesta de reflexión.",
+    "partner": "Alguien a quien te gustaría pedir oración (opcional)",
+    "partnerNote": "Solo se guarda un nombre. No se envía ningún mensaje.",
+    "privateNote": "Esta reflexión permanece en este dispositivo. Las publicaciones y la sincronización con la nube aún no están habilitadas.",
+    "tone": "¿Cómo fue tu día?",
+    "saveStone": "Colocar mi piedra",
+    "checkIn": "¿Qué llevas en el corazón?",
+    "retry": "Intentar de nuevo",
+    "details": "Leer mi reflexión",
+    "begin": "Comenzar una reflexión"
+  },
+  "feelings": {
+    "grateful": "Con gratitud",
+    "anxious": "Con ansiedad",
+    "overwhelmed": "Con agobio",
+    "lonely": "Con soledad",
+    "hopeful": "Con esperanza",
+    "sad": "Con tristeza",
+    "afraid": "Con miedo",
+    "tired": "Con cansancio",
+    "ashamed": "Con vergüenza",
+    "homesick": "Extraño mi hogar",
+    "uncertain": "Buscando mi camino"
+  },
+  "journey": {
+    "selectionNote": "No hay una respuesta correcta. Elige lo que refleje cómo te sientes.",
+    "mixedNote": "Distintos sentimientos pueden convivir. Aquí hay espacio para todos.",
+    "description": "Haz espacio para tu día. Encuentra ánimo en la Escritura. Guarda un recuerdo de la fidelidad de Dios.",
+    "affirmation": "Dios te ama. No tienes que caminar a solas.",
+    "note": "Los días luminosos y los difíciles forman parte de tu historia. Un momento, una piedra a la vez.",
+    "takeYourTime": "Tómate tu tiempo. Aquí hay espacio para ti.",
+    "heartTitle": "Ponlo todo en manos del Señor.",
+    "heartDescription": "Una pequeña alegría, gratitud o algo que te pesa. Puedes dejar unas palabras aquí o simplemente seguir.",
+    "wordsPlaceholder": "Señor, hoy te traigo…",
+    "starters": {
+      "joy": {
+        "label": "Algo alegre",
+        "text": "Señor, gracias por "
+      },
+      "heavy": {
+        "label": "Algo que me pesa",
+        "text": "Señor, pongo esto en tus manos: "
+      },
+      "unsure": {
+        "label": "Me cuesta decirlo",
+        "text": "Señor, no sé muy bien cómo decirlo, pero "
+      }
+    },
+    "invite": "Recordar a alguien a quien pedir oración (opcional)",
+    "preview": "Tu piedra está tomando forma",
+    "prompts": {
+      "stood": "¿Qué te llamó la atención?",
+      "learned": "¿Hay algo que empiezas a ver de otra manera?",
+      "questions": "¿Sobre qué sigues preguntándote?",
+      "thoughts": "¿Hay algo más que quieras dejar aquí?",
+      "prayer": "¿Qué te gustaría decirle al Señor?"
+    },
+    "writing": {
+      "stood": "Una palabra o un momento que se quedó conmigo…",
+      "learned": "Empiezo a ver…",
+      "questions": "Señor, todavía me pregunto…",
+      "thoughts": "Algo que llevo en el corazón…",
+      "prayer": "Señor, hoy…"
+    },
+    "moments": {
+      "feel": {
+        "title": "¿Qué llevas en el corazón hoy?",
+        "description": "Elige las piedras que más se acerquen a lo que sientes o comparte lo que llevas en el corazón abajo. Hay espacio para la alegría y lo que te pesa.",
+        "action": "Encontrar un poco de ánimo"
+      },
+      "read": {
+        "title": "Dedica tiempo al Señor.",
+        "description": "Lee despacio. No hay prisa. Puedes abrir el capítulo completo para explorar su contexto.",
+        "action": "¿Qué me quedó de esta lectura?"
+      },
+      "reflect": {
+        "title": "Llévate un pensamiento.",
+        "description": "Quédate con lo que tocó tu corazón. Escribe donde te nazcan las palabras; basta un pequeño pensamiento o una oración.",
+        "action": "Llevar esto conmigo"
+      },
+      "together": {
+        "title": "¿Quién podría caminar contigo?",
+        "description": "Piensa en alguien que te ayuda a sentir apoyo. También puedes guardar este momento para ti y continuar.",
+        "action": "Dar forma a mi piedra"
+      },
+      "stone": {
+        "title": "Un momento para recordar.",
+        "description": "Dale un recuerdo a esta piedra. Elige su color: luminoso, mixto o difícil. Cada piedra tiene su lugar.",
+        "action": "Colocar mi piedra"
+      }
+    },
+    "support": {
+      "overwhelmed": "No tienes que llevarlo todo a la vez. Hagamos espacio para un momento.",
+      "anxious": "La incertidumbre puede pesar. Puedes traer tus preocupaciones aquí.",
+      "lonely": "Estar lejos de personas conocidas puede pesar. Aquí hay espacio para tu historia.",
+      "sad": "No necesitas encontrar las palabras exactas. Podemos ir despacio.",
+      "afraid": "Puedes empezar tal como estás, con las cosas que te generan incertidumbre.",
+      "tired": "No hay prisa. Que este sea un pequeño momento de descanso.",
+      "ashamed": "Aquí hay lugar para ti, incluso con las cosas difíciles de decir.",
+      "homesick": "Puedes extrañar tu hogar y estar construyendo una vida aquí. Ambos sentimientos tienen lugar.",
+      "uncertain": "Encontrar tu camino lleva tiempo. No necesitas todas las respuestas hoy.",
+      "grateful": "Guardemos esta pequeña luz y recordemos lo que te dio alegría.",
+      "hopeful": "Incluso una pequeña esperanza merece recordarse. Caminemos con ella."
+    },
+    "word": {
+      "loading": "Haciendo espacio para una Palabra para tu día…",
+      "downloading": "Buscando un poco de ánimo para tu día…",
+      "searching": "Buscando ánimo a partir de lo que compartiste…",
+      "download": "El primer uso puede descargar unos 145 MB y necesita internet. Una vez preparada, la búsqueda puede funcionar sin conexión. Tus palabras permanecen en este dispositivo.",
+      "note": "World English Bible Classic · Inglés. Lee el pasaje en su contexto.",
+      "context": "Contexto del pasaje — resumen editorial",
+      "chapter": "Dedicar tiempo al capítulo completo",
+      "another": "Dedicar un momento a otro pasaje",
+      "bundled": "Continuar con una palabra de cuidado",
+      "errors": {
+        "setup": "La búsqueda de Escritura aún no está lista en este dispositivo. Puedes intentarlo con conexión o continuar con una palabra de cuidado guardada.",
+        "tooLong": "Estas palabras son más largas de lo que el modelo puede leer. Puedes volver y acortarlas o continuar con una palabra de cuidado.",
+        "search": "No pudimos mostrar un pasaje en este momento. Inténtalo de nuevo o continúa con una palabra de cuidado."
+      }
+    },
+    "evening": {
+      "title": "¿Cómo fue tu día?",
+      "description": "¿Qué pasó hoy y cómo te sientes ahora? Cuéntalo con tus propias palabras. Buscaremos un pasaje para tu reflexión.",
+      "wordNote": "Tu Palabra de la mañana. Después, explora un pasaje relacionado con lo que compartas de tu día.",
+      "morningLabel": "Tu Palabra de la mañana"
+    }
+  },
+  "passages": {
+    "remember": "1 Samuel 7:12 — Recordar la ayuda",
+    "care": "1 Pedro 5:7 — Él cuida de ti",
+    "rock": "Salmo 61:2 — Una roca más alta"
+  },
+  "tones": {
+    "bright": "Luminoso",
+    "mixed": "Mixto",
+    "hard": "Difícil"
+  },
+  "status": {
+    "loading": "Abriendo tu diario local…",
+    "local": "Guardado en este dispositivo"
+  },
+  "manage": {
+    "search": "Buscar en tu diario",
+    "all": "Todos los tonos",
+    "from": "Desde la fecha",
+    "to": "Hasta la fecha",
+    "backupNote": "Las copias contienen tus reflexiones personales. Guárdalas en un lugar privado. La importación añade piedras nuevas y omite los identificadores existentes; nunca sobrescribe tu diario.",
+    "export": "Exportar diario",
+    "import": "Importar copia",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "editLabel": "Editar: {{memory}}",
+    "deleteLabel": "Eliminar: {{memory}}",
+    "save": "Guardar cambios",
+    "cancel": "Cancelar",
+    "saved": "Cambios guardados en este dispositivo.",
+    "deleteTitle": "¿Eliminar esta piedra?",
+    "deleteDescription": "Esto elimina la piedra de este dispositivo. Solo podrás recuperarla si tienes una copia de seguridad.",
+    "deleted": "Piedra eliminada.",
+    "exported": "Se inició la descarga de la copia.",
+    "imported": "Se importaron {{imported}} piedras. Se omitieron {{skipped}} piedras existentes.",
+    "invalidBackup": "Elige una copia válida del diario Ebenezer, versión 1, de hasta 10 MB. No se importó ningún registro.",
+    "noResults": "No hay piedras coincidentes",
+    "changeFilters": "Prueba otra búsqueda, tono o intervalo de fechas.",
+    "exportTooLarge": "Este diario supera el límite de 10 MB para copias de seguridad. No se descargó ninguna copia.",
+    "clearFilters": "Borrar filtros"
+  },
+  "summary": {
+    "title": "Recordando Su fidelidad",
+    "description": "Haz una pausa con toda tu torre, en días difíciles, mixtos y luminosos.",
+    "privacy": "Al elegir reflexionar, solo se envían a Google los totales de días difíciles, mixtos y luminosos. Tus palabras, nombre, fechas, sentimientos y ubicación permanecen en tu dispositivo. Es una reflexión bíblica, no una lectura de tu diario. El nivel gratuito puede usar solicitudes para mejorar sus productos.",
+    "generate": "Reflexionar sobre mis piedras",
+    "loading": "Preparando una reflexión…",
+    "signIn": "Inicia sesión para una reflexión con IA",
+    "offline": "Conéctate para solicitar una reflexión. Tus piedras siguen aquí.",
+    "failed": "No se pudo cargar la reflexión. Inténtalo de nuevo.",
+    "prayer": "Una breve oración",
+    "revisit": "Toca una piedra para volver a su recuerdo y Escritura.",
+    "source": {
+      "ai": "Reflexión con ayuda de IA · basada en 1 Samuel 7:12.",
+      "prepared": "Reflexión preparada · la IA no está disponible."
+    },
+    "eyebrow": "Tu camino con el Señor",
+    "localMessage": "Aquí hay espacio para los días difíciles y los luminosos. El amor de Dios no se mide por lo fácil que fue tu día. Al mirar atrás, trae tu gratitud, tus preguntas y lo que sigue pendiente.",
+    "gathering": "Un momento con tu camino…",
+    "aiNote": "Escrito con IA de Google a partir de tus piedras: sus días, versículos, pensamientos y reflexiones."
+  },
+  "evening": {
+    "eyebrow": "Trae tu día",
+    "title": "Buenas noches.",
+    "titleNamed": "Buenas noches, {{name}}.",
+    "description": "Recorramos juntos tu día, un paso tranquilo a la vez.",
+    "chapters": {
+      "morning": "Esta mañana",
+      "word": "Una Palabra para tu día",
+      "reflect": "Quédate un momento",
+      "stone": "Coloca tu piedra"
+    },
+    "remindedLead": "Esta mañana, recordaste:",
+    "thoughtLead": "Y elegiste llevar contigo este pensamiento:",
+    "question": "Entonces, ¿cómo fue tu día? Cuéntaselo a Él, los momentos luminosos y los difíciles.",
+    "feel": "¿Cómo te sientes ahora?",
+    "ownWords": "O cuéntaselo con tus propias palabras.",
+    "ownWordsPlaceholder": "Hoy…",
+    "findWord": "Buscar una Palabra para mi día",
+    "wordTitle": "Aquí hay una Palabra para lo que compartiste.",
+    "wordNote": "Lee despacio. No hay prisa. Deja que te encuentre donde estás esta noche.",
+    "reflectAction": "Reflexionar sobre esta Palabra",
+    "reflectTitle": "¿Qué te dice esta Palabra?",
+    "reflectNote": "Escribe donde lleguen las palabras. Un pequeño pensamiento u oración es suficiente.",
+    "prompts": {
+      "stood": "¿Qué te llamó la atención esta noche?",
+      "questions": "¿Hay algo que todavía te preguntas?",
+      "prayer": "¿Qué te gustaría decirle al Señor antes de descansar?"
+    },
+    "stoneTitle": "Una piedra para hoy.",
+    "memory": "¿Dónde te encontró Dios hoy?",
+    "dayTone": "¿Qué tipo de día fue?",
+    "private": "Privado, a menos que decidas compartirlo.",
+    "whyLabel": "Por qué este pasaje · sugerido por IA",
+    "aiNote": "Sugerido con IA de Google a partir de lo que compartiste. El texto bíblico es la World English Bible.",
+    "song": {
+      "label": "Una canción para esta noche",
+      "listen": "Escuchar en YouTube"
+    }
+  }
+}

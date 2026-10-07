@@ -1,0 +1,1 @@
+import{j as r,o,Z as i}from"./index-DdoUahUq.js";const n=i("grid",{variants:{layout:{stack:"gap-5",split:"mt-7 items-start gap-6 lg:grid-cols-[1.4fr_1fr]"}},defaultVariants:{layout:"stack"}});function e({layout:t,className:a,...s}){return r.jsx("div",{className:o(n({layout:t}),a),...s})}export{e as C};

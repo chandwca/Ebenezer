@@ -1,0 +1,13 @@
+{
+  "modelId": "Xenova/multilingual-e5-small",
+  "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+  "runtime": "@huggingface/transformers",
+  "runtimeVersion": "3.8.1",
+  "dtype": "q8",
+  "pooling": "mean",
+  "normalize": true,
+  "dimensions": 384,
+  "maxTokens": 512,
+  "queryPrefix": "query: ",
+  "passagePrefix": "passage: "
+}

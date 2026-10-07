@@ -1,0 +1,45 @@
+{
+  "title": "No tienes que caminar a solas.",
+  "signedInTitle": "Tu lugar en Juntos.",
+  "description": "Inicia sesión para preparar tu perfil de comunidad. Tú eliges qué compartir; tu diario privado permanece en este dispositivo.",
+  "google": "Continuar con Google",
+  "signOut": "Cerrar sesión en este dispositivo",
+  "working": "Un momento…",
+  "loading": "Abriendo tu cuenta…",
+  "unavailable": "El inicio de sesión de Juntos aún no está disponible. Puedes seguir recorriendo el camino y guardando tus piedras.",
+  "offline": "Puedes seguir escribiendo en tu diario sin conexión. Conéctate para iniciar sesión o cambiar tu perfil de comunidad.",
+  "retry": "Intentar de nuevo",
+  "profile": {
+    "loading": "Abriendo tu perfil de comunidad…",
+    "welcome": "Bienvenido. ¿Cómo te gustaría que te llamaran? Elige un nombre y un nombre de usuario para Juntos.",
+    "existing": "Así aparecerá tu nombre en Juntos. Los amigos, los grupos y la opción de compartir llegarán después.",
+    "name": "¿Cómo te gustaría que te llamaran?",
+    "nameHint": "Tu nombre o un apodo es suficiente. Este nombre es para tu perfil de comunidad.",
+    "handle": "Elige tu nombre de usuario en Juntos",
+    "handleHint": "Usa entre 3 y 30 letras, números o guiones bajos. Empieza con una letra o un número. Así podrán encontrarte cuando estén disponibles los amigos.",
+    "handlePlaceholder": "Por ejemplo, chetna",
+    "create": "Crear mi perfil de comunidad",
+    "update": "Guardar mi perfil de comunidad",
+    "saving": "Guardando…",
+    "saved": "Tu perfil de comunidad está guardado. Tus piedras privadas siguen en este dispositivo."
+  },
+  "callback": {
+    "eyebrow": "Un lugar al que pertenecer",
+    "title": "Bienvenido de nuevo a Ebenezer.",
+    "description": "Te estamos llevando de vuelta a tu espacio.",
+    "working": "Terminando tu inicio de sesión…",
+    "return": "Volver a los ajustes de la cuenta"
+  },
+  "errors": {
+    "session": "No pudimos abrir tu cuenta. Inténtalo de nuevo; tu diario sigue aquí.",
+    "signIn": "No pudimos abrir el inicio de sesión de Google. Inténtalo de nuevo en un momento.",
+    "signOut": "No pudimos cerrar la sesión. Conéctate e inténtalo de nuevo.",
+    "load": "No pudimos abrir tu perfil de comunidad. Comprueba tu conexión e inténtalo de nuevo.",
+    "save": "No pudimos guardar tu perfil de comunidad. Comprueba tu conexión e inténtalo de nuevo.",
+    "invalidProfile": "Escribe un nombre de hasta 120 caracteres y un nombre de usuario con entre 3 y 30 letras, números o guiones bajos.",
+    "handleTaken": "Ese nombre de usuario ya está en uso. Prueba otro; puedes conservar el mismo nombre.",
+    "sessionExpired": "La sesión de tu cuenta ha terminado. Cierra sesión y vuelve a continuar con Google. Tu diario sigue aquí.",
+    "callback": "No pudimos terminar este inicio de sesión. Vuelve a los ajustes de la cuenta y continúa con Google de nuevo.",
+    "cancelled": "No terminaste de iniciar sesión. Puedes intentarlo de nuevo cuando quieras."
+  }
+}

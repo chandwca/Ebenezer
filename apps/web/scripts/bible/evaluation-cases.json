@@ -1,0 +1,105 @@
+{
+  "description": "Exploratory relevance cases. Expected IDs are editorial candidates, not a definitive theological answer. Empty candidates require human review of ambiguity or unrelated input. No calibrated rejection threshold yet.",
+  "cases": [
+    {
+      "id": "interview",
+      "query": "I am terrified about my job interview tomorrow.",
+      "candidatePassageIds": ["PHP.4.4-9", "MAT.6.25-34", "1PE.5.6-10"]
+    },
+    {
+      "id": "homes",
+      "query": "I moved back home after studying abroad and I no longer feel I belong.",
+      "candidatePassageIds": ["JER.29.4-7", "HEB.11.13-16", "EPH.2.17-22"]
+    },
+    {
+      "id": "lonely",
+      "query": "I have no friends in this city and feel completely alone.",
+      "candidatePassageIds": ["PSA.68.4-6", "EPH.2.17-22", "ROM.12.9-18"]
+    },
+    {
+      "id": "grief",
+      "query": "Someone I love died and I cannot stop crying.",
+      "candidatePassageIds": ["PSA.34.17-19", "2CO.1.3-7", "MAT.5.3-9"]
+    },
+    {
+      "id": "exhausted",
+      "query": "I am exhausted from caring for my family and need rest.",
+      "candidatePassageIds": ["1KI.19.4-8", "MAT.11.28-30", "ISA.40.28-31"]
+    },
+    {
+      "id": "shame",
+      "query": "I made a mistake and feel ashamed of myself.",
+      "candidatePassageIds": ["PSA.103.8-14", "LUK.15.17-24", "GAL.6.1-5"]
+    },
+    {
+      "id": "thankful",
+      "query": "A friend helped me through a difficult week and I am grateful.",
+      "candidatePassageIds": ["1SA.7.10-12", "PSA.34.4-8"]
+    },
+    {
+      "id": "decisions",
+      "query": "I do not know which direction to take in my life.",
+      "candidatePassageIds": ["PRO.3.5-8", "JAS.1.2-5", "PRO.16.1-3"]
+    },
+    {
+      "id": "money",
+      "query": "I am worried about paying rent and having enough food.",
+      "candidatePassageIds": ["MAT.6.25-34", "EXO.16.1-5", "PHP.4.10-13"]
+    },
+    {
+      "id": "help",
+      "query": "My friend is suffering and I want to support them.",
+      "candidatePassageIds": ["GAL.6.1-5", "2CO.1.3-7", "ROM.12.9-18"]
+    },
+    {
+      "id": "perseverance",
+      "query": "I keep trying to do the right thing but want to give up.",
+      "candidatePassageIds": ["GAL.6.7-10", "JAS.1.2-5", "ISA.40.28-31"]
+    },
+    {
+      "id": "faith",
+      "query": "I feel distant from God and miss the faith I used to have.",
+      "candidatePassageIds": ["PSA.42.1-5", "PSA.61.1-4"]
+    },
+    {
+      "id": "conflict",
+      "query": "I am arguing with my family and want to make peace.",
+      "candidatePassageIds": ["ROM.12.9-18", "MAT.5.3-9"]
+    },
+    {
+      "id": "suffering",
+      "query": "I feel overwhelmed by suffering and wonder whether I am loved.",
+      "candidatePassageIds": ["ROM.8.31-39", "PSA.34.17-19"]
+    },
+    {
+      "id": "uncertain",
+      "query": "Everything is changing and I feel afraid of the future.",
+      "candidatePassageIds": ["PSA.46.1-3", "ISA.41.8-10", "DEU.31.6-8"]
+    },
+    {
+      "id": "spanish",
+      "query": "Me siento solo y no sé dónde pertenezco.",
+      "candidatePassageIds": ["PSA.68.4-6", "EPH.2.17-22", "HEB.11.13-16"]
+    },
+    {
+      "id": "hindi",
+      "query": "मैं बहुत थक गया हूँ और मुझे आराम चाहिए।",
+      "candidatePassageIds": ["MAT.11.28-30", "1KI.19.4-8", "ISA.40.28-31"]
+    },
+    {
+      "id": "chinese",
+      "query": "我很担心明天，不知道该怎么办。",
+      "candidatePassageIds": ["MAT.6.25-34", "PHP.4.4-9", "1PE.5.6-10"]
+    },
+    {
+      "id": "ambiguous",
+      "query": "I do not know how I feel.",
+      "candidatePassageIds": []
+    },
+    {
+      "id": "unrelated",
+      "query": "How do I fix a broken laptop keyboard?",
+      "candidatePassageIds": []
+    }
+  ]
+}

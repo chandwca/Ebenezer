@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ebenezer · Walk the path, set a stone</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#13304a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ebenezer">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --well:#13304a;--well2:#1d4566;--stone:#eef0ea;--card:#fbfcf8;--slate:#5c6670;--ink:#18222b;--line:#d9ddd3;
+ --teal:#2f7c86;--tealsoft:#dcebea;--ochre:#c8892b;--ochresoft:#f4e4c6;--ochreink:#7a5212;
+ --serif:'Young Serif',Georgia,'Times New Roman',serif;--sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--stone:#0f1922;--card:#16232f;--slate:#9fb0bd;--ink:#e8edef;--line:#2a3a48;--tealsoft:#173a40;--ochresoft:#3a2c14;--ochreink:#efc47a}}
+:root[data-theme="dark"]{--stone:#0f1922;--card:#16232f;--slate:#9fb0bd;--ink:#e8edef;--line:#2a3a48;--tealsoft:#173a40;--ochresoft:#3a2c14;--ochreink:#efc47a}
+*,*:before,*:after{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--stone);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,textarea,input,select{font:inherit;color:inherit}button{cursor:pointer}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:2px;border-radius:10px}
+.app{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:110px}
+.screen{display:none}.screen.active{display:block}
+.pad{padding:0 18px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.005em}
+h1{font-size:34px;line-height:1.1}h2{font-size:24px;line-height:1.2}h3{font-size:19px;line-height:1.25}
+.muted{color:var(--slate)}.small{font-size:13px;color:var(--slate);line-height:1.5}
+.label{font-size:13px;font-weight:600;color:var(--teal)}
+.btn{min-height:50px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:12px 18px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--ink)}
+.btn.block{width:100%}.btn.primary{background:var(--well);border-color:var(--well);color:#fff}.btn.ochre{background:var(--ochre);border-color:var(--ochre);color:#1d1406}
+.btn.ghost{border-color:transparent;background:none;color:var(--slate)}
+.btn.small{min-height:40px;padding:8px 12px;font-size:13px;border-radius:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);padding:8px 14px;font-weight:600;font-size:14px;display:inline-flex;gap:6px;align-items:center}
+.chip[aria-pressed="true"]{background:var(--tealsoft);border-color:var(--teal);color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.sample{font-size:11px;font-weight:600;color:var(--slate);border:1px solid var(--line);border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:1px;white-space:nowrap}
+/* hero */
+.hero{background:var(--well);color:#e9f0f4;padding:calc(18px + env(safe-area-inset-top,0px)) 18px 22px;border-radius:0 0 28px 28px;position:relative;overflow:hidden}
+.hero .top{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.hero .mark{font-family:var(--serif);font-size:20px;flex:1;display:flex;align-items:center;gap:8px}
+.hero .mark svg{width:22px;height:22px}
+.iconbtn{min-width:44px;height:44px;border-radius:12px;border:1px solid #ffffff2e;background:#ffffff12;color:#fff;font-size:15px}
+.hero h1{color:#fff;font-size:30px}
+.hero .ctx{font-size:14px;color:#b7cad7;margin:6px 0 18px}
+.hero .ctx select,.hero .ctx input{background:#ffffff14;border:1px solid #ffffff30;border-radius:10px;color:#fff;min-height:34px;padding:2px 8px;font-size:13px}
+.hero .ctx option{color:#18222b}
+.aims{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.aim{background:#ffffff10;border:1px solid #ffffff26;border-radius:18px;padding:14px;text-align:left;color:#fff;min-height:96px;display:flex;flex-direction:column;justify-content:space-between}
+.aim .i{font-size:24px}.aim b{font-weight:600;font-size:15px;display:block}.aim span{font-size:12px;color:#b7cad7}
+.aim.main{background:var(--ochre);border-color:var(--ochre);color:#1d1406}.aim.main span{color:#3d2a0b}
+.waves{position:absolute;left:0;right:0;bottom:-2px;height:28px;opacity:.35;pointer-events:none}
+/* stepping stones */
+.path{padding:14px 10px 4px}
+.path svg{width:100%;height:auto;display:block}
+.path-cap{display:grid;grid-template-columns:repeat(6,1fr);text-align:center;font-size:11px;font-weight:600;color:var(--slate);margin-top:2px}
+.path-cap .on{color:var(--ochreink)}
+/* section */
+.sec{margin:20px 18px 0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.word{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;display:grid;gap:10px}
+.word .ref{font-size:13px;font-weight:600;color:var(--teal)}
+.verse{font-family:var(--serif);font-size:18px;line-height:1.55}
+.chal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.chal div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 10px}
+.chal b{display:block;font-size:12px;color:var(--slate);font-weight:600}
+.chal .n{font-family:var(--serif);font-size:22px;margin:2px 0 6px}
+.bar{height:6px;border-radius:6px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--ochre)}
+/* flow */
+.flowhead{background:var(--well);color:#fff;padding:calc(12px + env(safe-area-inset-top,0px)) 14px 6px;border-radius:0 0 24px 24px;position:sticky;top:0;z-index:15}
+.flowhead .bar2{display:flex;align-items:center;gap:8px}
+.flowhead .t{flex:1;font-family:var(--serif);font-size:18px}
+.flowhead .path{padding:4px 0 0}
+.flowhead .path-cap{color:#b7cad7}.flowhead .path-cap .on{color:#f2c46e}
+.step{padding:20px 18px 0;animation:rise .3s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.q{font-family:var(--serif);font-size:26px;line-height:1.2;margin:0 0 6px}
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:0 12px;margin:14px 0}
+.search input{border:0;background:none;min-height:48px;flex:1;font-size:16px;outline:none}
+.tabs2{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin:14px 0}
+.tabs2 button{flex:1;min-height:40px;border:0;border-radius:10px;background:none;font-weight:600;font-size:14px;color:var(--slate)}
+.tabs2 button[aria-pressed="true"]{background:var(--well);color:#fff}
+.feels{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.feel{display:flex;align-items:center;gap:10px;min-height:56px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);padding:10px 12px;text-align:left;font-weight:600;font-size:15px}
+.feel .e{font-size:22px}
+.feel[aria-pressed="true"]{border-color:var(--teal);background:var(--tealsoft)}
+.vlist{display:grid;gap:10px;margin-top:6px}
+.vopt{text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:14px;display:grid;gap:6px}
+.vopt[aria-pressed="true"]{border-color:var(--ochre);background:var(--ochresoft)}
+.vopt .t{font-family:var(--serif);font-size:18px}
+.vopt .r{font-size:13px;font-weight:600;color:var(--teal)}
+.vopt .s{font-size:14px;color:var(--slate);line-height:1.5}
+.read{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;display:grid;gap:12px}
+.read .story{font-size:16px;line-height:1.6}
+.read blockquote{margin:0;padding:14px 16px;border-left:4px solid var(--ochre);background:var(--stone);border-radius:0 14px 14px 0;font-family:var(--serif);font-size:19px;line-height:1.55}
+.read cite{display:block;font-family:var(--sans);font-style:normal;font-size:13px;font-weight:600;color:var(--teal);margin-top:6px}
+.qa{display:grid;gap:14px;margin-top:6px}
+.qa label{font-weight:600;font-size:15px;display:block;margin-bottom:6px}
+textarea{width:100%;min-height:84px;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.5;resize:vertical}
+textarea:focus,.search:focus-within{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px #2f7c8622}
+.choice{display:flex;gap:12px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+.choice .e{font-size:26px}.choice .g{flex:1;min-width:0}.choice b{display:block}.choice span{display:block;font-size:13px;color:var(--slate)}
+.choice[aria-pressed="true"]{border-color:var(--teal);background:var(--tealsoft)}
+.people{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}
+.stonecard{border-radius:26px;padding:20px;display:grid;gap:10px;color:#fff}
+.stonecard .ref{font-size:13px;font-weight:600;opacity:.85}
+.stonecard p{margin:0;font-family:var(--serif);font-size:21px;line-height:1.4}
+.tones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.tones button{min-height:56px;border-radius:16px;border:1.5px solid var(--line);font-weight:600;font-size:14px}
+.tones button[aria-pressed="true"]{outline:3px solid var(--ochre);outline-offset:1px}
+.navrow{display:flex;gap:10px;padding:20px 18px 0}
+.navrow .btn{flex:1}
+/* story tab */
+.seg{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin:16px 18px 0}
+.seg button{flex:1;font-size:14px;min-height:42px;border:0;border-radius:10px;background:none;font-weight:600;color:var(--slate)}
+.seg button[aria-pressed="true"]{background:var(--well);color:#fff}
+.towerbox{margin:14px 18px 0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:8px}
+.towerbox svg{width:100%;height:auto;display:block}
+.tlegend{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--slate);padding:6px 10px 0}
+.book{margin:14px 18px 0;display:grid;gap:14px}
+.page{background:var(--card);border:1px solid var(--line);border-radius:6px 22px 22px 6px;border-left:6px solid var(--well);padding:18px 18px 18px 20px}
+.page .d{font-size:13px;color:var(--slate)}.page h3{margin:4px 0 8px}
+.page .v{font-family:var(--serif);font-size:16px;line-height:1.55;color:var(--slate);margin:0 0 10px}
+.page p{margin:0 0 6px;font-size:15px}
+.songs{margin:14px 18px 0;display:grid;gap:10px}
+.song{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.song .e{font-size:22px}.song .g{flex:1;min-width:0}.song b{display:block}.song span{font-size:13px;color:var(--slate)}
+/* together */
+.group{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.group:first-child{border-top:0}.group .e{font-size:24px}.group .g{flex:1;min-width:0}.group b{display:block}.group span{font-size:13px;color:var(--slate)}
+.post{padding:14px 0;border-top:1px solid var(--line)}.post:first-child{border-top:0}
+.post .who{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex:0 0 auto}
+.post p{margin:0 0 8px;font-size:15px}
+.post .ref{font-size:13px;font-weight:600;color:var(--teal)}
+/* overlay */
+.overlay{position:fixed;inset:0;z-index:40;overflow:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 20px 30px;color:#fff}
+.overlay[hidden]{display:none}
+.overlay .in{max-width:540px;margin:0 auto;padding-top:44px;display:grid;gap:14px}
+.overlay .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff40;background:#ffffff1a;color:inherit;font-size:18px}
+.overlay blockquote{margin:0;padding:14px 16px;border-radius:16px;background:#ffffff18;font-family:var(--serif);font-size:19px;line-height:1.55}
+.overlay .w{font-family:var(--serif);font-size:24px;line-height:1.4;margin:0}
+.overlay .ob{min-height:46px;border-radius:14px;border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:600;padding:8px 14px;text-decoration:none;display:inline-flex;align-items:center}
+/* tabbar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;background:var(--card);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
+.tabbar .in{width:min(560px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tab{min-height:56px;border:0;background:none;border-radius:14px;font-weight:600;font-size:12px;color:var(--slate);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.tab svg{width:22px;height:22px}
+.tab[aria-current="page"]{color:var(--well);background:var(--tealsoft)}
+:root[data-theme="dark"] .tab[aria-current="page"]{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-current="page"]{color:#fff}}
+.sheet{position:fixed;inset:0;z-index:60;background:#0a141c99;display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.sheet .panel{background:var(--stone);width:min(560px,100%);max-height:90%;overflow:auto;border-radius:26px 26px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom,0px))}
+.sheet h3{margin:18px 0 6px}.sheet ul{margin:0;padding-left:18px;line-height:1.6;font-size:14px}.sheet p{font-size:14px;line-height:1.6}
+.local{margin:14px 18px 0;border-radius:22px;padding:16px;background:var(--card);border:1px solid var(--line);display:grid;gap:8px}
+.local .h{display:flex;gap:10px;align-items:center}.local .h .e{font-size:28px}.local .h b{font-family:var(--serif);font-weight:400;font-size:19px;display:block}.local .h span{font-size:12px;color:var(--slate)}
+.local p{margin:0;font-size:15px;line-height:1.55}.local .q2{font-family:var(--serif);font-size:17px;color:var(--teal)}
+.steps4{display:grid;gap:8px}.st4{display:flex;gap:12px;align-items:flex-start}.st4 .n{width:30px;height:30px;border-radius:50%;background:var(--well);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;flex:0 0 auto}.st4 b{display:block}.st4 span{font-size:13px;color:var(--slate)}
+.weekly label{font-weight:600;font-size:14px;display:block;margin:10px 0 4px}.weekly select{width:100%;min-height:44px;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:6px 10px}
+.wfield{font-size:14px;margin:4px 0}.wfield b{color:var(--slate);font-weight:600}
+.banner{margin:14px 18px 0;border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:center;background:var(--ochresoft);border:1px solid var(--ochre)}
+.banner .e{font-size:24px}.banner .g{flex:1;min-width:0}.banner b{display:block}.banner span{font-size:13px;color:var(--slate)}
+.offline{margin:10px 18px 0;border-radius:14px;padding:10px 14px;background:var(--tealsoft);font-size:13px}
+.morning{margin:14px 18px 0;background:linear-gradient(160deg,#f4e4c6,#dcebea);border-radius:22px;padding:16px;display:flex;gap:12px;align-items:center;color:#18222b}
+.morning .e{font-size:30px}.morning .g{flex:1}.morning b{display:block;font-family:var(--serif);font-weight:400;font-size:19px}.morning span{font-size:13px;color:#3d4a55}
+.ring{width:160px;height:160px;border-radius:50%;border:3px solid var(--ochre);display:grid;place-items:center;text-align:center;font-family:var(--serif);font-size:18px;margin:16px auto;transition:transform 4s ease-in-out;background:radial-gradient(circle,#f4e4c6,transparent 70%)}
+.ring.in{transform:scale(1.22)}
+.setrow{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line)}
+.setrow:first-of-type{border-top:0}.setrow b{display:block;font-size:15px}.setrow span{font-size:13px;color:var(--slate)}
+.setrow select,.setrow input[type=time]{min-height:40px;border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:4px 8px}
+.sw{flex:0 0 auto;width:52px;height:32px;border-radius:999px;background:var(--line);border:0;position:relative}
+.sw:after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0003;transition:left .2s}
+.sw[aria-checked="true"]{background:var(--teal)}.sw[aria-checked="true"]:after{left:23px}
+.notif{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top,0px));transform:translate(-50%,-160%);width:min(420px,calc(100% - 20px));background:#fbfcf8f2;color:#18222b;border-radius:20px;padding:12px 14px;box-shadow:0 12px 40px #0004;z-index:90;display:flex;gap:10px;transition:transform .35s;cursor:pointer}
+.notif.show{transform:translate(-50%,0)}.notif .ic{width:36px;height:36px;border-radius:10px;background:#13304a;display:grid;place-items:center;flex:0 0 auto}
+.notif small{font-size:11px;color:#5c6670;font-weight:600}.notif b{display:block;font-size:14px}.notif span{font-size:13px}
+.cpost{padding:16px 0;border-top:1px solid var(--line)}.cpost:first-child{border-top:0}
+.cpost .met{font-family:var(--serif);font-size:18px;line-height:1.45;margin:6px 0}
+.cpost .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.cmts{margin-top:10px;border-left:3px solid var(--line);padding-left:12px;display:grid;gap:8px}
+.cmt{font-size:14px}.cmt b{font-size:13px}.cmt .own{font-size:11px;color:var(--teal);font-weight:600;margin-left:6px}
+.cbox{display:flex;gap:8px;margin-top:8px}.cbox input{flex:1;min-height:42px;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:6px 10px;font-size:15px}
+.answered{display:inline-block;background:var(--ochresoft);color:var(--ochreink);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700}
+.lb{display:grid;gap:10px;margin:14px 18px 0}
+.lbi{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:12px}
+.lbi[aria-pressed="true"]{border-color:var(--ochre);background:var(--ochresoft)}
+.lbi .g{flex:1;min-width:0}.lbi .d{font-size:12px;color:var(--slate)}.lbi p{margin:2px 0 0;font-size:15px}
+.lbi .star{font-size:22px;background:none;border:0;min-width:44px;min-height:44px}
+.room{position:fixed;inset:0;z-index:55;background:var(--stone);display:flex;flex-direction:column}
+.room[hidden]{display:none}
+.room .rh{background:var(--well);color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 12px;display:flex;gap:10px;align-items:center}
+.room .rh .g{flex:1;min-width:0}.room .rh b{display:block;font-family:var(--serif);font-weight:400;font-size:19px}.room .rh span{font-size:12px;color:#b7cad7}
+.msgs{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:86%;background:var(--card);border:1px solid var(--line);border-radius:18px 18px 18px 6px;padding:10px 12px;font-size:15px;line-height:1.45}
+.msg.me{margin-left:auto;background:var(--tealsoft);border-color:var(--teal);border-radius:18px 18px 6px 18px}
+.msg .who{font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px}.msg .ex{font-size:10px;color:var(--slate);font-weight:600;margin-left:4px}
+.msg .stoneMsg{border-radius:14px;padding:10px 12px;color:#fff;margin-top:4px}
+.msg .stoneMsg .r{font-size:12px;font-weight:600;opacity:.9}.msg .stoneMsg p{margin:4px 0 0;font-family:var(--serif);font-size:16px}
+.msg .reacts{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.msg .reacts button{min-height:32px;border-radius:999px;border:1px solid var(--line);background:var(--stone);font-size:12px;padding:2px 10px}
+.compose{display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line);align-items:center}
+.compose input{flex:1;min-height:46px;border:1.5px solid var(--line);background:var(--stone);border-radius:999px;padding:6px 14px;font-size:15px}
+.picker{padding:10px 12px;background:var(--card);border-top:1px solid var(--line);display:grid;gap:8px;max-height:40vh;overflow:auto}
+.picker[hidden]{display:none}
+.sysmsg{align-self:center;font-size:12px;color:var(--slate);background:var(--card);border-radius:999px;padding:4px 12px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);background:var(--well);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:80;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes drop{from{transform:translateY(-120px);opacity:0}to{transform:none;opacity:1}}
+.dropping{animation:drop .6s cubic-bezier(.3,1.4,.5,1) both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- TODAY -->
+<section class="screen active" id="today">
+ <div class="hero">
+  <div class="top"><div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="17" rx="9" ry="4" fill="#c8892b"/><ellipse cx="11" cy="11" rx="6.5" ry="3.4" fill="#9fb3c2"/><ellipse cx="12.5" cy="6.2" rx="4" ry="2.4" fill="#e9f0f4"/></svg>Ebenezer</div><button class="iconbtn" id="setBtn" aria-label="Settings: language and reminders">⚙︎</button><button class="iconbtn" id="whyBtn" aria-label="Why it works this way">ⓘ</button></div>
+  <h1 id="greet">Good evening</h1>
+  <div class="ctx" id="ctx"></div>
+  <p id="aimQ" style="margin:0 0 10px;font-family:var(--serif);font-size:20px;color:#fff">What’s your aim today?</p>
+  <div class="aims">
+   <button class="aim main" data-aim="word"><span class="i">📖</span><div><b>Find a Word</b><span>For how I feel right now</span></div></button>
+   <button class="aim" data-aim="pray"><span class="i">🙏</span><div><b>Pray with someone</b><span>Ask my people to pray</span></div></button>
+   <button class="aim" data-aim="share"><span class="i">💬</span><div><b>Share my story</b><span>Tell what God did</span></div></button>
+   <button class="aim" data-aim="stone"><span class="i">🪨</span><div><b>Set a stone</b><span>Remember today</span></div></button>
+  </div>
+  <svg class="waves" viewBox="0 0 400 28" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 Q 25 4 50 14 T 100 14 T 150 14 T 200 14 T 250 14 T 300 14 T 350 14 T 400 14 V28 H0Z" fill="#2f7c86"/></svg>
+ </div>
+ <div id="offline"></div><div id="dueBanner"></div><div id="localCard"></div><div id="morningCard"></div><div id="seasonCard"></div>
+ <div class="sec"><div class="sec-h"><h2 data-t="thePath">The path</h2><span class="small">Every stone starts with the Word</span></div><div class="card" style="padding:6px 6px 10px"><div class="path" id="pathHome"></div></div></div>
+ <div class="sec"><div class="sec-h"><h2>Today’s Word</h2><span class="small" id="seasonTag"></span></div><div class="word" id="todayWord"></div></div>
+ <div class="sec"><div class="sec-h"><h2>Coming back</h2></div><div class="chal" id="chal"></div></div>
+</section>
+
+<!-- PATH (the flow) -->
+<section class="screen" id="flow">
+ <div class="flowhead"><div class="bar2"><button class="iconbtn" id="flowBack" aria-label="Back">←</button><span class="t" id="flowTitle">Find a Word</span><button class="iconbtn" id="flowClose" aria-label="Close">✕</button></div><div class="path" id="pathFlow"></div></div>
+ <div id="flowBody"></div>
+</section>
+
+<!-- MY STORY -->
+<section class="screen" id="story">
+ <div class="hero" style="padding-bottom:20px"><div class="top"><div class="mark">My story</div></div><h1>Thus far, the LORD has helped me</h1><p class="ctx" style="margin:8px 0 0">Every stone stands on a passage of Scripture. Keep them as a tower, read them as a book, sing them as songs.</p></div>
+ <div class="seg" role="group" aria-label="View"><button data-view="tower" aria-pressed="true" data-t="tower">Tower</button><button data-view="book" aria-pressed="false" data-t="book">Book</button><button data-view="look" aria-pressed="false">Timeline</button></div>
+ <div id="storyBody"></div>
+ <div class="pad" style="margin-top:14px"><button class="btn primary block" id="needBtn">I need to remember</button></div>
+</section>
+
+<!-- TOGETHER -->
+<section class="screen" id="together">
+ <div class="hero" style="padding-bottom:20px"><div class="top"><div class="mark">Together</div></div><h1>We walk this together</h1><p class="ctx" style="margin:8px 0 0">Groups to join, prayers to carry, and stories of what God did. Jesus met people at the well, on the hillside and in their boats, then called them to follow.</p></div>
+ <div class="sec"><div class="sec-h"><h2>How your circle works</h2></div><div class="card steps4" id="circleHow"></div></div>
+ <div class="sec"><div class="sec-h"><h2>This week’s Ebenezer</h2><span class="small" id="weekDue"></span></div><div class="card weekly" id="weekly"></div></div>
+ <div class="sec"><div class="sec-h"><h2>Groups</h2><span class="sample">sample</span></div><div class="card" id="groups"></div></div>
+ <div class="sec"><div class="sec-h"><h2>Prayer board</h2><span class="sample">sample</span></div><div class="card" id="prayers"></div></div>
+ <div class="sec"><div class="sec-h"><h2 data-t="sharedStones">Shared stones</h2><span class="small" id="liveTag"></span></div><div class="card" id="stories"></div></div>
+ <div class="sec"><div class="sec-h"><h2>My people</h2></div><div class="card" id="mypeople"></div></div>
+</section>
+</div>
+
+<nav class="tabbar" aria-label="Main"><div class="in">
+ <button class="tab" data-tab="today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="13" r="4"/><path d="M12 3v3M4.2 6.2l2 2M19.8 6.2l-2 2M2 13h3M19 13h3M3 20h18"/></svg>Today</button>
+ <button class="tab" data-tab="story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><ellipse cx="12" cy="18" rx="8" ry="3"/><ellipse cx="11" cy="12" rx="6" ry="2.6"/><ellipse cx="12.5" cy="6.5" rx="3.8" ry="2"/></svg>My story</button>
+ <button class="tab" data-tab="together"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M2.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M14 15.2c2.6-.4 5 1 5.8 3.8"/></svg>Together</button>
+</div></nav>
+
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-label="Stone"><button class="x" id="ovX" aria-label="Close">✕</button><div class="in" id="ov"></div></div>
+
+<div class="sheet" id="why" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="whyT">
+ <button class="btn small" id="whyClose" style="float:right">Close</button><h2 id="whyT">Why it works this way</h2>
+ <h3>The path, from Jesus’ own encounters</h3>
+ <p>At the well, Jesus met a woman in her thirst and her story before he offered living water (John 4). On the hillside, he fed five thousand before he taught them (John 6). In Peter’s boat, he filled empty nets, then said, “Fear not; from henceforth thou shalt catch men” (Luke 5). Meet the need, talk, then call to follow. Ebenezer’s path does the same: <b>how do you feel → find a Word → read the chapter → reflect → pray and share with someone → set a stone</b>.</p>
+ <h3>What reviewers and interviewees told us</h3>
+ <ul>
+  <li><b>Orwell:</b> start from common emotions like overwhelmed and anxious, lead to a searchable list of verses, open the chapter, then ask what you learned, what questions you have, your thoughts, and how we can pray. Find someone to pray with and share with, then set a stone. Make the look more appealing, and keep things people can archive: a book, songs, their story, a message board.</li>
+  <li><b>Jonathan:</b> generic emotions alone didn’t help him, so the first step also offers “What happened” (parents, work, two homes) and a search box.</li>
+  <li><b>Mr. Mlanga:</b> verses alone won’t keep faith, so every stone is a conversation with a passage and a person.</li>
+  <li><b>Brittany:</b> it’s about the soil.</li>
+  <li><b>Aaron:</b> do one thing really well: set a stone, and find it again.</li></ul>
+ <h3>The rule</h3><p>No Scripture, no stone. Every stone is built from a passage, your reflection on it, and, if you choose, the people you asked to pray.</p>
+ <p class="small">Prototype. The calendar, groups and prayer board are sample data. Scripture is KJV (public domain), copied from source text; Bible stories are retold in our own words. “Read the whole chapter” opens the KJV on bible.com.</p>
+</div></div>
+<div class="sheet" id="settings" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="setT">
+ <button class="btn small" id="setClose" style="float:right" data-t="close">Close</button><h2 id="setT" data-t="settings">Settings</h2>
+ <h3>About you</h3><div class="card" id="youRows"></div>
+ <h3>Sharing and privacy</h3><div class="card" id="privRows"></div>
+ <h3>If you need help now</h3><div id="helpSet"></div>
+ <h3 data-t="language">Language</h3><div class="row" id="langRow"></div>
+ <p class="small" data-t="langNote">Screens are translated. Verses appear in your language where a checked translation is available; others show the King James Version.</p>
+ <h3 data-t="reminders">Reminders</h3><div class="card" id="remRows"></div>
+ <p class="small" data-t="notifNote">This prototype is a web page, so it can’t send phone notifications. Reminders show inside Ebenezer when they’re due; tap “Preview” to see what a phone notification would look like. A phone app would send them for real.</p>
+ <h3>Local calendar</h3><p class="small">Ebenezer uses public days in your city to choose the morning’s Bible story. Preview one:</p><div class="row" id="localPrev"></div>
+ <h3 data-t="offlineH">Offline</h3><p class="small" data-t="offlineNote">Your stones are saved on this phone, so you can read and set them without internet once Ebenezer has opened. Shared stones, comments and prayers need internet and update live when you’re back online.</p>
+</div></div>
+<div class="sheet" id="ask" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="askT">
+ <h2 id="askT">Share this?</h2><p id="askB" style="margin:0 0 14px"></p>
+ <div class="row"><button class="btn" id="askNo">Not now</button><button class="btn primary" id="askYes">Share</button></div>
+</div></div>
+<div class="notif" id="notif" aria-live="polite"></div>
+<div class="room" id="room" hidden role="dialog" aria-modal="true" aria-labelledby="roomT">
+ <div class="rh"><button class="iconbtn" id="roomBack" aria-label="Back">←</button><div class="g"><b id="roomT">Group</b><span id="roomS"></span></div><a class="iconbtn" id="roomCall" style="display:grid;place-items:center;text-decoration:none" target="_blank" rel="noopener" aria-label="Join the weekly call">📹</a></div>
+ <div class="msgs" id="msgs" aria-live="polite"></div>
+ <div class="picker" id="picker" hidden></div>
+ <div class="compose"><button class="iconbtn" id="shareStoneBtn" style="background:var(--ochre);border-color:var(--ochre);color:#1d1406" aria-label="Share a stone">🪨</button><input id="msgIn" placeholder="Message the group…" maxlength="500" aria-label="Message"><button class="btn small primary" id="msgSend">Send</button></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- Scripture: KJV (public domain), copied from source text ---------- */
+const V={
+ 'Psalm 61:2':'From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock that is higher than I.',
+ 'John 6:9':'There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?',
+ '1 Peter 5:7':'Casting all your care upon him; for he careth for you.',
+ 'Genesis 22:14':'And Abraham called the name of that place Jehovahjireh: as it is said to this day, In the mount of the LORD it shall be seen.',
+ 'Psalm 68:6':'God setteth the solitary in families: he bringeth out those which are bound with chains: but the rebellious dwell in a dry land.',
+ 'John 4:14':'But whosoever drinketh of the water that I shall give him shall never thirst; but the water that I shall give him shall be in him a well of water springing up into everlasting life.',
+ 'Lamentations 3:22–23':'It is of the LORD’S mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.',
+ 'Psalm 147:16, 18':'He giveth snow like wool: he scattereth the hoarfrost like ashes… He sendeth out his word, and melteth them: he causeth his wind to blow, and the waters flow.',
+ 'Isaiah 43:1':'But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine.',
+ 'Luke 5:10':'And so was also James, and John, the sons of Zebedee, which were partners with Simon. And Jesus said unto Simon, Fear not; from henceforth thou shalt catch men.',
+ '1 Kings 19:7':'And the angel of the LORD came again the second time, and touched him, and said, Arise and eat; because the journey is too great for thee.',
+ 'Galatians 6:9':'And let us not be weary in well doing: for in due season we shall reap, if we faint not.',
+ 'Psalm 103:12':'As far as the east is from the west, so far hath he removed our transgressions from us.',
+ 'Jeremiah 29:7':'And seek the peace of the city whither I have caused you to be carried away captives, and pray unto the LORD for it: for in the peace thereof shall ye have peace.',
+ 'Hebrews 11:13':'These all died in faith, not having received the promises, but having seen them afar off, and were persuaded of them, and embraced them, and confessed that they were strangers and pilgrims on the earth.',
+ '1 Samuel 7:12':'Then Samuel took a stone, and set it between Mizpeh and Shen, and called the name of it Ebenezer, saying, Hitherto hath the LORD helped us.',
+ 'Song of Solomon 2:11–12':'For, lo, the winter is past, the rain is over and gone; The flowers appear on the earth; the time of the singing of birds is come, and the voice of the turtle is heard in our land.',
+ 'Joshua 4:6–7':'That this may be a sign among you, that when your children ask their fathers in time to come, saying, What mean ye by these stones? Then ye shall answer them, That the waters of Jordan were cut off before the ark of the covenant of the LORD… and these stones shall be for a memorial unto the children of Israel for ever.',
+ 'Psalm 1:3':'And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper.'};
+/* Bible stories retold in our own words; ch = bible.com chapter code (KJV) */
+const ST={
+ 'Psalm 61:2':{t:'The rock that is higher than I',e:'⛰️',ch:'PSA.61',s:'David cried out to God “from the end of the earth,” far from home with an overwhelmed heart. He didn’t try to climb out alone. He asked to be led to a rock higher than himself.',song:'Cornerstone',k:'overwhelmed far from home rock'},
+ 'John 6:9':{t:'Five loaves and two fishes',e:'🧺',ch:'JHN.6',s:'Thousands were hungry, and all the disciples could find was one boy’s lunch. “What are they among so many?” Jesus gave thanks for it, and everyone ate until they were full. He met their need before he taught them.',song:'Way Maker',k:'not enough money job provision hungry overwhelmed'},
+ '1 Peter 5:7':{t:'He careth for you',e:'🕊️',ch:'1PE.5',s:'Peter, who once sank in the waves when he was afraid, wrote to scattered, suffering believers: throw every care onto God, because he cares for you.',song:'It Is Well with My Soul',k:'anxious worry stress panic care'},
+ 'Genesis 22:14':{t:'The LORD will provide',e:'⛰️',ch:'GEN.22',s:'Abraham climbed a mountain not knowing how God would provide. At the top, God provided. Abraham named the place “The LORD will provide” so he would never forget.',song:'Way Maker',k:'provide anxious job interview money future'},
+ 'Psalm 68:6':{t:'God sets the lonely in families',e:'🏠',ch:'PSA.68',s:'David sang about a God who gives lonely people a family. Even far from the people you love, God places people around you.',song:'Goodness of God',k:'lonely alone family parents homesick'},
+ 'John 4:14':{t:'Living water at the well',e:'💧',ch:'JHN.4',s:'A woman came to the well alone at the hottest time of day. Jesus met her there, asked her for a drink, and already knew her whole story. He offered her water that becomes a well inside, and she ran to tell her town.',song:'Living Water',k:'lonely ashamed shame thirsty empty well story'},
+ 'Lamentations 3:22–23':{t:'New every morning',e:'🌅',ch:'LAM.3',s:'Jeremiah wrote this in a city in ruins. Even there he noticed God’s mercy was new that morning, and the next, and the next.',song:'Great Is Thy Faithfulness',k:'sad grief grateful morning mercy'},
+ 'Psalm 147:16, 18':{t:'He sends his word and melts them',e:'❄️',ch:'PSA.147',s:'The psalmist watches snow and frost cover the land, then sees God send his word, and the ice melts and the waters flow. Cold seasons don’t have the last word.',song:'Abide with Me',k:'sad frozen winter cold numb'},
+ 'Isaiah 43:1':{t:'Called by name',e:'🏷️',ch:'ISA.43',s:'God spoke to his people in exile, when they had lost their land and their sense of who they were. Before telling them what to do, he told them whose they were.',song:'Who You Say I Am',k:'afraid identity lost who am i parents'},
+ 'Luke 5:10':{t:'From now on',e:'🐟',ch:'LUK.5',s:'Peter had fished all night and caught nothing. Jesus met him in his boat and filled his nets, then said: Fear not; from now on you will catch people. He met the need, then called him to follow.',song:'I Have Decided to Follow Jesus',k:'afraid calling purpose work failure'},
+ '1 Kings 19:7':{t:'The journey is too great for you',e:'🍞',ch:'1KI.19',s:'Elijah was worn out and alone under a tree. God didn’t lecture him. An angel woke him, gave him warm food, and said the journey was too much to walk alone.',song:'Abide with Me',k:'tired exhausted burnout sick health'},
+ 'Galatians 6:9':{t:'In due season we shall reap',e:'🍂',ch:'GAL.6',s:'Paul wrote to tired believers: don’t give up doing good. Harvest comes in its season, not on our timetable.',song:'Great Is Thy Faithfulness',k:'tired weary give up waiting'},
+ 'Psalm 103:12':{t:'As far as the east is from the west',e:'🧭',ch:'PSA.103',s:'David had failed badly, and he knew it. In this song he remembers what God does with sin: he removes it as far as the east is from the west. Shame keeps the record; God has thrown it away.',song:'It Is Well with My Soul',k:'ashamed shame guilt angry at myself failure'},
+ 'Jeremiah 29:7':{t:'Seek the peace of the city',e:'🏙️',ch:'JER.29',s:'God’s people were taken far from home to Babylon and longed to go back. God told them not to live with one foot out the door: build houses, plant gardens, pray for the city.',song:'Be Thou My Vision',k:'torn two homes homesick city church'},
+ 'Hebrews 11:13':{t:'Strangers and pilgrims',e:'⛺',ch:'HEB.11',s:'Abraham, Sarah and their family lived in tents, never fully at home, looking for a better country God had promised. They weren’t lost. They were pilgrims.',song:'Abide with Me',k:'torn identity belong two homes pilgrim'},
+ '1 Samuel 7:12':{t:'Hitherto hath the LORD helped us',e:'🪨',ch:'1SA.7',s:'After God helped Israel, Samuel set up a stone and named it Ebenezer, “stone of help,” so they would never forget how far God had brought them.',song:'Come Thou Fount',k:'grateful thankful remember help'},
+ 'Song of Solomon 2:11–12':{t:'The winter is past',e:'🌸',ch:'SNG.2',s:'The Song of Songs pictures the end of a long winter: rain gone, flowers out, birds singing. God brings new seasons, even after the longest cold.',song:'Great Is Thy Faithfulness',k:'hopeful spring new season'},
+ 'Joshua 4:6–7':{t:'What mean ye by these stones?',e:'🪨',ch:'JOS.4',s:'After God brought Israel across the Jordan, Joshua had twelve stones carried out of the riverbed and set up as a memorial, so that one day their children would ask what the stones meant, and hear what God had done.',song:'Come Thou Fount',k:'remember ancestors family generations memorial grandparents'},
+ 'Psalm 1:3':{t:'A tree by the rivers',e:'🌳',ch:'PSA.1',s:'The first psalm describes a tree planted by water. It doesn’t panic in the heat, because its roots go deep. Deep roots in God’s Word bear fruit in their season.',song:'Firm Foundation',k:'hopeful calling growth roots'}};
+const FEELS=[['overwhelmed','🌊','Overwhelmed',['Psalm 61:2','John 6:9']],['anxious','🌀','Anxious',['1 Peter 5:7','Genesis 22:14']],['lonely','🫂','Lonely',['Psalm 68:6','John 4:14']],['sad','😢','Sad',['Lamentations 3:22–23','Psalm 147:16, 18']],['afraid','😨','Afraid',['Isaiah 43:1','Luke 5:10']],['tired','😴','Tired',['1 Kings 19:7','Galatians 6:9']],['ashamed','😞','Ashamed',['Psalm 103:12','John 4:14']],['torn','🧳','Torn between homes',['Jeremiah 29:7','Hebrews 11:13']],['lost','🪪','Not sure who I am',['Isaiah 43:1','Hebrews 11:13']],['grateful','🙌','Grateful',['1 Samuel 7:12','Lamentations 3:22–23']],['hopeful','🌱','Hopeful',['Song of Solomon 2:11–12','Psalm 1:3']]];
+const HAPPENED=[['parents','👪','My parents',['Psalm 68:6','Isaiah 43:1']],['work','💼','Work and money',['John 6:9','Genesis 22:14']],['church','⛪','Finding a church',['Jeremiah 29:7','Psalm 68:6']],['calling','🧭','My calling',['Luke 5:10','Psalm 1:3']],['health','🌡️','My health',['1 Kings 19:7','Psalm 61:2']],['homes','🧳','Two homes',['Jeremiah 29:7','Hebrews 11:13']]];
+const PEOPLE_DEFAULT=[['Mr. Liu','Care partner · home in Beijing 12 years'],['Hannah','Friend from Illinois'],['Pastor Mark','Mentor in Illinois'],['Mei','Beijing returnees group'],['Mom','Family']];
+/* Beijing public days (dates checked); a real app could add local news through a news service */
+const LOCAL={beijing:[
+ {d:'2026-09-25',to:'2026-09-27',n:'Mid-Autumn Festival',e:'🥮',ref:'Psalm 68:6',p:'Today is the Mid-Autumn Festival, when families gather under the full moon. The psalm says God sets the solitary in families.',q:'Who has God given you as family this year? Set a stone for them.'},
+ {d:'2026-09-30',to:'2026-09-30',n:'Martyrs’ Day',e:'🎖️',ref:'Hebrews 11:13',p:'Today Beijing remembers its heroes on Martyrs’ Day. Hebrews 11 remembers the heroes of faith: Abraham, Isaac and Jacob, who walked with God as pilgrims, trusting promises they had not yet seen.',q:'Where has God walked with you, even before you could see the promise? Set a stone on it.'},
+ {d:'2026-10-01',to:'2026-10-07',n:'National Day holiday',e:'🏮',ref:'Jeremiah 29:7',p:'It’s the National Day holiday, and the city is full of families and travelers. God told his people far from home to seek the peace of the city where they lived and pray for it.',q:'How can you pray for Beijing, and the people around you, this week?'},
+ {d:'2027-02-06',to:'2027-02-11',n:'Spring Festival',e:'🧧',ref:'Lamentations 3:22–23',p:'Happy Spring Festival. As a new year begins, Lamentations reminds us that God’s mercies are new every morning.',q:'What mercy from last year will you carry into this one?'},
+ {d:'2027-04-05',to:'2027-04-05',n:'Qingming Festival',e:'🌿',ref:'Joshua 4:6–7',p:'Today families remember those who came before them. Joshua set up twelve stones so future generations would ask what they meant, and hear what God had done.',q:'What would you want the next generation in your family to know God did for you?'},
+ {d:'2027-09-15',to:'2027-09-17',n:'Mid-Autumn Festival',e:'🥮',ref:'Psalm 68:6',p:'Today is the Mid-Autumn Festival, when families gather under the full moon. God sets the solitary in families.',q:'Who has God given you as family this year? Set a stone for them.'}]};
+let localPreview=null;
+function localToday(){if(localPreview&&localPreview!=='checkin')return localPreview;const L=LOCAL[CFG.city]||[];return L.find(x=>todayISO>=x.d&&todayISO<=x.to)||null}
+const CITIES={beijing:['Beijing',4,'light rain','🌧️'],chennai:['Chennai',29,'humid','🌤️'],lagos:['Lagos',26,'thunderstorms','⛈️'],chicago:['Chicago',-3,'snow','🌨️']};
+
+/* ---------- helpers & state ---------- */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+function ld(k,f){try{const v=localStorage.getItem(k);return v===null?f:JSON.parse(v)}catch(e){return f}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)}
+const NOW=new Date(),todayISO=new Date(NOW-NOW.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const addDays=(iso,n)=>{const d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const fmt=iso=>new Date(iso+'T12:00:00').toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
+const chURL=ref=>`https://www.bible.com/bible/1/${ST[ref].ch}.KJV`;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/LORD/g,'Lord'));u.rate=.92;speechSynthesis.speak(u)}catch(e){toast('Read-aloud isn’t available here.')}}
+let CFG=Object.assign({city:'beijing',plan:'Job interview at 2pm',name:'',care:'Mr. Liu',people:null,priv:false,setup:false},ld('eb4.cfg',{}));
+if(!Array.isArray(CFG.people))CFG.people=PEOPLE_DEFAULT.map(x=>x.slice());
+const PEOPLE_=()=>CFG.people;
+const EX=[
+ {id:'e0',ex:true,date:addDays(todayISO,-368),ref:'Psalm 1:3',tone:'bright',learned:'Deep roots bear fruit in their season.',met:'My last autumn in Illinois, my small group prayed over my job applications back home.',with:['Hannah']},
+ {id:'e1',ex:true,date:addDays(todayISO,-300),ref:'Psalm 68:6',tone:'bright',learned:'God gives lonely people a family.',met:'My first Christmas in Illinois, the Chens invited me to their table and prayed for my family by name.',song:'Goodness of God',shared:true,with:['Hannah']},
+ {id:'e2',ex:true,date:addDays(todayISO,-240),ref:'Genesis 22:14',tone:'bright',learned:'God provides on the mountain, even when I can’t see how.',met:'My visa came through two days before my flight.',song:'Way Maker'},
+ {id:'e3',ex:true,date:addDays(todayISO,-180),ref:'Lamentations 3:22–23',tone:'dark',learned:'His mercy is new even in grief.',met:'The night Grandma died, my small group sat with me and sang.',song:'Great Is Thy Faithfulness',with:['Hannah','Pastor Mark']},
+ {id:'e4',ex:true,date:addDays(todayISO,-60),ref:'Isaiah 43:1',tone:'dark',learned:'I am his before I am anything else.',met:'I told my parents I follow Jesus. They didn’t understand, but they didn’t hang up.',with:['Pastor Mark'],shared:true},
+ {id:'e5',ex:true,date:addDays(todayISO,-25),ref:'1 Kings 19:7',tone:'dark',learned:'God cares for tired bodies, not just souls.',met:'Sick and jet-lagged, Mei brought soup to my door without me asking.',with:['Mei']},
+ {id:'e6',ex:true,date:addDays(todayISO,-14),ref:'Jeremiah 29:7',tone:'mid',learned:'I can seek the peace of the city I’m in now.',met:'Mei asked me to help with a kids’ English class. Beijing felt like a place I could serve.',shared:true},
+ {id:'e7',ex:true,date:addDays(todayISO,-2),ref:'John 6:9',tone:'bright',learned:'What I have is enough in his hands.',met:'A recruiter called back the same week my savings ran low.'}];
+let STONES=ld('eb4.stones',null);if(!Array.isArray(STONES)){STONES=EX.slice();sv('eb4.stones',STONES)}
+const REAL=()=>STONES.filter(x=>!x.ex);
+const hasEx=()=>STONES.some(x=>x.ex);
+let JOINED=ld('eb4.groups',{});let PRAYED=ld('eb4.prayed',{});let MYPOSTS=ld('eb4.posts',[]);
+const save=()=>{sv('eb4.stones',STONES);sv('eb4.cfg',CFG);sv('eb4.groups',JOINED);sv('eb4.prayed',PRAYED);sv('eb4.posts',MYPOSTS)};
+
+
+/* ---------- languages (screen text: first translation, to be reviewed by native speakers) ---------- */
+const T={
+en:{today:'Today',story:'My story',together:'Together',gm:'Good morning',ga:'Good afternoon',ge:'Good evening',aimQ:'What’s your aim today?',aWord:'Find a Word',aWordS:'For how I feel right now',aPray:'Pray with someone',aPrayS:'Ask my people to pray',aShare:'Share my story',aShareS:'Tell what God did',aStone:'Set a stone',aStoneS:'Remember today',thePath:'The path',
+ steps:['Feel','Find','Read','Reflect','Together','Stone'],fTitles:['How are you feeling?','Find a Word','Read','Reflect','Walk together','Set a stone'],howReally:'How are you, really?',howSub:'Pick what’s closest, or tell me what happened. You can also search.',howFeel:'How I feel',whatHap:'What happened',searchPh:'Search: worry, homesick, job, family…',searchBtn:'Search verses',
+ chooseSub:'Choose the one that speaks to you. Each opens a Bible story.',readBtn:'Read this Word',listen:'🔊 Listen',chapter:'Read the whole chapter',reflectBtn:'Reflect on it',refQ:'What is this Word saying to you?',refSub:'Answer one or all four. Short is fine.',qL:'What did you learn?',qQ:'What questions do you have?',qT:'What are your thoughts?',qP:'How can we pray for you?',togBtn:'Walk together',
+ togQ:'Who will walk with you?',prayWith:'Find someone to pray with',shareExp:'Share your experience',shareExpS:'Your stone appears in Together for others to read and comment on.',joinGroup:'Join a group',sendPray:'💬 Send my prayer request',stoneBtn:'Set the stone',metQ:'Where did God meet you?',feltQ:'How did today feel?',bright:'Bright',mixed:'Mixed',hard:'Hard',setStone:'🪨 Set this stone',
+ need:'I need to remember',tower:'Tower',book:'Book',songs:'Songs',lookback:'Look back',settings:'Settings',close:'Close',language:'Language',langNote:'Screens are translated. Verses appear in your language where a checked translation is available; others show the King James Version.',reminders:'Reminders',
+ notifNote:'This prototype is a web page, so it can’t send phone notifications. Reminders show inside Ebenezer when they’re due; tap “Preview” to see what a phone notification would look like. A phone app would send them for real.',offlineH:'Offline',offlineNote:'Your stones are saved on this phone, so you can read and set them without internet once Ebenezer has opened. Shared stones, comments and prayers need internet and update live when you’re back online.',
+ morningT:'Your morning routine',morningS:'Two minutes: your Word, a breath, and your aim for today',start:'Start',doneMorning:'Morning routine done ✓',remMorning:'Morning routine',remEvening:'Evening stone',remWeekly:'Weekly look-back',remMonthly:'Monthly look-back',remMonthlyS:'On the 1st of each month',preview:'Preview',
+ weekBan:'Your week with God',weekBanS:'Choose this week’s outstanding moment',monthBan:'Your month with God',monthBanS:'Choose this month’s outstanding stones',eveBan:'Tonight’s stone',eveBanS:'Walk the path and set today’s stone',open:'Open',sharedStones:'Shared stones',offlineMsg:'You’re offline. Your stones are safe on this phone, and shared stones will update when you reconnect.',
+ thisWeek:'This week',thisMonth:'This month',lbWeekQ:'What was this week’s outstanding moment?',lbMonthQ:'Which stones stood out this month?',lbSub:'Tap the star on the stones that stood out. You can share them with others.',shareOut:'Share my outstanding moment',noStones:'No stones yet in this period.',
+ breathIn:'Breathe in…',breathOut:'Breathe out…',thusFar:'Thus far',helped:'the LORD has helped me',carry:'Carry this with you today:',chooseAim:'What’s your aim today?',finish:'Finish',next:'Next',
+ pray1:'🙏 I’m praying',praying:'🙏 Praying ✓',comment:'Comment',commentPh:'Write something kind…',post:'Post',yours:'Your stone',markAns:'✓ God answered this',answered:'God answered',updatePh:'What happened since?',addUpdate:'Add an update',save:'Save',someone:'Someone',you:'You',
+ liveOn:'Live: people in your community see these',liveOff:'Examples shown here. Live sharing works when Ebenezer is opened on claude.ai.',emptyShared:'No shared stones yet. Share one from the path and it will appear here.',ex:'example'},
+hi:{today:'आज',story:'मेरी कहानी',together:'साथ में',gm:'सुप्रभात',ga:'नमस्ते',ge:'शुभ संध्या',aimQ:'आज आपका लक्ष्य क्या है?',aWord:'एक वचन खोजें',aWordS:'अभी मैं जैसा महसूस करती हूँ',aPray:'किसी के साथ प्रार्थना',aPrayS:'अपने लोगों से प्रार्थना माँगें',aShare:'अपनी कहानी बताएँ',aShareS:'परमेश्वर ने क्या किया',aStone:'पत्थर रखें',aStoneS:'आज को याद रखें',thePath:'रास्ता',
+ steps:['भावना','खोज','पढ़ें','मनन','साथ','पत्थर'],fTitles:['आप कैसा महसूस कर रही हैं?','एक वचन खोजें','पढ़ें','मनन करें','साथ चलें','पत्थर रखें'],howReally:'आप सच में कैसी हैं?',howSub:'सबसे नज़दीकी चुनें, या बताएँ क्या हुआ। आप खोज भी सकती हैं।',howFeel:'मेरी भावना',whatHap:'क्या हुआ',searchPh:'खोजें: चिंता, घर की याद, नौकरी, परिवार…',searchBtn:'पद खोजें',
+ chooseSub:'जो आपसे बात करे उसे चुनें। हर एक में एक बाइबल कहानी है।',readBtn:'यह वचन पढ़ें',listen:'🔊 सुनें',chapter:'पूरा अध्याय पढ़ें',reflectBtn:'मनन करें',refQ:'यह वचन आपसे क्या कह रहा है?',refSub:'एक या चारों का उत्तर दें। छोटा भी ठीक है।',qL:'आपने क्या सीखा?',qQ:'आपके क्या प्रश्न हैं?',qT:'आपके विचार क्या हैं?',qP:'हम आपके लिए कैसे प्रार्थना करें?',togBtn:'साथ चलें',
+ togQ:'आपके साथ कौन चलेगा?',prayWith:'प्रार्थना के लिए कोई खोजें',shareExp:'अपना अनुभव बताएँ',shareExpS:'आपका पत्थर “साथ में” में दिखेगा, दूसरे पढ़ और टिप्पणी कर सकेंगे।',joinGroup:'समूह से जुड़ें',sendPray:'💬 प्रार्थना अनुरोध भेजें',stoneBtn:'पत्थर रखें',metQ:'परमेश्वर आपसे कहाँ मिला?',feltQ:'आज कैसा लगा?',bright:'उजला',mixed:'मिला-जुला',hard:'कठिन',setStone:'🪨 यह पत्थर रखें',
+ need:'मुझे याद करना है',tower:'मीनार',book:'किताब',songs:'गीत',lookback:'पीछे देखें',settings:'सेटिंग्स',close:'बंद करें',language:'भाषा',langNote:'स्क्रीन अनुवादित हैं। जहाँ जाँचा हुआ अनुवाद है वहाँ पद आपकी भाषा में दिखते हैं; बाकी किंग जेम्स संस्करण में।',reminders:'याद दिलाना',
+ notifNote:'यह प्रोटोटाइप एक वेब पेज है, इसलिए फ़ोन सूचनाएँ नहीं भेज सकता। समय होने पर याद Ebenezer के अंदर दिखती है; “पूर्वावलोकन” से देखें कि फ़ोन सूचना कैसी दिखेगी।',offlineH:'ऑफ़लाइन',offlineNote:'आपके पत्थर इसी फ़ोन पर सहेजे हैं, इसलिए खुलने के बाद बिना इंटरनेट भी पढ़ और रख सकती हैं। साझा पत्थर, टिप्पणियाँ और प्रार्थनाएँ इंटरनेट से चलती हैं।',
+ morningT:'आपकी सुबह की दिनचर्या',morningS:'दो मिनट: आपका वचन, एक साँस, और आज का लक्ष्य',start:'शुरू करें',doneMorning:'सुबह की दिनचर्या पूरी ✓',remMorning:'सुबह की दिनचर्या',remEvening:'शाम का पत्थर',remWeekly:'साप्ताहिक समीक्षा',remMonthly:'मासिक समीक्षा',remMonthlyS:'हर महीने की 1 तारीख़',preview:'पूर्वावलोकन',
+ weekBan:'परमेश्वर के साथ आपका सप्ताह',weekBanS:'इस सप्ताह का खास पल चुनें',monthBan:'परमेश्वर के साथ आपका महीना',monthBanS:'इस महीने के खास पत्थर चुनें',eveBan:'आज रात का पत्थर',eveBanS:'रास्ते पर चलें और आज का पत्थर रखें',open:'खोलें',sharedStones:'साझा पत्थर',offlineMsg:'आप ऑफ़लाइन हैं। आपके पत्थर इस फ़ोन पर सुरक्षित हैं।',
+ thisWeek:'इस सप्ताह',thisMonth:'इस महीने',lbWeekQ:'इस सप्ताह का खास पल क्या था?',lbMonthQ:'इस महीने कौन-से पत्थर खास थे?',lbSub:'खास पत्थरों पर तारा दबाएँ। आप उन्हें दूसरों के साथ साझा कर सकती हैं।',shareOut:'अपना खास पल साझा करें',noStones:'इस अवधि में अभी कोई पत्थर नहीं।',
+ breathIn:'साँस लें…',breathOut:'साँस छोड़ें…',thusFar:'अब तक',helped:'यहोवा ने मेरी सहायता की',carry:'आज यह साथ रखें:',chooseAim:'आज आपका लक्ष्य क्या है?',finish:'पूरा करें',next:'आगे',
+ pray1:'🙏 मैं प्रार्थना कर रही हूँ',praying:'🙏 प्रार्थना ✓',comment:'टिप्पणी',commentPh:'कुछ दयालु लिखें…',post:'भेजें',yours:'आपका पत्थर',markAns:'✓ परमेश्वर ने उत्तर दिया',answered:'परमेश्वर ने उत्तर दिया',updatePh:'तब से क्या हुआ?',addUpdate:'अपडेट जोड़ें',save:'सहेजें',someone:'कोई',you:'आप',
+ liveOn:'लाइव: आपका समुदाय इन्हें देखता है',liveOff:'यहाँ उदाहरण दिखाए गए हैं। claude.ai पर खोलने पर लाइव साझा होता है।',emptyShared:'अभी कोई साझा पत्थर नहीं।',ex:'उदाहरण'},
+es:{today:'Hoy',story:'Mi historia',together:'Juntos',gm:'Buenos días',ga:'Buenas tardes',ge:'Buenas noches',aimQ:'¿Cuál es tu propósito hoy?',aWord:'Encontrar una Palabra',aWordS:'Para cómo me siento ahora',aPray:'Orar con alguien',aPrayS:'Pedir oración a los míos',aShare:'Compartir mi historia',aShareS:'Contar lo que Dios hizo',aStone:'Poner una piedra',aStoneS:'Recordar el día de hoy',thePath:'El camino',
+ steps:['Sentir','Buscar','Leer','Reflexionar','Juntos','Piedra'],fTitles:['¿Cómo te sientes?','Encontrar una Palabra','Leer','Reflexionar','Caminar juntos','Poner una piedra'],howReally:'¿Cómo estás, de verdad?',howSub:'Elige lo más cercano, o cuéntame qué pasó. También puedes buscar.',howFeel:'Cómo me siento',whatHap:'Qué pasó',searchPh:'Buscar: preocupación, nostalgia, trabajo, familia…',searchBtn:'Buscar versículos',
+ chooseSub:'Elige el que te hable. Cada uno abre una historia bíblica.',readBtn:'Leer esta Palabra',listen:'🔊 Escuchar',chapter:'Leer el capítulo completo',reflectBtn:'Reflexionar',refQ:'¿Qué te dice esta Palabra?',refSub:'Responde una o las cuatro. Corto está bien.',qL:'¿Qué aprendiste?',qQ:'¿Qué preguntas tienes?',qT:'¿Qué piensas?',qP:'¿Cómo podemos orar por ti?',togBtn:'Caminar juntos',
+ togQ:'¿Quién caminará contigo?',prayWith:'Encontrar a alguien para orar',shareExp:'Compartir tu experiencia',shareExpS:'Tu piedra aparece en Juntos para que otros la lean y comenten.',joinGroup:'Unirse a un grupo',sendPray:'💬 Enviar mi petición de oración',stoneBtn:'Poner la piedra',metQ:'¿Dónde te encontró Dios?',feltQ:'¿Cómo fue hoy?',bright:'Luminoso',mixed:'Mixto',hard:'Difícil',setStone:'🪨 Poner esta piedra',
+ need:'Necesito recordar',tower:'Torre',book:'Libro',songs:'Canciones',lookback:'Mirar atrás',settings:'Ajustes',close:'Cerrar',language:'Idioma',langNote:'Las pantallas están traducidas. Los versículos aparecen en tu idioma cuando hay una traducción revisada; los demás en la versión King James.',reminders:'Recordatorios',
+ notifNote:'Este prototipo es una página web y no puede enviar notificaciones al teléfono. Los recordatorios aparecen dentro de Ebenezer; toca “Vista previa” para ver cómo sería una notificación.',offlineH:'Sin conexión',offlineNote:'Tus piedras se guardan en este teléfono, así que puedes leerlas y ponerlas sin internet una vez abierto Ebenezer. Las piedras compartidas, comentarios y oraciones necesitan internet.',
+ morningT:'Tu rutina de la mañana',morningS:'Dos minutos: tu Palabra, una respiración y tu propósito de hoy',start:'Empezar',doneMorning:'Rutina de la mañana hecha ✓',remMorning:'Rutina de la mañana',remEvening:'Piedra de la noche',remWeekly:'Repaso semanal',remMonthly:'Repaso mensual',remMonthlyS:'El día 1 de cada mes',preview:'Vista previa',
+ weekBan:'Tu semana con Dios',weekBanS:'Elige el momento destacado de esta semana',monthBan:'Tu mes con Dios',monthBanS:'Elige las piedras destacadas del mes',eveBan:'La piedra de esta noche',eveBanS:'Recorre el camino y pon la piedra de hoy',open:'Abrir',sharedStones:'Piedras compartidas',offlineMsg:'Estás sin conexión. Tus piedras están a salvo en este teléfono.',
+ thisWeek:'Esta semana',thisMonth:'Este mes',lbWeekQ:'¿Cuál fue el momento destacado de esta semana?',lbMonthQ:'¿Qué piedras destacaron este mes?',lbSub:'Toca la estrella en las piedras que destacaron. Puedes compartirlas.',shareOut:'Compartir mi momento destacado',noStones:'Aún no hay piedras en este periodo.',
+ breathIn:'Inhala…',breathOut:'Exhala…',thusFar:'Hasta aquí',helped:'me ayudó Jehová',carry:'Lleva esto contigo hoy:',chooseAim:'¿Cuál es tu propósito hoy?',finish:'Terminar',next:'Siguiente',
+ pray1:'🙏 Estoy orando',praying:'🙏 Orando ✓',comment:'Comentar',commentPh:'Escribe algo amable…',post:'Publicar',yours:'Tu piedra',markAns:'✓ Dios respondió',answered:'Dios respondió',updatePh:'¿Qué pasó desde entonces?',addUpdate:'Añadir novedad',save:'Guardar',someone:'Alguien',you:'Tú',
+ liveOn:'En vivo: tu comunidad ve esto',liveOff:'Aquí se muestran ejemplos. Se comparte en vivo al abrir Ebenezer en claude.ai.',emptyShared:'Aún no hay piedras compartidas.',ex:'ejemplo'},
+zh:{today:'今天',story:'我的故事',together:'同行',gm:'早上好',ga:'下午好',ge:'晚上好',aimQ:'你今天的目标是什么？',aWord:'寻找一句话语',aWordS:'为我此刻的感受',aPray:'和人一起祷告',aPrayS:'请我的人为我祷告',aShare:'分享我的故事',aShareS:'讲述神所做的',aStone:'立一块石头',aStoneS:'记念今天',thePath:'道路',
+ steps:['感受','寻找','阅读','默想','同行','石头'],fTitles:['你感觉怎么样？','寻找一句话语','阅读','默想','一起同行','立一块石头'],howReally:'你真的还好吗？',howSub:'选最接近的，或告诉我发生了什么。也可以搜索。',howFeel:'我的感受',whatHap:'发生了什么',searchPh:'搜索：担心、想家、工作、家人…',searchBtn:'搜索经文',
+ chooseSub:'选一节对你说话的经文，每节都有一个圣经故事。',readBtn:'阅读这句话语',listen:'🔊 收听',chapter:'阅读整章',reflectBtn:'默想',refQ:'这句话语对你说了什么？',refSub:'回答一个或全部四个，简短也可以。',qL:'你学到了什么？',qQ:'你有什么问题？',qT:'你有什么想法？',qP:'我们可以怎样为你祷告？',togBtn:'一起同行',
+ togQ:'谁会与你同行？',prayWith:'找人一起祷告',shareExp:'分享你的经历',shareExpS:'你的石头会出现在“同行”，别人可以阅读和留言。',joinGroup:'加入小组',sendPray:'💬 发送我的代祷请求',stoneBtn:'立下石头',metQ:'神在哪里遇见了你？',feltQ:'今天感觉如何？',bright:'明亮',mixed:'复杂',hard:'艰难',setStone:'🪨 立下这块石头',
+ need:'我需要记念',tower:'石塔',book:'书',songs:'诗歌',lookback:'回顾',settings:'设置',close:'关闭',language:'语言',langNote:'界面已翻译。有核对过的译本时经文以你的语言显示，其余显示英王钦定本。',reminders:'提醒',
+ notifNote:'这个原型是网页，无法发送手机通知。提醒会在 Ebenezer 内显示；点“预览”看看手机通知的样子。',offlineH:'离线',offlineNote:'你的石头保存在这部手机上，打开后没有网络也能阅读和立石头。共享的石头、留言和祷告需要网络。',
+ morningT:'你的晨间时光',morningS:'两分钟：你的话语、一次呼吸、今天的目标',start:'开始',doneMorning:'晨间时光完成 ✓',remMorning:'晨间时光',remEvening:'晚间石头',remWeekly:'每周回顾',remMonthly:'每月回顾',remMonthlyS:'每月 1 日',preview:'预览',
+ weekBan:'你与神同行的一周',weekBanS:'选出本周最难忘的时刻',monthBan:'你与神同行的一个月',monthBanS:'选出本月最难忘的石头',eveBan:'今晚的石头',eveBanS:'走完道路，立下今天的石头',open:'打开',sharedStones:'共享的石头',offlineMsg:'你已离线。你的石头安全地保存在这部手机上。',
+ thisWeek:'本周',thisMonth:'本月',lbWeekQ:'本周最难忘的时刻是什么？',lbMonthQ:'本月哪些石头最难忘？',lbSub:'在难忘的石头上点星标，也可以分享给别人。',shareOut:'分享我最难忘的时刻',noStones:'这段时间还没有石头。',
+ breathIn:'吸气…',breathOut:'呼气…',thusFar:'到如今',helped:'耶和华都帮助我',carry:'今天带着这句话：',chooseAim:'你今天的目标是什么？',finish:'完成',next:'下一步',
+ pray1:'🙏 我在祷告',praying:'🙏 祷告中 ✓',comment:'留言',commentPh:'写些温暖的话…',post:'发布',yours:'你的石头',markAns:'✓ 神回应了',answered:'神回应了',updatePh:'之后发生了什么？',addUpdate:'添加近况',save:'保存',someone:'某人',you:'你',
+ liveOn:'实时：你的群体能看到这些',liveOff:'这里显示的是示例。在 claude.ai 上打开时可实时分享。',emptyShared:'还没有共享的石头。',ex:'示例'}};
+const FEEL_T={hi:{overwhelmed:'बोझ से दबी',anxious:'चिंतित',lonely:'अकेली',sad:'दुखी',afraid:'डरी हुई',tired:'थकी हुई',ashamed:'शर्मिंदा',torn:'दो घरों के बीच',lost:'पता नहीं मैं कौन हूँ',grateful:'आभारी',hopeful:'आशावान',parents:'मेरे माता-पिता',work:'काम और पैसा',church:'कलीसिया खोजना',calling:'मेरी बुलाहट',health:'मेरा स्वास्थ्य',homes:'दो घर'},
+ es:{overwhelmed:'Abrumada',anxious:'Ansiosa',lonely:'Sola',sad:'Triste',afraid:'Con miedo',tired:'Cansada',ashamed:'Avergonzada',torn:'Entre dos hogares',lost:'No sé quién soy',grateful:'Agradecida',hopeful:'Con esperanza',parents:'Mis padres',work:'Trabajo y dinero',church:'Buscar iglesia',calling:'Mi llamado',health:'Mi salud',homes:'Dos hogares'},
+ zh:{overwhelmed:'不堪重负',anxious:'焦虑',lonely:'孤单',sad:'难过',afraid:'害怕',tired:'疲惫',ashamed:'羞愧',torn:'在两个家之间',lost:'不知道我是谁',grateful:'感恩',hopeful:'有盼望',parents:'我的父母',work:'工作和钱',church:'找教会',calling:'我的呼召',health:'我的健康',homes:'两个家'}};
+/* verses in other languages, copied from source text: Hindi Holy Bible (HHBD, licence to confirm), Reina-Valera Antigua, Chinese Union Version */
+const VL={hi:{'1 Samuel 7:12':'तब शमूएल ने एक पत्थर ले कर मिस्पा और शेन के बीच में खड़ा किया, और यह कहकर उसका नाम एबेनेज़ेर रखा, कि यहां तक यहोवा ने हमारी सहायता की है।','Psalm 68:6':'परमेश्वर अनाथों का घर बसाता है; और बन्धुओं को छुड़ाकर भाग्यवान करता है; परन्तु हठीलों को सूखी भूमि पर रहना पड़ता है॥','Lamentations 3:22–23':'हम मिट नहीं गए; यह यहोवा की महाकरुणा का फल है, क्योंकि उसकी दया अमर है। प्रति भोर वह नई होती रहती है; तेरी सच्चाई महान है।'},
+ es:{'1 Samuel 7:12':'Tomó luego Samuel una piedra, y púsola entre Mizpa y Sen, y púsole por nombre Eben-ezer, diciendo: Hasta aquí nos ayudó Jehová.','Psalm 68:6':'El Dios que hace habitar en familia los solos; Que saca á los aprisionados con grillos: Mas los rebeldes habitan en sequedad.','Lamentations 3:22–23':'Es por la misericordia de Jehová que no somos consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad.'},
+ zh:{'1 Samuel 7:12':'撒母耳将一块石头立在米斯巴和善的中间，给石头起名叫以便以谢，说，到如今耶和华都帮助我们。','Psalm 68:6':'神叫孤独的有家，使被囚的出来享福；惟有悖逆的住在乾燥之地。','Lamentations 3:22–23':'我们不致消灭，是出於耶和华诸般的慈爱；是因他的怜悯不致断绝。每早晨，这都是新的；你的诚实极其广大！'}};
+const VL_NAME={hi:'Hindi Holy Bible',es:'Reina-Valera Antigua',zh:'和合本'};
+let LANG=ld('eb4.lang','en');if(!T[LANG])LANG='en';
+const t=k=>(T[LANG]&&T[LANG][k]!==undefined)?T[LANG][k]:T.en[k];
+const feelName=(k,en)=>LANG!=='en'&&FEEL_T[LANG]&&FEEL_T[LANG][k]||en;
+function vtext(ref){if(LANG!=='en'&&VL[LANG]&&VL[LANG][ref])return{text:VL[LANG][ref],src:VL_NAME[LANG]};return{text:V[ref],src:'KJV'}}
+function applyStatic(){document.documentElement.lang=LANG;$$('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
+ const tabs={today:'today',story:'story',together:'together'};$$('.tab').forEach(b=>{const sv2=b.querySelector('svg');b.textContent='';b.appendChild(sv2);b.append(t(tabs[b.dataset.tab]))});
+ const aims=[['word','aWord','aWordS'],['pray','aPray','aPrayS'],['share','aShare','aShareS'],['stone','aStone','aStoneS']];aims.forEach(([k,a,b2])=>{const el=document.querySelector(`[data-aim="${k}"]`);el.querySelector(':scope > div > b').textContent=t(a);el.querySelector(':scope > div > span').textContent=t(b2)});
+ const q=document.querySelector('.hero p[style*="What"]')||document.getElementById('aimQ');if(q)q.textContent=t('aimQ');$('#needBtn').textContent=t('need')}
+
+/* ---------- stepping stones path (signature element) ---------- */
+const STEPS=['Feel','Find','Read','Reflect','Together','Stone'];
+function pathSVG(cur,dark){const W=360,H=70;const xs=[30,90,150,210,270,330];const ys=[38,30,40,30,38,32];
+ const water=dark?'#2f7c86':'#2f7c86';let g=`<path d="M0 46 Q 30 38 60 46 T 120 46 T 180 46 T 240 46 T 300 46 T 360 46" fill="none" stroke="${water}" stroke-width="2" opacity=".45"/><path d="M0 56 Q 30 48 60 56 T 120 56 T 180 56 T 240 56 T 300 56 T 360 56" fill="none" stroke="${water}" stroke-width="2" opacity=".25"/>`;
+ xs.forEach((x,i)=>{const done=i<cur,on=i===cur;const fill=on?'#c8892b':done?(dark?'#9fb3c2':'#5c6670'):'none';const stroke=on?'#c8892b':done?fill:(dark?'#9fb3c2':'#9aa3a9');
+  const rx=on?22:18,ry=on?12:10;g+=`<ellipse cx="${x}" cy="${ys[i]}" rx="${rx}" ry="${ry}" fill="${fill}" stroke="${stroke}" stroke-width="2" ${fill==='none'?'stroke-dasharray="4 3"':''}/>`;
+  if(done)g+=`<path d="M${x-6} ${ys[i]} l4 4 l8 -8" fill="none" stroke="${dark?'#13304a':'#fff'}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(on)g+=`<circle cx="${x}" cy="${ys[i]}" r="4" fill="#fff"/>`});
+ return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Path: step ${cur+1} of 6, ${STEPS[cur]||'start'}">${g}</svg><div class="path-cap">${t('steps').map((s,i)=>`<span class="${i===cur?'on':''}">${s}</span>`).join('')}</div>`}
+
+/* ---------- TODAY ---------- */
+function season(){const m=NOW.getMonth();return m<2||m===11?['Winter','Psalm 147:16, 18']:m<5?['Spring','Song of Solomon 2:11–12']:m<8?['Summer','Psalm 1:3']:['Autumn','Galatians 6:9']}
+function todayRef(){const lo=localToday();if(lo)return lo.ref;const p=(CFG.plan||'').toLowerCase();if(/interview|exam|job|meeting/.test(p))return 'Genesis 22:14';return season()[1]}
+function renderToday(){
+ const h=NOW.getHours();$('#greet').textContent=`${h<12?t('gm'):h<17?t('ga'):t('ge')}${CFG.name?', '+CFG.name:''}`;
+ const c=CITIES[CFG.city];
+ $('#ctx').innerHTML=`📍 <select id="city" aria-label="City">${Object.entries(CITIES).map(([k,v])=>`<option value="${k}"${k===CFG.city?' selected':''}>${v[0]}</option>`).join('')}</select> · <input id="plan" value="${esc(CFG.plan)}" placeholder="Today’s plan" aria-label="Today’s plan" style="width:170px">`;
+ $('#city').onchange=e=>{CFG.city=e.target.value;save();renderToday()};$('#plan').onchange=e=>{const v=e.target.value.trim();if(v===CFG.plan)return;CFG.plan=v;save();renderToday()};
+ $('#pathHome').innerHTML=pathSVG(-1,false);
+ const r=todayRef(),s=ST[r],se=season();$('#seasonTag').textContent=`${se[0]} · chosen for your day`;
+ $('#todayWord').innerHTML=`<div style="display:flex;gap:10px;align-items:center"><span style="font-size:26px">${s.e}</span><h3 style="flex:1">${esc(s.t)}</h3></div><p style="margin:0;font-size:15px;line-height:1.6">${esc(s.s)}</p><div class="verse" lang="${vtext(r).src==='KJV'?'en':LANG}">“${esc(vtext(r).text)}”</div><div class="ref">${esc(r)} (${vtext(r).src})</div>
+  <div class="row"><button class="btn small" id="twListen">${t('listen')}</button><a class="btn small" href="${chURL(r)}" target="_blank" rel="noopener">${t('chapter')}</a><button class="btn small primary" id="twWalk">Walk the path with this Word</button></div>`;
+ $('#twListen').onclick=()=>speak(`${s.t}. ${s.s} ${V[r]}`);$('#twWalk').onclick=()=>startPath({ref:r,feel:null,step:2});
+ const wk=(()=>{const d=new Date(NOW);d.setDate(d.getDate()-((d.getDay()+6)%7));return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)})();
+ const RS=REAL();const tc=RS.filter(x=>x.date===todayISO).length,w=RS.filter(x=>x.date>=wk).length,m=RS.filter(x=>x.date.slice(0,7)===todayISO.slice(0,7)&&x.shared).length;
+ const c3=(l,n,g,s2)=>`<div><b>${l}</b><div class="n">${Math.min(n,g)} / ${g}</div><div class="bar"><i style="width:${Math.min(1,n/g)*100}%"></i></div><div class="small" style="margin-top:6px;font-size:12px">${s2}</div></div>`;
+ $('#chal').innerHTML=c3(t('today'),tc,1,'')+c3(t('thisWeek'),w,5,'')+c3(t('thisMonth'),m,1,'')}
+$$('[data-aim]').forEach(b=>b.onclick=()=>{const a=b.dataset.aim;if(a==='word')startPath({step:0});if(a==='stone')startPath({step:0});if(a==='pray'){startPath({step:0,aim:'pray'});toast('First, find a Word to pray with. Then you’ll choose who to ask.')}if(a==='share'){startPath({step:0,aim:'share'});toast('Every story starts with a Word. You’ll choose whether to share at the end.')}});
+
+/* ---------- THE PATH ---------- */
+let P={};
+function startPath(o){P=Object.assign({readCh:false,step:0,mode:'feel',feel:null,q:'',ref:null,ans:{learned:'',questions:'',thoughts:'',pray:''},with:[],share:false,asked:false,group:null,tone:null,met:'',aim:null},o);if(P.ref&&P.step<2)P.step=2;tab('flow');renderFlow()}
+function renderFlow(){const titles=t('fTitles');$('#flowTitle').textContent=titles[P.step];$('#pathFlow').innerHTML=pathSVG(P.step,true);
+ const b=$('#flowBody');b.innerHTML='';window.scrollTo(0,0);[stepFeel,stepFind,stepRead,stepReflect,stepTogether,stepStone][P.step](b)}
+$('#flowBack').onclick=()=>{if(P.step===0){tab('today');return}P.step--;renderFlow()};
+$('#flowClose').onclick=()=>tab('today');
+function nav(b,nextLabel,can,next){const d=document.createElement('div');d.className='navrow';d.innerHTML=`<button class="btn primary" id="nextBtn">${nextLabel}</button>`;b.appendChild(d);$('#nextBtn').onclick=()=>{const why=can();if(why!==true){toast(why);return}next?next():(P.step++,renderFlow())}}
+/* 1 · Feel */
+function stepFeel(b){
+ const list=P.mode==='feel'?FEELS:HAPPENED;
+ b.innerHTML=`<div class="step"><p class="q">${t('howReally')}</p><p class="muted" style="margin:0">${t('howSub')}</p>
+  <div class="tabs2" role="group" aria-label="Choose how"><button data-mode="feel" aria-pressed="${P.mode==='feel'}">${t('howFeel')}</button><button data-mode="happened" aria-pressed="${P.mode==='happened'}">${t('whatHap')}</button></div>
+  <div class="feels">${list.map(([k,e,l])=>`<button class="feel" data-feel="${k}" aria-pressed="${P.feel===k}"><span class="e">${e}</span>${feelName(k,l)}</button>`).join('')}</div>
+  <div class="search"><span aria-hidden="true">🔎</span><input id="q" placeholder="${t('searchPh')}" value="${esc(P.q)}" aria-label="Search for a verse"></div></div>`;
+ b.querySelectorAll('[data-mode]').forEach(x=>x.onclick=()=>{P.mode=x.dataset.mode;P.feel=null;renderFlow()});
+ b.querySelectorAll('[data-feel]').forEach(x=>x.onclick=()=>{P.feel=x.dataset.feel;P.q='';P.step=1;renderFlow()});
+ $('#q').onkeydown=e=>{if(e.key==='Enter'&&e.target.value.trim()){P.q=e.target.value.trim();P.feel=null;P.step=1;renderFlow()}};
+ nav(b,t('searchBtn'),()=>($('#q').value.trim()||P.feel)?true:'Pick a feeling or type a word to search.',()=>{P.q=$('#q').value.trim();if(P.q)P.feel=null;P.step=1;renderFlow()})}
+/* 2 · Find a Word */
+function refsFor(){const all=FEELS.concat(HAPPENED);if(P.feel){return all.find(x=>x[0]===P.feel)[3]}
+ const q=P.q.toLowerCase();const hit=Object.keys(ST).filter(r=>(ST[r].k+' '+ST[r].t+' '+V[r]+' '+r).toLowerCase().includes(q));
+ const fromFeel=all.filter(x=>x[2].toLowerCase().includes(q)).flatMap(x=>x[3]);return [...new Set(fromFeel.concat(hit))].slice(0,6)}
+function stepFind(b){const refs=refsFor();const f=FEELS.concat(HAPPENED).find(x=>x[0]===P.feel);
+ b.innerHTML=`<div class="step"><p class="q">${f?`Verses for when you feel ${esc(f[2].toLowerCase())}`:`Verses for “${esc(P.q)}”`}</p><p class="muted" style="margin:0">${t('chooseSub')}</p>
+  <div class="search"><span aria-hidden="true">🔎</span><input id="q2" placeholder="Search again" value="${esc(P.q)}" aria-label="Search for a verse"></div>
+  <div class="vlist">${refs.length?refs.map(r=>`<button class="vopt" data-ref="${esc(r)}" aria-pressed="${P.ref===r}"><span class="t">${ST[r].e} ${esc(ST[r].t)}</span><span class="r">${esc(r)}</span><span class="s">“${esc((x=>x.length>120?x.slice(0,120)+'…':x)(vtext(r).text))}”</span></button>`).join(''):`<div class="card"><p style="margin:0">No verses match “${esc(P.q)}” yet. Try a feeling instead, like anxious, lonely or tired.</p></div>`}</div></div>`;
+ $('#q2').onkeydown=e=>{if(e.key==='Enter'&&e.target.value.trim()){P.q=e.target.value.trim();P.feel=null;renderFlow()}};
+ b.querySelectorAll('[data-ref]').forEach(x=>x.onclick=()=>{P.ref=x.dataset.ref;b.querySelectorAll('[data-ref]').forEach(y=>y.setAttribute('aria-pressed',y===x))});
+ nav(b,t('readBtn'),()=>P.ref?true:'Choose a verse first.')}
+/* 3 · Read */
+function stepRead(b){const s=ST[P.ref];
+ b.innerHTML=`<div class="step"><div class="read"><div style="display:flex;gap:10px;align-items:center"><span style="font-size:28px">${s.e}</span><h2 style="flex:1">${esc(s.t)}</h2></div>
+  <p class="story" style="margin:0">${esc(s.s)}</p>
+  <blockquote lang="${vtext(P.ref).src==='KJV'?'en':LANG}">“${esc(vtext(P.ref).text)}”<cite>${esc(P.ref)} (${vtext(P.ref).src})</cite></blockquote>
+  <div class="row"><button class="btn small" id="rListen">${t('listen')}</button><a class="btn small primary" id="rCh" href="${chURL(P.ref)}" target="_blank" rel="noopener">📖 ${t('chapter')}</a></div>
+  <div class="choice" style="margin:4px 0 0" aria-pressed="${!!P.readCh}"><span class="e">${P.readCh?'✅':'📖'}</span><div class="g"><b>${P.readCh?'Chapter read':'Read the whole chapter first'}</b><span>${P.readCh?'Your song is ready.':'The song unlocks when you’ve read the chapter.'}</span></div>${P.readCh?`<a class="btn small ochre" href="https://www.youtube.com/results?search_query=${encodeURIComponent(s.song+' worship')}" target="_blank" rel="noopener">♪ ${esc(s.song)}</a>`:`<button class="btn small" id="rDone">✓ I’ve read it</button>`}</div></div></div>`;
+ const rd=$('#rDone');if(rd)rd.onclick=()=>{P.readCh=true;renderFlow()};
+ $('#rListen').onclick=()=>speak(`${s.t}. ${s.s} ${V[P.ref]}`);
+ nav(b,t('reflectBtn'),()=>P.readCh?true:'Read the whole chapter first, then tap “I’ve read it.”')}
+/* 4 · Reflect */
+function stepReflect(b){const a=P.ans;
+ b.innerHTML=`<div class="step"><p class="q">${t('refQ')}</p><p class="muted" style="margin:0">${t('refSub')}</p>
+  <div class="qa">
+   <div><label for="aS">What stood out to you?</label><textarea id="aS" placeholder="The words that stood out were…">${esc(a.stood||'')}</textarea></div>
+   <div><label for="aL">${t('qL')}</label><textarea id="aL" placeholder="God provides, even when…">${esc(a.learned)}</textarea></div>
+   <div><label for="aQ">${t('qQ')}</label><textarea id="aQ" placeholder="I still wonder…">${esc(a.questions)}</textarea></div>
+   <div><label for="aT">${t('qT')}</label><textarea id="aT" placeholder="Today this made me think about…">${esc(a.thoughts)}</textarea></div>
+   <div><label for="aP">${t('qP')}</label><textarea id="aP" placeholder="Please pray that…">${esc(a.pray)}</textarea></div>
+  </div></div>`;
+ const grab=()=>{a.stood=$('#aS').value.trim();a.learned=$('#aL').value.trim();a.questions=$('#aQ').value.trim();a.thoughts=$('#aT').value.trim();a.pray=$('#aP').value.trim()};
+ b.querySelectorAll('textarea').forEach(t=>t.oninput=grab);
+ nav(b,t('togBtn'),()=>{grab();return (a.stood||a.learned||a.questions||a.thoughts||a.pray)?true:'Write at least one answer.'})}
+/* 5 · Together */
+function stepTogether(b){const a=P.ans;const who=P.with.length===1?'Hi '+P.with[0].split(' ').pop()+', c':'C';const msg=`${who}ould you pray with me today? I’ve been reading ${P.ref}. ${a.pray?'Please pray that '+a.pray.replace(/^please pray that\s*/i,''):''}`.trim();
+ const hl=k=>P.aim===k?' style="outline:2px solid #c8892b;outline-offset:2px"':'';
+ b.innerHTML=`<div class="step"><p class="q">${t('togQ')}</p><p class="muted" style="margin:0">Jesus met people one by one, then gathered them. Choose any that help today.</p>
+  <div style="margin-top:14px">
+   <div class="choice" id="cPray" aria-pressed="${P.asked}"${hl('pray')}><span class="e">🙏</span><div class="g"><b>${t('prayWith')}</b><span>Pick who you’ll ask, then tap Send. Only people you actually message are saved on the stone.</span><div class="people">${PEOPLE_().map(([n])=>`<button class="chip" data-with="${esc(n)}" aria-pressed="${P.with.includes(n)}">${esc(n)}</button>`).join('')}</div></div></div>
+   ${CFG.priv?`<div class="choice"><span class="e">🔒</span><div class="g"><b>Private mode is on</b><span>Nothing leaves this phone. You can change this in Settings.</span></div></div>`:`<div class="choice" id="cShare" aria-pressed="${P.share}"${hl('share')}><span class="e">💬</span><div class="g"><b>${t('shareExp')}</b><span>Anyone who can open this Ebenezer page will see it with your name. You can remove it later.</span></div><button class="btn small" id="shareT">${P.share?'Sharing ✓':'Share'}</button></div>`}
+   <div class="choice" id="cGroup" aria-pressed="${!!P.group}"><span class="e">👥</span><div class="g"><b>${t('joinGroup')}</b><span>${P.group?`You’ll join “${esc(P.group)}”.`:'Beijing returnees meet Saturdays at 8pm on video.'}</span></div><button class="btn small" id="groupT">${P.group?'Joined ✓':'Join'}</button></div>
+  </div>
+  <a class="btn block" id="sendPray" target="_blank" rel="noopener" href="sms:?&body=${encodeURIComponent(msg)}" style="margin-top:4px">${t('sendPray')}${P.asked?' ✓':''}</a>
+  <p class="small" style="margin:6px 0 0" id="sendNote">${P.with.length&&!P.asked?`You picked ${esc(P.with.join(', '))}. Tap Send to actually ask them.`:'Opens a message on your phone. You choose who it goes to.'}</p></div>`;
+ b.querySelectorAll('[data-with]').forEach(x=>x.onclick=()=>{const n=x.dataset.with;P.with=P.with.includes(n)?P.with.filter(y=>y!==n):P.with.concat(n);P.asked=false;renderFlow()});
+ $('#sendPray').addEventListener('click',()=>{P.asked=true;setTimeout(renderFlow,300)});
+ const sT=$('#shareT');if(sT)sT.onclick=async()=>{if(!P.share){if(!await askShare('Your stone (the line about where God met you and what you learned) will appear in Together. Anyone who can open this Ebenezer page will see it with your name, and can pray and comment. Your reflection answers stay private.'+((P.group||Object.keys(JOINED).some(k=>JOINED[k]))?' It will also be posted in your group chat.':'')))return}P.share=!P.share;renderFlow()};
+ $('#groupT').onclick=()=>{P.group=P.group?null:'Beijing returnees';renderFlow()};
+ nav(b,t('stoneBtn'),()=>true)}
+/* 6 · Stone */
+function pal(tone){return tone==='bright'?{bg:'#c8892b',fg:'#1d1406'}:tone==='dark'?{bg:'#13304a',fg:'#e9f0f4'}:{bg:'#2f7c86',fg:'#fff'}}
+function stepStone(b){const a=P.ans;const p=pal(P.tone||'mid');
+ b.innerHTML=`<div class="step"><p class="q">${t('metQ')}</p><p class="muted" style="margin:0">One line about today, set on ${esc(P.ref)}.</p>
+  <textarea id="met" style="margin-top:12px" placeholder="Today God…">${esc(P.met)}</textarea>
+  <p style="font-weight:600;margin:16px 0 0">${t('feltQ')}</p>
+  <div class="tones"><button data-tone="bright" aria-pressed="${P.tone==='bright'}" style="background:#c8892b;color:#1d1406;border-color:#c8892b">${t('bright')}</button><button data-tone="mid" aria-pressed="${P.tone==='mid'}" style="background:#2f7c86;color:#fff;border-color:#2f7c86">${t('mixed')}</button><button data-tone="dark" aria-pressed="${P.tone==='dark'}" style="background:#13304a;color:#fff;border-color:#13304a">${t('hard')}</button></div>
+  <div class="stonecard" id="preview" style="background:${p.bg};color:${p.fg}"><span class="ref">${esc(ST[P.ref].e)} ${esc(P.ref)}</span><p id="pv">“${esc(P.met||a.learned||'Today God…')}”</p>${a.learned?`<span style="font-size:14px;opacity:.9">I learned: ${esc(a.learned)}</span>`:''}${P.asked&&P.with.length?`<span style="font-size:14px;opacity:.9">Asked ${esc(P.with.join(', '))} to pray</span>`:''}</div></div>`;
+ $('#met').oninput=e=>{P.met=e.target.value;$('#pv').textContent=`“${P.met||a.learned||'Today God…'}”`};
+ b.querySelectorAll('[data-tone]').forEach(x=>x.onclick=()=>{P.tone=x.dataset.tone;P.met=$('#met').value;renderFlow()});
+ nav(b,t('setStone'),()=>{P.met=$('#met').value.trim();if(!P.met)return 'Write one line about where God met you.';if(!P.tone)return 'Choose how today felt.';return true},()=>{
+  const st={id:'s'+Date.now().toString(36),date:todayISO,ref:P.ref,tone:P.tone,met:P.met,stood:a.stood,feel:P.feel,learned:a.learned,questions:a.questions,thoughts:a.thoughts,pray:a.pray,with:P.asked?P.with:[],shared:P.share&&!CFG.priv,song:ST[P.ref].song};
+  STONES.push(st);if(P.group)JOINED[P.group]=true;save();if(st.shared){shareStone(st,'');const g=P.group||Object.keys(JOINED).find(k=>JOINED[k]);if(g){const prev=room;room=g;sendMsg({stone:{ref:st.ref,met:st.met,tone:st.tone},text:'Sharing tonight’s stone.'});room=prev}}tab('story');view='tower';renderStory(st.id);toast(`Stone set on ${P.ref}. Hitherto hath the LORD helped you.`)})}
+
+/* ---------- MY STORY ---------- */
+let view='tower';
+$$('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;renderStory()});
+function renderStory(newId){$$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===view));const el=$('#storyBody');
+ const exNote=hasEx()&&view!=='look'?`<p class="small" style="margin:10px 16px 0">Includes example stones so you can see how it works. <button class="btn small" id="exClear">Remove examples</button></p>`:'';const list=STONES.slice().sort((a,b)=>a.date.localeCompare(b.date));
+ if(view==='tower'){const H=Math.max(320,list.length*36+60);let g=`<line x1="180" x2="180" y1="14" y2="${H-22}" stroke="currentColor" opacity=".12" stroke-width="2"/><ellipse cx="180" cy="${H-14}" rx="140" ry="8" fill="#13304a" opacity=".12"/>`;
+  list.forEach((s,i)=>{const y=H-32-i*36,off=s.tone==='dark'?-50:s.tone==='bright'?50:0,cx=180+off+((i*17)%9-4),w=100-((i*13)%20),p=pal(s.tone),rot=((i*29)%11)-5;
+   g+=`<g class="ts${s.id===newId?' dropping':''}" data-open="${s.id}" role="button" tabindex="0" aria-label="Stone from ${esc(fmt(s.date))}, ${esc(s.ref)}" style="cursor:pointer" transform="rotate(${rot} ${cx} ${y})"><path d="M${cx-w/2} ${y} C ${cx-w/2} ${y-18}, ${cx+w/2-6} ${y-19}, ${cx+w/2} ${y-2} C ${cx+w/2+2} ${y+14}, ${cx-w/2+8} ${y+16}, ${cx-w/2} ${y} Z" fill="${p.bg}"/><ellipse cx="${cx-w*.14}" cy="${y-7}" rx="${w*.18}" ry="4" fill="#ffffff40"/><text x="${cx}" y="${y+5}" text-anchor="middle" font-size="14">${ST[s.ref]?ST[s.ref].e:'🪨'}</text></g>`});
+  el.innerHTML=`<div class="towerbox"><div class="tlegend"><span>Hard days</span><span>Bright days</span></div><svg viewBox="0 0 360 ${H}" role="img" aria-label="Your stones, oldest at the bottom">${g}</svg></div>`}
+ if(view==='book'){el.innerHTML=`<div class="book">${list.slice().reverse().map(s=>`<article class="page"><div class="d">${esc(fmt(s.date))}${s.ex?' · example':''}</div><h3>${esc(ST[s.ref]?ST[s.ref].t:s.ref)}</h3><p class="v">“${esc(V[s.ref])}” ${esc(s.ref)}</p><p><b>Where God met me:</b> ${esc(s.met)}</p>${s.learned?`<p><b>I learned:</b> ${esc(s.learned)}</p>`:''}${s.pray?`<p><b>I asked for prayer:</b> ${esc(s.pray)}</p>`:''}${s.with&&s.with.length?`<p class="small">Asked ${esc(s.with.join(', '))} to pray</p>`:''}</article>`).join('')}</div>`}
+ if(view==='look'){renderLook(el)}
+ if(view==='songs'){const songs={};list.forEach(s=>{if(s.song)(songs[s.song]=songs[s.song]||[]).push(s)});
+  el.innerHTML=`<div class="songs">${Object.entries(songs).map(([n,ss])=>`<div class="song"><span class="e">♪</span><div class="g"><b>${esc(n)}</b><span>${ss.length} stone${ss.length>1?'s':''} · ${esc(ss.map(x=>x.ref).join(', '))}</span></div><a class="btn small" href="https://www.youtube.com/results?search_query=${encodeURIComponent(n+' worship')}" target="_blank" rel="noopener">▶ Play</a></div>`).join('')}</div>`}
+ if(exNote){el.insertAdjacentHTML('afterbegin',exNote);$('#exClear').onclick=clearExamples}
+ if(newId)setTimeout(()=>{const n=document.querySelector(`[data-open="${newId}"]`);if(n)n.scrollIntoView({block:'center'})},50)}
+function openStone(s,why,help){const p=pal(s.tone);const ov=$('#overlay');ov.style.background=p.bg;ov.style.color=p.fg;
+ const real=!s.ex&&!s.wordOnly;
+ $('#ov').innerHTML=`<div style="font-size:13px;font-weight:600;opacity:.85">${s.wordOnly?'A Word for tonight':esc(fmt(s.date))}${s.ex?' · example':''}${why?' · '+esc(why):''}</div>
+  <blockquote lang="${vtext(s.ref).src==='KJV'?'en':LANG}">“${esc(vtext(s.ref).text)}”<div style="font-family:var(--sans);font-size:13px;font-weight:600;margin-top:6px;opacity:.9">${esc(s.ref)} (${vtext(s.ref).src}) · ${esc(ST[s.ref]?ST[s.ref].t:'')}</div></blockquote>
+  ${s.wordOnly?`<p style="margin:0">${esc(ST[s.ref].s)}</p><p style="margin:0;opacity:.9">You haven’t set a stone yet. When God meets you, set one, and it will be here next time.</p>`:`<p class="w">“${esc(s.met)}”</p>${s.learned?`<p style="margin:0">I learned: ${esc(s.learned)}</p>`:''}${s.with&&s.with.length?`<p style="margin:0;opacity:.9">Asked ${esc(s.with.join(', '))} to pray</p>`:''}
+  <p style="font-family:var(--serif);font-size:19px;margin:6px 0">Thus far, God has helped you. He is the same God today.</p>`}
+  <div class="row"><button class="ob" id="ovL">🔊 Listen</button>${s.song?`<a class="ob" href="https://www.youtube.com/results?search_query=${encodeURIComponent(s.song+' worship')}" target="_blank" rel="noopener">♪ ${esc(s.song)}</a>`:''}<a class="ob" href="${chURL(s.ref)}" target="_blank" rel="noopener">Read the chapter</a><a class="ob" href="sms:?&body=${encodeURIComponent('Could we talk? I’m holding onto '+s.ref+' tonight.')}" target="_blank" rel="noopener">🤝 Talk to someone</a></div>
+  ${help?helpHTML(true):''}
+  ${real?`<div class="row" style="margin-top:8px">${s.shared?`<button class="ob" id="ovUnshare">Stop sharing</button>`:''}<button class="ob" id="ovDel">Delete this stone</button></div>`:''}`;
+ ov.hidden=false;ov.scrollTop=0;$('#ovL').onclick=()=>speak(s.wordOnly?`${ST[s.ref].t}. ${V[s.ref]}`:`${V[s.ref]}. ${s.met}. Thus far, God has helped you.`);
+ const un=$('#ovUnshare');if(un)un.onclick=async()=>{s.shared=false;save();await unshareStone(s.id);toast('Removed from Together.');openStone(s,why,help)};
+ const dl=$('#ovDel');if(dl)dl.onclick=async()=>{if(dl.dataset.sure!=='1'){dl.dataset.sure='1';dl.textContent='Tap again to delete for good';return}
+  if(s.shared)await unshareStone(s.id);STONES=STONES.filter(x=>x.id!==s.id);save();ov.hidden=true;renderStory();renderToday();toast('Stone deleted.')}}
+$('#ovX').onclick=()=>{$('#overlay').hidden=true;try{speechSynthesis.cancel()}catch(e){}};
+document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o)openStone(STONES.find(x=>x.id===o.dataset.open))});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#overlay').hidden=true;$('#why').hidden=true}if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.ts')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
+$('#needBtn').onclick=()=>{const ov=$('#overlay');ov.style.background='#13304a';ov.style.color='#e9f0f4';
+ $('#ov').innerHTML=`<h2 style="color:#fff;font-size:28px">What’s going on tonight?</h2><div class="row">${FEELS.slice(0,9).map(([k,e,l])=>`<button class="ob" data-rf="${k}" style="flex:1 1 45%;min-height:54px">${e} ${esc(feelName(k,l))}</button>`).join('')}</div>${helpHTML(true)}`;ov.hidden=false};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-rf]');if(!b)return;const refs=FEELS.find(x=>x[0]===b.dataset.rf)[3];const mine=REAL();let pool=mine.filter(s=>refs.includes(s.ref));if(!pool.length)pool=mine;
+ if(!pool.length){openStone({wordOnly:true,ref:refs[0],tone:'dark',date:todayISO},'',true);return}
+ const s=pool.slice().sort((a,c)=>c.date.localeCompare(a.date))[0];openStone(s,'A time God helped you before',true)});
+
+/* ---------- TOGETHER ---------- */
+const GROUPS=[['Beijing returnees','🏙️','Students back in Beijing in their first years · weekly call Saturdays 8pm'],['Returnees around the world','🌍','Students back in India, Nigeria, Brazil and more · monthly call'],['Wisdom circle','🌳','Believers home in Beijing 10+ years · they walk with newer returnees']];
+const PRAYERS=[['Mei','Pray for my job interview on Friday. I’m anxious.','1 Peter 5:7',7],['Daniel','I miss my small group in Ohio. Pray I find a church here.','Psalm 68:6',4],['Hannah','My visa paperwork is stuck. Pray God provides.','Genesis 22:14',9]];
+let WEEK=ld('eb4.week',{});let WDRAFT=null;
+function renderWeekly(){const wk=weekKey(),mine=WEEK[wk];const ws=REAL().filter(x=>x.date>=wk).sort((a,b)=>b.date.localeCompare(a.date));const day=NOW.getDay();
+ $('#circleHow').innerHTML=[['1','All week · you','Set stones as God meets you. Your circle sees the ones you share, and can pray and comment.'],['2','Friday · you','Post this week’s Ebenezer: your stone, a prayer of thanks, a prayer request, and what stood out.'],['3','Saturday · your group','Weekly call with Beijing returnees. Your care partner joins from the Wisdom circle.'],['4',`Sunday · ${esc(CFG.care||'your care partner')} (coming soon)`,'In the full app, your care partner gets a gentle nudge if you haven’t posted. This prototype can only preview it.'],['✦','Any time · you','Message or call anyone in your circle. You don’t have to wait.']].map(([n,h,d])=>`<div class="st4"><span class="n">${n}</span><div><b>${h}</b><span>${d}</span></div></div>`).join('');
+ $('#weekDue').textContent=mine?(mine.local?'Saved ✓':'Posted ✓'):(day===5?'Due today':(day===6||day===0)?'Not posted yet':'Due Friday');
+ if(mine){$('#weekly').innerHTML=`<p style="margin:0 0 6px;font-weight:600">${mine.local?'Saved on this phone ✓':'You posted this week’s Ebenezer ✓'}</p>${mine.stone?`<div class="wfield"><b>My stone:</b> ${esc(mine.stone)}</div>`:''}<div class="wfield"><b>Thank you, God:</b> ${esc(mine.praise)}</div><div class="wfield"><b>Please pray:</b> ${esc(mine.request)}</div><div class="wfield"><b>What stood out:</b> ${esc(mine.stood)}</div><div class="row" style="margin-top:8px"><button class="btn small" id="wEdit">Edit</button>${mine.local?'':`<button class="btn small" id="wDel">Remove from Together</button>`}</div>`;
+ $('#wEdit').onclick=()=>{WDRAFT=mine;delete WEEK[wk];sv('eb4.week',WEEK);renderWeekly()};
+ const wd=$('#wDel');if(wd)wd.onclick=async()=>{await unshareStone('w'+wk);WEEK[wk]=Object.assign({},mine,{local:true});sv('eb4.week',WEEK);renderWeekly();toast('Removed from Together.')};return}
+ const checkin=localPreview==='checkin';const D=WDRAFT||{};WDRAFT=null;
+ $('#weekly').innerHTML=`${checkin?`<div class="banner" style="margin:0 0 10px"><span class="av">${esc((CFG.care||'C')[0])}</span><div class="g"><b>Preview: ${esc(CFG.care||'Your care partner')} checks in</b><span>“We missed your stone this week. Is anything wrong? How are you feeling, and how can we pray for you?”</span></div><a class="btn small" href="sms:?&body=${encodeURIComponent('Hi '+(CFG.care||'')+', thank you for checking in. This week was hard. Could we talk?')}" target="_blank" rel="noopener">Reply</a></div>`:''}
+  <label for="wStone">My stone this week</label><select id="wStone"><option value="">${ws.length?'Choose a stone':'No stones yet this week'}</option>${ws.map(x=>`<option value="${esc(x.id)}">${esc(x.ref)}: ${esc(x.met.slice(0,50))}</option>`).join('')}</select>
+  <label for="wPraise">A prayer of thanks</label><textarea id="wPraise" placeholder="Thank you, God, for…">${esc(D.praise||'')}</textarea>
+  <label for="wReq">A prayer request</label><textarea id="wReq" placeholder="Please pray that…">${esc(D.request||'')}</textarea>
+  <label for="wStood">Something that stood out this week</label><textarea id="wStood" placeholder="This week I noticed…">${esc(D.stood||'')}</textarea>
+  <button class="btn primary block" id="wPost" style="margin-top:12px">${CFG.priv?'Save for me':'Post to Together'}</button>${CFG.priv?'':'<p class="small" style="margin:6px 0 0">Anyone who can open this Ebenezer page will see your post with your name.</p>'}
+  ${!checkin?`<button class="btn ghost block" id="wPreview" style="margin-top:4px">Preview Sunday’s check-in</button>`:''}`;
+ $('#wPost').onclick=async()=>{const stId=$('#wStone').value,st=STONES.find(x=>x.id===stId);const praise=$('#wPraise').value.trim(),request=$('#wReq').value.trim(),stood=$('#wStood').value.trim();if(!praise&&!request&&!stood&&!st){toast('Write at least one part.');return}
+  const goLive=!CFG.priv&&DB&&UID;if(goLive&&!await askShare('Your weekly post, including your prayer request, will appear in Together. Anyone who can open this Ebenezer page will see it with your name.'))return;
+  WEEK[wk]={stone:st?`${st.ref}: ${st.met}`:'',praise,request,stood,at:Date.now(),local:!goLive};sv('eb4.week',WEEK);
+  if(goLive){try{const {r,data}=await myDoc('posts');const items=(data&&data.items||[]);items.unshift({id:'w'+wk,type:'weekly',ref:st?st.ref:'',met:st?st.met:'',praise,request,stood,at:Date.now(),answered:false,update:''});await r.set({items:items.filter((x,i,a)=>a.findIndex(y=>y.id===x.id)===i).slice(0,40)})}catch(e){}}
+  renderWeekly();toast(goLive?'Posted to Together.':'Saved on this phone.')};
+ const wp=$('#wPreview');if(wp)wp.onclick=()=>{localPreview='checkin';renderWeekly();localPreview=null}}
+function renderTogether(){renderWeekly();
+ $('#groups').innerHTML=GROUPS.map(([n,e,d])=>`<div class="group"><span class="e">${e}</span><div class="g"><b>${n}</b><span>${d}</span></div>${JOINED[n]?`<button class="btn small primary" data-openroom="${esc(n)}">💬 Open</button>`:`<button class="btn small" data-join="${esc(n)}">Join</button>`}</div>`).join('');
+ $('#prayers').innerHTML=PRAYERS.map(([w,t,r,n],i)=>`<div class="post"><div class="who"><span class="av">${w[0]}</span><b>${w}</b></div><p>${esc(t)}</p><div style="display:flex;align-items:center;gap:10px"><span class="ref" style="flex:1">${r}</span><button class="btn small" data-pray="${i}">${PRAYED[i]?'🙏 Praying ✓':'🙏 I’ll pray'} · ${n+(PRAYED[i]?1:0)}</button></div></div>`).join('');
+ $('#liveTag').textContent=DB?('● Everyone who can open this page sees these'):'';
+ if(DB){const posts=LIVE.posts.slice().sort((a,b)=>b.at-a.at);$('#stories').innerHTML=posts.length?posts.map(p=>postHTML(p,true)).join(''):`<p class="small" style="margin:0">${t('emptyShared')}</p>`}
+ else{const mine=STONES.filter(s=>s.shared&&!s.ex).map(s=>({who:CFG.name||t('you'),mine:true,met:s.met,ref:s.ref,learned:s.learned}));$('#stories').innerHTML=`<p class="small" style="margin:0 0 6px">${t('liveOff')}</p>`+mine.concat(EX_POSTS).map(p=>postHTML(p,false)).join('')}
+ $('#mypeople').innerHTML=PEOPLE_().map(([n,r])=>`<div class="group"><span class="av">${esc(n[0]||'?')}</span><div class="g"><b>${esc(n)}</b><span>${esc(r)}</span></div><a class="btn small" href="sms:?&body=${encodeURIComponent('Hi '+n.split(' ').pop()+', could we talk this week?')}" target="_blank" rel="noopener">💬 Message</a></div>`).join('')}
+document.addEventListener('click',e=>{const j=e.target.closest('[data-join]');if(j){JOINED[j.dataset.join]=true;save();renderTogether();openRoom(j.dataset.join);return}const p=e.target.closest('[data-pray]');if(p){PRAYED[p.dataset.pray]=!PRAYED[p.dataset.pray];save();renderTogether()}});
+
+
+/* ---------- reminders, morning routine, look-back ---------- */
+let REM=Object.assign({morning:true,mTime:'07:30',evening:true,eTime:'20:30',weekly:true,wDay:'0',monthly:true},ld('eb4.rem',{}));
+let DONE=ld('eb4.done',{});
+const weekKey=()=>{const d=new Date(NOW);d.setDate(d.getDate()-((d.getDay()+6)%7));return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const monthKey=()=>todayISO.slice(0,7);
+const saveRem=()=>{sv('eb4.rem',REM);sv('eb4.done',DONE)};
+const DAYS=()=>[...Array(7)].map((_,i)=>new Date(2024,0,7+i).toLocaleDateString(LANG==='zh'?'zh-CN':LANG,{weekday:'long'}));
+function minutesNow(){return NOW.getHours()*60+NOW.getMinutes()}
+const tmin=x=>{const [h,m]=x.split(':').map(Number);return h*60+m};
+function seasonOf(iso){const m=+iso.slice(5,7);return m===12||m<=2?'Winter':m<=5?'Spring':m<=8?'Summer':'Autumn'}
+function seasonYear(iso){const y=+iso.slice(0,4),m=+iso.slice(5,7);return m===12?y+1:y}
+function renderLocal(){const lo=localToday(),c=CITIES[CFG.city];
+ $('#localCard').innerHTML=lo?`<div class="local"><div class="h"><span class="e">${lo.e}</span><div><b>Today in ${esc(c[0])}: ${esc(lo.n)}</b><span>From the local calendar${localPreview?' (preview)':''}</span></div></div><p>${esc(lo.p)}</p><p class="q2">${esc(lo.q)}</p><div class="row"><button class="btn small primary" data-localgo="1">Read ${esc(lo.ref)} and set a stone</button></div></div>`:'';
+ const ss=seasonOf(todayISO),sy=seasonYear(todayISO);const past=REAL().filter(x=>seasonOf(x.date)===ss&&seasonYear(x.date)<sy).sort((a,b)=>b.date.localeCompare(a.date));
+ $('#seasonCard').innerHTML=past.length?`<div class="local"><div class="h"><span class="e">${ss==='Autumn'?'🍂':ss==='Winter'?'❄️':ss==='Spring'?'🌸':'☀️'}</span><div><b>${ss} again</b><span>Stones you set in ${ss.toLowerCase()} before</span></div></div>${past.slice(0,2).map(x=>`<button class="lbi" data-open="${x.id}" style="text-align:left;width:100%"><div class="g"><div class="d">${esc(fmt(x.date))} · ${esc(x.ref)}</div><p>${esc(x.met)}</p></div></button>`).join('')}</div>`:''}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-localgo]');if(b){const lo=localToday();if(lo)startPath({ref:lo.ref,step:2})}});
+function renderBanners(){renderLocal();
+ $('#offline').innerHTML=navigator.onLine===false?`<div class="offline">📴 ${t('offlineMsg')}</div>`:'';
+ let ban='';
+ if(REM.weekly&&String(NOW.getDay())===REM.wDay&&DONE.week!==weekKey())ban=['🗓️',t('weekBan'),t('weekBanS'),'week'];
+ else if(REM.monthly&&NOW.getDate()<=3&&DONE.month!==monthKey())ban=['🌙',t('monthBan'),t('monthBanS'),'month'];
+ else if(REM.evening&&minutesNow()>=tmin(REM.eTime)&&!REAL().some(x=>x.date===todayISO))ban=['🪨',t('eveBan'),t('eveBanS'),'evening'];
+ $('#dueBanner').innerHTML=ban?`<div class="banner"><span class="e">${ban[0]}</span><div class="g"><b>${esc(ban[1])}</b><span>${esc(ban[2])}</span></div><button class="btn small primary" data-due="${ban[3]}">${t('open')}</button></div>`:'';
+ $('#morningCard').innerHTML=REM.morning?(DONE.morning===todayISO?`<div class="morning"><span class="e">☀️</span><div class="g"><b>${t('doneMorning')}</b><span>${esc(DONE.aim||'')}</span></div></div>`:`<div class="morning"><span class="e">🌅</span><div class="g"><b>${t('morningT')}</b><span>${t('morningS')}</span></div><button class="btn small primary" id="mStart">${t('start')}</button></div>`):'';
+ const ms=$('#mStart');if(ms)ms.onclick=()=>morning(0)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-due]');if(!b)return;const k=b.dataset.due;if(k==='evening')startPath({step:0});else{tab('story');view='look';lbPeriod=k;renderStory()}});
+window.addEventListener('online',()=>{renderBanners();renderTogether()});window.addEventListener('offline',renderBanners);
+/* morning routine: greeting + weather → Word → breathe → aim */
+function morning(stepN){const ov=$('#overlay');ov.style.background='#13304a';ov.style.color='#e9f0f4';const c=CITIES[CFG.city],r=todayRef(),s2=ST[r],vt=vtext(r);
+ const dots=`<div style="display:flex;gap:6px">${[0,1,2,3].map(i=>`<span style="height:6px;flex:1;border-radius:6px;background:${i<=stepN?'#c8892b':'#ffffff30'}"></span>`).join('')}</div>`;
+ let body='';
+ if(stepN===0)body=`<h2 style="font-size:30px;color:#fff">${t('gm')}${CFG.name?', '+esc(CFG.name):''}</h2><p style="margin:0;font-size:17px">📍 ${esc(c[0])}</p>${CFG.plan?`<p style="margin:0;font-size:17px">📅 ${esc(CFG.plan)}</p>`:''}${localToday()?`<div style="background:#ffffff14;border-radius:16px;padding:14px"><b>${localToday().e} Today in ${esc(c[0])}: ${esc(localToday().n)}</b><p style="margin:6px 0 0;line-height:1.55">${esc(localToday().p)}</p></div>`:''}<button class="btn ochre block" data-mnext="1">${t('next')}</button>`;
+ if(stepN===1)body=`<div style="font-size:30px">${s2.e}</div><h2 style="color:#fff">${esc(s2.t)}</h2><p style="margin:0;line-height:1.6">${esc(s2.s)}</p><blockquote lang="${vt.src==='KJV'?'en':LANG}">“${esc(vt.text)}”<div style="font-family:var(--sans);font-size:13px;font-weight:600;margin-top:6px">${esc(r)} (${vt.src})</div></blockquote><div class="row"><button class="ob" id="mListen">${t('listen')}</button></div><button class="btn ochre block" data-mnext="2">${t('next')}</button>`;
+ if(stepN===2)body=`<div class="ring" id="mRing">${t('breathIn')}</div><p style="text-align:center;margin:0" id="mCount"></p><button class="btn ochre block" data-mnext="3">${t('next')}</button>`;
+ if(stepN===3)body=`<h2 style="color:#fff">${t('chooseAim')}</h2><div class="row">${[['📖',t('aWord'),'word'],['🙏',t('aPray'),'pray'],['💬',t('aShare'),'share'],['🪨',t('aStone'),'stone']].map(([e,l,k])=>`<button class="ob" data-maim="${k}" data-ml="${esc(l)}" style="flex:1 1 45%;min-height:54px">${e} ${esc(l)}</button>`).join('')}</div><p style="margin:6px 0 0">${t('carry')}</p><p style="font-family:var(--serif);font-size:20px;margin:0;color:#f2c46e">${esc(localToday()?localToday().q:s2.t)}</p>`;
+ $('#ov').innerHTML=dots+body;ov.hidden=false;ov.scrollTop=0;
+ const ml=$('#mListen');if(ml)ml.onclick=()=>speak(`${s2.t}. ${s2.s} ${V[r]}`);
+ if(stepN===2){let n=0;const ring=$('#mRing');const tick=()=>{if(!document.getElementById('mRing'))return;if(n>=6){$('#mCount').textContent='✓';return}const inn=n%2===0;ring.classList.toggle('in',inn);ring.innerHTML=inn?`${t('breathIn')}<br><b>${t('thusFar')}</b>`:`${t('breathOut')}<br><b>${t('helped')}</b>`;$('#mCount').textContent=`${3-Math.floor(n/2)}`;n++;setTimeout(tick,matchMedia('(prefers-reduced-motion: reduce)').matches?1500:4000)};tick()}}
+document.addEventListener('click',e=>{const n=e.target.closest('[data-mnext]');if(n){morning(+n.dataset.mnext);return}
+ const a=e.target.closest('[data-maim]');if(a){const k=a.dataset.maim;DONE.morning=todayISO;DONE.aim=a.dataset.ml;saveRem();$('#overlay').hidden=true;renderBanners();toast(t('doneMorning'));startPath({step:0,aim:(k==='pray'||k==='share')?k:null})}});
+/* settings */
+function renderSettings(){renderYou();
+ $('#localPrev').innerHTML=(LOCAL.beijing||[]).slice(0,5).map((x,i)=>`<button class="chip" data-lprev="${i}" aria-pressed="${localPreview===x}">${x.e} ${esc(x.n)}</button>`).join('')+`<button class="chip" data-lprev="-1" aria-pressed="${!localPreview}">Today’s real date</button>`;
+ $('#langRow').innerHTML=[['en','English'],['hi','हिन्दी'],['es','Español'],['zh','中文']].map(([k,l])=>`<button class="chip" data-lang="${k}" aria-pressed="${LANG===k}">${l}</button>`).join('');
+ const sw=(k)=>`<button class="sw" data-rem="${k}" role="switch" aria-checked="${!!REM[k]}" aria-label="${k}"></button>`;
+ $('#remRows').innerHTML=`<div class="setrow"><div><b>☀️ ${t('remMorning')}</b><span><input type="time" id="mTime" value="${REM.mTime}"></span></div><button class="btn small" data-prev="morning">${t('preview')}</button>${sw('morning')}</div>
+  <div class="setrow"><div><b>🪨 ${t('remEvening')}</b><span><input type="time" id="eTime" value="${REM.eTime}"></span></div><button class="btn small" data-prev="evening">${t('preview')}</button>${sw('evening')}</div>
+  <div class="setrow"><div><b>🗓️ ${t('remWeekly')}</b><span><select id="wDay">${DAYS().map((d,i)=>`<option value="${i}"${REM.wDay==i?' selected':''}>${d}</option>`).join('')}</select></span></div><button class="btn small" data-prev="week">${t('preview')}</button>${sw('weekly')}</div>
+  <div class="setrow"><div><b>🌙 ${t('remMonthly')}</b><span>${t('remMonthlyS')}</span></div><button class="btn small" data-prev="month">${t('preview')}</button>${sw('monthly')}</div>`;
+ $('#mTime').onchange=e=>{REM.mTime=e.target.value;saveRem()};$('#eTime').onchange=e=>{REM.eTime=e.target.value;saveRem();renderBanners()};$('#wDay').onchange=e=>{REM.wDay=e.target.value;saveRem();renderBanners()}}
+document.addEventListener('click',e=>{const l=e.target.closest('[data-lang]');if(l){LANG=l.dataset.lang;sv('eb4.lang',LANG);applyStatic();renderSettings();renderToday();renderBanners();if($('#story').classList.contains('active'))renderStory();if($('#together').classList.contains('active'))renderTogether();return}
+ const lp=e.target.closest('[data-lprev]');if(lp){const i=+lp.dataset.lprev;localPreview=i<0?null:LOCAL.beijing[i];if(localPreview)CFG.city='beijing';renderSettings();renderToday();renderBanners();return}
+ const r=e.target.closest('[data-rem]');if(r){REM[r.dataset.rem]=!REM[r.dataset.rem];saveRem();renderSettings();renderBanners();return}
+ const p=e.target.closest('[data-prev]');if(p){const k=p.dataset.prev;const m={morning:[t('remMorning'),`${t('gm')}${CFG.name?', '+CFG.name:''}. ${ST[todayRef()].t}`],evening:[t('eveBan'),t('eveBanS')],week:[t('weekBan'),t('weekBanS')],month:[t('monthBan'),t('monthBanS')]}[k];
+  const n=$('#notif');n.innerHTML=`<span class="ic"><svg viewBox="0 0 24 24" width="22" height="22"><ellipse cx="12" cy="17" rx="9" ry="4" fill="#c8892b"/><ellipse cx="11" cy="11" rx="6.5" ry="3.4" fill="#9fb3c2"/><ellipse cx="12.5" cy="6.2" rx="4" ry="2.4" fill="#e9f0f4"/></svg></span><div><small>Ebenezer</small><b>${esc(m[0])}</b><span>${esc(m[1])}</span></div>`;n.dataset.k=k;n.classList.add('show');clearTimeout(n.t);n.t=setTimeout(()=>n.classList.remove('show'),4500)}});
+$('#notif').onclick=()=>{const k=$('#notif').dataset.k;$('#notif').classList.remove('show');$('#settings').hidden=true;if(k==='morning')morning(0);else if(k==='evening')startPath({step:0});else{tab('story');view='look';lbPeriod=k;renderStory()}};
+$('#setBtn').onclick=()=>{renderSettings();$('#settings').hidden=false};$('#setClose').onclick=()=>$('#settings').hidden=true;$('#settings').addEventListener('click',e=>{if(e.target.id==='settings')$('#settings').hidden=true});
+/* look-back: weekly outstanding moment, monthly outstanding stones */
+let lbPeriod='week';
+function periodStart(k){const d=new Date(todayISO+'T12:00:00');if(k==='week')return weekKey();if(k==='month')return monthKey()+'-01';if(k==='quarter'){const q=Math.floor(d.getMonth()/3)*3;return `${d.getFullYear()}-${String(q+1).padStart(2,'0')}-01`}if(k==='year')return `${d.getFullYear()}-01-01`;return '0000'}
+function periodKey(k){return k==='all'?'all':k+':'+periodStart(k)}
+function renderLook(el){const P2=[['week',t('thisWeek')],['month',t('thisMonth')],['quarter','This quarter'],['year','This year'],['all','All time']];
+ const from=periodStart(lbPeriod),key=periodKey(lbPeriod);const list=REAL().filter(x=>x.date>=from).sort((a,b)=>b.date.localeCompare(a.date));
+ const cnt={bright:0,mid:0,dark:0};list.forEach(x=>cnt[x.tone]=(cnt[x.tone]||0)+1);const tot=list.length||1;
+ const refs={};list.forEach(x=>refs[x.ref]=(refs[x.ref]||0)+1);const topRef=Object.entries(refs).sort((a,b)=>b[1]-a[1])[0];
+ const ppl=[...new Set(list.flatMap(x=>x.with||[]))];const songs=[...new Set(list.map(x=>x.song).filter(Boolean))];
+ const stars=REAL().filter(x=>(x.stars||[]).includes(key));
+ el.innerHTML=`<div class="seg" style="margin-top:12px;flex-wrap:wrap">${P2.map(([k,l])=>`<button data-lb="${k}" aria-pressed="${lbPeriod===k}" style="flex:1 1 30%">${l}</button>`).join('')}</div>
+ <div class="sec"><div class="card" style="display:grid;gap:12px">
+  <div style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--serif);font-size:40px">${list.length}</span><span class="muted">stone${list.length===1?'':'s'} ${lbPeriod==='all'?'in all':'in this period'}</span></div>
+  <div style="display:flex;height:12px;border-radius:8px;overflow:hidden;background:var(--line)"><i style="width:${cnt.bright/tot*100}%;background:#c8892b"></i><i style="width:${cnt.mid/tot*100}%;background:#2f7c86"></i><i style="width:${cnt.dark/tot*100}%;background:#13304a"></i></div>
+  <div class="small">${cnt.bright} bright · ${cnt.mid} mixed · ${cnt.dark} hard</div>
+  ${topRef?`<div><b style="font-size:13px;color:var(--slate)">The Word God used most</b><div style="font-family:var(--serif);font-size:18px">${ST[topRef[0]]?ST[topRef[0]].e:''} ${esc(topRef[0])} · ${topRef[1]}×</div></div>`:''}
+  ${ppl.length?`<div><b style="font-size:13px;color:var(--slate)">People you asked to pray</b><div>${esc(ppl.join(', '))}</div></div>`:''}
+  ${songs.length?`<div><b style="font-size:13px;color:var(--slate)">Songs</b><div>${songs.map(n=>`<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(n+' worship')}" target="_blank" rel="noopener">♪ ${esc(n)}</a>`).join(' · ')}</div></div>`:''}
+ </div></div>
+ <div class="pad" style="margin-top:16px"><h2>${lbPeriod==='week'?t('lbWeekQ'):lbPeriod==='all'?'Which stones stand out across your whole story?':'Which stones stood out?'}</h2><p class="small" style="margin:4px 0 0">${t('lbSub')}</p></div>
+ <div class="lb">${list.length?list.map(x=>{const on=(x.stars||[]).includes(key);return `<div class="lbi" aria-pressed="${on}"><div class="g"><div class="d">${esc(fmt(x.date))} · ${esc(x.ref)}</div><p>${esc(x.met)}</p></div><button class="star" data-star="${x.id}" aria-label="Mark as outstanding">${on?'⭐':'☆'}</button></div>`}).join(''):`<div class="card"><p style="margin:0">${t('noStones')}</p></div>`}</div>
+ ${stars.length&&!CFG.priv?`<div class="pad" style="margin-top:12px"><button class="btn primary block" id="shareOut">${t('shareOut')} (${stars.length})</button></div>`:''}`;
+ el.querySelectorAll('[data-lb]').forEach(b=>b.onclick=()=>{lbPeriod=b.dataset.lb;renderStory()});
+ el.querySelectorAll('[data-star]').forEach(b=>b.onclick=()=>{const x=STONES.find(y=>y.id===b.dataset.star);x.stars=x.stars||[];x.stars=x.stars.includes(key)?x.stars.filter(k=>k!==key):x.stars.concat(key);if(lbPeriod==='week')DONE.week=weekKey();if(lbPeriod==='month')DONE.month=monthKey();save();saveRem();renderStory();renderBanners()});
+ const so=$('#shareOut');if(so)so.onclick=async()=>{if(!await askShare(`${stars.length} starred stone${stars.length>1?'s':''} will appear in Together. Anyone who can open this Ebenezer page will see ${stars.length>1?'them':'it'} with your name. You can remove any of them later.`))return;for(const x of stars){x.shared=true;await shareStone(x,lbPeriod)}save();toast('✓');tab('together')}}
+
+/* ---------- community: live shared stones, comments, prayers (db capability) ---------- */
+let DB=null,USER=null,UID=null,LIVE={posts:[],comments:{},prayers:{}},NAMES={};
+async function initCommunity(){try{DB=await claude.use('db');USER=await claude.use('user')}catch(e){DB=null}
+ if(!DB||!USER){renderTogether();return}UID=await USER.id();if(!UID){DB=null;renderTogether();return}
+ DB.collection('posts').onSnapshot(q=>{LIVE.posts=q.docs.flatMap(d=>((d.data()||{}).items||[]).map(it=>Object.assign({},it,{owner:d.id})));refreshNames();renderTogether()},()=>{});
+ DB.collection('comments').onSnapshot(q=>{const c={};q.docs.forEach(d=>{const m=(d.data()||{}).c||{};Object.entries(m).forEach(([k,arr])=>{(c[k]=c[k]||[]).push(...arr.map(x=>Object.assign({},x,{by:d.id})))})});LIVE.comments=c;refreshNames();renderTogether()},()=>{});
+ DB.collection('chat').onSnapshot(q=>{const c={};q.docs.forEach(d=>{c[d.id]=(d.data()||{}).r||{}});LIVE.chat=c;refreshNames();renderRoom()},()=>{});
+ DB.collection('prayers').onSnapshot(q=>{const p={};q.docs.forEach(d=>{Object.keys((d.data()||{}).p||{}).forEach(k=>{(p[k]=p[k]||[]).push(d.id)})});LIVE.prayers=p;renderTogether()},()=>{});
+ renderTogether()}
+async function refreshNames(){if(!USER)return;const ids=[...new Set(LIVE.posts.map(p=>p.owner).concat(Object.values(LIVE.comments).flat().map(c=>c.by)))];try{const ps=await USER.profiles(ids);ids.forEach(i=>NAMES[i]=(ps[i]&&ps[i].name)||'');renderTogether()}catch(e){}}
+const nameOf=id=>id===UID?t('you'):(NAMES[id]||t('someone'));
+async function myDoc(col){const r=DB.doc(col+'/'+UID);const g=await r.get();return {r,data:g.exists?Object.assign({},g.data()):null}}
+async function shareStone(x,why){if(!DB||!UID)return;try{const {r,data}=await myDoc('posts');const items=(data&&data.items||[]).filter(i=>i.id!==x.id);items.unshift({id:x.id,ref:x.ref,met:x.met,learned:x.learned||'',tone:x.tone,at:Date.now(),why:why||'',answered:false,update:''});await r.set({items:items.slice(0,40)})}catch(e){toast('Couldn’t share right now. Your stone is still saved.')}}
+async function addComment(key,text){if(!DB||!UID||!text.trim())return;try{const {r,data}=await myDoc('comments');const c=Object.assign({},data&&data.c||{});c[key]=(c[key]||[]).concat({id:Date.now().toString(36),text:text.trim().slice(0,400),at:Date.now()}).slice(-20);await r.set({c})}catch(e){toast('Couldn’t post the comment.')}}
+async function togglePray(key){if(!DB||!UID)return;try{const {r,data}=await myDoc('prayers');const p=Object.assign({},data&&data.p||{});if(p[key])delete p[key];else p[key]=true;await r.set({p})}catch(e){}}
+async function unshareStone(id){if(!DB||!UID)return;try{const {r,data}=await myDoc('posts');const items=(data&&data.items||[]).filter(i=>i.id!==id);await r.set({items})}catch(e){toast('Couldn’t remove it right now. Try again when you’re online.')}}
+async function deleteComment(key,cid){if(!DB||!UID)return;try{const {r,data}=await myDoc('comments');const c=Object.assign({},data&&data.c||{});c[key]=(c[key]||[]).filter(x=>x.id!==cid);if(!c[key].length)delete c[key];await r.set({c})}catch(e){toast('Couldn’t delete the comment.')}}
+async function ownerUpdate(id,patch){try{const {r,data}=await myDoc('posts');const items=(data&&data.items||[]).map(i=>i.id===id?Object.assign({},i,patch):i);await r.set({items})}catch(e){toast('Couldn’t save the update.')}}
+function postHTML(p,live){const key=`${p.owner}:${p.id}`,mine=live?p.owner===UID:!!p.mine;const hid=p.hidden||[];const cmts=live?(LIVE.comments[key]||[]).filter(c=>!hid.includes(c.by+':'+c.id)).sort((a,b)=>a.at-b.at):(p.cmts||[]);const prayers=live?(LIVE.prayers[key]||[]):[];const iPray=live&&prayers.includes(UID);
+ return `<div class="cpost"><div class="who" style="display:flex;gap:10px;align-items:center"><span class="av" style="${mine?'background:#c8892b;color:#1d1406':''}">${esc((live?nameOf(p.owner):p.who||'?')[0]||'?')}</span><b>${esc(live?nameOf(p.owner):p.who)}</b>${mine?`<span class="sample" style="color:var(--ochreink)">${t('yours')}</span>`:''}${!live?`<span class="sample">${t('ex')}</span>`:''}${p.answered?`<span class="answered">✓ ${t('answered')}</span>`:''}</div>
+  ${p.type==='weekly'?`<p style="margin:6px 0 2px;font-weight:600;color:var(--teal)">This week’s Ebenezer</p>${p.met?`<p class="met">“${esc(p.met)}”</p>`:''}${p.praise?`<div class="wfield"><b>Thanks:</b> ${esc(p.praise)}</div>`:''}${p.request?`<div class="wfield"><b>Please pray:</b> ${esc(p.request)}</div>`:''}${p.stood?`<div class="wfield"><b>Stood out:</b> ${esc(p.stood)}</div>`:''}`:`<p class="met">“${esc(p.met)}”</p>`}<div class="small"><span style="color:var(--teal);font-weight:600">${esc(p.ref||'')}</span>${p.learned?` · ${esc(p.learned)}`:''}</div>${p.update?`<p style="margin:6px 0 0;font-size:14px"><b>Update:</b> ${esc(p.update)}</p>`:''}
+  <div class="acts">${live?`<button class="btn small" data-cpray="${esc(key)}">${iPray?t('praying'):t('pray1')} · ${prayers.length}</button>`:''}${live&&mine&&!p.answered?`<button class="btn small" data-ans="${esc(p.id)}">${t('markAns')}</button>`:''}${live&&mine?`<button class="btn small" data-upd="${esc(p.id)}">${t('addUpdate')}</button><button class="btn small" data-rm="${esc(p.id)}">Remove</button>`:''}</div>
+  <div class="cmts">${cmts.map(c=>`<div class="cmt"><b>${esc(live?nameOf(c.by):c.who)}</b>${live&&c.by===p.owner?`<span class="own">${t('yours')}</span>`:''} ${esc(c.text)}${live&&c.by===UID?` <button class="btn small" data-cdel="${esc(key+'|'+c.id)}" aria-label="Delete my comment">Delete</button>`:live&&mine?` <button class="btn small" data-hide="${esc(p.id+'|'+c.by+':'+c.id)}" aria-label="Hide this comment">Hide</button>`:''}</div>`).join('')}
+  ${live?`<div class="cbox"><input placeholder="${t('commentPh')}" maxlength="400" data-cin="${esc(key)}" aria-label="${t('comment')}"><button class="btn small primary" data-csend="${esc(key)}">${t('post')}</button></div>`:''}</div></div>`}
+const EX_POSTS=[{who:'Mei',met:'My interview went well, and the manager asked about my church. I told her the truth.',ref:'1 Peter 5:7',learned:'He cares for me, even in interviews.',answered:true,update:'I got the job!',cmts:[{who:'Daniel',text:'So happy for you! Praying for your first week.'},{who:'Mei',text:'Thank you, everyone who prayed. 🙏'}]},
+ {who:'Daniel',met:'Found a small group that meets near my apartment. I almost didn’t go.',ref:'Psalm 68:6',learned:'God sets the lonely in families.',cmts:[{who:'Hannah',text:'This made my day.'}]}];
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.cpray){await togglePray(b.dataset.cpray);return}
+ if(b.dataset.csend){const i=document.querySelector(`[data-cin="${CSS.escape(b.dataset.csend)}"]`);if(i&&i.value.trim()){const v=i.value;i.value='';await addComment(b.dataset.csend,v)}return}
+ if(b.dataset.rm){const id=b.dataset.rm;if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Tap again to remove';return}await unshareStone(id);const st=STONES.find(x=>x.id===id);if(st){st.shared=false;save()}if(id.startsWith('w')){const wk=id.slice(1);if(WEEK[wk]){WEEK[wk].local=true;sv('eb4.week',WEEK)}}toast('Removed from Together.');return}
+ if(b.dataset.cdel){const [k,cid]=b.dataset.cdel.split('|');await deleteComment(k,cid);return}
+ if(b.dataset.hide){const [pid,ck]=b.dataset.hide.split('|');const post=LIVE.posts.find(x=>x.owner===UID&&x.id===pid);await ownerUpdate(pid,{hidden:((post&&post.hidden)||[]).concat(ck)});toast('Comment hidden.');return}
+ if(b.dataset.ans){await ownerUpdate(b.dataset.ans,{answered:true});toast('✓ '+t('answered'));return}
+ if(b.dataset.upd){const id=b.dataset.upd;const box=document.createElement('div');box.className='cbox';box.innerHTML=`<input placeholder="${t('updatePh')}" maxlength="300" aria-label="${t('addUpdate')}"><button class="btn small primary">${t('save')}</button>`;b.closest('.cpost').appendChild(box);const inp=box.querySelector('input');inp.focus();box.querySelector('button').onclick=async()=>{if(inp.value.trim()){await ownerUpdate(id,{update:inp.value.trim()});}box.remove()};return}});
+document.addEventListener('keydown',async e=>{if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.cin){const k=e.target.dataset.cin,v=e.target.value;e.target.value='';await addComment(k,v)}});
+
+
+/* ---------- group chat: join, talk, share a stone, others respond ---------- */
+const ROOM_INFO={'Beijing returnees':{call:'Saturdays 8pm',members:12,leader:'Mei'},'Returnees around the world':{call:'First Sunday, 9pm',members:48,leader:'Daniel'},'Wisdom circle':{call:'Thursdays 7:30pm',members:9,leader:'Mr. Liu'}};
+const EX_CHAT={'Beijing returnees':[{who:'Mei',text:'Welcome to everyone new this week! We meet Saturday at 8pm.',ago:26},{who:'Daniel',stone:{ref:'Psalm 68:6',met:'Found a small group near my apartment. I almost didn’t go.',tone:'bright'},ago:20},{who:'Mr. Liu',text:'That’s a stone worth setting, Daniel. God sets the lonely in families.',ago:19}],
+ 'Returnees around the world':[{who:'Daniel',text:'Hello from Lagos! Who else is in their first year back?',ago:40}],
+ 'Wisdom circle':[{who:'Mr. Liu',text:'This week let’s each check on one newer returnee.',ago:30}]};
+let LOCALCHAT=ld('eb4.chat',{});let room=null;const ROOMREPLY={};
+function roomMsgs(name){let arr=[];if(DB){Object.entries(LIVE.chat||{}).forEach(([uid,m])=>{(m[name]||[]).forEach(x=>arr.push(Object.assign({},x,{uid,mine:uid===UID})))});}
+ else{arr=(EX_CHAT[name]||[]).map((x,i)=>({id:'ex'+i,who:x.who,text:x.text,stone:x.stone,at:Date.now()-x.ago*3600e3,ex:true})).concat((LOCALCHAT[name]||[]).map(x=>Object.assign({},x,{mine:!x.who})))}
+ return arr.sort((a,b)=>a.at-b.at)}
+function msgHTML(m){const who=m.mine?t('you'):(DB?nameOf(m.uid):m.who);const p=m.stone?pal(m.stone.tone):null;
+ return `<div class="msg${m.mine?' me':''}"><div class="who">${esc(who)}${m.ex||m.exreply?'<span class="ex">example</span>':''}${m.mine?` <button class="btn small" data-mdel="${esc(m.id)}" style="min-height:26px;padding:0 8px;font-size:11px">Delete</button>`:''}</div>${m.text?`<div>${esc(m.text)}</div>`:''}${m.stone?`<div class="stoneMsg" style="background:${p.bg};color:${p.fg}"><div class="r">🪨 ${esc(m.stone.ref)}</div><p>“${esc(m.stone.met)}”</p></div><div class="reacts"><button data-react="${esc(m.id)}" data-rt="🙏 Praying">🙏 Praying</button><button data-react="${esc(m.id)}" data-rt="🙌 Amen">🙌 Amen</button></div>`:''}</div>`}
+function renderRoom(){if(!room)return;const inf=ROOM_INFO[room]||{};$('#roomT').textContent=room;$('#roomS').textContent=`${inf.members||''} members · weekly call ${inf.call||''}${DB?'':' · examples'}`;$('#roomCall').href=`https://meet.google.com/`;
+ const ms=roomMsgs(room);$('#msgs').innerHTML=`<div class="sysmsg">You joined ${esc(room)}</div><div class="sysmsg">${DB?'Anyone who can open this Ebenezer page can read this chat':'Examples on this phone only'}</div>`+ms.map(msgHTML).join('');$('#msgs').scrollTop=$('#msgs').scrollHeight}
+function openRoom(name){room=name;$('#room').hidden=false;$('#picker').hidden=true;renderRoom();setTimeout(()=>$('#msgIn').focus(),50)}
+async function deleteMsg(id){if(DB&&UID){try{const {r,data}=await myDoc('chat');const c=Object.assign({},data&&data.r||{});c[room]=(c[room]||[]).filter(x=>x.id!==id);await r.set({r:c})}catch(e){toast('Couldn’t delete. Check your connection.')}}else{LOCALCHAT[room]=(LOCALCHAT[room]||[]).filter(x=>x.id!==id);sv('eb4.chat',LOCALCHAT);renderRoom()}}
+async function sendMsg(obj){if(!room)return;if(CFG.priv&&DB){toast('Private mode is on. Turn it off in Settings to post in groups.');return}const rn=room;const m=Object.assign({id:Date.now().toString(36),at:Date.now()},obj);
+ if(DB&&UID){try{const {r,data}=await myDoc('chat');const c=Object.assign({},data&&data.r||{});c[rn]=(c[rn]||[]).concat(m).slice(-60);await r.set({r:c})}catch(e){toast('Couldn’t send. Check your connection.')}}
+ else{LOCALCHAT[rn]=(LOCALCHAT[rn]||[]).concat(m);sv('eb4.chat',LOCALCHAT);renderRoom();
+  if(m.stone&&!ROOMREPLY[m.id]){ROOMREPLY[m.id]=1;const leader=rn==='Wisdom circle'||rn==='Beijing returnees'?'Mr. Liu':(ROOM_INFO[rn]||{}).leader;setTimeout(()=>{LOCALCHAT[rn]=(LOCALCHAT[rn]||[]).concat({id:'r'+Date.now(),who:leader,text:`Thank you for sharing this${CFG.name?', '+CFG.name:''}. ${m.stone.ref} is a good stone to stand on. I’m praying for you this week.`,at:Date.now(),exreply:true});sv('eb4.chat',LOCALCHAT);if(room===rn)renderRoom()},1800)}}}
+$('#msgSend').onclick=()=>{const v=$('#msgIn').value.trim();if(!v)return;$('#msgIn').value='';sendMsg({text:v})};
+$('#msgIn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#msgSend').click()}};
+$('#roomBack').onclick=()=>{$('#room').hidden=true;room=null;renderTogether()};
+$('#shareStoneBtn').onclick=()=>{const p=$('#picker');if(!p.hidden){p.hidden=true;return}const mine=REAL().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);if(!mine.length){toast('Set a stone first, then you can share it here.');return}
+ p.innerHTML=`<b style="font-size:14px">Share a stone with ${esc(room)}</b>`+mine.map(x=>`<button class="lbi" data-sendstone="${x.id}" style="text-align:left"><div class="g"><div class="d">${esc(fmt(x.date))} · ${esc(x.ref)}</div><p>${esc(x.met)}</p></div></button>`).join('');p.hidden=false};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-sendstone]');if(b){const x=STONES.find(y=>y.id===b.dataset.sendstone);$('#picker').hidden=true;askShare(`Your stone will appear in ${room}. Anyone who can open this Ebenezer page can read group chats.`).then(ok=>{if(ok)sendMsg({stone:{ref:x.ref,met:x.met,tone:x.tone}})});return}
+ const md=e.target.closest('[data-mdel]');if(md){deleteMsg(md.dataset.mdel);return}
+ const r=e.target.closest('[data-react]');if(r){sendMsg({text:r.dataset.rt});return}
+ const o=e.target.closest('[data-openroom]');if(o){openRoom(o.dataset.openroom)}});
+
+/* ---------- share confirmation, help, examples, setup ---------- */
+function askShare(body){return new Promise(res=>{const sh=$('#ask');$('#askB').textContent=body;sh.hidden=false;const done=v=>{sh.hidden=true;res(v)};$('#askYes').onclick=()=>done(true);$('#askNo').onclick=()=>done(false);sh.onclick=e=>{if(e.target===sh)done(false)}})}
+/* crisis numbers checked Oct 2026 (12356 national line; Beijing Suicide Research and Prevention Center 010-8295-1332 / 800-810-1117). Re-check before launch. */
+function helpHTML(onDark){const box=onDark?'background:#ffffff14;color:inherit':'background:var(--card,#fff);border:1px solid var(--line)';const a=(n,l)=>`<a class="btn small" href="tel:${n.replace(/[^0-9+]/g,'')}">${l}</a>`;
+ const cn=CFG.city==='beijing';
+ return `<div style="${box};border-radius:16px;padding:14px;margin-top:12px"><b>If you might not be safe right now</b>
+  <p style="margin:6px 0 8px;line-height:1.5">You don’t have to carry this alone tonight. Please reach out to a person now.</p>
+  <div class="row">${cn?a('120','📞 120 Medical emergency')+a('110','📞 110 Police')+a('12356','📞 12356 Psychological help line')+a('010-8295-1332','📞 Beijing crisis line, 24 hours'):`<span>Call your local emergency number.</span><a class="btn small" href="https://findahelpline.com" target="_blank" rel="noopener">Find a free helpline</a>`}${CFG.care?`<a class="btn small" href="sms:?&body=${encodeURIComponent('Hi '+CFG.care+', I’m having a hard time. Could you call me?')}">💬 Message ${esc(CFG.care)}</a>`:''}</div></div>`}
+function clearExamples(){STONES=REAL();sv('eb4.exGone',true);save();renderStory();renderToday();renderBanners();toast('Example stones removed.')}
+if(ld('eb4.exGone',false)){STONES=STONES.filter(x=>!x.ex)}
+function renderYou(){const y=$('#youRows');if(!y)return;
+ y.innerHTML=`<label for="sName">Your name</label><input id="sName" value="${esc(CFG.name)}" placeholder="What should Ebenezer call you?">
+  <label for="sCity" style="display:block;margin-top:10px">Your city</label><select id="sCity">${Object.entries(CITIES).map(([k,v])=>`<option value="${k}"${k===CFG.city?' selected':''}>${v[0]}</option>`).join('')}</select>
+  <label for="sCare" style="display:block;margin-top:10px">Care partner (optional)</label><input id="sCare" value="${esc(CFG.care)}" placeholder="Someone who walks with you">
+  <p style="font-weight:600;margin:14px 0 4px">My people</p>${PEOPLE_().map(([n,r],i)=>`<div class="setrow"><div><b>${esc(n)}</b><span>${esc(r)}</span></div><button class="btn small" data-pdel="${i}">Remove</button></div>`).join('')}
+  <div class="row" style="margin-top:6px"><input id="pName" placeholder="Name" style="flex:1 1 40%"><input id="pRole" placeholder="Who they are" style="flex:1 1 40%"><button class="btn small primary" id="pAdd">Add</button></div>`;
+ $('#sName').onchange=e=>{CFG.name=e.target.value.trim();save();renderToday()};$('#sCity').onchange=e=>{CFG.city=e.target.value;save();renderToday();renderBanners()};$('#sCare').onchange=e=>{CFG.care=e.target.value.trim();save()};
+ $('#pAdd').onclick=()=>{const n=$('#pName').value.trim();if(!n){toast('Add a name first.');return}CFG.people.push([n,$('#pRole').value.trim()]);save();renderYou()};
+ y.querySelectorAll('[data-pdel]').forEach(b=>b.onclick=()=>{CFG.people.splice(+b.dataset.pdel,1);save();renderYou()});
+ $('#privRows').innerHTML=`<div class="setrow"><div><b>🔒 Private mode</b><span>Nothing leaves this phone: no sharing, and weekly posts are saved only for you.</span></div><button class="sw" id="privSw" role="switch" aria-checked="${!!CFG.priv}" aria-label="Private mode"></button></div>
+  <p class="small" style="margin:8px 0 0">When you share, your stone appears in Together for anyone who can open this Ebenezer page, with your name. Your reflection answers and prayer notes on a stone always stay on this phone. You can remove anything you shared from Together or from the stone itself.</p>
+  ${hasEx()?`<button class="btn small" id="exClear2" style="margin-top:10px">Remove example stones</button>`:''}`;
+ $('#privSw').onclick=()=>{CFG.priv=!CFG.priv;save();renderYou();toast(CFG.priv?'Private mode on.':'Private mode off.')};
+ const ec=$('#exClear2');if(ec)ec.onclick=()=>{clearExamples();renderYou()};
+ $('#helpSet').innerHTML=helpHTML(false)}
+function setup(){const ov=$('#overlay');ov.style.background='#13304a';ov.style.color='#e9f0f4';
+ $('#ov').innerHTML=`<h2 style="color:#fff;font-size:28px">Welcome to Ebenezer</h2><p style="margin:0">“Hitherto hath the LORD helped us.” Let’s set up a few things. You can change them any time in Settings.</p>
+  <label for="uName" style="color:#fff">What should we call you?</label><input id="uName" value="${esc(CFG.name)}" placeholder="Your name">
+  <label for="uCity" style="color:#fff">Where do you live now?</label><select id="uCity">${Object.entries(CITIES).map(([k,v])=>`<option value="${k}"${k===CFG.city?' selected':''}>${v[0]}</option>`).join('')}</select>
+  <p class="small" style="color:#d6e2ea;margin:4px 0 0">Your stones stay on this phone unless you choose to share one.</p>
+  <button class="btn ochre block" id="uGo">Start</button>`;ov.hidden=false;
+ $('#uGo').onclick=()=>{const n=$('#uName').value.trim();if(!n){toast('Add your name first.');return}CFG.name=n;CFG.city=$('#uCity').value;CFG.setup=true;save();ov.hidden=true;renderToday();renderBanners()}}
+
+/* ---------- tabs ---------- */
+function tab(id){$$('.screen').forEach(s=>s.classList.toggle('active',s.id===id));$$('.tab').forEach(t=>t.toggleAttribute('aria-current',t.dataset.tab===id||(id==='flow'&&t.dataset.tab==='today')));
+ document.querySelector('.tabbar').style.display=id==='flow'?'none':'';if(id==='today'){renderToday();renderBanners()}if(id==='story')renderStory();if(id==='together')renderTogether();window.scrollTo(0,0)}
+$$('.tab').forEach(t=>t.onclick=()=>tab(t.dataset.tab));
+$('#whyBtn').onclick=()=>$('#why').hidden=false;$('#whyClose').onclick=()=>$('#why').hidden=true;$('#why').addEventListener('click',e=>{if(e.target.id==='why')$('#why').hidden=true});
+applyStatic();renderToday();renderBanners();initCommunity();if(!CFG.setup)setup();
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>

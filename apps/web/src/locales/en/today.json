@@ -1,0 +1,165 @@
+{
+  "eyebrow": "Make room for what matters",
+  "title": "A moment to remember.",
+  "description": "Come as you are.",
+  "hero": {
+    "tagline": "This evening",
+    "title": "Bring your day.",
+    "description": "When the day winds down, look back with the Lord and set a stone to remember it.",
+    "begin": "Begin tonight’s reflection"
+  },
+  "scripture": {
+    "heading": "A Word to carry",
+    "description": "Begin with today’s passage. There is room for your questions as you explore God’s care.",
+    "reflect": "Reflect on this passage",
+    "note": "Scripture is shown in English (KJV)."
+  },
+  "invitation": {
+    "title": "Start where you are.",
+    "description": "Grateful, uncertain, or somewhere in between. There is room for all of your days."
+  },
+  "next": {
+    "title": "Your next small step",
+    "wordTitle": "Find a Word",
+    "wordDescription": "Begin with how you feel.",
+    "storyTitle": "Revisit your story",
+    "storyDescription": "Remember what carried you.",
+    "communityTitle": "Walk together",
+    "communityDescription": "Make room for encouragement."
+  },
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "named": "{{greeting}}, {{name}}"
+  },
+  "onboarding": {
+    "title": "Find a little grounding, wherever you are.",
+    "description": "A new country. New people. Some days full of possibility, others far from home. Make room for what you’re feeling, find encouragement in Scripture, and remember what carries you.",
+    "privacy": "No account needed. Your journal stays on this device. You can add your name and city later in Settings.",
+    "skip": "Start without a profile",
+    "start": "Start my journey",
+    "personalize": "Make this space mine",
+    "personalizeNote": "What should we call you, and where do you live now? These details stay on your device.",
+    "back": "Back to welcome",
+    "word": "Find encouragement in Scripture",
+    "reflect": "Make space for your feelings",
+    "remember": "Remember moments of hope"
+  },
+  "entry": {
+    "eyebrow": "A stone of remembrance",
+    "visualTitle": "You are loved. Never forgotten.",
+    "visualNote": "Wherever you call home, Jesus is your provider. One stone at a time, remember the Lord’s faithfulness.",
+    "title": "Welcome to Ebenezer.",
+    "description": "Build a story of God’s faithfulness. Each stone is a reminder of His help, a prayer, or a moment of hope to return to.",
+    "reminders": {
+      "loved": {
+        "title": "You are always loved.",
+        "description": "Near or far from home, God’s love goes with you."
+      },
+      "provided": {
+        "title": "Jesus is your provider.",
+        "description": "Bring Him your worries. Remember the ways He has carried you."
+      },
+      "together": {
+        "title": "You don’t have to walk alone.",
+        "description": "Invite your prayer warriors to pray with you and encourage one another."
+      }
+    },
+    "privacy": "Your journal is private and saved on this device. No account needed.",
+    "profileTitle": "Let’s get to know you.",
+    "profileDescription": "Let’s make this space feel a little more like yours. You can also skip this and settle in first.",
+    "finish": "Enter my space",
+    "stepOne": "A little welcome · 1 of 2",
+    "stepTwo": "Your space · 2 of 2",
+    "choose": "How would you like to begin?",
+    "options": {
+      "account": {
+        "title": "Create an account",
+        "description": "Sign in with Google to share stones, pray with friends and join groups."
+      },
+      "local": {
+        "title": "Use my name and city",
+        "description": "No account. Your name and city stay on this device."
+      },
+      "explore": {
+        "title": "Just look around",
+        "description": "Go straight in. You can add details any time in Settings."
+      }
+    },
+    "accountTitle": "Walk together with others.",
+    "accountDescription": "An account lets you share on the board, pray with friends and join groups. Your journal stays private on this device.",
+    "back": "Back"
+  },
+  "encouragement": {
+    "title": "A little encouragement",
+    "description": "Choose a Scripture theme and make room for a short prayer.",
+    "privacy": "Only a public Scripture theme, language, selected calendar occasion, and optional weather category are sent to Google AI. Google’s free tier may use them to improve its products. Your journal, name, city, coordinates, and prayer requests are never sent to Google.",
+    "loading": "Preparing encouragement…",
+    "signIn": "Sign in for encouragement",
+    "theme": "Choose a theme",
+    "themes": {
+      "remember": "Gratitude",
+      "care": "God’s care",
+      "steadiness": "Steadiness"
+    },
+    "offline": "Connect to request encouragement. Your local journal is still available.",
+    "generate": "Find encouragement",
+    "failed": "Encouragement could not load. Please try again.",
+    "source": {
+      "ai": "AI-assisted encouragement · Scripture is shown separately.",
+      "prepared": "Prepared encouragement · available when AI is off or unavailable."
+    },
+    "prayer": "A prayer:",
+    "question": "To reflect on:"
+  },
+  "morning": {
+    "title": "A Word for today",
+    "read": "Read the passage",
+    "aiDetails": "About AI-assisted encouragement",
+    "weatherOption": "Include weather context",
+    "weatherPrivacy": "Check weather for {{city}}? Your city is sent to Open-Meteo. Only a broad weather category goes to Google AI; weather does not tell us how you feel.",
+    "weatherCheck": "Check my city’s weather",
+    "weatherLoading": "Checking weather…",
+    "weatherFailed": "Weather is unavailable. Today’s Word is still here.",
+    "weather": {
+      "clear": "Clear skies",
+      "cloudy": "Cloudy",
+      "rain": "Rainy",
+      "snow": "Snowy",
+      "storm": "Thunderstorms"
+    },
+    "occasions": {
+      "christmas": {
+        "title": "Christmas",
+        "context": "Christians celebrate Jesus’ birth at Christmas. This passage announces His birth as good news."
+      },
+      "easter": {
+        "title": "Easter · Western calendar",
+        "context": "At Easter, Christians celebrate Jesus’ resurrection. Explore this invitation to remember His risen life."
+      },
+      "goodFriday": {
+        "title": "Good Friday · Western calendar",
+        "context": "Good Friday remembers Jesus’ death. This passage points to God’s love shown through Christ."
+      },
+      "newYear": {
+        "title": "New Year",
+        "context": "At the beginning of a year, pause with this passage about God’s faithfulness."
+      }
+    },
+    "prepared": {
+      "remember": "Take a quiet moment with this Word. You can begin noticing God’s faithful care, even while questions remain.",
+      "care": "You can bring what is on your heart to Jesus. His invitation makes room for you as you are today.",
+      "steadiness": "There is room for an overwhelmed heart in this passage. Pause, breathe, and bring your next step to Jesus.",
+      "occasion": "Make a little room to explore what this passage reveals about Jesus and His love."
+    },
+    "preparedPrayer": "Jesus, help me understand Your love and carry this Word into my day. Amen.",
+    "preparedQuestion": "What would you like to carry into today?",
+    "translationNote": "Scripture in English · {{translation}}",
+    "thoughtTitle": "A thought to carry",
+    "thoughtPlaceholder": "One small thought for the day ahead…",
+    "carry": "Carry this today",
+    "thoughtSaved": "Your thought is saved",
+    "prayerLabel": "A short prayer"
+  }
+}

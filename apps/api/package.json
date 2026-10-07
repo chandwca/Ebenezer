@@ -1,0 +1,27 @@
+{
+  "name": "@ebenezer/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "build": "pnpm --filter @ebenezer/contracts build && tsc -p tsconfig.build.json && node scripts/copy-bible.mjs",
+    "start": "node --env-file-if-exists=.env dist/apps/api/src/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test $(find src -name '*.test.ts' | sort)",
+    "test:integration": "tsx --test test/integration/*.test.ts"
+  },
+  "dependencies": {
+    "@ebenezer/contracts": "workspace:*",
+    "@fastify/cors": "^11.0.0",
+    "@supabase/supabase-js": "^2.117.2",
+    "fastify": "^5.0.0",
+    "ws": "^8.22.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.18.2",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

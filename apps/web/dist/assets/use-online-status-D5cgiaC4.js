@@ -1,0 +1,1 @@
+import{r as n}from"./index-DdoUahUq.js";function r(){const[t,o]=n.useState(()=>navigator.onLine);return n.useEffect(()=>{const e=()=>o(navigator.onLine);return window.addEventListener("online",e),window.addEventListener("offline",e),()=>{window.removeEventListener("online",e),window.removeEventListener("offline",e)}},[]),t}export{r as u};

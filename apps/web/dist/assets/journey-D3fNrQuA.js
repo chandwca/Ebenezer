@@ -1,0 +1,1 @@
+const r=["feel","read","reflect","together","stone"],n=[0,1,3,4,5];function o(t){const e=Math.min(5,Math.max(0,t));return e<=2?Math.min(e,1):e-1}function s(t){return n[t]}export{r as j,s as p,o as r};

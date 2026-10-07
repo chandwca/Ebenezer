@@ -1,0 +1,20 @@
+{
+  // Type checks the Edge Functions without Deno installed: deno-shim.d.ts describes the few
+  // Deno APIs used. Supabase runs these files with Deno and the per-function deno.json imports.
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    // Packages live in the API workspace; Deno fetches the same versions from npm at runtime.
+    "typeRoots": ["../../apps/api/node_modules/@types", "../../node_modules/@types"],
+    "paths": {
+      "zod": ["../../apps/api/node_modules/zod"],
+      "@supabase/supabase-js": ["../../apps/api/node_modules/@supabase/supabase-js"]
+    },
+    "noEmit": true
+  },
+  "include": ["**/*.ts"]
+}

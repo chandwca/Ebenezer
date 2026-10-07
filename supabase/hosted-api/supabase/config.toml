@@ -1,0 +1,7 @@
+# Partial hosted configuration: deploy only the application's Data API settings.
+# Pass --project-ref explicitly; do not push the full local Auth/development config.
+project_id = "ebenezer"
+
+[api]
+schemas = ["ebenezer_api"]
+extra_search_path = ["extensions"]

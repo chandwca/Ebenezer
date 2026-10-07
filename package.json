@@ -1,0 +1,29 @@
+{
+  "name": "ebenezer",
+  "private": true,
+  "packageManager": "pnpm@10.17.1",
+  "scripts": {
+    "dev": "pnpm --filter @ebenezer/contracts build && pnpm --parallel --filter @ebenezer/web --filter @ebenezer/api dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm exec eslint apps packages",
+    "format": "prettier --write apps/web/src apps/api/src packages/contracts/src",
+    "check": "pnpm typecheck && pnpm lint && pnpm build",
+    "db:start": "supabase start",
+    "db:migrate": "supabase migration up",
+    "db:test": "node scripts/test-database.mjs",
+    "db:types": "node scripts/generate-database-types.mjs",
+    "test:functions": "pnpm --filter @ebenezer/api exec tsx --tsconfig ../../supabase/functions/tsconfig.json --test ../../supabase/functions/_shared/reminders.test.ts",
+    "typecheck:functions": "pnpm --filter @ebenezer/api exec tsc -p ../../supabase/functions/tsconfig.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/web-push": "^3.6.4",
+    "eslint": "^9.0.0",
+    "http_ece": "1.2.0",
+    "prettier": "^3.0.0",
+    "supabase": "2.120.0",
+    "typescript-eslint": "^8.0.0",
+    "web-push": "3.6.7"
+  }
+}

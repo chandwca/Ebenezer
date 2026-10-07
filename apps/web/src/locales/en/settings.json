@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Make yourself at home",
+  "title": "Your preferences.",
+  "description": "A quieter space, shaped around you.",
+  "appearance": {
+    "title": "Appearance",
+    "description": "Choose the light or dark theme.",
+    "switchLight": "Switch to light",
+    "switchDark": "Switch to dark",
+    "labelLight": "Switch to light theme",
+    "labelDark": "Switch to dark theme"
+  },
+  "language": {
+    "title": "Language",
+    "label": "Application language",
+    "description": "Choose your language. Switching keeps your current screen and entered text.",
+    "available": "English and Spanish are bundled with the application."
+  },
+  "privacy": {
+    "title": "Your journal, your choice",
+    "description": "Your journal is saved on this device. Optional private cloud sync, account settings, and backups will follow in later stages."
+  },
+  "profile": {
+    "title": "A little about you",
+    "description": "Make this space feel like yours. These details stay on your device.",
+    "name": "What should we call you?",
+    "city": "Where do you live now?",
+    "saved": "Preferences saved on this device.",
+    "other": "Another city",
+    "beijing": "Beijing",
+    "chennai": "Chennai",
+    "lagos": "Lagos",
+    "chicago": "Chicago",
+    "nameHint": "A first name or nickname—whatever feels right to you.",
+    "cityHint": "Your city or town is enough.",
+    "namePlaceholder": "For example, Alex",
+    "cityPlaceholder": "For example, Melbourne"
+  },
+  "reminders": {
+    "title": "A gentle reminder, twice a day",
+    "morning": "A Word to carry into your day",
+    "evening": "A moment to bring your day back to Jesus",
+    "privacy": "Reminders only say “A moment for you”. Nothing from your journal is shown.",
+    "turnOn": "Turn on reminders",
+    "turningOn": "Turning on…",
+    "notNow": "Not now",
+    "changeLater": "Change times anytime in Settings.",
+    "confirmed": "Reminders are on. We’ll meet you tomorrow at {{time}}.",
+    "install": {
+      "title": "Get reminders on your iPhone",
+      "steps": [
+        "In Safari, tap Share.",
+        "Choose Add to Home Screen.",
+        "Open Ebenezer from your Home Screen and turn reminders on."
+      ]
+    },
+    "blocked": {
+      "title": "Notifications are blocked for Ebenezer",
+      "steps": [
+        "Open your browser’s settings for this site (the icon beside the address).",
+        "Allow notifications.",
+        "Come back and turn reminders on in Settings."
+      ]
+    },
+    "unsupported": "This browser can’t show reminders. Try Chrome, Edge or Firefox, or Safari on an iPhone with Ebenezer added to the Home Screen.",
+    "errors": {
+      "blocked": "Notifications were blocked. You can allow them in your browser’s site settings.",
+      "dismissed": "No problem. You can turn reminders on anytime.",
+      "not_ready": "Reminders work in the installed app. Open Ebenezer from your Home Screen or installed app, then try again.",
+      "failed": "Reminders couldn’t be updated just now. Please try again."
+    },
+    "settings": {
+      "title": "Reminders",
+      "description": "A gentle nudge each morning and evening, in your own time zone.",
+      "on": "Reminders are on",
+      "off": "Reminders are off",
+      "morning": "Morning",
+      "evening": "Evening",
+      "discreet": "Discreet wording",
+      "discreetNote": "Your lock screen shows only “A moment for you”.",
+      "turnOff": "Turn off reminders",
+      "tryTitle": "Try a reminder now",
+      "try": {
+        "morning": "Morning reminder",
+        "evening": "Evening reminder"
+      },
+      "sent": "Sent. It should arrive in a few seconds.",
+      "saved": "Saved."
+    }
+  }
+}

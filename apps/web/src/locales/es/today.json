@@ -1,0 +1,165 @@
+{
+  "eyebrow": "Haz espacio para lo que importa",
+  "title": "Un momento para recordar.",
+  "description": "Ven como estás.",
+  "hero": {
+    "tagline": "Esta noche",
+    "title": "Trae tu día.",
+    "description": "Cuando el día termine, mira atrás con el Señor y coloca una piedra para recordarlo.",
+    "begin": "Comenzar la reflexión de esta noche"
+  },
+  "scripture": {
+    "heading": "Una Palabra para llevar contigo",
+    "description": "Empieza con el pasaje de hoy. Hay espacio para tus preguntas al explorar el cuidado de Dios.",
+    "reflect": "Reflexionar sobre este pasaje",
+    "note": "La Escritura se muestra en inglés (KJV)."
+  },
+  "invitation": {
+    "title": "Empieza donde estás.",
+    "description": "Con gratitud, con incertidumbre o entre ambas. Hay espacio para todos tus días."
+  },
+  "next": {
+    "title": "Tu próximo pequeño paso",
+    "wordTitle": "Encontrar una Palabra",
+    "wordDescription": "Empieza por cómo te sientes.",
+    "storyTitle": "Volver a tu historia",
+    "storyDescription": "Recuerda lo que te sostuvo.",
+    "communityTitle": "Caminar juntos",
+    "communityDescription": "Haz espacio para el ánimo."
+  },
+  "greeting": {
+    "morning": "Buenos días",
+    "afternoon": "Buenas tardes",
+    "evening": "Buenas noches",
+    "named": "{{greeting}}, {{name}}"
+  },
+  "onboarding": {
+    "title": "Encuentra calma, estés donde estés.",
+    "description": "Un país nuevo. Gente nueva. Algunos días llenos de posibilidades; otros, lejos de casa. Da espacio a lo que sientes, encuentra ánimo en las Escrituras y recuerda lo que te sostiene.",
+    "privacy": "No necesitas una cuenta. Tu diario se guarda en este dispositivo. Puedes añadir tu nombre y ciudad después en Ajustes.",
+    "skip": "Empezar sin perfil",
+    "start": "Comenzar mi camino",
+    "personalize": "Hacer mío este espacio",
+    "personalizeNote": "¿Cómo te gustaría que te llamáramos y dónde vives ahora? Estos datos se guardan en tu dispositivo.",
+    "back": "Volver a la bienvenida",
+    "word": "Encuentra ánimo en las Escrituras",
+    "reflect": "Da espacio a tus sentimientos",
+    "remember": "Recuerda momentos de esperanza"
+  },
+  "entry": {
+    "eyebrow": "Una piedra para recordar",
+    "visualTitle": "Dios te ama. Nunca te olvida.",
+    "visualNote": "Dondequiera que esté tu hogar, Jesús es tu proveedor. Piedra a piedra, recuerda la fidelidad del Señor.",
+    "title": "Bienvenido a Ebenezer.",
+    "description": "Construye una historia de la fidelidad de Dios. Cada piedra recuerda Su ayuda, una oración o un momento de esperanza al que puedes volver.",
+    "reminders": {
+      "loved": {
+        "title": "Dios siempre te ama.",
+        "description": "Cerca o lejos de casa, el amor de Dios te acompaña."
+      },
+      "provided": {
+        "title": "Jesús es tu proveedor.",
+        "description": "Entrégale tus preocupaciones. Recuerda cómo te ha sostenido."
+      },
+      "together": {
+        "title": "No tienes que caminar a solas.",
+        "description": "Invita a quienes te apoyan en oración a orar contigo y a darse ánimo mutuamente."
+      }
+    },
+    "privacy": "Tu diario es privado y se guarda en este dispositivo. No necesitas una cuenta.",
+    "profileTitle": "Vamos a conocerte un poco.",
+    "profileDescription": "Hagamos que este espacio se sienta un poco más tuyo. También puedes saltar este paso y ponerte cómodo primero.",
+    "finish": "Entrar en mi espacio",
+    "stepOne": "Una bienvenida · 1 de 2",
+    "stepTwo": "Tu espacio · 2 de 2",
+    "choose": "¿Cómo te gustaría empezar?",
+    "options": {
+      "account": {
+        "title": "Crear una cuenta",
+        "description": "Inicia sesión con Google para compartir piedras, orar con amigos y unirte a grupos."
+      },
+      "local": {
+        "title": "Usar mi nombre y ciudad",
+        "description": "Sin cuenta. Tu nombre y ciudad se quedan en este dispositivo."
+      },
+      "explore": {
+        "title": "Solo mirar",
+        "description": "Entra directamente. Puedes añadir tus datos cuando quieras en Ajustes."
+      }
+    },
+    "accountTitle": "Camina junto a otros.",
+    "accountDescription": "Una cuenta te permite compartir en el tablero, orar con amigos y unirte a grupos. Tu diario sigue privado en este dispositivo.",
+    "back": "Volver"
+  },
+  "encouragement": {
+    "title": "Un poco de ánimo",
+    "description": "Elige un tema bíblico y haz espacio para una breve oración.",
+    "privacy": "Solo se envían a Google un tema bíblico, idioma, ocasión del calendario y categoría opcional del clima. El nivel gratuito puede usarlos para mejorar sus productos. No se envían tu diario, nombre, ciudad, coordenadas ni peticiones de oración.",
+    "loading": "Preparando palabras de ánimo…",
+    "signIn": "Inicia sesión para recibir ánimo",
+    "theme": "Elige un tema",
+    "themes": {
+      "remember": "Gratitud",
+      "care": "El cuidado de Dios",
+      "steadiness": "Firmeza"
+    },
+    "offline": "Conéctate para solicitar ánimo. Tu diario local sigue disponible.",
+    "generate": "Encontrar ánimo",
+    "failed": "No se pudieron cargar las palabras de ánimo. Inténtalo de nuevo.",
+    "source": {
+      "ai": "Ánimo con ayuda de IA · la Escritura se muestra por separado.",
+      "prepared": "Ánimo preparado · disponible cuando la IA está desactivada o no disponible."
+    },
+    "prayer": "Una oración:",
+    "question": "Para reflexionar:"
+  },
+  "morning": {
+    "title": "Una Palabra para hoy",
+    "read": "Leer el pasaje",
+    "aiDetails": "Sobre el ánimo con ayuda de IA",
+    "weatherOption": "Incluir el clima",
+    "weatherPrivacy": "¿Consultar el clima de {{city}}? Tu ciudad se envía a Open-Meteo. Google recibe solo una categoría del clima, no tu ubicación. El clima no indica cómo te sientes.",
+    "weatherCheck": "Consultar el clima",
+    "weatherLoading": "Consultando el clima…",
+    "weatherFailed": "El clima no está disponible. La Palabra de hoy sigue aquí.",
+    "weather": {
+      "clear": "Cielo despejado",
+      "cloudy": "Nublado",
+      "rain": "Lluvia",
+      "snow": "Nieve",
+      "storm": "Tormentas"
+    },
+    "occasions": {
+      "christmas": {
+        "title": "Navidad",
+        "context": "En Navidad, los cristianos celebran el nacimiento de Jesús. Este pasaje lo anuncia como una buena noticia."
+      },
+      "easter": {
+        "title": "Pascua · calendario occidental",
+        "context": "En Pascua, los cristianos celebran la resurrección de Jesús."
+      },
+      "goodFriday": {
+        "title": "Viernes Santo · calendario occidental",
+        "context": "El Viernes Santo recuerda la muerte de Jesús y el amor de Dios mostrado en Cristo."
+      },
+      "newYear": {
+        "title": "Año Nuevo",
+        "context": "Al comenzar el año, haz una pausa con este pasaje sobre la fidelidad de Dios."
+      }
+    },
+    "prepared": {
+      "remember": "Haz una pausa con esta Palabra. Puedes reconocer el cuidado fiel de Dios, incluso cuando quedan preguntas.",
+      "care": "Puedes llevar a Jesús lo que tienes en el corazón. Hay espacio para ti tal como eres hoy.",
+      "steadiness": "Este pasaje da espacio a un corazón abrumado. Haz una pausa y trae tu próximo paso a Jesús.",
+      "occasion": "Haz espacio para explorar lo que este pasaje revela sobre Jesús y Su amor."
+    },
+    "preparedPrayer": "Jesús, ayúdame a entender Tu amor y llevar esta Palabra a mi día. Amén.",
+    "preparedQuestion": "¿Qué te gustaría llevar contigo hoy?",
+    "translationNote": "Escritura en inglés · {{translation}}",
+    "thoughtTitle": "Un pensamiento para llevar",
+    "thoughtPlaceholder": "Un pequeño pensamiento para el día…",
+    "carry": "Llevarlo conmigo hoy",
+    "thoughtSaved": "Tu pensamiento está guardado",
+    "prayerLabel": "Una breve oración"
+  }
+}

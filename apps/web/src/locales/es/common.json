@@ -1,0 +1,48 @@
+{
+  "brandTagline": "Un pequeño recuerdo",
+  "navigation": {
+    "today": "Hoy",
+    "story": "Mi historia",
+    "community": "Juntos",
+    "settings": "Ajustes",
+    "reflection": "Reflexión",
+    "bibleSearch": "Buscar en la Biblia"
+  },
+  "mainNavigation": "Navegación principal",
+  "mobileNavigation": "Navegación móvil",
+  "skipContent": "Saltar al contenido",
+  "dailyWalk": "Tu camino diario",
+  "sidebarTitle": "Pequeñas piedras. Una historia que perdura.",
+  "sidebarDescription": "Recuerda lo que te ha sostenido hasta aquí.",
+  "headerTagline": "Recorre el camino. Coloca una piedra.",
+  "preview": "Vista previa inicial",
+  "backToday": "Volver a Hoy",
+  "returnToday": "Volver a Hoy",
+  "footer": "Un espacio para la Escritura, la reflexión y el recuerdo.",
+  "stepOf": "Paso {{current}} de {{total}} · {{step}}",
+  "steps": {
+    "feel": "Sentir",
+    "find": "Buscar",
+    "read": "Leer",
+    "reflect": "Reflexionar",
+    "together": "Juntos",
+    "stone": "Piedra"
+  },
+  "buttons": {
+    "close": "Cerrar diálogo",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "back": "Atrás"
+  },
+  "pwa": {
+    "offline": "No tienes conexión. Tu diario local sigue disponible; los servicios en línea necesitan conexión.",
+    "ready": "Los archivos de la aplicación están guardados para usarlos sin conexión en este navegador.",
+    "failed": "No se pudo completar la preparación sin conexión o la actualización. Guarda los cambios e inténtalo de nuevo con conexión.",
+    "updateNote": "Hay una actualización disponible. Guarda los cambios del perfil o del diario antes de recargar. Los borradores se guardan antes de actualizar.",
+    "update": "Actualizar y recargar",
+    "installTitle": "Instalar Ebenezer",
+    "installHelp": "Usa la opción Instalar aplicación de tu navegador. En iPhone o iPad, abre Safari y elige Compartir → Añadir a la pantalla de inicio. La instalación es opcional; puedes seguir usando el navegador.",
+    "install": "Instalar aplicación"
+  }
+}

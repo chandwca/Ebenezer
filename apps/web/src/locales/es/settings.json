@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Siéntete como en casa",
+  "title": "Tus preferencias.",
+  "description": "Un espacio más tranquilo, a tu medida.",
+  "appearance": {
+    "title": "Apariencia",
+    "description": "Elige el tema claro u oscuro.",
+    "switchLight": "Cambiar al tema claro",
+    "switchDark": "Cambiar al tema oscuro",
+    "labelLight": "Cambiar al tema claro",
+    "labelDark": "Cambiar al tema oscuro"
+  },
+  "language": {
+    "title": "Idioma",
+    "label": "Idioma de la aplicación",
+    "description": "Elige tu idioma. Al cambiarlo se mantienen la pantalla actual y el texto introducido.",
+    "available": "El inglés y el español están incluidos en la aplicación."
+  },
+  "privacy": {
+    "title": "Tu diario, tu elección",
+    "description": "Tu diario se guarda en este dispositivo. La sincronización privada opcional con la nube, los ajustes de la cuenta y las copias de seguridad llegarán en etapas posteriores."
+  },
+  "profile": {
+    "title": "Un poquito sobre ti",
+    "description": "Haz que este espacio se sienta tuyo. Estos datos se guardan en tu dispositivo.",
+    "name": "¿Cómo te gustaría que te llamáramos?",
+    "city": "¿Dónde vives ahora?",
+    "saved": "Preferencias guardadas en este dispositivo.",
+    "other": "Otra ciudad",
+    "beijing": "Pekín",
+    "chennai": "Chennai",
+    "lagos": "Lagos",
+    "chicago": "Chicago",
+    "nameHint": "Tu nombre o un apodo, lo que te haga sentir cómodo.",
+    "cityHint": "Tu ciudad o pueblo es suficiente.",
+    "namePlaceholder": "Por ejemplo, Alex",
+    "cityPlaceholder": "Por ejemplo, Melbourne"
+  },
+  "reminders": {
+    "title": "Un recordatorio amable, dos veces al día",
+    "morning": "Una Palabra para llevar en tu día",
+    "evening": "Un momento para llevar tu día a Jesús",
+    "privacy": "Los recordatorios solo dicen “Un momento para ti”. No se muestra nada de tu diario.",
+    "turnOn": "Activar recordatorios",
+    "turningOn": "Activando…",
+    "notNow": "Ahora no",
+    "changeLater": "Cambia los horarios cuando quieras en Configuración.",
+    "confirmed": "Recordatorios activos. Te acompañaremos mañana a las {{time}}.",
+    "install": {
+      "title": "Recibe recordatorios en tu iPhone",
+      "steps": [
+        "En Safari, toca Compartir.",
+        "Elige Agregar a pantalla de inicio.",
+        "Abre Ebenezer desde tu pantalla de inicio y activa los recordatorios."
+      ]
+    },
+    "blocked": {
+      "title": "Las notificaciones están bloqueadas para Ebenezer",
+      "steps": [
+        "Abre la configuración de tu navegador para este sitio (el ícono junto a la dirección).",
+        "Permite las notificaciones.",
+        "Vuelve y activa los recordatorios en Configuración."
+      ]
+    },
+    "unsupported": "Este navegador no puede mostrar recordatorios. Prueba Chrome, Edge o Firefox, o Safari en un iPhone con Ebenezer en la pantalla de inicio.",
+    "errors": {
+      "blocked": "Las notificaciones fueron bloqueadas. Puedes permitirlas en la configuración del sitio en tu navegador.",
+      "dismissed": "No hay problema. Puedes activar los recordatorios cuando quieras.",
+      "not_ready": "Los recordatorios funcionan en la app instalada. Abre Ebenezer desde tu pantalla de inicio o la app instalada e inténtalo de nuevo.",
+      "failed": "No se pudieron actualizar los recordatorios. Inténtalo de nuevo."
+    },
+    "settings": {
+      "title": "Recordatorios",
+      "description": "Un recordatorio amable cada mañana y cada noche, en tu zona horaria.",
+      "on": "Recordatorios activos",
+      "off": "Recordatorios desactivados",
+      "morning": "Mañana",
+      "evening": "Noche",
+      "discreet": "Texto discreto",
+      "discreetNote": "Tu pantalla de bloqueo solo muestra “Un momento para ti”.",
+      "turnOff": "Desactivar recordatorios",
+      "tryTitle": "Prueba un recordatorio ahora",
+      "try": {
+        "morning": "Recordatorio de la mañana",
+        "evening": "Recordatorio de la noche"
+      },
+      "sent": "Enviado. Debería llegar en unos segundos.",
+      "saved": "Guardado."
+    }
+  }
+}

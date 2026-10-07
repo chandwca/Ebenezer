@@ -1,0 +1,10 @@
+{
+  "notFound": "This path isn't here.",
+  "required": "This field is required.",
+  "invalidEmail": "Enter a valid email address.",
+  "saveFailed": "Could not save your changes. Please try again.",
+  "offline": "You are offline. Online actions will be available when you reconnect.",
+  "tooLong": "This entry is too long. Please shorten it.",
+  "storageUnavailable": "Local storage is unavailable. Your journal cannot be loaded. Try again or check your browser storage settings.",
+  "invalidPhone": "Enter a phone number with digits only, like +1 555 123 4567."
+}

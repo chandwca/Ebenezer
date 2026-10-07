@@ -1,0 +1,10 @@
+{
+  "notFound": "Este camino no existe.",
+  "required": "Este campo es obligatorio.",
+  "invalidEmail": "Escribe un correo válido.",
+  "saveFailed": "No se pudieron guardar los cambios. Inténtalo de nuevo.",
+  "offline": "No tienes conexión. Las acciones en línea estarán disponibles cuando vuelvas a conectarte.",
+  "tooLong": "Esta entrada es demasiado larga. Acórtala.",
+  "storageUnavailable": "El almacenamiento local no está disponible. No se puede cargar tu diario. Inténtalo de nuevo o revisa los ajustes de almacenamiento del navegador.",
+  "invalidPhone": "Escribe un teléfono solo con números, por ejemplo +1 555 123 4567."
+}

@@ -1,0 +1,48 @@
+{
+  "brandTagline": "A little remembrance",
+  "navigation": {
+    "today": "Today",
+    "story": "My story",
+    "community": "Together",
+    "settings": "Settings",
+    "reflection": "Reflection",
+    "bibleSearch": "Bible search"
+  },
+  "mainNavigation": "Main navigation",
+  "mobileNavigation": "Mobile navigation",
+  "skipContent": "Skip to content",
+  "dailyWalk": "Your daily walk",
+  "sidebarTitle": "Small stones. A lasting story.",
+  "sidebarDescription": "Remember what has carried you this far.",
+  "headerTagline": "Walk the path. Set a stone.",
+  "preview": "Foundation preview",
+  "backToday": "Back to Today",
+  "returnToday": "Return to Today",
+  "footer": "A space for Scripture, reflection, and remembrance.",
+  "stepOf": "Step {{current}} of {{total}} · {{step}}",
+  "steps": {
+    "feel": "Feel",
+    "find": "Find",
+    "read": "Read",
+    "reflect": "Reflect",
+    "together": "Together",
+    "stone": "Stone"
+  },
+  "buttons": {
+    "close": "Close dialog",
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back"
+  },
+  "pwa": {
+    "offline": "You are offline. Your local journal is still available; online services need a connection.",
+    "ready": "Application assets are cached for offline use on this browser.",
+    "failed": "Offline setup or update could not complete. Save any changes first, then try again when connected.",
+    "updateNote": "An update is ready. Save profile or journal edits before reloading. Reflection drafts are saved before updating.",
+    "update": "Update and reload",
+    "installTitle": "Install Ebenezer",
+    "installHelp": "Use your browser’s Install app option. On iPhone or iPad, open in Safari and choose Share → Add to Home Screen. Installation is optional; you can keep using the browser.",
+    "install": "Install app"
+  }
+}

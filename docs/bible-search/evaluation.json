@@ -1,0 +1,939 @@
+{
+  "model": {
+    "modelId": "Xenova/multilingual-e5-small",
+    "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+    "runtime": "@huggingface/transformers",
+    "runtimeVersion": "3.8.1",
+    "dtype": "q8",
+    "pooling": "mean",
+    "normalize": true,
+    "dimensions": 384,
+    "maxTokens": 512,
+    "queryPrefix": "query: ",
+    "passagePrefix": "passage: "
+  },
+  "datasetSha256": "f401bce4c1ccd38901989fcfb5085e68667bb9a52faf228f750266ecc8298b68",
+  "generatedAt": "2026-10-06T01:00:41.109Z",
+  "summary": {
+    "scripture": {
+      "candidateHitAt3": 9,
+      "cases": 18,
+      "note": "Agreement with hand-selected candidates, not human-reviewed usefulness or theological correctness."
+    },
+    "context": {
+      "candidateHitAt3": 9,
+      "cases": 18,
+      "note": "Agreement with hand-selected candidates, not human-reviewed usefulness or theological correctness."
+    }
+  },
+  "results": [
+    {
+      "id": "interview",
+      "query": "I am terrified about my job interview tomorrow.",
+      "candidatePassageIds": [
+        "PHP.4.4-9",
+        "MAT.6.25-34",
+        "1PE.5.6-10"
+      ],
+      "queryMs": 35,
+      "results": {
+        "scripture": [
+          {
+            "id": "ISA.41.8-10",
+            "score": 0.8328283613257216,
+            "reference": "Isaiah 41:8–10"
+          },
+          {
+            "id": "PSA.23.5-6",
+            "score": 0.8298178010012669,
+            "reference": "Psalms 23:5–6"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8287935525415419,
+            "reference": "Matthew 11:28–30"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8218895944412928,
+            "reference": "Psalms 42:1–5"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8205152710085465,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "ISA.41.8-10",
+            "score": 0.8190162313542464,
+            "reference": "Isaiah 41:8–10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "homes",
+      "query": "I moved back home after studying abroad and I no longer feel I belong.",
+      "candidatePassageIds": [
+        "JER.29.4-7",
+        "HEB.11.13-16",
+        "EPH.2.17-22"
+      ],
+      "queryMs": 6,
+      "results": {
+        "scripture": [
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8145569937015149,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "PSA.23.5-6",
+            "score": 0.8108606362214897,
+            "reference": "Psalms 23:5–6"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8067254912026066,
+            "reference": "Psalms 61:1–4"
+          }
+        ],
+        "context": [
+          {
+            "id": "EPH.2.17-22",
+            "score": 0.7957288289808879,
+            "reference": "Ephesians 2:17–22"
+          },
+          {
+            "id": "JER.29.10-14",
+            "score": 0.7942548799501832,
+            "reference": "Jeremiah 29:10–14"
+          },
+          {
+            "id": "LUK.15.17-24",
+            "score": 0.793682730405989,
+            "reference": "Luke 15:17–24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lonely",
+      "query": "I have no friends in this city and feel completely alone.",
+      "candidatePassageIds": [
+        "PSA.68.4-6",
+        "EPH.2.17-22",
+        "ROM.12.9-18"
+      ],
+      "queryMs": 10,
+      "results": {
+        "scripture": [
+          {
+            "id": "EPH.2.17-22",
+            "score": 0.8023631273346741,
+            "reference": "Ephesians 2:17–22"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.799934453882568,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "HEB.11.13-16",
+            "score": 0.7965186266104793,
+            "reference": "Hebrews 11:13–16"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.7897561408064356,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PSA.46.1-3",
+            "score": 0.7856109458943424,
+            "reference": "Psalms 46:1–3"
+          },
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.7855119552349022,
+            "reference": "Psalms 139:1–6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grief",
+      "query": "Someone I love died and I cannot stop crying.",
+      "candidatePassageIds": [
+        "PSA.34.17-19",
+        "2CO.1.3-7",
+        "MAT.5.3-9"
+      ],
+      "queryMs": 11,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8331867493686707,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "JHN.14.25-27",
+            "score": 0.816243683920803,
+            "reference": "John 14:25–27"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8126189059886202,
+            "reference": "Philippians 4:10–13"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8201177229638238,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "ECC.3.1-8",
+            "score": 0.8101130420710431,
+            "reference": "Ecclesiastes 3:1–8"
+          },
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8092857652343173,
+            "reference": "Psalms 139:1–6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "exhausted",
+      "query": "I am exhausted from caring for my family and need rest.",
+      "candidatePassageIds": [
+        "1KI.19.4-8",
+        "MAT.11.28-30",
+        "ISA.40.28-31"
+      ],
+      "queryMs": 8,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8462643330775841,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8388738076329949,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "JHN.14.25-27",
+            "score": 0.821986610332949,
+            "reference": "John 14:25–27"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8419546243900065,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8251899352340534,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.823145837834003,
+            "reference": "Psalms 42:1–5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shame",
+      "query": "I made a mistake and feel ashamed of myself.",
+      "candidatePassageIds": [
+        "PSA.103.8-14",
+        "LUK.15.17-24",
+        "GAL.6.1-5"
+      ],
+      "queryMs": 4,
+      "results": {
+        "scripture": [
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8233505562384943,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "GAL.6.1-5",
+            "score": 0.8096711381024972,
+            "reference": "Galatians 6:1–5"
+          },
+          {
+            "id": "PSA.23.5-6",
+            "score": 0.8078254890570723,
+            "reference": "Psalms 23:5–6"
+          }
+        ],
+        "context": [
+          {
+            "id": "LUK.15.17-24",
+            "score": 0.7964500460150359,
+            "reference": "Luke 15:17–24"
+          },
+          {
+            "id": "LAM.3.19-26",
+            "score": 0.793671983191193,
+            "reference": "Lamentations 3:19–26"
+          },
+          {
+            "id": "MAT.6.25-34",
+            "score": 0.7899216506349662,
+            "reference": "Matthew 6:25–34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "thankful",
+      "query": "A friend helped me through a difficult week and I am grateful.",
+      "candidatePassageIds": [
+        "1SA.7.10-12",
+        "PSA.34.4-8"
+      ],
+      "queryMs": 5,
+      "results": {
+        "scripture": [
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8355543162681756,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8271160961938853,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "ECC.3.1-8",
+            "score": 0.8178929082176928,
+            "reference": "Ecclesiastes 3:1–8"
+          }
+        ],
+        "context": [
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.819417221243875,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.813467817551309,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8119124155380135,
+            "reference": "Psalms 61:1–4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "decisions",
+      "query": "I do not know which direction to take in my life.",
+      "candidatePassageIds": [
+        "PRO.3.5-8",
+        "JAS.1.2-5",
+        "PRO.16.1-3"
+      ],
+      "queryMs": 5,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.8421649060240802,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8302967737177965,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8299871380758164,
+            "reference": "Psalms 42:1–5"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.832664731095994,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8275579270859617,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "MAT.6.25-34",
+            "score": 0.8266477965361614,
+            "reference": "Matthew 6:25–34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "money",
+      "query": "I am worried about paying rent and having enough food.",
+      "candidatePassageIds": [
+        "MAT.6.25-34",
+        "EXO.16.1-5",
+        "PHP.4.10-13"
+      ],
+      "queryMs": 4,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8355502904964105,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8296063031136088,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8255632603871442,
+            "reference": "Philippians 4:10–13"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8343636286075087,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "MAT.6.25-34",
+            "score": 0.8243696025333401,
+            "reference": "Matthew 6:25–34"
+          },
+          {
+            "id": "LUK.15.17-24",
+            "score": 0.8166913597707238,
+            "reference": "Luke 15:17–24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "help",
+      "query": "My friend is suffering and I want to support them.",
+      "candidatePassageIds": [
+        "GAL.6.1-5",
+        "2CO.1.3-7",
+        "ROM.12.9-18"
+      ],
+      "queryMs": 5,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8319404653983358,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "2CO.1.3-7",
+            "score": 0.8281827395812069,
+            "reference": "2 Corinthians 1:3–7"
+          },
+          {
+            "id": "ISA.41.8-10",
+            "score": 0.8256618385954274,
+            "reference": "Isaiah 41:8–10"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8329561010166429,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8157143092948131,
+            "reference": "Psalms 42:1–5"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8152146651054655,
+            "reference": "Matthew 11:28–30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "perseverance",
+      "query": "I keep trying to do the right thing but want to give up.",
+      "candidatePassageIds": [
+        "GAL.6.7-10",
+        "JAS.1.2-5",
+        "ISA.40.28-31"
+      ],
+      "queryMs": 10,
+      "results": {
+        "scripture": [
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8345021124234675,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "JAS.1.2-5",
+            "score": 0.8265990263645241,
+            "reference": "James 1:2–5"
+          },
+          {
+            "id": "PSA.23.5-6",
+            "score": 0.8201766616976899,
+            "reference": "Psalms 23:5–6"
+          }
+        ],
+        "context": [
+          {
+            "id": "JAS.1.2-5",
+            "score": 0.8180343069168343,
+            "reference": "James 1:2–5"
+          },
+          {
+            "id": "LAM.3.19-26",
+            "score": 0.8073075917616511,
+            "reference": "Lamentations 3:19–26"
+          },
+          {
+            "id": "GAL.6.7-10",
+            "score": 0.8045362173731486,
+            "reference": "Galatians 6:7–10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faith",
+      "query": "I feel distant from God and miss the faith I used to have.",
+      "candidatePassageIds": [
+        "PSA.42.1-5",
+        "PSA.61.1-4"
+      ],
+      "queryMs": 5,
+      "results": {
+        "scripture": [
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8454402351359664,
+            "reference": "Philippians 4:10–13"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8388687025364079,
+            "reference": "Psalms 42:1–5"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8371381262618492,
+            "reference": "Psalms 61:1–4"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8396393070299608,
+            "reference": "Psalms 42:1–5"
+          },
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8367119733925757,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8323978686381234,
+            "reference": "Psalms 61:1–4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conflict",
+      "query": "I am arguing with my family and want to make peace.",
+      "candidatePassageIds": [
+        "ROM.12.9-18",
+        "MAT.5.3-9"
+      ],
+      "queryMs": 4,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8319377121997201,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "JHN.14.25-27",
+            "score": 0.8308494070348995,
+            "reference": "John 14:25–27"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8260895102924061,
+            "reference": "Matthew 11:28–30"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8305950626031979,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "EPH.2.17-22",
+            "score": 0.8197804333193471,
+            "reference": "Ephesians 2:17–22"
+          },
+          {
+            "id": "JAS.1.2-5",
+            "score": 0.8149194463355521,
+            "reference": "James 1:2–5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "suffering",
+      "query": "I feel overwhelmed by suffering and wonder whether I am loved.",
+      "candidatePassageIds": [
+        "ROM.8.31-39",
+        "PSA.34.17-19"
+      ],
+      "queryMs": 4,
+      "results": {
+        "scripture": [
+          {
+            "id": "ROM.8.18-25",
+            "score": 0.8437236201519671,
+            "reference": "Romans 8:18–25"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8411878140409412,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8339148981105167,
+            "reference": "Philippians 4:10–13"
+          }
+        ],
+        "context": [
+          {
+            "id": "LAM.3.19-26",
+            "score": 0.837282768162059,
+            "reference": "Lamentations 3:19–26"
+          },
+          {
+            "id": "ROM.8.18-25",
+            "score": 0.8335043538810474,
+            "reference": "Romans 8:18–25"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8326493860871976,
+            "reference": "Psalms 61:1–4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uncertain",
+      "query": "Everything is changing and I feel afraid of the future.",
+      "candidatePassageIds": [
+        "PSA.46.1-3",
+        "ISA.41.8-10",
+        "DEU.31.6-8"
+      ],
+      "queryMs": 3,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.46.1-3",
+            "score": 0.83593404716833,
+            "reference": "Psalms 46:1–3"
+          },
+          {
+            "id": "ECC.3.1-8",
+            "score": 0.832171327577445,
+            "reference": "Ecclesiastes 3:1–8"
+          },
+          {
+            "id": "ISA.41.8-10",
+            "score": 0.8211219597066509,
+            "reference": "Isaiah 41:8–10"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.46.1-3",
+            "score": 0.8258709663576848,
+            "reference": "Psalms 46:1–3"
+          },
+          {
+            "id": "MAT.6.25-34",
+            "score": 0.8227249477079993,
+            "reference": "Matthew 6:25–34"
+          },
+          {
+            "id": "ECC.3.1-8",
+            "score": 0.8119054192859974,
+            "reference": "Ecclesiastes 3:1–8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spanish",
+      "query": "Me siento solo y no sé dónde pertenezco.",
+      "candidatePassageIds": [
+        "PSA.68.4-6",
+        "EPH.2.17-22",
+        "HEB.11.13-16"
+      ],
+      "queryMs": 9,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8315440430760411,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.8311438664809025,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.8305297368339893,
+            "reference": "Philippians 4:10–13"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8273263945078349,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8222720732625917,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8189132858567415,
+            "reference": "Psalms 42:1–5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hindi",
+      "query": "मैं बहुत थक गया हूँ और मुझे आराम चाहिए।",
+      "candidatePassageIds": [
+        "MAT.11.28-30",
+        "1KI.19.4-8",
+        "ISA.40.28-31"
+      ],
+      "queryMs": 6,
+      "results": {
+        "scripture": [
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8385182459435598,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8030024558339396,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PHP.4.10-13",
+            "score": 0.7996658743685929,
+            "reference": "Philippians 4:10–13"
+          }
+        ],
+        "context": [
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.8241257185693027,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "1KI.19.4-8",
+            "score": 0.8017567870681268,
+            "reference": "1 Kings 19:4–8"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8010629068411858,
+            "reference": "Psalms 61:1–4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chinese",
+      "query": "我很担心明天，不知道该怎么办。",
+      "candidatePassageIds": [
+        "MAT.6.25-34",
+        "PHP.4.4-9",
+        "1PE.5.6-10"
+      ],
+      "queryMs": 4,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.821998771247591,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.817588987637637,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8172467756833429,
+            "reference": "Psalms 42:1–5"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.61.1-4",
+            "score": 0.8121061223967038,
+            "reference": "Psalms 61:1–4"
+          },
+          {
+            "id": "MAT.6.25-34",
+            "score": 0.8090170947312775,
+            "reference": "Matthew 6:25–34"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8042676588823394,
+            "reference": "Psalms 42:1–5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ambiguous",
+      "query": "I do not know how I feel.",
+      "candidatePassageIds": [],
+      "queryMs": 3,
+      "results": {
+        "scripture": [
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8333814360058501,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.8234704064499756,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.820981909964399,
+            "reference": "Matthew 11:28–30"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.139.1-6",
+            "score": 0.8316973249498141,
+            "reference": "Psalms 139:1–6"
+          },
+          {
+            "id": "PSA.139.7-12",
+            "score": 0.8158561503064687,
+            "reference": "Psalms 139:7–12"
+          },
+          {
+            "id": "PSA.42.1-5",
+            "score": 0.8134142669682382,
+            "reference": "Psalms 42:1–5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unrelated",
+      "query": "How do I fix a broken laptop keyboard?",
+      "candidatePassageIds": [],
+      "queryMs": 6,
+      "results": {
+        "scripture": [
+          {
+            "id": "MAT.11.28-30",
+            "score": 0.7862105588399895,
+            "reference": "Matthew 11:28–30"
+          },
+          {
+            "id": "PHP.4.4-9",
+            "score": 0.7854449260984323,
+            "reference": "Philippians 4:4–9"
+          },
+          {
+            "id": "PSA.23.5-6",
+            "score": 0.7806595958109123,
+            "reference": "Psalms 23:5–6"
+          }
+        ],
+        "context": [
+          {
+            "id": "PSA.147.1-6",
+            "score": 0.7931474380842968,
+            "reference": "Psalms 147:1–6"
+          },
+          {
+            "id": "GAL.6.1-5",
+            "score": 0.7817753260750615,
+            "reference": "Galatians 6:1–5"
+          },
+          {
+            "id": "PHP.4.4-9",
+            "score": 0.7791419029600413,
+            "reference": "Philippians 4:4–9"
+          }
+        ]
+      }
+    }
+  ]
+}

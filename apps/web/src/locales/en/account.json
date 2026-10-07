@@ -1,0 +1,45 @@
+{
+  "title": "You don’t have to walk alone.",
+  "signedInTitle": "Your place in Together.",
+  "description": "Sign in to prepare your community profile. Sharing will always be your choice; your private journal stays on this device.",
+  "google": "Continue with Google",
+  "signOut": "Sign out on this device",
+  "working": "One moment…",
+  "loading": "Opening your account…",
+  "unavailable": "Together sign-in is not available yet. You can still walk the path and keep your stones.",
+  "offline": "You can keep your journal here while offline. Reconnect to sign in or change your community profile.",
+  "retry": "Try again",
+  "profile": {
+    "loading": "Opening your community profile…",
+    "welcome": "Welcome. What should your people call you? Choose a name and a handle for Together.",
+    "existing": "This is how your name will appear in Together. Friends, groups and sharing are coming next.",
+    "name": "What should your people call you?",
+    "nameHint": "A first name or nickname is enough. This name is for your community profile.",
+    "handle": "Choose your Together handle",
+    "handleHint": "Use 3–30 letters, numbers or underscores. Begin with a letter or number. Your handle helps people find you when friends are available.",
+    "handlePlaceholder": "For example, chetna",
+    "create": "Make my community profile",
+    "update": "Save my community profile",
+    "saving": "Saving…",
+    "saved": "Your community profile is saved. Your private stones are still on this device."
+  },
+  "callback": {
+    "eyebrow": "A place to belong",
+    "title": "Welcome back to Ebenezer.",
+    "description": "We’re bringing you back to your space.",
+    "working": "Finishing your sign-in…",
+    "return": "Return to account settings"
+  },
+  "errors": {
+    "session": "We couldn’t open your account. Try again; your journal is still here.",
+    "signIn": "We couldn’t open Google sign-in. Please try again in a moment.",
+    "signOut": "We couldn’t finish signing out. Reconnect and try again.",
+    "load": "We couldn’t open your community profile. Check your connection and try again.",
+    "save": "We couldn’t save your community profile. Check your connection and try again.",
+    "invalidProfile": "Please enter a name of up to 120 characters and a handle using 3–30 letters, numbers or underscores.",
+    "handleTaken": "That handle is already in use. Try another one—you can keep the same name.",
+    "sessionExpired": "Your account session has ended. Sign out, then continue with Google again. Your journal is still here.",
+    "callback": "We couldn’t finish this sign-in. Return to account settings and continue with Google again.",
+    "cancelled": "You didn’t finish signing in. You can try again whenever you’re ready."
+  }
+}

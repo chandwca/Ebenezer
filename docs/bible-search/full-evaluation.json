@@ -1,0 +1,1221 @@
+{
+  "datasetSha256": "125a3696de6aa90aaa9c1c6bb5265553ab69e3db16088936dbaf448ea1dd62e3",
+  "model": {
+    "modelId": "Xenova/multilingual-e5-small",
+    "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+    "runtime": "@huggingface/transformers",
+    "runtimeVersion": "3.8.1",
+    "dtype": "q8",
+    "pooling": "mean",
+    "normalize": true,
+    "dimensions": 384,
+    "maxTokens": 512,
+    "queryPrefix": "query: ",
+    "passagePrefix": "passage: "
+  },
+  "passageCount": 9534,
+  "generatedAt": "2026-10-06T03:09:06.177Z",
+  "limitations": "Full Scripture-only paragraphs versus original 50 Scripture-plus-editorial-context passages. Coverage and chunking differ. Similarity is not confidence; human review and rejection handling remain required. Timing includes local inference and ranking, excludes setup.",
+  "results": [
+    {
+      "id": "loved",
+      "query": "I feel loved.",
+      "elapsedMs": 129,
+      "full": [
+        {
+          "id": "SNG04.1-1",
+          "reference": "Song of Solomon 4:1",
+          "score": 0.8527730725197412,
+          "text": "Behold, you are beautiful, my love. Behold, you are beautiful. Your eyes are like doves behind your veil. Your hair is as a flock of goats, that descend from Mount Gilead.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG04.htm"
+        },
+        {
+          "id": "SNG03.1-1",
+          "reference": "Song of Solomon 3:1",
+          "score": 0.8487840655718981,
+          "text": "By night on my bed, I sought him whom my soul loves. I sought him, but I didn’t find him.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG03.htm"
+        },
+        {
+          "id": "JER31.3-3",
+          "reference": "Jeremiah 31:3",
+          "score": 0.8468126141110262,
+          "text": "Yahweh appeared of old to me, saying, “Yes, I have loved you with an everlasting love. Therefore I have drawn you with loving kindness.",
+          "sourceUrl": "https://ebible.org/eng-web/JER31.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.7996547727005542,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.7985193957692539,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "LAM.3.19-26",
+          "score": 0.7965884855318673,
+          "reference": "Lamentations 3:19–26"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unloved",
+      "query": "I feel unloved.",
+      "elapsedMs": 25,
+      "full": [
+        {
+          "id": "LUK14.20-20",
+          "reference": "Luke 14:20",
+          "score": 0.8507935912979151,
+          "text": "“Another said, ‘I have married a wife, and therefore I can’t come.’",
+          "sourceUrl": "https://ebible.org/eng-web/LUK14.htm"
+        },
+        {
+          "id": "SNG03.1-1",
+          "reference": "Song of Solomon 3:1",
+          "score": 0.8488868913451617,
+          "text": "By night on my bed, I sought him whom my soul loves. I sought him, but I didn’t find him.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG03.htm"
+        },
+        {
+          "id": "1CO09.27-27",
+          "reference": "1 Corinthians 9:27",
+          "score": 0.8423147020481937,
+          "text": "but I beat my body and bring it into submission, lest by any means, after I have preached to others, I myself should be disqualified.",
+          "sourceUrl": "https://ebible.org/eng-web/1CO09.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8035764682966782,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.802047847810888,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.7942540887589605,
+          "reference": "Matthew 11:28–30"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "am-unloved",
+      "query": "I am unloved",
+      "elapsedMs": 16,
+      "full": [
+        {
+          "id": "SNG03.1-1",
+          "reference": "Song of Solomon 3:1",
+          "score": 0.8472406350430202,
+          "text": "By night on my bed, I sought him whom my soul loves. I sought him, but I didn’t find him.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG03.htm"
+        },
+        {
+          "id": "LUK14.20-20",
+          "reference": "Luke 14:20",
+          "score": 0.8395706005522359,
+          "text": "“Another said, ‘I have married a wife, and therefore I can’t come.’",
+          "sourceUrl": "https://ebible.org/eng-web/LUK14.htm"
+        },
+        {
+          "id": "JER01.6-6",
+          "reference": "Jeremiah 1:6",
+          "score": 0.8327727577474695,
+          "text": "Then I said, “Ah, Lord Yahweh! Behold, I don’t know how to speak; for I am a child.”",
+          "sourceUrl": "https://ebible.org/eng-web/JER01.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.7976218119490802,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.7975468940018193,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "ROM.8.31-39",
+          "score": 0.7903328422293633,
+          "reference": "Romans 8:31–39"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "want-love",
+      "query": "I want to feel loved.",
+      "elapsedMs": 18,
+      "full": [
+        {
+          "id": "SNG03.1-1",
+          "reference": "Song of Solomon 3:1",
+          "score": 0.8534594311109814,
+          "text": "By night on my bed, I sought him whom my soul loves. I sought him, but I didn’t find him.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG03.htm"
+        },
+        {
+          "id": "2CO13.11-12",
+          "reference": "2 Corinthians 13:11–12",
+          "score": 0.8534467285807921,
+          "text": "Finally, brothers, rejoice! Be perfected. Be comforted. Be of the same mind. Live in peace, and the God of love and peace will be with you. Greet one another with a holy kiss.",
+          "sourceUrl": "https://ebible.org/eng-web/2CO13.htm"
+        },
+        {
+          "id": "PSA016.11-11",
+          "reference": "Psalms 16:11",
+          "score": 0.8509838765425486,
+          "text": "You will show me the path of life. In your presence is fullness of joy. In your right hand there are pleasures forever more.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA016.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8194905378330135,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8075804425668899,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.8053473650991495,
+          "reference": "Matthew 11:28–30"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "interview",
+      "query": "I am terrified about my job interview tomorrow.",
+      "elapsedMs": 19,
+      "full": [
+        {
+          "id": "2CO11.28-29",
+          "reference": "2 Corinthians 11:28–29",
+          "score": 0.8480611431919374,
+          "text": "Besides those things that are outside, there is that which presses on me daily: anxiety for all the assemblies. Who is weak, and I am not weak? Who is caused to stumble, and I don’t burn with indignation?",
+          "sourceUrl": "https://ebible.org/eng-web/2CO11.htm"
+        },
+        {
+          "id": "NEH06.8-9",
+          "reference": "Nehemiah 6:8–9",
+          "score": 0.8477529897650244,
+          "text": "Then I sent to him, saying, “There are no such things done as you say, but you imagine them out of your own heart.” For they all would have made us afraid, saying, “Their hands will be weakened from the work, that it not be done.” But now, strengthen my hands.",
+          "sourceUrl": "https://ebible.org/eng-web/NEH06.htm"
+        },
+        {
+          "id": "GEN30.32-33",
+          "reference": "Genesis 30:32–33",
+          "score": 0.8466418274170534,
+          "text": "I will pass through all your flock today, removing from there every speckled and spotted one, and every black one among the sheep, and the spotted and speckled among the goats. This will be my hire. So my righteousness will answer for me hereafter, when you come concerning my hire that is before you. Every one that is not speckled and spotted among the goats, and black among the sheep, that might be with me, will be considered stolen.”",
+          "sourceUrl": "https://ebible.org/eng-web/GEN30.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8218895944412928,
+          "reference": "Psalms 42:1–5"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8205152710085465,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "ISA.41.8-10",
+          "score": 0.8190162313542464,
+          "reference": "Isaiah 41:8–10"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "homes",
+      "query": "I moved back home after studying abroad and I no longer feel I belong.",
+      "elapsedMs": 69,
+      "full": [
+        {
+          "id": "1CO09.27-27",
+          "reference": "1 Corinthians 9:27",
+          "score": 0.8424540320618558,
+          "text": "but I beat my body and bring it into submission, lest by any means, after I have preached to others, I myself should be disqualified.",
+          "sourceUrl": "https://ebible.org/eng-web/1CO09.htm"
+        },
+        {
+          "id": "JER13.7-7",
+          "reference": "Jeremiah 13:7",
+          "score": 0.8371774205440731,
+          "text": "Then I went to the Euphrates, and dug, and took the belt from the place where I had hidden it; and behold, the belt was ruined. It was profitable for nothing.",
+          "sourceUrl": "https://ebible.org/eng-web/JER13.htm"
+        },
+        {
+          "id": "SNG08.1-1",
+          "reference": "Song of Solomon 8:1",
+          "score": 0.8329169248704131,
+          "text": "Oh that you were like my brother, who nursed from the breasts of my mother! If I found you outside, I would kiss you; yes, and no one would despise me.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG08.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "EPH.2.17-22",
+          "score": 0.7957288289808879,
+          "reference": "Ephesians 2:17–22"
+        },
+        {
+          "id": "JER.29.10-14",
+          "score": 0.7942548799501832,
+          "reference": "Jeremiah 29:10–14"
+        },
+        {
+          "id": "LUK.15.17-24",
+          "score": 0.793682730405989,
+          "reference": "Luke 15:17–24"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "lonely",
+      "query": "I have no friends in this city and feel completely alone.",
+      "elapsedMs": 26,
+      "full": [
+        {
+          "id": "SNG08.1-1",
+          "reference": "Song of Solomon 8:1",
+          "score": 0.8345742709433364,
+          "text": "Oh that you were like my brother, who nursed from the breasts of my mother! If I found you outside, I would kiss you; yes, and no one would despise me.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG08.htm"
+        },
+        {
+          "id": "ISA14.31-31",
+          "reference": "Isaiah 14:31",
+          "score": 0.8343365280285306,
+          "text": "Howl, gate! Cry, city! You are melted away, Philistia, all of you; for smoke comes out of the north, and there is no straggler in his ranks.",
+          "sourceUrl": "https://ebible.org/eng-web/ISA14.htm"
+        },
+        {
+          "id": "LUK14.33-33",
+          "reference": "Luke 14:33",
+          "score": 0.8279639429389046,
+          "text": "So therefore, whoever of you who doesn’t renounce all that he has, he can’t be my disciple.",
+          "sourceUrl": "https://ebible.org/eng-web/LUK14.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.7897561408064356,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.46.1-3",
+          "score": 0.7856109458943424,
+          "reference": "Psalms 46:1–3"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.7855119552349022,
+          "reference": "Psalms 139:1–6"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "grief",
+      "query": "Someone I love died and I cannot stop crying.",
+      "elapsedMs": 19,
+      "full": [
+        {
+          "id": "SNG03.1-1",
+          "reference": "Song of Solomon 3:1",
+          "score": 0.8480908806994562,
+          "text": "By night on my bed, I sought him whom my soul loves. I sought him, but I didn’t find him.",
+          "sourceUrl": "https://ebible.org/eng-web/SNG03.htm"
+        },
+        {
+          "id": "ECC07.26-26",
+          "reference": "Ecclesiastes 7:26",
+          "score": 0.8419332855431302,
+          "text": "I find more bitter than death the woman whose heart is snares and traps, whose hands are chains. Whoever pleases God shall escape from her; but the sinner will be ensnared by her.",
+          "sourceUrl": "https://ebible.org/eng-web/ECC07.htm"
+        },
+        {
+          "id": "PSA102.1-11",
+          "reference": "Psalms 102:1–11",
+          "score": 0.8378163223116569,
+          "text": "Hear my prayer, Yahweh! Let my cry come to you. Don’t hide your face from me in the day of my distress. Turn your ear to me. Answer me quickly in the day when I call. For my days consume away like smoke. My bones are burned as a torch. My heart is blighted like grass, and withered, for I forget to eat my bread. By reason of the voice of my groaning, my bones stick to my skin. I am like a pelican of the wilderness. I have become as an owl of the waste places. I watch, and have become like a sparrow that is alone on the housetop. My enemies reproach me all day. Those who are mad at me use my name as a curse. For I have eaten ashes like bread, and mixed my drink with tears, because of your indignation and your wrath; for you have taken me up and thrown me away. My days are like a long shadow. I have withered like grass.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA102.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8201177229638238,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "ECC.3.1-8",
+          "score": 0.8101130420710431,
+          "reference": "Ecclesiastes 3:1–8"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8092857652343173,
+          "reference": "Psalms 139:1–6"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "exhausted",
+      "query": "I am exhausted from caring for my family and need rest.",
+      "elapsedMs": 38,
+      "full": [
+        {
+          "id": "PSA095.11-11",
+          "reference": "Psalms 95:11",
+          "score": 0.8581183767319429,
+          "text": "Therefore I swore in my wrath, “They won’t enter into my rest.”",
+          "sourceUrl": "https://ebible.org/eng-web/PSA095.htm"
+        },
+        {
+          "id": "HEB13.18-19",
+          "reference": "Hebrews 13:18–19",
+          "score": 0.8489837956017116,
+          "text": "Pray for us, for we are persuaded that we have a good conscience, desiring to live honorably in all things. I strongly urge you to do this, that I may be restored to you sooner.",
+          "sourceUrl": "https://ebible.org/eng-web/HEB13.htm"
+        },
+        {
+          "id": "HEB13.22-23",
+          "reference": "Hebrews 13:22–23",
+          "score": 0.8450494222467516,
+          "text": "But I exhort you, brothers, endure the word of exhortation, for I have written to you in few words. Know that our brother Timothy has been freed, with whom, if he comes shortly, I will see you.",
+          "sourceUrl": "https://ebible.org/eng-web/HEB13.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8419546243900065,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.8251899352340534,
+          "reference": "Matthew 11:28–30"
+        },
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.823145837834003,
+          "reference": "Psalms 42:1–5"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "shame",
+      "query": "I made a mistake and feel ashamed of myself.",
+      "elapsedMs": 14,
+      "full": [
+        {
+          "id": "1CO09.27-27",
+          "reference": "1 Corinthians 9:27",
+          "score": 0.8864166167497136,
+          "text": "but I beat my body and bring it into submission, lest by any means, after I have preached to others, I myself should be disqualified.",
+          "sourceUrl": "https://ebible.org/eng-web/1CO09.htm"
+        },
+        {
+          "id": "JHN15.25-25",
+          "reference": "John 15:25",
+          "score": 0.8507378528086009,
+          "text": "But this happened so that the word may be fulfilled which was written in their law, ‘They hated me without a cause.’",
+          "sourceUrl": "https://ebible.org/eng-web/JHN15.htm"
+        },
+        {
+          "id": "EZK05.13-13",
+          "reference": "Ezekiel 5:13",
+          "score": 0.847786698140529,
+          "text": "“ ‘Thus my anger will be accomplished, and I will cause my wrath toward them to rest, and I will be comforted. They will know that I, Yahweh, have spoken in my zeal, when I have accomplished my wrath on them.",
+          "sourceUrl": "https://ebible.org/eng-web/EZK05.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "LUK.15.17-24",
+          "score": 0.7964500460150359,
+          "reference": "Luke 15:17–24"
+        },
+        {
+          "id": "LAM.3.19-26",
+          "score": 0.793671983191193,
+          "reference": "Lamentations 3:19–26"
+        },
+        {
+          "id": "MAT.6.25-34",
+          "score": 0.7899216506349662,
+          "reference": "Matthew 6:25–34"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "thankful",
+      "query": "A friend helped me through a difficult week and I am grateful.",
+      "elapsedMs": 15,
+      "full": [
+        {
+          "id": "LAM03.1-13",
+          "reference": "Lamentations 3:1–13",
+          "score": 0.848451260281271,
+          "text": "I am the man who has seen affliction by the rod of his wrath. He has led me and caused me to walk in darkness, and not in light. Surely he turns his hand against me again and again all day long. He has made my flesh and my skin old. He has broken my bones. He has built against me, and surrounded me with bitterness and hardship. He has made me dwell in dark places, as those who have been long dead. He has walled me about, so that I can’t go out. He has made my chain heavy. Yes, when I cry, and call for help, he shuts out my prayer. He has walled up my ways with cut stone. He has made my paths crooked. He is to me as a bear lying in wait, as a lion in hiding. He has turned away my path, and pulled me in pieces. He has made me desolate. He has bent his bow, and set me as a mark for the arrow. He has caused the shafts of his quiver to enter into my kidneys.",
+          "sourceUrl": "https://ebible.org/eng-web/LAM03.htm"
+        },
+        {
+          "id": "JOB16.11-20",
+          "reference": "Job 16:11–20",
+          "score": 0.8472475692938497,
+          "text": "God delivers me to the ungodly, and casts me into the hands of the wicked. I was at ease, and he broke me apart. Yes, he has taken me by the neck, and dashed me to pieces. He has also set me up for his target. His archers surround me. He splits my kidneys apart, and does not spare. He pours out my bile on the ground. He breaks me with breach on breach. He runs at me like a giant. I have sewed sackcloth on my skin, and have thrust my horn in the dust. My face is red with weeping. Deep darkness is on my eyelids, although there is no violence in my hands, and my prayer is pure. “Earth, don’t cover my blood. Let my cry have no place to rest. Even now, behold, my witness is in heaven. He who vouches for me is on high. My friends scoff at me. My eyes pour out tears to God,",
+          "sourceUrl": "https://ebible.org/eng-web/JOB16.htm"
+        },
+        {
+          "id": "2SA22.12-21",
+          "reference": "2 Samuel 22:12–21",
+          "score": 0.8390264396127123,
+          "text": "He made darkness a shelter around himself, gathering of waters, and thick clouds of the skies. At the brightness before him, coals of fire were kindled. Yahweh thundered from heaven. The Most High uttered his voice. He sent out arrows and scattered them, lightning and confused them. Then the channels of the sea appeared. The foundations of the world were laid bare by Yahweh’s rebuke, at the blast of the breath of his nostrils. He sent from on high and he took me. He drew me out of many waters. He delivered me from my strong enemy, from those who hated me, for they were too mighty for me. They came on me in the day of my calamity, but Yahweh was my support. He also brought me out into a large place. He delivered me, because he delighted in me. Yahweh rewarded me according to my righteousness. He rewarded me according to the cleanness of my hands.",
+          "sourceUrl": "https://ebible.org/eng-web/2SA22.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.819417221243875,
+          "reference": "Matthew 11:28–30"
+        },
+        {
+          "id": "PHP.4.10-13",
+          "score": 0.813467817551309,
+          "reference": "Philippians 4:10–13"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8119124155380135,
+          "reference": "Psalms 61:1–4"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "decisions",
+      "query": "I do not know which direction to take in my life.",
+      "elapsedMs": 15,
+      "full": [
+        {
+          "id": "ECC07.24-25",
+          "reference": "Ecclesiastes 7:24–25",
+          "score": 0.8609658781467154,
+          "text": "That which is, is far off and exceedingly deep. Who can find it out? I turned around, and my heart sought to know and to search out, and to seek wisdom and the scheme of things, and to know that wickedness is stupidity, and that foolishness is madness.",
+          "sourceUrl": "https://ebible.org/eng-web/ECC07.htm"
+        },
+        {
+          "id": "GEN13.9-9",
+          "reference": "Genesis 13:9",
+          "score": 0.8501872141962964,
+          "text": "Isn’t the whole land before you? Please separate yourself from me. If you go to the left hand, then I will go to the right. Or if you go to the right hand, then I will go to the left.”",
+          "sourceUrl": "https://ebible.org/eng-web/GEN13.htm"
+        },
+        {
+          "id": "PSA016.11-11",
+          "reference": "Psalms 16:11",
+          "score": 0.8486238873251643,
+          "text": "You will show me the path of life. In your presence is fullness of joy. In your right hand there are pleasures forever more.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA016.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.139.7-12",
+          "score": 0.832664731095994,
+          "reference": "Psalms 139:7–12"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8275579270859617,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "MAT.6.25-34",
+          "score": 0.8266477965361614,
+          "reference": "Matthew 6:25–34"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "money",
+      "query": "I am worried about paying rent and having enough food.",
+      "elapsedMs": 14,
+      "full": [
+        {
+          "id": "NEH13.14-14",
+          "reference": "Nehemiah 13:14",
+          "score": 0.8466375537053232,
+          "text": "Remember me, my God, concerning this, and don’t wipe out my good deeds that I have done for the house of my God, and for its observances.",
+          "sourceUrl": "https://ebible.org/eng-web/NEH13.htm"
+        },
+        {
+          "id": "HEB13.18-19",
+          "reference": "Hebrews 13:18–19",
+          "score": 0.8465389067921189,
+          "text": "Pray for us, for we are persuaded that we have a good conscience, desiring to live honorably in all things. I strongly urge you to do this, that I may be restored to you sooner.",
+          "sourceUrl": "https://ebible.org/eng-web/HEB13.htm"
+        },
+        {
+          "id": "1TI06.6-10",
+          "reference": "1 Timothy 6:6–10",
+          "score": 0.8446984220666752,
+          "text": "But godliness with contentment is great gain. For we brought nothing into the world, and we certainly can’t carry anything out. But having food and clothing, we will be content with that. But those who are determined to be rich fall into a temptation, a snare, and many foolish and harmful lusts, such as drown men in ruin and destruction. For the love of money is a root of all kinds of evil. Some have been led astray from the faith in their greed, and have pierced themselves through with many sorrows.",
+          "sourceUrl": "https://ebible.org/eng-web/1TI06.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8343636286075087,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "MAT.6.25-34",
+          "score": 0.8243696025333401,
+          "reference": "Matthew 6:25–34"
+        },
+        {
+          "id": "LUK.15.17-24",
+          "score": 0.8166913597707238,
+          "reference": "Luke 15:17–24"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "help",
+      "query": "My friend is suffering and I want to support them.",
+      "elapsedMs": 19,
+      "full": [
+        {
+          "id": "PSA041.1-9",
+          "reference": "Psalms 41:1–9",
+          "score": 0.8494462023125552,
+          "text": "Blessed is he who considers the poor. Yahweh will deliver him in the day of evil. Yahweh will preserve him, and keep him alive. He shall be blessed on the earth, and he will not surrender him to the will of his enemies. Yahweh will sustain him on his sickbed, and restore him from his bed of illness. I said, “Yahweh, have mercy on me! Heal me, for I have sinned against you.” My enemies speak evil against me: “When will he die, and his name perish?” If he comes to see me, he speaks falsehood. His heart gathers iniquity to itself. When he goes abroad, he tells it. All who hate me whisper together against me. They imagine the worst for me. “An evil disease”, they say, “has afflicted him. Now that he lies he shall rise up no more.” Yes, my own familiar friend, in whom I trusted, who ate bread with me, has lifted up his heel against me.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA041.htm"
+        },
+        {
+          "id": "ACT28.27-27",
+          "reference": "Acts 28:27",
+          "score": 0.8478918990864096,
+          "text": "For this people’s heart has grown callous. Their ears are dull of hearing. Their eyes they have closed. Lest they should see with their eyes, hear with their ears, understand with their heart, and would turn again, then I would heal them.’",
+          "sourceUrl": "https://ebible.org/eng-web/ACT28.htm"
+        },
+        {
+          "id": "MRK09.22-22",
+          "reference": "Mark 9:22",
+          "score": 0.846228146145671,
+          "text": "Often it has cast him both into the fire and into the water to destroy him. But if you can do anything, have compassion on us and help us.”",
+          "sourceUrl": "https://ebible.org/eng-web/MRK09.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8329561010166429,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8157143092948131,
+          "reference": "Psalms 42:1–5"
+        },
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.8152146651054655,
+          "reference": "Matthew 11:28–30"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "perseverance",
+      "query": "I keep trying to do the right thing but want to give up.",
+      "elapsedMs": 21,
+      "full": [
+        {
+          "id": "1CO09.27-27",
+          "reference": "1 Corinthians 9:27",
+          "score": 0.8470518000489984,
+          "text": "but I beat my body and bring it into submission, lest by any means, after I have preached to others, I myself should be disqualified.",
+          "sourceUrl": "https://ebible.org/eng-web/1CO09.htm"
+        },
+        {
+          "id": "PSA036.10-12",
+          "reference": "Psalms 36:10–12",
+          "score": 0.8470062456516658,
+          "text": "Oh continue your loving kindness to those who know you, your righteousness to the upright in heart. Don’t let the foot of pride come against me. Don’t let the hand of the wicked drive me away. There the workers of iniquity are fallen. They are thrust down, and shall not be able to rise.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA036.htm"
+        },
+        {
+          "id": "HOS05.15-15",
+          "reference": "Hosea 5:15",
+          "score": 0.843345781778004,
+          "text": "I will go and return to my place, until they acknowledge their offense, and seek my face. In their affliction they will seek me earnestly.”",
+          "sourceUrl": "https://ebible.org/eng-web/HOS05.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "JAS.1.2-5",
+          "score": 0.8180343069168343,
+          "reference": "James 1:2–5"
+        },
+        {
+          "id": "LAM.3.19-26",
+          "score": 0.8073075917616511,
+          "reference": "Lamentations 3:19–26"
+        },
+        {
+          "id": "GAL.6.7-10",
+          "score": 0.8045362173731486,
+          "reference": "Galatians 6:7–10"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "faith",
+      "query": "I feel distant from God and miss the faith I used to have.",
+      "elapsedMs": 23,
+      "full": [
+        {
+          "id": "PSA073.26-28",
+          "reference": "Psalms 73:26–28",
+          "score": 0.8694347496921725,
+          "text": "My flesh and my heart fails, but God is the strength of my heart and my portion forever. For, behold, those who are far from you shall perish. You have destroyed all those who are unfaithful to you. But it is good for me to come close to God. I have made the Lord Yahweh my refuge, that I may tell of all your works.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA073.htm"
+        },
+        {
+          "id": "1CO09.27-27",
+          "reference": "1 Corinthians 9:27",
+          "score": 0.8665499086151182,
+          "text": "but I beat my body and bring it into submission, lest by any means, after I have preached to others, I myself should be disqualified.",
+          "sourceUrl": "https://ebible.org/eng-web/1CO09.htm"
+        },
+        {
+          "id": "GAL05.11-12",
+          "reference": "Galatians 5:11–12",
+          "score": 0.8663981798979106,
+          "text": "But I, brothers, if I still preach circumcision, why am I still persecuted? Then the stumbling block of the cross has been removed. I wish that those who disturb you would cut themselves off.",
+          "sourceUrl": "https://ebible.org/eng-web/GAL05.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8396393070299608,
+          "reference": "Psalms 42:1–5"
+        },
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8367119733925757,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8323978686381234,
+          "reference": "Psalms 61:1–4"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "conflict",
+      "query": "I am arguing with my family and want to make peace.",
+      "elapsedMs": 18,
+      "full": [
+        {
+          "id": "HOS05.15-15",
+          "reference": "Hosea 5:15",
+          "score": 0.8598098835306398,
+          "text": "I will go and return to my place, until they acknowledge their offense, and seek my face. In their affliction they will seek me earnestly.”",
+          "sourceUrl": "https://ebible.org/eng-web/HOS05.htm"
+        },
+        {
+          "id": "LUK12.49-53",
+          "reference": "Luke 12:49–53",
+          "score": 0.8546755481654894,
+          "text": "“I came to throw fire on the earth. I wish it were already kindled. But I have a baptism to be baptized with, and how distressed I am until it is accomplished! Do you think that I have come to give peace on the earth? I tell you, no, but rather division. For from now on, there will be five in one house divided, three against two, and two against three. They will be divided, father against son, and son against father; mother against daughter, and daughter against her mother; mother-in-law against her daughter-in-law, and daughter-in-law against her mother-in-law.”",
+          "sourceUrl": "https://ebible.org/eng-web/LUK12.htm"
+        },
+        {
+          "id": "HAB02.1-1",
+          "reference": "Habakkuk 2:1",
+          "score": 0.8540347741776111,
+          "text": "I will stand at my watch and set myself on the ramparts, and will look out to see what he will say to me, and what I will answer concerning my complaint.",
+          "sourceUrl": "https://ebible.org/eng-web/HAB02.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8305950626031979,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "EPH.2.17-22",
+          "score": 0.8197804333193471,
+          "reference": "Ephesians 2:17–22"
+        },
+        {
+          "id": "JAS.1.2-5",
+          "score": 0.8149194463355521,
+          "reference": "James 1:2–5"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "suffering",
+      "query": "I feel overwhelmed by suffering and wonder whether I am loved.",
+      "elapsedMs": 23,
+      "full": [
+        {
+          "id": "ECC07.24-25",
+          "reference": "Ecclesiastes 7:24–25",
+          "score": 0.8574222960584748,
+          "text": "That which is, is far off and exceedingly deep. Who can find it out? I turned around, and my heart sought to know and to search out, and to seek wisdom and the scheme of things, and to know that wickedness is stupidity, and that foolishness is madness.",
+          "sourceUrl": "https://ebible.org/eng-web/ECC07.htm"
+        },
+        {
+          "id": "2CO02.1-4",
+          "reference": "2 Corinthians 2:1–4",
+          "score": 0.8503773802553379,
+          "text": "But I determined this for myself, that I would not come to you again in sorrow. For if I make you grieve, then who will make me glad but he who is made to grieve by me? And I wrote this very thing to you, so that when I came, I wouldn’t have sorrow from them of whom I ought to rejoice; having confidence in you all that my joy would be shared by all of you. For out of much affliction and anguish of heart I wrote to you with many tears, not that you should be made to grieve, but that you might know the love that I have so abundantly for you.",
+          "sourceUrl": "https://ebible.org/eng-web/2CO02.htm"
+        },
+        {
+          "id": "HEB10.32-36",
+          "reference": "Hebrews 10:32–36",
+          "score": 0.8501154991358616,
+          "text": "But remember the former days, in which, after you were enlightened, you endured a great struggle with sufferings: partly, being exposed to both reproaches and oppressions, and partly, becoming partakers with those who were treated so. For you both had compassion on me in my chains and joyfully accepted the plundering of your possessions, knowing that you have for yourselves a better possession and an enduring one in the heavens. Therefore don’t throw away your boldness, which has a great reward. For you need endurance so that, having done the will of God, you may receive the promise.",
+          "sourceUrl": "https://ebible.org/eng-web/HEB10.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "LAM.3.19-26",
+          "score": 0.837282768162059,
+          "reference": "Lamentations 3:19–26"
+        },
+        {
+          "id": "ROM.8.18-25",
+          "score": 0.8335043538810474,
+          "reference": "Romans 8:18–25"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8326493860871976,
+          "reference": "Psalms 61:1–4"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "uncertain",
+      "query": "Everything is changing and I feel afraid of the future.",
+      "elapsedMs": 34,
+      "full": [
+        {
+          "id": "ECC12.13-14",
+          "reference": "Ecclesiastes 12:13–14",
+          "score": 0.8522875776562647,
+          "text": "This is the end of the matter. All has been heard. Fear God and keep his commandments; for this is the whole duty of man. For God will bring every work into judgment, with every hidden thing, whether it is good, or whether it is evil.",
+          "sourceUrl": "https://ebible.org/eng-web/ECC12.htm"
+        },
+        {
+          "id": "2CO11.28-29",
+          "reference": "2 Corinthians 11:28–29",
+          "score": 0.8519066631183532,
+          "text": "Besides those things that are outside, there is that which presses on me daily: anxiety for all the assemblies. Who is weak, and I am not weak? Who is caused to stumble, and I don’t burn with indignation?",
+          "sourceUrl": "https://ebible.org/eng-web/2CO11.htm"
+        },
+        {
+          "id": "ISA24.17-20",
+          "reference": "Isaiah 24:17–20",
+          "score": 0.851067232051176,
+          "text": "Fear, the pit, and the snare are on you who inhabit the earth. It will happen that he who flees from the noise of the fear will fall into the pit; and he who comes up out of the middle of the pit will be taken in the snare; for the windows on high are opened, and the foundations of the earth tremble. The earth is utterly broken. The earth is torn apart. The earth is shaken violently. The earth will stagger like a drunken man, and will sway back and forth like a hammock. Its disobedience will be heavy on it, and it will fall and not rise again.",
+          "sourceUrl": "https://ebible.org/eng-web/ISA24.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.46.1-3",
+          "score": 0.8258709663576848,
+          "reference": "Psalms 46:1–3"
+        },
+        {
+          "id": "MAT.6.25-34",
+          "score": 0.8227249477079993,
+          "reference": "Matthew 6:25–34"
+        },
+        {
+          "id": "ECC.3.1-8",
+          "score": 0.8119054192859974,
+          "reference": "Ecclesiastes 3:1–8"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "spanish",
+      "query": "Me siento solo y no sé dónde pertenezco.",
+      "elapsedMs": 19,
+      "full": [
+        {
+          "id": "JHN07.33-34",
+          "reference": "John 7:33–34",
+          "score": 0.8485770242313521,
+          "text": "Then Jesus said, “I will be with you a little while longer, then I go to him who sent me. You will seek me and won’t find me. You can’t come where I am.”",
+          "sourceUrl": "https://ebible.org/eng-web/JHN07.htm"
+        },
+        {
+          "id": "MRK10.40-40",
+          "reference": "Mark 10:40",
+          "score": 0.8482787905189433,
+          "text": "but to sit at my right hand and at my left hand is not mine to give, but for whom it has been prepared.”",
+          "sourceUrl": "https://ebible.org/eng-web/MRK10.htm"
+        },
+        {
+          "id": "GEN28.15-15",
+          "reference": "Genesis 28:15",
+          "score": 0.8452077797781031,
+          "text": "Behold, I am with you, and will keep you, wherever you go, and will bring you again into this land. For I will not leave you until I have done that which I have spoken of to you.”",
+          "sourceUrl": "https://ebible.org/eng-web/GEN28.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8273263945078349,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8222720732625917,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8189132858567415,
+          "reference": "Psalms 42:1–5"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "hindi",
+      "query": "मैं बहुत थक गया हूँ और मुझे आराम चाहिए।",
+      "elapsedMs": 18,
+      "full": [
+        {
+          "id": "JER31.26-26",
+          "reference": "Jeremiah 31:26",
+          "score": 0.8791645844081545,
+          "text": "On this I awakened, and saw; and my sleep was sweet to me.",
+          "sourceUrl": "https://ebible.org/eng-web/JER31.htm"
+        },
+        {
+          "id": "EXO33.14-14",
+          "reference": "Exodus 33:14",
+          "score": 0.8490045323498631,
+          "text": "He said, “My presence will go with you, and I will give you rest.”",
+          "sourceUrl": "https://ebible.org/eng-web/EXO33.htm"
+        },
+        {
+          "id": "DAN05.27-27",
+          "reference": "Daniel 5:27",
+          "score": 0.8421526727982874,
+          "text": "TEKEL: you are weighed in the balances, and are found wanting.",
+          "sourceUrl": "https://ebible.org/eng-web/DAN05.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "MAT.11.28-30",
+          "score": 0.8241257185693027,
+          "reference": "Matthew 11:28–30"
+        },
+        {
+          "id": "1KI.19.4-8",
+          "score": 0.8017567870681268,
+          "reference": "1 Kings 19:4–8"
+        },
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8010629068411858,
+          "reference": "Psalms 61:1–4"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "chinese",
+      "query": "我很担心明天，不知道该怎么办。",
+      "elapsedMs": 31,
+      "full": [
+        {
+          "id": "JOB09.35-35",
+          "reference": "Job 9:35",
+          "score": 0.8362304476925373,
+          "text": "then I would speak, and not fear him, for I am not so in myself.",
+          "sourceUrl": "https://ebible.org/eng-web/JOB09.htm"
+        },
+        {
+          "id": "DAN08.17-17",
+          "reference": "Daniel 8:17",
+          "score": 0.83148604936848,
+          "text": "So he came near where I stood; and when he came, I was frightened, and fell on my face; but he said to me, “Understand, son of man, for the vision belongs to the time of the end.”",
+          "sourceUrl": "https://ebible.org/eng-web/DAN08.htm"
+        },
+        {
+          "id": "2CO02.1-4",
+          "reference": "2 Corinthians 2:1–4",
+          "score": 0.8305855272382253,
+          "text": "But I determined this for myself, that I would not come to you again in sorrow. For if I make you grieve, then who will make me glad but he who is made to grieve by me? And I wrote this very thing to you, so that when I came, I wouldn’t have sorrow from them of whom I ought to rejoice; having confidence in you all that my joy would be shared by all of you. For out of much affliction and anguish of heart I wrote to you with many tears, not that you should be made to grieve, but that you might know the love that I have so abundantly for you.",
+          "sourceUrl": "https://ebible.org/eng-web/2CO02.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.61.1-4",
+          "score": 0.8121061223967038,
+          "reference": "Psalms 61:1–4"
+        },
+        {
+          "id": "MAT.6.25-34",
+          "score": 0.8090170947312775,
+          "reference": "Matthew 6:25–34"
+        },
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8042676588823394,
+          "reference": "Psalms 42:1–5"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ambiguous",
+      "query": "I do not know how I feel.",
+      "elapsedMs": 51,
+      "full": [
+        {
+          "id": "JER01.6-6",
+          "reference": "Jeremiah 1:6",
+          "score": 0.8551309682674103,
+          "text": "Then I said, “Ah, Lord Yahweh! Behold, I don’t know how to speak; for I am a child.”",
+          "sourceUrl": "https://ebible.org/eng-web/JER01.htm"
+        },
+        {
+          "id": "LUK14.20-20",
+          "reference": "Luke 14:20",
+          "score": 0.8532284857657714,
+          "text": "“Another said, ‘I have married a wife, and therefore I can’t come.’",
+          "sourceUrl": "https://ebible.org/eng-web/LUK14.htm"
+        },
+        {
+          "id": "ZEC04.13-13",
+          "reference": "Zechariah 4:13",
+          "score": 0.8496751835923556,
+          "text": "He answered me, “Don’t you know what these are?” I said, “No, my lord.”",
+          "sourceUrl": "https://ebible.org/eng-web/ZEC04.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.139.1-6",
+          "score": 0.8316973249498141,
+          "reference": "Psalms 139:1–6"
+        },
+        {
+          "id": "PSA.139.7-12",
+          "score": 0.8158561503064687,
+          "reference": "Psalms 139:7–12"
+        },
+        {
+          "id": "PSA.42.1-5",
+          "score": 0.8134142669682382,
+          "reference": "Psalms 42:1–5"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unrelated",
+      "query": "How do I fix a broken laptop keyboard?",
+      "elapsedMs": 26,
+      "full": [
+        {
+          "id": "PSA045.1-7",
+          "reference": "Psalms 45:1–7",
+          "score": 0.8149974695455854,
+          "text": "My heart overflows with a noble theme. I recite my verses for the king. My tongue is like the pen of a skillful writer. You are the most excellent of the sons of men. Grace has anointed your lips, therefore God has blessed you forever. Strap your sword on your thigh, O mighty one, in your splendor and your majesty. In your majesty ride on victoriously on behalf of truth, humility, and righteousness. Let your right hand display awesome deeds. Your arrows are sharp. The nations fall under you, with arrows in the heart of the king’s enemies. Your throne, God, is forever and ever. A scepter of equity is the scepter of your kingdom. You have loved righteousness, and hated wickedness. Therefore God, your God, has anointed you with the oil of gladness above your fellows.",
+          "sourceUrl": "https://ebible.org/eng-web/PSA045.htm"
+        },
+        {
+          "id": "PRO04.24-27",
+          "reference": "Proverbs 4:24–27",
+          "score": 0.8146282826736465,
+          "text": "Put away from yourself a perverse mouth. Put corrupt lips far from you. Let your eyes look straight ahead. Fix your gaze directly before you. Make the path of your feet level. Let all of your ways be established. Don’t turn to the right hand nor to the left. Remove your foot from evil.",
+          "sourceUrl": "https://ebible.org/eng-web/PRO04.htm"
+        },
+        {
+          "id": "TIT02.15-15",
+          "reference": "Titus 2:15",
+          "score": 0.8144317012147101,
+          "text": "Say these things and exhort and reprove with all authority. Let no one despise you.",
+          "sourceUrl": "https://ebible.org/eng-web/TIT02.htm"
+        }
+      ],
+      "original": [
+        {
+          "id": "PSA.147.1-6",
+          "score": 0.7931474380842968,
+          "reference": "Psalms 147:1–6"
+        },
+        {
+          "id": "GAL.6.1-5",
+          "score": 0.7817753260750615,
+          "reference": "Galatians 6:1–5"
+        },
+        {
+          "id": "PHP.4.4-9",
+          "score": 0.7791419029600413,
+          "reference": "Philippians 4:4–9"
+        }
+      ],
+      "review": {
+        "helpful": null,
+        "distinguishesEmotion": null,
+        "notes": ""
+      }
+    }
+  ]
+}

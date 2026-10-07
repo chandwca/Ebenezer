@@ -1,0 +1,280 @@
+{
+  "reflection": {
+    "eyebrow": "One step at a time",
+    "title": "Walk the path.",
+    "description": "A guided conversation with Scripture, your day, and the people who walk with you.",
+    "heading": "Your reflection starts here",
+    "text": "The next stage adds the guided form, Scripture selection, and saved drafts. This preview does not save journal entries yet."
+  },
+  "story": {
+    "eyebrow": "Your own book of remembrance",
+    "title": "Every stone has a story.",
+    "description": "A place for bright days, hard days, and all the ways you have been helped.",
+    "heading": "Room for your first stone",
+    "text": "Your saved stones will appear here once the local journal is built. Your original journal has not been imported or changed.",
+    "empty": "Set your first stone. It will be saved on this device."
+  },
+  "tower": {
+    "view": "Your story view",
+    "tower": "Tower",
+    "list": "Journal",
+    "tools": "Search, filters & backups",
+    "heading": "Thus far, the Lord has helped me.",
+    "description": "Every stone holds a Scripture and a memory. Tap one to remember.",
+    "hardDays": "Hard days",
+    "mixedDays": "Mixed days",
+    "brightDays": "Bright days",
+    "label": "Your tower of remembrance, oldest stones at the bottom",
+    "open": "Open stone: {{date}} · {{tone}} · {{reference}} · {{memory}}",
+    "order_one": "{{count}} stone · Oldest at the bottom, newest at the top",
+    "order_other": "{{count}} stones · Oldest at the bottom, newest at the top",
+    "remember": "I need to remember",
+    "latest": "Return to your most recent stone in this view.",
+    "close": "Close memory",
+    "chapter": "Read the chapter online",
+    "referenceOnly": "This Scripture reference is saved. Its passage text is not bundled with this journal view.",
+    "encouragement": "Thus far, God has helped you. He is the same God today.",
+    "song": "A song for that day"
+  },
+  "form": {
+    "memoryLabel": "Where did God meet you?",
+    "memoryPlaceholder": "Today God…",
+    "feel": "How are you feeling?",
+    "passage": "Scripture to carry with me",
+    "choose": "Choose an option",
+    "confirmRead": "I have read this passage",
+    "confirmReadError": "Read the passage and confirm before continuing.",
+    "readNote": "Scripture is shown in English (KJV).",
+    "readContext": "Read slowly and consider what this passage says to you today.",
+    "stood": "What stood out to you?",
+    "learned": "What did you learn?",
+    "questions": "What questions do you have?",
+    "thoughts": "What are your thoughts?",
+    "prayer": "How can we pray for you?",
+    "reflectionRequired": "Write at least one reflection answer.",
+    "partner": "Someone you would like to ask to pray (optional)",
+    "partnerNote": "This saves a name only. No message is sent.",
+    "privateNote": "This reflection stays on this device. Sharing and cloud sync are not enabled yet.",
+    "tone": "How did today feel?",
+    "saveStone": "Set my stone",
+    "checkIn": "What’s on your heart?",
+    "retry": "Try again",
+    "details": "Read my reflection",
+    "begin": "Begin a reflection"
+  },
+  "feelings": {
+    "grateful": "Grateful",
+    "anxious": "Anxious",
+    "overwhelmed": "Overwhelmed",
+    "lonely": "Lonely",
+    "hopeful": "Hopeful",
+    "sad": "Sad",
+    "afraid": "Afraid",
+    "tired": "Tired",
+    "ashamed": "Ashamed",
+    "homesick": "Missing home",
+    "uncertain": "Finding my way"
+  },
+  "journey": {
+    "selectionNote": "There’s no right answer. Choose what feels true for you.",
+    "mixedNote": "Different feelings can sit together. There’s room for all of them here.",
+    "description": "Make room for your day. Find encouragement in Scripture. Carry a memory of God’s faithfulness.",
+    "affirmation": "You are loved. You don’t have to walk alone.",
+    "note": "Bright days and hard days both belong in your story. One moment, one stone at a time.",
+    "takeYourTime": "Take your time. There’s room for you here.",
+    "heartTitle": "Bring it all to the Lord.",
+    "heartDescription": "A little joy, a grateful heart, or something heavy. You can leave a few words here, or simply carry on.",
+    "wordsPlaceholder": "Lord, today I’m bringing You…",
+    "starters": {
+      "joy": {
+        "label": "Something joyful",
+        "text": "Lord, thank You for "
+      },
+      "heavy": {
+        "label": "Something heavy",
+        "text": "Lord, I’m placing this in Your hands: "
+      },
+      "unsure": {
+        "label": "Hard to put into words",
+        "text": "Lord, I’m not quite sure how to say this, but "
+      }
+    },
+    "invite": "Remember someone I could ask to pray (optional)",
+    "preview": "Your stone is taking shape",
+    "prompts": {
+      "stood": "What stood out to you?",
+      "learned": "Is there something you’re beginning to see in a new way?",
+      "questions": "What are you still wondering about?",
+      "thoughts": "Is there anything else you’d like to leave here?",
+      "prayer": "What would you like to say to the Lord?"
+    },
+    "writing": {
+      "stood": "A word or a moment that stayed with me…",
+      "learned": "I’m beginning to see…",
+      "questions": "Lord, I’m still wondering…",
+      "thoughts": "Something on my heart…",
+      "prayer": "Lord, today…"
+    },
+    "moments": {
+      "feel": {
+        "title": "What’s on your heart today?",
+        "description": "Choose the stones that feel closest, or share what’s on your heart below. There’s room for joy and heavy things together.",
+        "action": "Find a little encouragement"
+      },
+      "read": {
+        "title": "Spend time with the Lord.",
+        "description": "Read slowly. There’s no hurry. You can open the whole chapter to explore its context.",
+        "action": "What stayed with me?"
+      },
+      "reflect": {
+        "title": "Carry one thought with you.",
+        "description": "Stay with what touched your heart. Write wherever the words come; one small thought or prayer is enough.",
+        "action": "Carry this with me"
+      },
+      "together": {
+        "title": "Who could walk alongside you?",
+        "description": "Bring someone to mind who helps you feel supported. You can also keep this moment personal and continue.",
+        "action": "Shape my stone"
+      },
+      "stone": {
+        "title": "A moment worth remembering.",
+        "description": "Give this stone a memory. Choose its colour for yourself: bright, mixed, or hard. Every stone belongs.",
+        "action": "Set my stone"
+      }
+    },
+    "support": {
+      "overwhelmed": "You don’t have to carry everything at once. Let’s make space for one moment.",
+      "anxious": "Uncertainty can feel heavy. You can bring your worries with you here.",
+      "lonely": "Being far from familiar people can feel heavy. There is room for your story here.",
+      "sad": "You don’t have to find the right words. We can take this slowly.",
+      "afraid": "You can begin just as you are, with the things that feel uncertain.",
+      "tired": "There’s no hurry. Let this be a small moment of rest.",
+      "ashamed": "You are welcome here, even with the things that are hard to say.",
+      "homesick": "You can miss home and be building a life here. Both feelings belong.",
+      "uncertain": "Finding your way takes time. You don’t need every answer today.",
+      "grateful": "Let’s hold onto this little light and remember what brought you joy.",
+      "hopeful": "Even a little hope is worth remembering. Let’s walk with it."
+    },
+    "word": {
+      "loading": "Making space for a Word for your day…",
+      "downloading": "Finding a little encouragement for your day…",
+      "searching": "Finding encouragement from what you shared…",
+      "download": "First use may download about 145 MB and needs internet. Once prepared, search can work offline. Your words stay on this device.",
+      "note": "World English Bible Classic · English. Read the passage in its context.",
+      "context": "Passage context — editorial summary",
+      "chapter": "Spend time with the whole chapter",
+      "another": "Spend a moment with another passage",
+      "bundled": "Continue with a word of care",
+      "errors": {
+        "setup": "Scripture search isn’t ready on this device yet. You can try again online, or continue with a saved word of care.",
+        "tooLong": "These words are longer than the search model can read. You can return to your heart space and shorten them, or continue with a word of care.",
+        "search": "We couldn’t bring a passage forward just now. Try again, or continue with a word of care."
+      }
+    },
+    "evening": {
+      "title": "How was your day?",
+      "description": "What happened today, and how are you feeling now? Bring it in your own words. We’ll find a passage to explore with your evening reflection.",
+      "wordNote": "Your morning Word. Next, explore a passage connected to what you share about your day.",
+      "morningLabel": "Your morning Word"
+    }
+  },
+  "passages": {
+    "remember": "1 Samuel 7:12 — Remembering help",
+    "care": "1 Peter 5:7 — He cares for you",
+    "rock": "Psalm 61:2 — A higher rock"
+  },
+  "tones": {
+    "bright": "Bright",
+    "mixed": "Mixed",
+    "hard": "Hard"
+  },
+  "status": {
+    "loading": "Opening your local journal…",
+    "local": "Saved on this device"
+  },
+  "manage": {
+    "search": "Search your journal",
+    "all": "All tones",
+    "from": "From date",
+    "to": "To date",
+    "backupNote": "Backups contain your personal reflections. Keep them somewhere private. Imports add new stones and skip existing IDs; they never overwrite your journal.",
+    "export": "Export journal",
+    "import": "Import backup",
+    "edit": "Edit",
+    "delete": "Delete",
+    "editLabel": "Edit: {{memory}}",
+    "deleteLabel": "Delete: {{memory}}",
+    "save": "Save changes",
+    "cancel": "Cancel",
+    "saved": "Changes saved on this device.",
+    "deleteTitle": "Delete this stone?",
+    "deleteDescription": "This removes the stone from this device. You can restore it only if you have a backup.",
+    "deleted": "Stone deleted.",
+    "exported": "Backup download started.",
+    "imported": "Imported {{imported}} stones. Skipped {{skipped}} existing stones.",
+    "invalidBackup": "Choose a valid Ebenezer journal backup, version 1, no larger than 10 MB. No records were imported.",
+    "noResults": "No matching stones",
+    "changeFilters": "Try another search, tone, or date range.",
+    "exportTooLarge": "This journal exceeds the 10 MB backup limit. A backup was not downloaded.",
+    "clearFilters": "Clear filters"
+  },
+  "summary": {
+    "title": "Remembering His faithfulness",
+    "description": "Pause with your whole tower, through hard, mixed, and bright days.",
+    "privacy": "When you choose to reflect, only totals of hard, mixed, and bright days are sent to Google AI. Private words, names, dates, feelings, and locations stay on your device. This is a gentle Scripture-grounded reflection, not a reading of your journal. Google’s free tier may use requests to improve its products.",
+    "generate": "Reflect on my stones",
+    "loading": "Preparing a reflection…",
+    "signIn": "Sign in for an AI reflection",
+    "offline": "Connect to request a reflection. Your stones are still here.",
+    "failed": "The reflection could not load. Please try again.",
+    "prayer": "A short prayer",
+    "revisit": "Tap a stone above to return to its memory and Scripture.",
+    "source": {
+      "ai": "AI-assisted reflection · grounded in 1 Samuel 7:12.",
+      "prepared": "Prepared reflection · AI is currently unavailable."
+    },
+    "eyebrow": "Your walk with the Lord",
+    "localMessage": "There is room here for both the hard days and the bright ones. God’s love is not measured by how easy your day felt. As you look back, bring Him your gratitude, your questions, and what still feels unfinished.",
+    "gathering": "Taking a moment with your journey…",
+    "aiNote": "Written with Google AI from your stones: their days, verses, thoughts and reflections."
+  },
+  "evening": {
+    "eyebrow": "Bring your day",
+    "title": "Good evening.",
+    "titleNamed": "Good evening, {{name}}.",
+    "description": "Let’s walk back through your day together, one gentle step at a time.",
+    "chapters": {
+      "morning": "This morning",
+      "word": "A Word for your day",
+      "reflect": "Stay with it",
+      "stone": "Set your stone"
+    },
+    "remindedLead": "This morning, you were reminded:",
+    "thoughtLead": "And you chose to carry this thought with you:",
+    "question": "So, how was your day? Tell Him about it, the bright moments and the heavy ones.",
+    "feel": "How are you feeling right now?",
+    "ownWords": "Or tell Him in your own words.",
+    "ownWordsPlaceholder": "Today…",
+    "findWord": "Find a Word for my day",
+    "wordTitle": "Here is a Word for what you shared.",
+    "wordNote": "Read slowly. There’s no hurry. Let it meet you where you are tonight.",
+    "reflectAction": "Reflect on this Word",
+    "reflectTitle": "What is this Word saying to you?",
+    "reflectNote": "Write wherever the words come. One small thought or prayer is enough.",
+    "prompts": {
+      "stood": "What stood out to you tonight?",
+      "questions": "Is there anything you’re still wondering about?",
+      "prayer": "What would you like to say to the Lord before you rest?"
+    },
+    "stoneTitle": "A stone for today.",
+    "memory": "Where did God meet you today?",
+    "dayTone": "What kind of day was it?",
+    "private": "Private unless you choose to share.",
+    "whyLabel": "Why this passage · suggested by AI",
+    "aiNote": "Suggested with Google AI from what you shared. The Bible text is the World English Bible.",
+    "song": {
+      "label": "A song for tonight",
+      "listen": "Listen on YouTube"
+    }
+  }
+}
