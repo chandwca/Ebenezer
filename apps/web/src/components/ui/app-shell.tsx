@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check, Layers, Leaf, Moon, Settings, Sparkles, Sun, Users } from 'lucide-react';
+import { Check, Layers, Leaf, Moon, Settings, Sun, Users } from 'lucide-react';
 import { PwaStatus } from './pwa-status';
 import { Button } from './button';
-import { Badge } from './badge';
 import { LanguageSelect } from './language-select';
 import { StoneMark } from './stone-mark';
 import { cn } from '@/lib/utils';
@@ -129,9 +128,6 @@ export function AppShell({
           </p>
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSelect id="header-language" />
-            <Badge variant="outline" className="hidden sm:inline-flex">
-              <Sparkles /> {t('common:preview')}
-            </Badge>
             <Button
               variant="ghost"
               size="icon"

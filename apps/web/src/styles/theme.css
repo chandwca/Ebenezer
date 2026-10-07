@@ -55,10 +55,9 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --font-sans: "Plus Jakarta Sans Variable", "Segoe UI", system-ui, sans-serif;
-  --font-display:
-    "Plus Jakarta Sans Variable", "Segoe UI", system-ui, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 }
 @custom-variant dark (&:where(.dark, .dark *));
 

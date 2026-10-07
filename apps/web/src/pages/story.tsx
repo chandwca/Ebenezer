@@ -8,13 +8,11 @@ import { backupSchema, MAX_BACKUP_BYTES } from '@/db/backup';
 import { Alert } from '@/components/ui/alert';
 import { EmptyState } from '@/components/ui/empty-state';
 import { PageHeading } from '@/components/ui/page-heading';
-import { StoneList } from '@/components/ui/stone-list';
 import { StoneTower } from '@/components/ui/stone-tower';
 import { StoneDetail } from '@/components/ui/stone-detail';
-import { StoryViewSwitcher } from '@/components/ui/story-view-switcher';
 import { Disclosure } from '@/components/ui/disclosure';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
-import { JournalToolbar, type JournalFilters } from '@/components/ui/journal-toolbar';
+import { JournalToolbar } from '@/components/ui/journal-toolbar';
 import { JourneySummary } from '@/features/remembrance/journey-summary';
 import { StoneEditor } from '@/features/journal/stone-editor';
 import { ReminderPrompt } from '@/features/reminders/reminder-prompt';
@@ -24,14 +22,7 @@ export function StoryPage() {
   // Arriving right after setting a stone: a second, final chance to turn on reminders.
   const justSaved = (useLocation().state as { saved?: boolean } | null)?.saved === true;
   const { t } = useTranslation(['journal', 'errors']);
-  const [filters, setFilters] = useState<JournalFilters>({
-    search: '',
-    tone: 'all',
-    from: '',
-    to: '',
-  });
   const [editing, setEditing] = useState<Stone>();
-  const [view, setView] = useState<'tower' | 'list'>('tower');
   const [selectedId, setSelectedId] = useState<string>();
   const [deleting, setDeleting] = useState<Stone>();
   const [busy, setBusy] = useState(false);
@@ -47,37 +38,16 @@ export function StoryPage() {
       return { stones: [], failed: true };
     }
   });
-  const stones =
-    result?.stones.filter((stone) => {
-      const text = [
-        stone.memory,
-        stone.ref,
-        stone.feel,
-        stone.feelings?.join(' '),
-        stone.checkIn,
-        stone.stood,
-        stone.learned,
-        stone.questions,
-        stone.thoughts,
-        stone.prayer,
-        stone.partner,
-      ]
-        .join(' ')
-        .toLocaleLowerCase();
-      return (
-        text.includes(filters.search.trim().toLocaleLowerCase()) &&
-        (filters.tone === 'all' || stone.tone === filters.tone) &&
-        (!filters.from || stone.journalDate >= filters.from) &&
-        (!filters.to || stone.journalDate <= filters.to)
-      );
-    }) ?? [];
-  const selected = result?.stones.find((stone) => stone.id === selectedId);
+  const stones = result?.stones ?? [];
+  const selected = stones.find((stone) => stone.id === selectedId);
   async function exportJournal() {
     setBusy(true);
     setNotice(undefined);
     try {
       const backup = await journal.exportBackup();
-      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const blob = new Blob([JSON.stringify(backup, null, 2)], {
+        type: 'application/json',
+      });
       if (blob.size > MAX_BACKUP_BYTES) {
         setNotice({ error: true, key: 'manage.exportTooLarge' });
         return;
@@ -124,14 +94,11 @@ export function StoryPage() {
         description={t('tower.description')}
       />
       {justSaved && <ReminderPrompt placement="after-stone" />}
-      {!editing && result && !result.failed && result.stones.length > 0 && (
+      {!editing && result && !result.failed && stones.length > 0 && (
         <JourneySummary stones={result.stones} />
       )}
-      <StoryViewSwitcher value={view} onChange={setView} />
       <Disclosure label={t('tower.tools')}>
         <JournalToolbar
-          filters={filters}
-          onChange={setFilters}
           onExport={() => void exportJournal()}
           onImport={(file) => void importJournal(file)}
           busy={busy}
@@ -154,27 +121,14 @@ export function StoryPage() {
       ) : result.failed ? (
         <Alert>{t('errors:storageUnavailable')}</Alert>
       ) : stones.length ? (
-        view === 'tower' ? (
-          <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
-        ) : (
-          <StoneList
-            stones={stones}
-            onEdit={setEditing}
-            onDelete={(stone) => {
-              setNotice(undefined);
-              setDeleting(stone);
-            }}
-          />
-        )
+        <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
       ) : (
         <EmptyState
           icon={Layers}
-          title={t(result.stones.length ? 'manage.noResults' : 'story.heading')}
-          description={t(result.stones.length ? 'manage.changeFilters' : 'story.empty')}
-          action={t(result.stones.length ? 'manage.clearFilters' : 'form.begin')}
-          {...(result.stones.length
-            ? { onAction: () => setFilters({ search: '', tone: 'all', from: '', to: '' }) }
-            : { to: '/reflection' })}
+          title={t('story.heading')}
+          description={t('story.empty')}
+          action={t('form.begin')}
+          to="/reflection"
         />
       )}
       {selected && (

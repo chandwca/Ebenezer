@@ -20,45 +20,11 @@ beforeEach(async () => {
   await db.stones.clear();
   await db.drafts.clear();
 });
-it('searches and filters the journal by text, tone and date', async () => {
-  await journal.saveStone(values);
-  renderWithProviders(
-    <AuthProvider client={null}>
-      <StoryPage />
-    </AuthProvider>,
-  );
-  fireEvent.click(screen.getByRole('button', { name: 'Journal' }));
-  fireEvent.click(screen.getByText('Search, filters & backups'));
-  await screen.findByRole('heading', { name: values.memory });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Search your journal' }), {
-    target: { value: 'missing' },
-  });
-  await screen.findByText('No matching stones');
-  fireEvent.change(screen.getByRole('textbox', { name: 'Search your journal' }), {
-    target: { value: 'friend' },
-  });
-  fireEvent.keyDown(screen.getByRole('combobox', { name: 'How did today feel?' }), {
-    key: 'ArrowDown',
-  });
-  fireEvent.click(await screen.findByRole('option', { name: 'Hard' }));
-  await screen.findByText('No matching stones');
-  fireEvent.keyDown(screen.getByRole('combobox', { name: 'How did today feel?' }), {
-    key: 'ArrowDown',
-  });
-  fireEvent.click(await screen.findByRole('option', { name: 'All tones' }));
-  fireEvent.change(screen.getByLabelText('From date'), { target: { value: '2999-01-01' } });
-  await screen.findByText('No matching stones');
-  fireEvent.change(screen.getByLabelText('From date'), { target: { value: '' } });
-  await screen.findByRole('heading', { name: values.memory });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Search your journal' }), {
-    target: { value: 'missing' },
-  });
-  fireEvent.click(await screen.findByRole('button', { name: 'Clear filters' }));
-  await screen.findByRole('heading', { name: values.memory });
-  expect(
-    (screen.getByRole('textbox', { name: 'Search your journal' }) as HTMLInputElement).value,
-  ).toBe('');
-});
+/** Opens a stone from the tower by the memory at the end of its label. */
+async function openStone(memory: string) {
+  fireEvent.click(await screen.findByRole('button', { name: new RegExp(`· ${memory}$`) }));
+  return screen.getByRole('dialog', { name: memory });
+}
 
 it('edits a stone without changing a draft and requires confirmation before deletion', async () => {
   const stone = await journal.saveStone(values);
@@ -68,19 +34,19 @@ it('edits a stone without changing a draft and requires confirmation before dele
       <StoryPage />
     </AuthProvider>,
   );
-  fireEvent.click(screen.getByRole('button', { name: 'Journal' }));
-  fireEvent.click(await screen.findByRole('button', { name: `Edit: ${values.memory}` }));
+  let dialog = await openStone(values.memory);
+  fireEvent.click(within(dialog).getByRole('button', { name: `Edit: ${values.memory}` }));
   fireEvent.change(screen.getByRole('textbox', { name: 'Where did God meet you?' }), {
     target: { value: 'A friend called' },
   });
   fireEvent.click(screen.getByRole('button', { name: 'Save changes' }));
-  await screen.findByRole('heading', { name: 'A friend called' });
   expect((await journal.getDraft())?.step).toBe(2);
-  fireEvent.click(screen.getByRole('button', { name: 'Delete: A friend called' }));
-  const dialog = screen.getByRole('dialog');
-  fireEvent.click(within(dialog).getByRole('button', { name: 'Cancel' }));
+  dialog = await openStone('A friend called');
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Delete: A friend called' }));
+  fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Cancel' }));
   expect((await journal.listStones())[0].id).toBe(stone.id);
-  fireEvent.click(screen.getByRole('button', { name: 'Delete: A friend called' }));
+  dialog = await openStone('A friend called');
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Delete: A friend called' }));
   fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Delete' }));
   await waitFor(async () => expect(await journal.listStones()).toHaveLength(0));
 });
@@ -95,21 +61,26 @@ it('imports a backup through the shared file input and rejects malformed files w
     </AuthProvider>,
   );
   const input = screen.getByLabelText('Import backup');
-  fireEvent.click(screen.getByRole('button', { name: 'Journal' }));
-  fireEvent.click(screen.getByText('Search, filters & backups'));
-  const valid = new File(['unused'], 'backup.json', { type: 'application/json' });
-  Object.defineProperty(valid, 'text', { value: async () => JSON.stringify(backup) });
+  fireEvent.click(screen.getByText('Backups'));
+  const valid = new File(['unused'], 'backup.json', {
+    type: 'application/json',
+  });
+  Object.defineProperty(valid, 'text', {
+    value: async () => JSON.stringify(backup),
+  });
   fireEvent.change(input, { target: { files: [valid] } });
   await screen.findByText('Imported 1 stones. Skipped 0 existing stones.');
-  await screen.findByRole('heading', { name: values.memory });
-  const invalid = new File(['broken'], 'broken.json', { type: 'application/json' });
+  await screen.findByRole('button', { name: new RegExp(`· ${values.memory}$`) });
+  const invalid = new File(['broken'], 'broken.json', {
+    type: 'application/json',
+  });
   Object.defineProperty(invalid, 'text', { value: async () => 'broken' });
   fireEvent.change(input, { target: { files: [invalid] } });
   await screen.findByText(/Choose a valid Ebenezer journal backup/);
   expect(await journal.listStones()).toHaveLength(1);
 });
 
-it('downloads all local stones even when the current search hides them', async () => {
+it('downloads all local stones as a backup', async () => {
   await journal.saveStone(values);
   const createObjectURL = vi.fn(() => 'blob:test-backup');
   vi.stubGlobal(
@@ -125,12 +96,8 @@ it('downloads all local stones even when the current search hides them', async (
       <StoryPage />
     </AuthProvider>,
   );
-  fireEvent.click(screen.getByRole('button', { name: 'Journal' }));
-  fireEvent.click(screen.getByText('Search, filters & backups'));
-  await screen.findByRole('heading', { name: values.memory });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Search your journal' }), {
-    target: { value: 'missing' },
-  });
+  fireEvent.click(screen.getByText('Backups'));
+  await screen.findByRole('button', { name: new RegExp(`· ${values.memory}$`) });
   fireEvent.click(screen.getByRole('button', { name: 'Export journal' }));
   await screen.findByText('Backup download started.');
   expect(createObjectURL).toHaveBeenCalledOnce();
