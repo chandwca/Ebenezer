@@ -24,6 +24,8 @@
     "hardDays": "Días difíciles",
     "mixedDays": "Días mixtos",
     "brightDays": "Días luminosos",
+    "today": "La piedra de hoy",
+    "setToday": "Coloca la piedra de hoy",
     "label": "Tu torre de recuerdos, con las piedras más antiguas abajo",
     "open": "Abrir piedra: {{date}} · {{tone}} · {{reference}} · {{memory}}",
     "order_one": "{{count}} piedra · Las más antiguas abajo, las más recientes arriba",

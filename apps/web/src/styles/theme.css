@@ -55,9 +55,10 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --font-sans: 'Plus Jakarta Sans Variable', 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans Variable', 'Segoe UI', system-ui, sans-serif;
-  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: "Plus Jakarta Sans Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display:
+    "Plus Jakarta Sans Variable", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 }
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -69,6 +70,24 @@
   }
   to {
     opacity: 1;
+    transform: none;
+  }
+}
+
+/* The newest stone falls, lands, lifts once and comes to rest on the tower. */
+@keyframes stone-settle {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  72% {
+    transform: translateY(-4px);
+  }
+  100% {
     transform: none;
   }
 }

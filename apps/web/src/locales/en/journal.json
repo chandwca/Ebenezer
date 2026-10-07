@@ -24,6 +24,8 @@
     "hardDays": "Hard days",
     "mixedDays": "Mixed days",
     "brightDays": "Bright days",
+    "today": "Today's stone",
+    "setToday": "Set today's stone",
     "label": "Your tower of remembrance, oldest stones at the bottom",
     "open": "Open stone: {{date}} · {{tone}} · {{reference}} · {{memory}}",
     "order_one": "{{count}} stone · Oldest at the bottom, newest at the top",
