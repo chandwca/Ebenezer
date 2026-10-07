@@ -160,7 +160,7 @@
       "downloading": "Finding a little encouragement for your day…",
       "searching": "Finding encouragement from what you shared…",
       "download": "First use may download about 145 MB and needs internet. Once prepared, search can work offline. Your words stay on this device.",
-      "note": "World English Bible Classic · English. Read the passage in its context.",
+      "note": "Scripture in English. Read the passage in its context.",
       "context": "Passage context — editorial summary",
       "chapter": "Spend time with the whole chapter",
       "another": "Spend a moment with another passage",
@@ -271,7 +271,7 @@
     "dayTone": "What kind of day was it?",
     "private": "Private unless you choose to share.",
     "whyLabel": "Why this passage · suggested by AI",
-    "aiNote": "Suggested with Google AI from what you shared. The Bible text is the World English Bible.",
+    "aiNote": "Suggested with Google AI from what you shared. Bible text: {{translation}}.",
     "song": {
       "label": "A song for tonight",
       "listen": "Listen on YouTube"

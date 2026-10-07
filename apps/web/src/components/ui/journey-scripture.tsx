@@ -5,6 +5,7 @@ import type { ScriptureSnapshot } from '@ebenezer/contracts';
 import { Button } from './button';
 import { DialogModalLayout } from './dialog-modal-layout';
 import { BibleChapterReader } from './bible-results';
+import { ScriptureCredit } from './scripture-credit';
 
 export function JourneyScripture({
   quote,
@@ -16,6 +17,7 @@ export function JourneyScripture({
   context,
   contextLabel,
   onRead,
+  credit,
 }: {
   quote: string;
   reference: string;
@@ -26,6 +28,7 @@ export function JourneyScripture({
   context?: string;
   contextLabel?: string;
   onRead?: () => void;
+  credit?: { attribution?: string; provider?: 'youversion' };
 }) {
   return (
     <div className="mb-6 rounded-2xl bg-background p-5 sm:p-6">
@@ -37,6 +40,7 @@ export function JourneyScripture({
         {reference} · {translation}
       </p>
       <p className="mt-2 text-xs leading-5 text-muted-foreground">{note}</p>
+      <ScriptureCredit {...credit} />
       {context && (
         <p lang="en" className="mt-4 text-sm leading-6 text-muted-foreground">
           <span className="block text-xs font-semibold">{contextLabel}</span>
@@ -139,9 +143,11 @@ export function JourneyChapterDialog({
     >
       <BibleChapterReader
         embedded
+        translation={scripture.translation}
         result={{ chapter: scripture.chapter, passage: scripture }}
         onClose={onClose}
       />
+      <ScriptureCredit {...scripture} />
     </DialogModalLayout>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from '@ebenezer/contracts';
 import type { EncouragementProvider } from '../../shared/ai/provider.js';
 import { verifiedMorningVerse } from '../../shared/bible/morning-bible.js';
+import type { ScriptureProvider } from '../../shared/bible/provider.js';
 
 type Reference = readonly [book: string, chapter: number, verse: number];
 
@@ -100,7 +101,21 @@ function dailyFallback(input: EncouragementRequest): Reference {
   return pool[day % pool.length];
 }
 
-export function createMorningService(provider?: EncouragementProvider, now = Date.now) {
+export function createMorningService(
+  provider?: EncouragementProvider,
+  now = Date.now,
+  scriptureProvider?: ScriptureProvider,
+) {
+  async function resolve(book: string, chapter: number, verse: number, key: string) {
+    if (scriptureProvider) {
+      try {
+        return await scriptureProvider.passage(book, chapter, verse, verse, key);
+      } catch {
+        /* Clearly attributed WEB fallback keeps the encounter available. */
+      }
+    }
+    return verifiedMorningVerse(book, chapter, verse, key);
+  }
   // Keys hold only public date, language, occasion and weather category: bounded AI usage.
   const cache = new Map<string, { expires: number; value: MorningWordResponse }>();
   const pending = new Map<string, Promise<MorningWordResponse>>();
@@ -109,7 +124,7 @@ export function createMorningService(provider?: EncouragementProvider, now = Dat
     if (provider?.selectMorningReference) {
       try {
         const { book, chapter, verse } = await provider.selectMorningReference(input);
-        const snapshot = await verifiedMorningVerse(book, chapter, verse, key);
+        const snapshot = await resolve(book, chapter, verse, key);
         // A lone fragment or a long passage does not carry well through a day.
         if (snapshot.text.length >= 25 && snapshot.text.length <= 450)
           return { snapshot, selected: true };
@@ -119,7 +134,10 @@ export function createMorningService(provider?: EncouragementProvider, now = Dat
     }
     const [book, chapter, verse] = dailyFallback(input);
     try {
-      return { snapshot: await verifiedMorningVerse(book, chapter, verse, key), selected: false };
+      return {
+        snapshot: await resolve(book, chapter, verse, key),
+        selected: false,
+      };
     } catch {
       return { snapshot: undefined, selected: false };
     }
@@ -139,7 +157,14 @@ export function createMorningService(provider?: EncouragementProvider, now = Dat
           ? {
               reference: snapshot.reference,
               text: snapshot.text,
-              translation: 'WEB Classic' as const,
+              translation: snapshot.translation,
+              ...(snapshot.provider
+                ? {
+                    provider: snapshot.provider,
+                    attribution: snapshot.attribution,
+                    sourceUrl: snapshot.sourceUrl,
+                  }
+                : {}),
             }
           : input.occasion
             ? occasionPassages[input.occasion]

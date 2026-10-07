@@ -191,6 +191,7 @@ export function EveningReflection({ draft }: { draft: Draft }) {
 
       <StoryChapter eyebrow={t('evening.chapters.morning')} current={stage === 0}>
         <MorningRecall
+          credit={morning.scripture}
           lead={t('evening.remindedLead')}
           reference={morningScripture.reference}
           translation={morningScripture.translation}
@@ -232,6 +233,7 @@ export function EveningReflection({ draft }: { draft: Draft }) {
           <StoryNote>{t('evening.wordNote')}</StoryNote>
           {wordReady && scripture && (
             <JourneyScripture
+              credit={scripture}
               quote={scripture.text}
               reference={scripture.reference}
               translation={scripture.translation}
@@ -261,7 +263,11 @@ export function EveningReflection({ draft }: { draft: Draft }) {
               listen={t('evening.song.listen')}
             />
           )}
-          {wordReady && aiChosen && <StoryNote>{t('evening.aiNote')}</StoryNote>}
+          {wordReady && aiChosen && (
+            <StoryNote>
+              {t('evening.aiNote', { translation: scripture?.translation ?? 'WEB Classic' })}
+            </StoryNote>
+          )}
           <JourneyWordStatus
             {...word}
             onExplore={word.explore}

@@ -160,7 +160,7 @@
       "downloading": "Buscando un poco de ánimo para tu día…",
       "searching": "Buscando ánimo a partir de lo que compartiste…",
       "download": "El primer uso puede descargar unos 145 MB y necesita internet. Una vez preparada, la búsqueda puede funcionar sin conexión. Tus palabras permanecen en este dispositivo.",
-      "note": "World English Bible Classic · Inglés. Lee el pasaje en su contexto.",
+      "note": "Escritura en inglés. Lee el pasaje en su contexto.",
       "context": "Contexto del pasaje — resumen editorial",
       "chapter": "Dedicar tiempo al capítulo completo",
       "another": "Dedicar un momento a otro pasaje",
@@ -271,7 +271,7 @@
     "dayTone": "¿Qué tipo de día fue?",
     "private": "Privado, a menos que decidas compartirlo.",
     "whyLabel": "Por qué este pasaje · sugerido por IA",
-    "aiNote": "Sugerido con IA de Google a partir de lo que compartiste. El texto bíblico es la World English Bible.",
+    "aiNote": "Sugerido con IA de Google a partir de lo que compartiste. Texto bíblico: {{translation}}.",
     "song": {
       "label": "Una canción para esta noche",
       "listen": "Escuchar en YouTube"

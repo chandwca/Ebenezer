@@ -4,6 +4,7 @@ import { scriptureSnapshotSchema, type ReflectionValues } from '@ebenezer/contra
 import { createBibleSearchWorker } from '@/lib/bible/worker-client';
 import type { SearchResult, WorkerResponse } from '@/lib/bible/types';
 import { passages } from '@/lib/scripture';
+import { publicRequest } from '@/lib/api/client';
 
 // Describe the person's feelings for the multilingual embedding model, never map to verse IDs.
 const feelingMeaning: Record<string, string> = {
@@ -44,13 +45,30 @@ export function useJourneyWord(form: UseFormReturn<ReflectionValues>, enabled: b
   const generation = React.useRef(0);
 
   const accept = React.useCallback(
-    (result: SearchResult, key: string) => {
-      const snapshot = scriptureSnapshotSchema.parse({
+    async (result: SearchResult, key: string, id: number) => {
+      let snapshot = scriptureSnapshotSchema.parse({
         ...result.passage,
         chapter: result.chapter,
         inputKey: key,
         translation: 'WEB Classic',
       });
+      if (navigator.onLine) {
+        try {
+          const remote = await publicRequest('/v1/scripture', scriptureSnapshotSchema, {
+            method: 'POST',
+            body: {
+              book: result.chapter.book,
+              chapter: result.chapter.chapter,
+              firstVerse: snapshot.firstVerse,
+              lastVerse: snapshot.lastVerse,
+            },
+          });
+          if (remote.provider === 'youversion') snapshot = { ...remote, inputKey: key };
+        } catch {
+          /* The exact device passage remains available offline or on outages. */
+        }
+      }
+      if (generation.current !== id) return;
       if (form.getValues('ref') !== snapshot.reference) form.setValue('readConfirmed', false);
       form.setValue('ref', snapshot.reference, { shouldDirty: true });
       form.setValue('scripture', snapshot, { shouldDirty: true });
@@ -77,7 +95,7 @@ export function useJourneyWord(form: UseFormReturn<ReflectionValues>, enabled: b
     try {
       const search = createBibleSearchWorker();
       worker.current = search;
-      search.onmessage = (event: MessageEvent<WorkerResponse>) => {
+      search.onmessage = async (event: MessageEvent<WorkerResponse>) => {
         if (event.data.id !== id || generation.current !== id) return;
         const message = event.data;
         if (message.type === 'progress') {
@@ -89,7 +107,9 @@ export function useJourneyWord(form: UseFormReturn<ReflectionValues>, enabled: b
         } else {
           try {
             if (!message.results.length) throw new Error('No passages');
-            accept(message.results[0], inputKey);
+            setPhase('searching');
+            await accept(message.results[0], inputKey, id);
+            if (generation.current !== id) return;
             setResults(message.results);
           } catch {
             setError('search');
@@ -124,7 +144,8 @@ export function useJourneyWord(form: UseFormReturn<ReflectionValues>, enabled: b
       const index = results.findIndex(
         (result) => result.passage.reference === form.getValues('ref'),
       );
-      accept(results[(index + 1) % results.length], inputKey);
+      setPhase('searching');
+      void accept(results[(index + 1) % results.length], inputKey, ++generation.current);
     },
     retry() {
       completed.current = undefined;

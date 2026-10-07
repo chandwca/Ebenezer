@@ -1,4 +1,5 @@
 import { quoted } from '@/lib/scripture';
+import { ScriptureCredit } from './scripture-credit';
 /** The morning Word and the thought she chose to carry, told back to her in the evening. */
 export function MorningRecall({
   lead,
@@ -7,6 +8,7 @@ export function MorningRecall({
   quote,
   thoughtLead,
   thought,
+  credit,
 }: {
   lead: string;
   reference: string;
@@ -14,6 +16,7 @@ export function MorningRecall({
   quote: string;
   thoughtLead: string;
   thought?: string;
+  credit?: { attribution?: string; provider?: 'youversion' };
 }) {
   return (
     <div className="grid gap-4">
@@ -26,6 +29,7 @@ export function MorningRecall({
           {reference} · {translation}
         </figcaption>
       </figure>
+      <ScriptureCredit {...credit} />
       {thought && (
         <p className="text-base leading-7 text-muted-foreground">
           {thoughtLead}{' '}

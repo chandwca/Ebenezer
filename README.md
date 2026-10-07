@@ -2,6 +2,8 @@
 
 A Christian reflection and journaling PWA. The React rebuild currently implements the **stages 1–8**: preserved prototype, typed workspace, Node API, common theme/components, responsive routed screens, and bundled English/Spanish interface translations.
 
+The primary audience is international students who are new to Christian faith and want to understand Jesus’ love. The main morning/evening Scripture flows and guided reader now support YouVersion BSB, with backend-only credentials, publisher attribution, and verified WEB fallback. See [YouVersion setup and live verification](docs/youversion-setup.md). Community needs still require validation with students; this audience statement is not a claim of completed user research.
+
 The shared FormBuilder powers a five-moment reflection journey (Feel → Read → Reflect → Together → Stone) and the profile form. Scripture appears in one reading moment, with full-chapter and alternative-passage options, before continuing directly to reflection. Drafts, saved reflections, and profile preferences are stored locally in IndexedDB. The production build includes install metadata, precached application assets, offline status, and a user-controlled update prompt. Authentication and cloud synchronization remain future stages.
 
 ## Development

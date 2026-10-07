@@ -9,7 +9,7 @@ Implementation progress: stages 1–8 have local foundations; first-use onboardi
 
 ## 1. What Ebenezer does
 
-Ebenezer is a Christian reflection and journaling application. It helps people connect everyday experiences with Scripture, record memories of God's help as **stones**, and revisit those memories for encouragement. The primary audience includes international students living and studying away from home, including those navigating homesickness, belonging, academic pressure and returning home. The personal journal can serve a wider audience.
+Ebenezer is a Christian reflection and journaling application. It helps people connect everyday experiences with Scripture, record memories of God's help as **stones**, and revisit those memories for encouragement. The primary audience is international students who are new to Christian faith and want to learn about and understand the love of Jesus while living away from home. Homesickness, belonging and study pressure are candidate moments to validate with this community; their unmet needs have not yet been established through a documented user study. The personal journal can serve a wider audience.
 
 The central journey is **Feel → Read → Reflect → Together → Stone**. Every stone is associated with Scripture. Users may keep their journal on one device, opt into private cloud synchronization, or explicitly publish selected content to a community group.
 

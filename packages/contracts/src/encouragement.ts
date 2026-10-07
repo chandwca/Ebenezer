@@ -43,7 +43,10 @@ export const encouragementResponseSchema = z.object({
   scripture: z.object({
     reference: z.string(),
     text: z.string(),
-    translation: z.enum(['KJV', 'WEB Classic']),
+    translation: z.enum(['KJV', 'WEB Classic', 'BSB']),
+    provider: z.literal('youversion').optional(),
+    attribution: z.string().min(1).max(8000).optional(),
+    sourceUrl: z.url().optional(),
   }),
   encouragement: encouragementTextSchema,
   source: z.enum(['ai', 'prepared']),

@@ -7,6 +7,7 @@ import {
 } from '@ebenezer/contracts';
 import { Button } from './button';
 import { Card } from './card';
+import { ScriptureCredit } from './scripture-credit';
 
 export function EncouragementPanel({
   input,
@@ -46,9 +47,13 @@ export function EncouragementPanel({
           {t(`morning.occasions.${input.occasion}.context`)}
         </p>
       )}
+      <ScriptureCredit {...result?.scripture} />
       <Button asChild variant="ghost" className="my-3 px-0">
         <a
-          href={`https://www.biblegateway.com/passage/?search=${encodeURIComponent(passage.reference)}&version=${passage.translation === 'KJV' ? 'KJV' : 'WEB'}`}
+          href={
+            result?.scripture.sourceUrl ??
+            `https://www.biblegateway.com/passage/?search=${encodeURIComponent(passage.reference)}&version=${passage.translation === 'KJV' ? 'KJV' : 'WEB'}`
+          }
           target="_blank"
           rel="noreferrer"
         >

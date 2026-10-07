@@ -7,6 +7,8 @@ import { createPublicClient } from './shared/supabase/public-client.js';
 import { readEncouragementProvider } from './config/ai.js';
 import type { EncouragementProvider } from './shared/ai/provider.js';
 import type { SongCatalog } from './shared/music/song-catalog.js';
+import type { ScriptureProvider } from './shared/bible/provider.js';
+import { readScriptureProvider } from './config/scripture.js';
 import { registerModules, type RepositoryFactories } from './modules/index.js';
 
 interface AppOptions {
@@ -16,6 +18,7 @@ interface AppOptions {
   logger?: boolean;
   encouragementProvider?: EncouragementProvider;
   songCatalog?: SongCatalog;
+  scriptureProvider?: ScriptureProvider;
 }
 
 export function createApp(options: AppOptions = {}) {
@@ -39,6 +42,7 @@ export function createApp(options: AppOptions = {}) {
     repositories: options.repositories,
     encouragementProvider: options.encouragementProvider ?? readEncouragementProvider(),
     songCatalog: options.songCatalog,
+    scriptureProvider: options.scriptureProvider ?? readScriptureProvider(),
   });
   app.setErrorHandler((error, request, reply) => {
     if (error instanceof ApiError)
@@ -52,13 +56,19 @@ export function createApp(options: AppOptions = {}) {
       error.statusCode < 500
     ) {
       return reply.code(error.statusCode).send({
-        error: { code: 'invalid_request', message: 'The request could not be accepted.' },
+        error: {
+          code: 'invalid_request',
+          message: 'The request could not be accepted.',
+        },
       });
     }
     // Do not log tokens, request bodies or raw upstream errors containing personal data.
     request.log.error({ requestId: request.id }, 'Unhandled API failure');
     return reply.code(500).send({
-      error: { code: 'internal_error', message: 'Something went wrong. Please try again.' },
+      error: {
+        code: 'internal_error',
+        message: 'Something went wrong. Please try again.',
+      },
     });
   });
   return app;

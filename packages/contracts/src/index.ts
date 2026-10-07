@@ -27,15 +27,26 @@ export const scriptureSnapshotSchema = z
     reference: z.string().min(1).max(120),
     text: z.string().min(1).max(20000),
     context: z.string().max(2000),
-    sourceUrl: z.string().regex(/^https:\/\/ebible\.org\/eng-web\/[A-Za-z0-9]+\.htm$/),
-    translation: z.literal('WEB Classic'),
+    sourceUrl: z
+      .string()
+      .regex(
+        /^https:\/\/(?:ebible\.org\/eng-web\/[A-Za-z0-9]+\.htm|www\.bible\.com\/bible\/3034\/[A-Z0-9]{3}\.\d+\.BSB)$/,
+      ),
+    translation: z.enum(['WEB Classic', 'BSB']),
+    provider: z.literal('youversion').optional(),
+    attribution: z.string().min(1).max(8000).optional(),
     firstVerse: z.number().int().positive(),
     lastVerse: z.number().int().positive(),
     chapter: z.object({
       book: z.string().min(1).max(80),
       chapter: z.number().int().positive().max(150),
       verses: z
-        .array(z.object({ number: z.number().int().positive(), text: z.string().max(4000) }))
+        .array(
+          z.object({
+            number: z.number().int().positive(),
+            text: z.string().max(4000),
+          }),
+        )
         .min(1)
         .max(200),
     }),
@@ -43,6 +54,11 @@ export const scriptureSnapshotSchema = z
   })
   .refine(
     (value) =>
+      (value.translation !== 'BSB' ||
+        (value.provider === 'youversion' &&
+          !!value.attribution &&
+          value.sourceUrl.startsWith('https://www.bible.com/'))) &&
+      (value.translation !== 'WEB Classic' || value.sourceUrl.startsWith('https://ebible.org/')) &&
       value.firstVerse <= value.lastVerse &&
       value.chapter.verses
         .filter(

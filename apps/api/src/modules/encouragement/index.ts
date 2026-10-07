@@ -9,7 +9,10 @@ import {
   type EveningWordResponse,
   type EveningPromptResponse,
   type JourneySummaryResponse,
+  scriptureSnapshotSchema,
 } from '@ebenezer/contracts';
+import { z } from 'zod';
+import type { ScriptureProvider } from '../../shared/bible/provider.js';
 import { ApiError } from '../../shared/errors/api-error.js';
 import { requireAuth } from '../../shared/http/auth.js';
 import { noStore } from '../../shared/http/no-store.js';
@@ -26,8 +29,50 @@ export function registerEncouragementRoutes(
   gateway?: AuthGateway,
   provider?: EncouragementProvider,
   songCatalog: SongCatalog = createItunesCatalog(),
+  scriptureProvider?: ScriptureProvider,
 ) {
-  const morning = createMorningService(provider);
+  const morning = createMorningService(provider, Date.now, scriptureProvider);
+  async function resolve(
+    book: string,
+    chapter: number,
+    firstVerse: number,
+    lastVerse: number,
+    key: string,
+  ) {
+    if (scriptureProvider) {
+      try {
+        return await scriptureProvider.passage(book, chapter, firstVerse, lastVerse, key);
+      } catch {
+        /* Verified, separately attributed WEB remains available on outages. */
+      }
+    }
+    return verifiedPassage(book, chapter, firstVerse, lastVerse, key);
+  }
+  // Only a reference crosses this boundary; device search keeps private inputs local.
+  app.post(
+    '/scripture',
+    { onRequest: rateLimit({ max: 30, windowMs: 3600000 }), onSend: noStore },
+    async (request) => {
+      const parsed = z
+        .strictObject({
+          book: z.string().min(1).max(80),
+          chapter: z.number().int().min(1).max(150),
+          firstVerse: z.number().int().min(1).max(200),
+          lastVerse: z.number().int().min(1).max(200),
+        })
+        .safeParse(request.body);
+      if (!parsed.success || parsed.data.lastVerse < parsed.data.firstVerse)
+        throw new ApiError(400, 'invalid_request', 'Provide a valid Scripture reference.');
+      const { book, chapter, firstVerse, lastVerse } = parsed.data;
+      try {
+        return scriptureSnapshotSchema.parse(
+          await resolve(book, chapter, firstVerse, lastVerse, 'reference'),
+        );
+      } catch {
+        throw new ApiError(503, 'unavailable', 'Scripture is unavailable.');
+      }
+    },
+  );
   const publicRequests = new Map<string, { time: number; count: number }>();
   app.post('/morning-word', { onSend: noStore }, async (request) => {
     const parsed = encouragementRequestSchema.safeParse(request.body);
@@ -71,7 +116,10 @@ export function registerEncouragementRoutes(
       };
       try {
         if (provider?.eveningQuestion)
-          value = { source: 'ai', question: await provider.eveningQuestion(parsed.data) };
+          value = {
+            source: 'ai',
+            question: await provider.eveningQuestion(parsed.data),
+          };
       } catch {
         /* The prepared question keeps the evening reflection usable. */
       }
@@ -96,8 +144,11 @@ export function registerEncouragementRoutes(
       const exclude = [...(parsed.data.exclude ?? [])];
       for (let attempt = 0; attempt < 2; attempt++) {
         try {
-          const choice = await provider.selectEveningWord({ ...parsed.data, exclude });
-          const scripture = await verifiedPassage(
+          const choice = await provider.selectEveningWord({
+            ...parsed.data,
+            exclude,
+          });
+          const scripture = await resolve(
             choice.book,
             choice.chapter,
             choice.firstVerse,
@@ -114,7 +165,12 @@ export function registerEncouragementRoutes(
             song = await songCatalog.verify(candidate).catch(() => undefined);
             if (song) break;
           }
-          return { scripture, note: choice.note, ...(song ? { song } : {}), source: 'ai' };
+          return {
+            scripture,
+            note: choice.note,
+            ...(song ? { song } : {}),
+            source: 'ai',
+          };
         } catch {
           /* Unknown references or AI failures retry once, then fall back on the device. */
         }
@@ -176,7 +232,9 @@ export function registerEncouragementRoutes(
           // Keep a usable reflection when quota or generation fails. The reason holds only an
           // HTTP status or failure kind, never journal content.
           request.log.warn(
-            { reason: error instanceof Error ? error.message.slice(0, 120) : 'unknown' },
+            {
+              reason: error instanceof Error ? error.message.slice(0, 120) : 'unknown',
+            },
             'Journey summary used the prepared reflection',
           );
         }

@@ -1,4 +1,5 @@
 import type { SongCatalog } from '../shared/music/song-catalog.js';
+import type { ScriptureProvider } from '../shared/bible/provider.js';
 import type { FastifyInstance } from 'fastify';
 import type { AuthGateway } from '../shared/supabase/auth-gateway.js';
 import type { UserScopedSupabaseClient } from '../shared/supabase/client-types.js';
@@ -25,6 +26,7 @@ export interface RepositoryFactories {
 }
 
 export interface ModuleDependencies {
+  scriptureProvider?: ScriptureProvider;
   encouragementProvider?: EncouragementProvider;
   songCatalog?: SongCatalog;
   authGateway?: AuthGateway;
@@ -43,6 +45,7 @@ export function registerModules(
     repositories = {},
     encouragementProvider,
     songCatalog,
+    scriptureProvider,
   }: ModuleDependencies,
 ) {
   // Unversioned so hosting health checks survive API version changes.
@@ -53,7 +56,13 @@ export function registerModules(
   app.register(
     async (api) => {
       registerProfileRoutes(api, authGateway, repositories.profiles);
-      registerEncouragementRoutes(api, authGateway, encouragementProvider, songCatalog);
+      registerEncouragementRoutes(
+        api,
+        authGateway,
+        encouragementProvider,
+        songCatalog,
+        scriptureProvider,
+      );
       registerPeopleRoutes(api, authGateway, repositories.people);
       registerGroupRoutes(api, authGateway, repositories.groups);
       registerPostRoutes(api, authGateway, repositories.posts);

@@ -44,5 +44,6 @@
     "installTitle": "Instalar Ebenezer",
     "installHelp": "Usa la opción Instalar aplicación de tu navegador. En iPhone o iPad, abre Safari y elige Compartir → Añadir a la pantalla de inicio. La instalación es opcional; puedes seguir usando el navegador.",
     "install": "Instalar aplicación"
-  }
+  },
+  "scriptureProvider": "Escritura de YouVersion"
 }

@@ -36,8 +36,14 @@ export function ReflectionSession({ draft }: { draft: Draft }) {
   const changed = React.useRef(false);
   const currentStep = React.useRef(step);
   currentStep.current = step;
-  const [ref, scripture] = useWatch({ control: form.control, name: ['ref', 'scripture'] });
-  const [memory, tone] = useWatch({ control: form.control, name: ['memory', 'tone'] });
+  const [ref, scripture] = useWatch({
+    control: form.control,
+    name: ['ref', 'scripture'],
+  });
+  const [memory, tone] = useWatch({
+    control: form.control,
+    name: ['memory', 'tone'],
+  });
   const passage = passages.find((item) => item.value === ref);
   const morning = draft.values.morningWord;
   const morningScripture = morning
@@ -162,17 +168,22 @@ export function ReflectionSession({ draft }: { draft: Draft }) {
       {step === 0 && morningScripture && (
         <JourneyScripture
           quote={morningScripture.text}
+          credit={morning?.scripture}
           translation={morningScripture.translation}
           reference={morningScripture.reference}
           note={t('journey.evening.wordNote')}
           chapterLabel={t('tower.chapter')}
-          chapterUrl={`https://www.biblegateway.com/passage/?search=${encodeURIComponent(morningScripture.reference)}&version=KJV`}
+          chapterUrl={
+            morning?.scripture?.sourceUrl ??
+            `https://www.biblegateway.com/passage/?search=${encodeURIComponent(morningScripture.reference)}&version=KJV`
+          }
         />
       )}
       {step === 0 && morning?.thought && <JourneyStatus>{morning.thought}</JourneyStatus>}
       {step === 1 && scripture && (
         <JourneyScripture
           quote={scripture.text}
+          credit={scripture}
           reference={scripture.reference}
           translation={scripture.translation}
           note={t('journey.word.note')}

@@ -8,6 +8,7 @@ import { Button } from './button';
 import { Badge } from './badge';
 import { DialogModalLayout } from './dialog-modal-layout';
 import { JourneyChapterDialog } from './journey-scripture';
+import { ScriptureCredit } from './scripture-credit';
 
 export function StoneDetail<T extends StoneItem>({
   stone,
@@ -79,9 +80,9 @@ export function StoneDetail<T extends StoneItem>({
       <div className="rounded-2xl p-5" style={{ background: colors.fill, color: colors.text }}>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <time dateTime={stone.journalDate} className="text-sm">
-            {new Intl.DateTimeFormat(i18n.resolvedLanguage, { dateStyle: 'long' }).format(
-              new Date(`${stone.journalDate}T12:00:00`),
-            )}
+            {new Intl.DateTimeFormat(i18n.resolvedLanguage, {
+              dateStyle: 'long',
+            }).format(new Date(`${stone.journalDate}T12:00:00`))}
           </time>
           <Badge variant="outline" className="border-current text-inherit">
             {t(`tones.${stone.tone}`)}
@@ -90,7 +91,7 @@ export function StoneDetail<T extends StoneItem>({
         <p className="text-sm font-semibold">
           {stoneSymbol(stone.ref)} {stone.ref}
           {scripture
-            ? ' · WEB Classic'
+            ? ` · ${scripture.translation}`
             : morningWord
               ? ` · ${morningWord.translation}`
               : passage
@@ -112,11 +113,13 @@ export function StoneDetail<T extends StoneItem>({
           <blockquote lang="en" className="mt-2 font-serif">
             {quoted(morning.text)}
           </blockquote>
+          <ScriptureCredit {...stone.morningWord?.scripture} />
           {stone.morningWord?.thought && (
             <p className="mt-3 text-sm italic">“{stone.morningWord.thought}”</p>
           )}
         </div>
       )}
+      <ScriptureCredit {...(scripture ?? stone.morningWord?.scripture)} />
       {song && (
         <div className="mt-5">
           <SongSuggestion

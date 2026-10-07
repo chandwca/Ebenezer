@@ -37,5 +37,6 @@
   "fullBible": "Biblia completa — experimental",
   "fullNote": "Búsqueda experimental en 66 libros y 9.534 pasajes de World English Bible Classic. Las Escrituras están en inglés. La pertinencia aún necesita revisión; sentirse amado o no amado puede producir sugerencias inadecuadas.",
   "fullDownload": "La primera búsqueda en la Biblia completa también descarga unos 24,8 MB de texto y vectores. Mantén esta página abierta hasta que termine para preparar el uso sin conexión.",
-  "emptyVerse": "Esta edición no tiene texto principal para este número de versículo; consulta las notas de la fuente oficial."
+  "emptyVerse": "Esta edición no tiene texto principal para este número de versículo; consulta las notas de la fuente oficial.",
+  "chapterEditionNote": "{{translation}} · Inglés. Los versículos seleccionados están resaltados."
 }
