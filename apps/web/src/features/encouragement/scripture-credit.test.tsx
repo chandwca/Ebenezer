@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/test/render';
-import { EncouragementPanel } from './encouragement-panel';
+import { EncouragementPanel } from '@/components/ui/encouragement-panel';
 import { emptyReflection, scriptureSnapshotSchema } from '@ebenezer/contracts';
 import { backupSchema } from '@/db/backup';
 

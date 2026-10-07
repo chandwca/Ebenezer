@@ -63,8 +63,27 @@ Two Supabase Edge Functions in `supabase/functions/`, sharing code in `_shared/`
 | `push-subscription` | The app (no account) | `save` her settings (welcome notification the first time), `test` a morning or evening reminder now, or `remove` to turn reminders off. The phone's push address proves the request is hers. Requests are validated and rate-limited. |
 | `send-reminders` | pg_cron every 15 minutes | Sends each reminder due in her time zone once a day (within 3 hours of her time), retries failed deliveries on the next run, and deletes phones the push service reports gone. Requires the `x-reminders-secret` header. |
 
-Wording is discreet by default ("A moment for you") and never contains journal content.
-Morning reminders open Today; evening reminders open "Bring your day".
+Wording is discreet by default and never contains journal content. Morning reminders say
+“Breathe in the Word”; evening reminders say “Bring your day to Jesus”. Scripture lock-screen
+previews require a separate consent dialog. Spanish interface copy labels BSB Scripture as English.
+
+Set `SCRIPTURE_API_URL=https://ebenezer-api-c0sx.onrender.com` in the Edge Function environment.
+The API needs `YOUVERSION_APP_KEY` in Render. The key stays on the API server. Edge Functions
+request `/v1/notification-word` with only the local date. The API returns a complete short
+YouVersion BSB verse with its reference and publisher attribution. When unavailable, a generic
+reminder still arrives; it does not invent a verse or substitute another provider.
+
+Apply `20261007110000_notification_encounters.sql` before deploying these functions. It adds
+explicit preview consent and a five-minute delivery lease. Legacy subscriptions revert to
+discreet wording until consent is given. Atomic claims prevent overlapping scheduler runs from
+sending the same reminder. Failed sends can retry; a crash after push acceptance but before
+database confirmation can still cause a repeat. Scheduling is best effort, not an exact alarm.
+
+The service worker saves up to 30 public passage snapshots locally. Tapping a reminder opens
+`/notification/{morning|evening}/{date}` and reads the original saved passage, including offline.
+The first snapshot for a date is preserved. A missing snapshot is explained rather than replaced.
+Students can carry a thought locally into that date's evening reflection. Existing drafts are
+preserved. The saved verse is clearly distinguished from a complete chapter.
 
 Migration `20261007100000_schedule_send_reminders.sql` schedules the run. It reads the function
 URL and shared secret from Supabase Vault, so neither is in the code:
@@ -95,8 +114,9 @@ pnpm exec supabase functions serve --env-file supabase/functions/.env   # local 
   show how to allow them; browsers without Web Push show nothing on Today.
 - **Settings › Reminders**: on/off, morning and evening times, discreet wording (on by default),
   and **Try a reminder now** (morning or evening). A language change is passed on automatically.
-- Settings live on the device (IndexedDB key `reminders`). The service worker shows each
-  reminder and, when tapped, routes the open app to Today or "Bring your day" without reloading.
+- Settings live on the device (IndexedDB key `reminders`). Times use the displayed device time zone.
+  Turning reminders off removes the subscription; failures are reported rather than silently
+  showing success. Scripture previews explain lock-screen exposure before enabling them.
 - Code: `apps/web/src/features/reminders/`, `apps/web/tooling/service-worker.ts`.
 
 Try it on a computer (the service worker runs in the production build only):

@@ -8,6 +8,8 @@ export type Target = { endpoint: string; p256dh: string; auth: string };
 export type Delivery = 'sent' | 'gone' | 'failed';
 
 export function requestFor(target: Target, payload: Payload, vapid: Vapid) {
+  if (new TextEncoder().encode(JSON.stringify(payload)).byteLength > 3500)
+    throw new Error('Reminder payload is too large');
   return webpush.generateRequestDetails(
     { endpoint: target.endpoint, keys: { p256dh: target.p256dh, auth: target.auth } },
     JSON.stringify(payload),

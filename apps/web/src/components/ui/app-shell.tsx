@@ -61,11 +61,13 @@ export function AppShell({
         : (navigation.find((item) => item.to === location.pathname)?.label ??
           (location.pathname === '/bible-search'
             ? 'navigation.bibleSearch'
-            : location.pathname.startsWith('/pray/')
-              ? 'community:pray.pageTitle'
-              : location.pathname === '/reflection'
-                ? 'navigation.reflection'
-                : 'errors:notFound'));
+            : location.pathname.startsWith('/notification/')
+              ? 'settings:reminders.settings.title'
+              : location.pathname.startsWith('/pray/')
+                ? 'community:pray.pageTitle'
+                : location.pathname === '/reflection'
+                  ? 'navigation.reflection'
+                  : 'errors:notFound'));
     document.title = `${t(titleKey)} · Ebenezer`;
   }, [location.pathname, t]);
   React.useEffect(() => {

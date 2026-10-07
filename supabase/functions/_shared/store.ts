@@ -4,7 +4,7 @@ import type { SchedulerStore } from './scheduler.ts';
 import type { NewRow, Row, Store } from './subscriptions.ts';
 
 const columns =
-  'id, endpoint, p256dh, auth, time_zone, language, morning_time, evening_time, discreet, last_morning_sent, last_evening_sent';
+  'id, endpoint, p256dh, auth, time_zone, language, morning_time, evening_time, discreet, scripture_preview_consent, last_morning_sent, last_evening_sent';
 
 export function createStore(url: string, serviceKey: string): Store & SchedulerStore {
   const client = createClient(url, serviceKey, {
@@ -18,9 +18,8 @@ export function createStore(url: string, serviceKey: string): Store & SchedulerS
   };
   return {
     async find(endpoint) {
-      return (
-        check(await table().select(columns).eq('endpoint', endpoint).maybeSingle()) ?? undefined
-      ) as Row | undefined;
+      return (check(await table().select(columns).eq('endpoint', endpoint).maybeSingle()) ??
+        undefined) as Row | undefined;
     },
     async save(row: NewRow) {
       check(await table().upsert(row, { onConflict: 'endpoint' }));
@@ -33,7 +32,10 @@ export function createStore(url: string, serviceKey: string): Store & SchedulerS
       // Paged so a growing list never exceeds the API's row limit.
       for (let from = 0; ; from += 1000) {
         const page = check(
-          await table().select(columns).order('id').range(from, from + 999),
+          await table()
+            .select(columns)
+            .order('id')
+            .range(from, from + 999),
         ) as Row[];
         rows.push(...page);
         if (page.length < 1000) return rows;
@@ -41,6 +43,34 @@ export function createStore(url: string, serviceKey: string): Store & SchedulerS
     },
     async mark(id, marks) {
       check(await table().update(marks).eq('id', id));
+    },
+    async claim(id, kind, date, token) {
+      return (
+        check(
+          await client.rpc('claim_reminder_delivery', {
+            p_id: id,
+            p_kind: kind,
+            p_date: date,
+            p_token: token,
+          }),
+        ) === true
+      );
+    },
+    async finish(id, token, marks) {
+      check(
+        await table()
+          .update({ ...marks, delivery_claim_token: null, delivery_claim_until: null })
+          .eq('id', id)
+          .eq('delivery_claim_token', token),
+      );
+    },
+    async release(id, token) {
+      check(
+        await table()
+          .update({ delivery_claim_token: null, delivery_claim_until: null })
+          .eq('id', id)
+          .eq('delivery_claim_token', token),
+      );
     },
     async removeById(id) {
       check(await table().delete().eq('id', id));

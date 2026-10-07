@@ -23,6 +23,7 @@ import type { AuthGateway } from '../../shared/supabase/auth-gateway.js';
 import type { EncouragementProvider } from '../../shared/ai/provider.js';
 import { createMorningService } from './morning.service.js';
 import { createEncouragementService } from './encouragement.service.js';
+import { createNotificationWordService } from './notification.service.js';
 
 export function registerEncouragementRoutes(
   app: FastifyInstance,
@@ -32,6 +33,21 @@ export function registerEncouragementRoutes(
   scriptureProvider?: ScriptureProvider,
 ) {
   const morning = createMorningService(provider, Date.now, scriptureProvider);
+  const notificationWords = createNotificationWordService(scriptureProvider);
+  app.post(
+    '/notification-word',
+    { onRequest: rateLimit({ max: 120, windowMs: 3600000 }), onSend: noStore },
+    async (request) => {
+      const input = z.strictObject({ date: z.iso.date() }).safeParse(request.body);
+      if (!input.success || Math.abs(Date.parse(input.data.date) - Date.now()) > 2 * 86400000)
+        throw new ApiError(400, 'invalid_request', 'Provide the current notification date.');
+      try {
+        return await notificationWords.get(input.data.date);
+      } catch {
+        throw new ApiError(503, 'unavailable', 'Notification Scripture is unavailable.');
+      }
+    },
+  );
   async function resolve(
     book: string,
     chapter: number,

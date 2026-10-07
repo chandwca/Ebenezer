@@ -60,11 +60,13 @@ export function BibleChapterReader({
   onClose,
   embedded = false,
   translation = 'WEB Classic',
+  complete = true,
 }: {
   result: { chapter: Chapter; passage: Pick<Passage, 'firstVerse' | 'lastVerse'> };
   onClose: () => void;
   embedded?: boolean;
   translation?: string;
+  complete?: boolean;
 }) {
   const { t } = useTranslation('bible');
   const title = `${result.chapter.book} ${result.chapter.chapter}`;
@@ -85,7 +87,7 @@ export function BibleChapterReader({
         </div>
       )}
       <p className="my-4 text-sm text-muted-foreground">
-        {t('chapterEditionNote', { translation })}
+        {t(complete ? 'chapterEditionNote' : 'selectedVerseNote', { translation })}
       </p>
       <div lang="en" className="grid gap-4 font-serif text-lg leading-8">
         {result.chapter.verses.map((verse) => (

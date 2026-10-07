@@ -137,6 +137,15 @@ describe('reminder notifications', () => {
   function setupPush(
     windows: { url: string; focus: () => Promise<void>; postMessage: (m: unknown) => void }[] = [],
   ) {
+    const records = new Map<string, Response>();
+    const wordCache = {
+      match: async (path: string) => records.get(path)?.clone(),
+      put: async (path: string, response: Response) => {
+        records.set(path, response);
+      },
+      keys: async () => [...records.keys()],
+      delete: async (path: string) => records.delete(path),
+    };
     const handlers: Record<string, (event: unknown) => void> = {};
     const scope = {
       location: { origin: 'https://example.test' },
@@ -152,7 +161,7 @@ describe('reminder notifications', () => {
     };
     new Function('self', 'caches', 'fetch', 'URL', 'Response', serviceWorkerSource('v1', []))(
       scope,
-      {},
+      { open: async () => wordCache },
       vi.fn(),
       URL,
       Response,
@@ -162,7 +171,7 @@ describe('reminder notifications', () => {
       handlers[name]({ ...event, waitUntil: (promise: Promise<unknown>) => (work = promise) });
       await work;
     };
-    return { scope, run };
+    return { scope, run, records };
   }
 
   it('shows the reminder with its text and page, and ignores unsafe or malformed data', async () => {
@@ -180,6 +189,7 @@ describe('reminder notifications', () => {
     expect(scope.registration.showNotification).toHaveBeenCalledWith('Ebenezer', {
       body: 'A moment for you',
       tag: 'evening',
+      renotify: true,
       icon: '/icon-192.png',
       badge: '/icon-192.png',
       data: { url: '/reflection?from=today' },
@@ -220,5 +230,39 @@ describe('reminder notifications', () => {
     const closed = setupPush();
     await closed.run('notificationclick', { notification: { close, data: { url: '/' } } });
     expect(closed.scope.clients.openWindow).toHaveBeenCalledWith('/');
+  });
+  it('keeps the originally delivered verse and attribution offline, without cutting the preview body', async () => {
+    const { run, records, scope } = setupPush();
+    const word = {
+      date: '2026-10-07',
+      text: 'We love because He first loved us.',
+      reference: '1 John 4:19',
+      provider: 'youversion',
+      translation: 'BSB',
+      attribution: 'Publisher public domain credit. '.repeat(12),
+    };
+    const body = `${word.text}\n${word.reference} · BSB\n${word.attribution}`;
+    await run('push', {
+      data: {
+        json: () => ({
+          title: 'Breathe in the Word',
+          tag: 'morning',
+          body,
+          word,
+          url: '/notification/morning/2026-10-07',
+        }),
+      },
+    });
+    expect(await records.get('/notification-word/2026-10-07')!.clone().json()).toEqual(word);
+    expect(scope.registration.showNotification).toHaveBeenCalledWith(
+      'Breathe in the Word',
+      expect.objectContaining({ body }),
+    );
+    await run('push', {
+      data: { json: () => ({ tag: 'evening', word: { ...word, text: 'A different verse.' } }) },
+    });
+    expect((await records.get('/notification-word/2026-10-07')!.clone().json()).text).toBe(
+      word.text,
+    );
   });
 });

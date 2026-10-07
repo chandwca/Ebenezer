@@ -38,5 +38,7 @@
   "fullNote": "Experimental search across 66 books and 9,534 passages of the World English Bible Classic. Scripture is in English. Relevance still needs review; feeling loved and unloved may produce unsuitable suggestions.",
   "fullDownload": "The first full-Bible search also downloads about 24.8 MB of text and vectors. Keep this page open until the search completes to prepare offline use.",
   "emptyVerse": "This edition has no main-body text for this verse marker; consult the official source notes.",
-  "chapterEditionNote": "{{translation}} · English. The selected verses are highlighted."
+  "chapterEditionNote": "{{translation}} · English. The selected verses are highlighted.",
+  "selectedVerseNote": "{{translation}} · English. This is the saved notification verse. Open the source link for the full chapter.",
+  "fullChapterOnline": "Open full chapter online"
 }

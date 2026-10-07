@@ -5,7 +5,7 @@ select plan(16);
 -- Only delivery details and reminder settings: no account, name or journal content.
 select columns_are('ebenezer_api', 'push_subscriptions', array[
   'id', 'endpoint', 'p256dh', 'auth', 'time_zone', 'language', 'morning_time', 'evening_time',
-  'discreet', 'last_morning_sent', 'last_evening_sent', 'created_at', 'updated_at'
+  'discreet', 'scripture_preview_consent', 'delivery_claim_token', 'delivery_claim_until', 'last_morning_sent', 'last_evening_sent', 'created_at', 'updated_at'
 ], 'Stores no account, name or journal content');
 select is(
   (select relrowsecurity from pg_class where oid = 'ebenezer_api.push_subscriptions'::regclass),
@@ -31,7 +31,7 @@ select throws_ok($$insert into ebenezer_api.push_subscriptions (endpoint, p256dh
   '23514', null, 'Only HTTPS push addresses are accepted');
 select throws_ok($$update ebenezer_api.push_subscriptions set language = 'fr'$$,
   '23514', null, 'Only supported languages');
-select lives_ok($$update ebenezer_api.push_subscriptions set morning_time = '06:45', discreet = false$$,
+select lives_ok($$update ebenezer_api.push_subscriptions set morning_time = '06:45', discreet = false, scripture_preview_consent = true$$,
   'Server can change times and wording');
 select lives_ok($$delete from ebenezer_api.push_subscriptions where endpoint = 'https://push.example.test/device-1'$$,
   'Server can remove a subscription');

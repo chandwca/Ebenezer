@@ -18,11 +18,25 @@ self.addEventListener('push', event => {
   let data = {};
   try { data = event.data ? event.data.json() : {}; } catch { data = {}; }
   const title = typeof data.title === 'string' && data.title ? data.title.slice(0, 80) : 'Ebenezer';
-  const body = typeof data.body === 'string' ? data.body.slice(0, 240) : '';
+  const body = typeof data.body === 'string' ? data.body.slice(0, 1600) : '';
   const tag = REMINDER_TAGS.includes(data.tag) ? data.tag : 'ebenezer';
-  event.waitUntil(self.registration.showNotification(title, {
-    body, tag, icon: '/icon-192.png', badge: '/icon-192.png', data: { url: appPath(data.url) },
-  }));
+  event.waitUntil((async () => {
+    const word = data.word;
+    if (word && word.provider === 'youversion' && word.translation === 'BSB' &&
+        /^\\d{4}-\\d{2}-\\d{2}$/.test(word.date) && typeof word.text === 'string' && word.text.length <= 200 &&
+        typeof word.attribution === 'string' && word.attribution.length <= 1200) {
+      try {
+        const cache = await caches.open('ebenezer-notification-words-v1');
+        if (!await cache.match('/notification-word/' + word.date))
+          await cache.put('/notification-word/' + word.date, new Response(JSON.stringify(word), { headers: { 'Content-Type': 'application/json' } }));
+        const keys = await cache.keys();
+        for (const key of keys.slice(0, Math.max(0, keys.length - 30))) await cache.delete(key);
+      } catch { /* Storage failures must not suppress a visible reminder. */ }
+    }
+    await self.registration.showNotification(title, {
+    body, tag, renotify: true, icon: '/icon-192.png', badge: '/icon-192.png', data: { url: appPath(data.url) },
+    });
+  })());
 });
 self.addEventListener('notificationclick', event => {
   event.notification.close();

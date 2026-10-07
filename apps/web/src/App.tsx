@@ -33,6 +33,9 @@ const TogetherPage = React.lazy(() =>
 const BibleSearchPage = React.lazy(() =>
   import('./pages/bible-search').then((module) => ({ default: module.BibleSearchPage })),
 );
+const NotificationPage = React.lazy(() =>
+  import('./pages/notification').then((module) => ({ default: module.NotificationPage })),
+);
 
 const StudentWelcome = React.lazy(() =>
   import('./features/profile/student-welcome').then((module) => ({
@@ -88,6 +91,10 @@ function AppContent() {
           <Route path="/auth/callback" element={<AuthCallbackPage />} />
           <Route path="/" element={<TodayPage />} />
           <Route path="/reflection" element={<ReflectionPage />} />
+          <Route
+            path="/notification/:kind/:date"
+            element={<NotificationPage key={location.pathname} />}
+          />
           <Route path="/bible-search" element={<BibleSearchPage />} />
           <Route path="/story" element={<StoryPage />} />
           <Route path="/community" element={<TogetherPage />} />

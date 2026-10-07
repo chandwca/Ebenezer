@@ -41,7 +41,11 @@ export function StoneDetail<T extends StoneItem>({
         <>
           {scripture ? (
             <Button variant="outline" onClick={() => setReading(true)}>
-              {t('journey.word.chapter')}
+              {t(
+                scripture.chapterComplete === false
+                  ? 'common:savedVerseLabel'
+                  : 'journey.word.chapter',
+              )}
             </Button>
           ) : (
             (passage || morningWord) && (

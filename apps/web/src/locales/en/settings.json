@@ -38,9 +38,9 @@
   },
   "reminders": {
     "title": "A gentle reminder, twice a day",
-    "morning": "A Word to carry into your day",
-    "evening": "A moment to bring your day back to Jesus",
-    "privacy": "Reminders only say “A moment for you”. Nothing from your journal is shown.",
+    "morning": "Breathe in the Word",
+    "evening": "Bring your day to Jesus",
+    "privacy": "Discreet reminders are on by default. Scripture previews are optional. Your journal is never shown in notifications.",
     "turnOn": "Turn on reminders",
     "turningOn": "Turning on…",
     "notNow": "Not now",
@@ -66,18 +66,18 @@
     "errors": {
       "blocked": "Notifications were blocked. You can allow them in your browser’s site settings.",
       "dismissed": "No problem. You can turn reminders on anytime.",
-      "not_ready": "Reminders work in the installed app. Open Ebenezer from your Home Screen or installed app, then try again.",
+      "not_ready": "Notifications aren’t ready. Reload Ebenezer, then turn reminders on again.",
       "failed": "Reminders couldn’t be updated just now. Please try again."
     },
     "settings": {
       "title": "Reminders",
-      "description": "A gentle nudge each morning and evening, in your own time zone.",
+      "description": "Morning and evening reminders in {{timeZone}}. Change the times or turn them off anytime.",
       "on": "Reminders are on",
       "off": "Reminders are off",
       "morning": "Morning",
       "evening": "Evening",
       "discreet": "Discreet wording",
-      "discreetNote": "Your lock screen shows only “A moment for you”.",
+      "discreetNote": "On: only “A moment for you”. Off: public English Scripture may appear on your lock screen after you consent.",
       "turnOff": "Turn off reminders",
       "tryTitle": "Try a reminder now",
       "try": {
@@ -85,7 +85,21 @@
         "evening": "Evening reminder"
       },
       "sent": "Sent. It should arrive in a few seconds.",
-      "saved": "Saved."
+      "saved": "Saved.",
+      "previewTitle": "Show Scripture on your lock screen?",
+      "previewDescription": "Morning notifications will include an English Bible verse, reference and publisher credit. Evening notifications mention Jesus. Anyone who can see your lock screen may see them. Your journal and personal thoughts are never included. You can return to discreet wording anytime.",
+      "previewAllow": "Allow Scripture previews",
+      "previewCancel": "Keep discreet wording"
+    },
+    "encounter": {
+      "morning": "Breathe in the Word",
+      "evening": "Bring your day to Jesus",
+      "description": "Your Word from {{date}}. Take a quiet moment when you’re ready.",
+      "invitation": "Pause with this passage. What does it help you notice about Jesus’ love? Questions are welcome.",
+      "reflect": "Pray, reflect, and build a stone",
+      "today": "Go to Today",
+      "missing": "The original notification passage is no longer available on this device. You can open Today to choose a new reading.",
+      "loading": "Opening your passage…"
     }
   }
 }

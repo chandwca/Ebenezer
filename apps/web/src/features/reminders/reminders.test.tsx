@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { db } from '@/db/database';
 import { renderWithProviders } from '@/test/render';
@@ -52,6 +52,20 @@ function pushBrowser({ answer = 'granted' as NotificationPermission, userAgent =
 }
 const stored = async () => parseReminders((await db.preferences.get(REMINDERS_KEY))?.value);
 
+it('shows a rejected preview save inside the consent dialog and preserves discreet wording', async () => {
+  const browser = pushBrowser();
+  await browser.pushManager.subscribe();
+  await storeReminders({ ...parseReminders(undefined), enabled: true, language: 'en' });
+  browser.fetch.mockImplementation(async () => new Response('{}', { status: 400 }));
+  renderWithProviders(<ReminderPreferences />);
+  fireEvent.click(await screen.findByRole('checkbox', { name: /Discreet wording/ }));
+  const dialog = await screen.findByRole('dialog');
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Allow Scripture previews' }));
+  expect(await within(dialog).findByRole('alert')).toBeTruthy();
+  expect((await stored()).discreet).toBe(true);
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Keep discreet wording' }));
+});
+
 beforeEach(async () => {
   await db.preferences.delete(REMINDERS_KEY);
   vi.stubEnv('VITE_SUPABASE_URL', 'https://project.supabase.test');
@@ -103,7 +117,7 @@ it('“Not now” is respected: asked again once after a stone, then never', asy
   renderWithProviders(<ReminderPrompt placement="after-stone" />);
   fireEvent.click(await screen.findByRole('button', { name: 'Not now' }));
   await waitFor(async () => expect((await stored()).dismissed).toBe('after-stone'));
-  expect(screen.queryByText('A gentle reminder, twice a day')).toBeNull();
+  await waitFor(() => expect(screen.queryByText('A gentle reminder, twice a day')).toBeNull());
 });
 
 it('a refused permission explains how to allow notifications', async () => {
@@ -154,7 +168,12 @@ it('Settings changes times and wording, sends a test now, and turns reminders of
   expect(browser.sent().at(-1)).toMatchObject({ action: 'save', eveningTime: '21:15' });
 
   fireEvent.click(screen.getByRole('checkbox', { name: /Discreet wording/ }));
-  await waitFor(() => expect(browser.sent().at(-1)).toMatchObject({ discreet: false }));
+  expect(await screen.findByText('Show Scripture on your lock screen?')).toBeTruthy();
+  expect(browser.sent().at(-1)).toMatchObject({ discreet: true });
+  fireEvent.click(screen.getByRole('button', { name: 'Allow Scripture previews' }));
+  await waitFor(() =>
+    expect(browser.sent().at(-1)).toMatchObject({ discreet: false, scripturePreviewConsent: true }),
+  );
 
   fireEvent.click(await screen.findByRole('button', { name: 'Evening reminder' }));
   expect(await screen.findByText('Sent. It should arrive in a few seconds.')).toBeTruthy();

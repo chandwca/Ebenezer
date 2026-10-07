@@ -10,11 +10,19 @@ export type Subscription = {
   morning_time: string; // 'HH:MM' or 'HH:MM:SS'
   evening_time: string;
   discreet: boolean;
+  scripture_preview_consent?: boolean;
   last_morning_sent: string | null; // local 'YYYY-MM-DD'
   last_evening_sent: string | null;
 };
 
-export type Payload = { title: string; body: string; url: string; tag: MessageKind };
+import type { NotificationWord } from '../../../packages/contracts/src/notifications.ts';
+export type Payload = {
+  title: string;
+  body: string;
+  url: string;
+  tag: MessageKind;
+  word?: NotificationWord;
+};
 
 // A reminder missed by a late or failed run is still sent within this window, never hours later.
 const SEND_WINDOW_MINUTES = 180;
@@ -56,7 +64,9 @@ export function isTimeZone(value: string) {
 
 const isDue = (time: string, lastSent: string | null, local: { date: string; minutes: number }) => {
   const start = minutesOf(time);
-  return lastSent !== local.date && local.minutes >= start && local.minutes < start + SEND_WINDOW_MINUTES;
+  return (
+    lastSent !== local.date && local.minutes >= start && local.minutes < start + SEND_WINDOW_MINUTES
+  );
 };
 
 /**
@@ -108,16 +118,25 @@ export function settledSentDates(
 const text = {
   en: {
     discreet: { title: 'Ebenezer', body: 'A moment for you' },
-    morning: { title: 'Good morning', body: 'Your Word for today is ready.' },
-    evening: { title: 'Good evening', body: 'How was your day? Bring it to Jesus tonight.' },
-    welcome: { title: 'You’re all set', body: 'We’ll meet you at {morning} each morning and {evening} each evening.' },
+    morning: { title: 'Breathe in the Word', body: 'Pause with Scripture when you’re ready.' },
+    evening: { title: 'Bring your day to Jesus', body: 'Pause, pray, and build a stone.' },
+    welcome: {
+      title: 'You’re all set',
+      body: 'We’ll meet you at {morning} each morning and {evening} each evening.',
+    },
     welcomeDiscreet: { title: 'Ebenezer', body: 'Reminders are on: {morning} and {evening}.' },
   },
   es: {
     discreet: { title: 'Ebenezer', body: 'Un momento para ti' },
-    morning: { title: 'Buenos días', body: 'Tu Palabra para hoy está lista.' },
-    evening: { title: 'Buenas noches', body: '¿Cómo fue tu día? Llévalo a Jesús esta noche.' },
-    welcome: { title: 'Todo listo', body: 'Te acompañaremos a las {morning} cada mañana y a las {evening} cada noche.' },
+    morning: {
+      title: 'Respira la Palabra',
+      body: 'Haz una pausa con la Escritura cuando quieras.',
+    },
+    evening: { title: 'Lleva tu día a Jesús', body: 'Haz una pausa, ora y guarda una piedra.' },
+    welcome: {
+      title: 'Todo listo',
+      body: 'Te acompañaremos a las {morning} cada mañana y a las {evening} cada noche.',
+    },
     welcomeDiscreet: { title: 'Ebenezer', body: 'Recordatorios activos: {morning} y {evening}.' },
   },
 } as const;
@@ -141,7 +160,11 @@ export function formatTime(time: string, language: Language) {
 /** Lock-screen wording. Never contains journal content; discreet wording names nothing religious. */
 export function messageFor(
   kind: MessageKind,
-  row: Pick<Subscription, 'language' | 'discreet' | 'morning_time' | 'evening_time'>,
+  row: Pick<
+    Subscription,
+    'language' | 'discreet' | 'morning_time' | 'evening_time' | 'scripture_preview_consent'
+  >,
+  word?: NotificationWord,
 ): Payload {
   const words = text[row.language] ?? text.en;
   const chosen =
@@ -152,8 +175,16 @@ export function messageFor(
       : row.discreet
         ? words.discreet
         : words[kind];
-  const body = chosen.body
+  let body = chosen.body
     .replace('{morning}', formatTime(row.morning_time, row.language))
     .replace('{evening}', formatTime(row.evening_time, row.language));
-  return { title: chosen.title, body, url: urls[kind], tag: kind };
+  if (kind === 'morning' && !row.discreet && row.scripture_preview_consent === true && word)
+    body = `${word.text}\n${word.reference} · BSB${row.language === 'es' ? ' · Inglés' : ''}\n${word.attribution}`;
+  return {
+    title: chosen.title,
+    body,
+    url: word && kind !== 'welcome' ? `/notification/${kind}/${word.date}` : urls[kind],
+    tag: kind,
+    ...(word && kind !== 'welcome' ? { word } : {}),
+  };
 }

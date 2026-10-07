@@ -1,0 +1,20 @@
+begin;
+create extension if not exists pgtap with schema extensions;
+select plan(8);
+set local role service_role;
+insert into ebenezer_api.push_subscriptions (id, endpoint, p256dh, auth, time_zone)
+values ('22222222-2222-4222-8222-222222222222', 'https://push.example.test/encounter', repeat('p', 87), repeat('a', 22), 'UTC');
+select throws_ok($$update ebenezer_api.push_subscriptions set discreet = false where id = '22222222-2222-4222-8222-222222222222'$$, '23514', null, 'Scripture previews require consent');
+select lives_ok($$update ebenezer_api.push_subscriptions set discreet = false, scripture_preview_consent = true where id = '22222222-2222-4222-8222-222222222222'$$, 'Explicit preview consent is stored');
+select is(ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'33333333-3333-4333-8333-333333333333'), true, 'First worker claims delivery');
+select is(ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'44444444-4444-4444-8444-444444444444'), false, 'Concurrent worker cannot claim');
+update ebenezer_api.push_subscriptions set delivery_claim_until = now() - interval '1 minute';
+select is(ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'44444444-4444-4444-8444-444444444444'), true, 'Expired crash lease can be retried');
+update ebenezer_api.push_subscriptions set last_morning_sent = current_date, delivery_claim_until = null, delivery_claim_token = null;
+select is(ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'33333333-3333-4333-8333-333333333333'), false, 'Acknowledged day cannot be sent again');
+set local role anon;
+select throws_ok($$select ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'33333333-3333-4333-8333-333333333333')$$, '42501', null, 'Public role cannot claim deliveries');
+set local role authenticated;
+select throws_ok($$select ebenezer_api.claim_reminder_delivery('22222222-2222-4222-8222-222222222222','morning',current_date,'33333333-3333-4333-8333-333333333333')$$, '42501', null, 'Signed-in users cannot claim deliveries');
+select * from finish();
+rollback;

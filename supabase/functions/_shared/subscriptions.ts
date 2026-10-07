@@ -26,10 +26,14 @@ export type Deps = {
   vapid: Vapid | undefined;
   deliver: (target: Target, payload: Payload, vapid: Vapid) => Promise<Delivery>;
   now: () => Date;
+  payloadFor?: (kind: 'morning' | 'evening', row: Row, now: Date) => Promise<Payload>;
 };
 
 const base64url = z.string().regex(/^[A-Za-z0-9_-]+=*$/);
-const endpoint = z.string().max(2048).regex(/^https:\/\//);
+const endpoint = z
+  .string()
+  .max(2048)
+  .regex(/^https:\/\//);
 const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 
 const requestSchema = z.discriminatedUnion('action', [
@@ -44,6 +48,7 @@ const requestSchema = z.discriminatedUnion('action', [
     morningTime: time.default('07:30'),
     eveningTime: time.default('20:30'),
     discreet: z.boolean().default(true),
+    scripturePreviewConsent: z.literal(true).optional(),
   }),
   z.strictObject({ action: z.literal('test'), endpoint, kind: z.enum(['morning', 'evening']) }),
   z.strictObject({ action: z.literal('remove'), endpoint }),
@@ -53,7 +58,11 @@ export type Reply = { status: number; body: Record<string, unknown> };
 
 async function send(deps: Deps, row: Row, kind: MessageKind) {
   if (!deps.vapid) return 'failed' as const;
-  const delivery = await deps.deliver(row, messageFor(kind, row), deps.vapid);
+  const payload =
+    kind !== 'welcome' && deps.payloadFor
+      ? await deps.payloadFor(kind, row, deps.now())
+      : messageFor(kind, row);
+  const delivery = await deps.deliver(row, payload, deps.vapid);
   // The push service says this phone no longer accepts reminders: forget it.
   if (delivery === 'gone') await deps.store.remove(row.endpoint);
   return delivery;
@@ -77,6 +86,8 @@ export async function handleSubscriptionRequest(input: unknown, deps: Deps): Pro
   }
 
   if (!deps.vapid) return { status: 503, body: { error: 'unavailable' } };
+  if (!request.discreet && request.scripturePreviewConsent !== true)
+    return { status: 400, body: { error: 'preview_consent_required' } };
   const existing = await deps.store.find(request.subscription.endpoint);
   const settings = {
     time_zone: request.timeZone,
@@ -84,6 +95,7 @@ export async function handleSubscriptionRequest(input: unknown, deps: Deps): Pro
     morning_time: request.morningTime,
     evening_time: request.eveningTime,
     discreet: request.discreet,
+    scripture_preview_consent: request.scripturePreviewConsent === true,
   };
   const row: NewRow = {
     endpoint: request.subscription.endpoint,

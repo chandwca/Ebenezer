@@ -8,6 +8,7 @@ export type ReminderSettings = {
   morningTime: string; // 'HH:MM'
   eveningTime: string;
   discreet: boolean;
+  scripturePreviewConsent?: boolean;
   /** Language the server last saved, so a language change can be passed on. */
   language?: 'en' | 'es';
   /** 'once' after the first "Not now"; 'after-stone' once asked again after a stone. */
@@ -30,7 +31,8 @@ export function parseReminders(value: unknown): ReminderSettings {
       enabled: stored?.enabled === true,
       morningTime: time(stored?.morningTime, defaultReminders.morningTime),
       eveningTime: time(stored?.eveningTime, defaultReminders.eveningTime),
-      discreet: stored?.discreet !== false,
+      discreet: !(stored?.discreet === false && stored?.scripturePreviewConsent === true),
+      scripturePreviewConsent: stored?.scripturePreviewConsent === true,
       ...(stored?.language === 'en' || stored?.language === 'es'
         ? { language: stored.language }
         : {}),
@@ -126,6 +128,9 @@ function settingsBody(settings: ReminderSettings, language: 'en' | 'es') {
     morningTime: settings.morningTime,
     eveningTime: settings.eveningTime,
     discreet: settings.discreet,
+    ...(!settings.discreet && settings.scripturePreviewConsent
+      ? { scripturePreviewConsent: true }
+      : {}),
   };
 }
 
@@ -177,8 +182,11 @@ export async function turnOffReminders() {
     .catch(() => null);
   if (!subscription) return;
   // Forget the phone on the server first; unsubscribing locally stops delivery regardless.
-  await call({ action: 'remove', endpoint: subscription.endpoint }).catch(() => undefined);
-  await subscription.unsubscribe().catch(() => undefined);
+  const removed = await call({ action: 'remove', endpoint: subscription.endpoint })
+    .then(() => true)
+    .catch(() => false);
+  const unsubscribed = await subscription.unsubscribe().catch(() => false);
+  if (!removed && !unsubscribed) throw new ReminderError('failed');
 }
 
 export async function sendTestReminder(kind: 'morning' | 'evening') {

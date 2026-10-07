@@ -14,10 +14,12 @@ import { ReflectionSession } from '@/features/reflection/session';
 import { EveningReflection } from '@/features/reflection/evening';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { readNotificationWord, notificationSnapshot } from '@/features/reminders/notification-word';
 
 export function ReflectionPage() {
   const location = useLocation();
   const evening = new URLSearchParams(location.search).get('from') === 'today';
+  const notificationDate = new URLSearchParams(location.search).get('notificationDate');
   const { t } = useTranslation(['journal', 'errors']);
   const [draft, setDraft] = React.useState<Draft>();
   const [failed, setFailed] = React.useState(false);
@@ -30,7 +32,7 @@ export function ReflectionPage() {
       .then(async (value) => {
         if (evening) {
           const now = new Date();
-          const date = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+          let date = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
             .toISOString()
             .slice(0, 10);
           let input = morningContext(now);
@@ -51,6 +53,20 @@ export function ReflectionPage() {
             }
           } catch {
             /* Use today’s curated passage if the optional preference is damaged. */
+          }
+          if (notificationDate && !value) {
+            const notified = await readNotificationWord(notificationDate);
+            if (notified) {
+              date = notified.date;
+              input = {
+                ...morningContext(new Date(`${date}T12:00:00`)),
+                date,
+                language: input.language,
+              };
+              scripture = notificationSnapshot(notified);
+              const carried = await journal.getPreference(`notification:thought:${date}`);
+              thought = typeof carried?.value === 'string' ? carried.value : undefined;
+            }
           }
           const morningWord = {
             date,
@@ -75,6 +91,7 @@ export function ReflectionPage() {
             await journal.saveDraft(value.values, 0);
           } else if (
             value.values.morningWord &&
+            !notificationDate &&
             shownToday &&
             JSON.stringify(value.values.morningWord) !== JSON.stringify(morningWord)
           ) {
@@ -110,7 +127,7 @@ export function ReflectionPage() {
     return () => {
       active = false;
     };
-  }, [attempt, evening]);
+  }, [attempt, evening, notificationDate]);
   return (
     <>
       {failed ? (

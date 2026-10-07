@@ -137,17 +137,29 @@ export function JourneyChapterDialog({
   const { t } = useTranslation('bible');
   return (
     <DialogModalLayout
-      title={`${scripture.chapter.book} ${scripture.chapter.chapter}`}
+      title={
+        scripture.chapterComplete === false
+          ? scripture.reference
+          : `${scripture.chapter.book} ${scripture.chapter.chapter}`
+      }
       closeLabel={t('closeChapter')}
       onClose={onClose}
     >
       <BibleChapterReader
         embedded
         translation={scripture.translation}
+        complete={scripture.chapterComplete !== false}
         result={{ chapter: scripture.chapter, passage: scripture }}
         onClose={onClose}
       />
       <ScriptureCredit {...scripture} />
+      {scripture.chapterComplete === false && (
+        <Button asChild variant="outline">
+          <a href={scripture.sourceUrl} target="_blank" rel="noopener noreferrer">
+            {t('fullChapterOnline')}
+          </a>
+        </Button>
+      )}
     </DialogModalLayout>
   );
 }

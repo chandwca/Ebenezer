@@ -45,5 +45,6 @@
     "installHelp": "Use your browser’s Install app option. On iPhone or iPad, open in Safari and choose Share → Add to Home Screen. Installation is optional; you can keep using the browser.",
     "install": "Install app"
   },
-  "scriptureProvider": "Scripture from YouVersion"
+  "scriptureProvider": "Scripture from YouVersion",
+  "savedVerseLabel": "Read saved verse"
 }

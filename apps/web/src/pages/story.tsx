@@ -4,15 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Layers } from 'lucide-react';
 import { journal } from '@/db/repositories';
 import type { Stone } from '@/db/database';
-import { backupSchema, MAX_BACKUP_BYTES } from '@/db/backup';
 import { Alert } from '@/components/ui/alert';
 import { EmptyState } from '@/components/ui/empty-state';
 import { PageHeading } from '@/components/ui/page-heading';
 import { StoneTower } from '@/components/ui/stone-tower';
 import { StoneDetail } from '@/components/ui/stone-detail';
-import { Disclosure } from '@/components/ui/disclosure';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
-import { JournalToolbar } from '@/components/ui/journal-toolbar';
 import { JourneySummary } from '@/features/remembrance/journey-summary';
 import { StoneEditor } from '@/features/journal/stone-editor';
 import { ReminderPrompt } from '@/features/reminders/reminder-prompt';
@@ -26,11 +23,7 @@ export function StoryPage() {
   const [selectedId, setSelectedId] = useState<string>();
   const [deleting, setDeleting] = useState<Stone>();
   const [busy, setBusy] = useState(false);
-  const [notice, setNotice] = useState<{
-    error: boolean;
-    key: string;
-    values?: { imported: number; skipped: number };
-  }>();
+  const [notice, setNotice] = useState<{ error: boolean; key: string }>();
   const result = useLiveQuery(async () => {
     try {
       return { stones: await journal.listStones(), failed: false };
@@ -40,52 +33,6 @@ export function StoryPage() {
   });
   const stones = result?.stones ?? [];
   const selected = stones.find((stone) => stone.id === selectedId);
-  async function exportJournal() {
-    setBusy(true);
-    setNotice(undefined);
-    try {
-      const backup = await journal.exportBackup();
-      const blob = new Blob([JSON.stringify(backup, null, 2)], {
-        type: 'application/json',
-      });
-      if (blob.size > MAX_BACKUP_BYTES) {
-        setNotice({ error: true, key: 'manage.exportTooLarge' });
-        return;
-      }
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `ebenezer-journal-${backup.exportedAt.slice(0, 10)}.json`;
-      link.click();
-      const revokeUrl = URL.revokeObjectURL.bind(URL);
-      setTimeout(() => revokeUrl(url), 1000);
-      setNotice({ error: false, key: 'manage.exported' });
-    } catch {
-      setNotice({ error: true, key: 'errors:storageUnavailable' });
-    } finally {
-      setBusy(false);
-    }
-  }
-  async function importJournal(file: File) {
-    setBusy(true);
-    setNotice(undefined);
-    try {
-      if (file.size > MAX_BACKUP_BYTES) throw new Error('Invalid backup');
-      const content: unknown = JSON.parse(await file.text());
-      const validated = backupSchema.safeParse(content);
-      if (!validated.success) throw new Error('Invalid backup');
-      try {
-        const summary = await journal.importBackup(validated.data);
-        setNotice({ error: false, key: 'manage.imported', values: summary });
-      } catch {
-        setNotice({ error: true, key: 'errors:storageUnavailable' });
-      }
-    } catch {
-      setNotice({ error: true, key: 'manage.invalidBackup' });
-    } finally {
-      setBusy(false);
-    }
-  }
   return (
     <>
       <PageHeading
@@ -97,16 +44,7 @@ export function StoryPage() {
       {!editing && result && !result.failed && stones.length > 0 && (
         <JourneySummary stones={result.stones} />
       )}
-      <Disclosure label={t('tower.tools')}>
-        <JournalToolbar
-          onExport={() => void exportJournal()}
-          onImport={(file) => void importJournal(file)}
-          busy={busy}
-        />
-      </Disclosure>
-      {notice && (
-        <Alert variant={notice.error ? 'error' : 'success'}>{t(notice.key, notice.values)}</Alert>
-      )}
+      {notice && <Alert variant={notice.error ? 'error' : 'success'}>{t(notice.key)}</Alert>}
       {editing ? (
         <StoneEditor
           key={editing.id}
@@ -153,7 +91,7 @@ export function StoryPage() {
           confirmLabel={t('manage.delete')}
           cancelLabel={t('manage.cancel')}
           busy={busy}
-          error={notice?.error ? t(notice.key, notice.values) : undefined}
+          error={notice?.error ? t(notice.key) : undefined}
           onCancel={() => setDeleting(undefined)}
           onConfirm={() => {
             void (async () => {

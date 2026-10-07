@@ -4,6 +4,7 @@ import { deliver, vapidFromEnv } from '../_shared/push.ts';
 import { corsHeaders, json, rateLimiter } from '../_shared/http.ts';
 import { createStore } from '../_shared/store.ts';
 import { handleSubscriptionRequest } from '../_shared/subscriptions.ts';
+import { createReminderPayloads } from '../_shared/notification-word.ts';
 
 const headers = corsHeaders(Deno.env.get('WEB_ORIGIN') ?? '*');
 const store = createStore(
@@ -36,6 +37,7 @@ Deno.serve(async (request) => {
       vapid: vapidFromEnv((name) => Deno.env.get(name)),
       deliver,
       now: () => new Date(),
+      payloadFor: createReminderPayloads(Deno.env.get('SCRIPTURE_API_URL')),
     });
     return json(reply.body, reply.status, headers);
   } catch {

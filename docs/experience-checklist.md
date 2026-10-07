@@ -53,17 +53,17 @@ The automated suites cover these behaviors locally. The following checklist is t
 - [ ] Generate a QR code only after the public URL is stable.
 - [ ] Rehearse the full experience with demo data and a second account.
 
-## Daily rhythm extension — not implemented yet
+## Daily rhythm and notifications
 
-An on-demand encouragement foundation is now implemented on Today: authenticated requests, public themes only, verified Scripture, optional Gemini provider, and prepared fallback. See [AI setup](./ai-setup.md). Live generation needs a locally configured API key. The full daily/scheduled workflow below is still pending.
+Morning/evening encounters and scheduled Web Push are implemented locally. See [AI setup](./ai-setup.md), [notification setup](./notifications-setup.md), and the [notification submission checklist](./notification-submission-checklist.md) for deployment and device verification. AI availability depends on the deployed API configuration.
 
-- [ ] Daily devotion contracts, private storage, morning intention, and evening continuation.
-- [ ] Reminder settings, timezone, quiet hours, and consent for AI personalization.
+- [x] Morning passage, local carried thought, and evening continuation from a delivered notification.
+- [x] Reminder times, displayed timezone, discreet defaults and explicit Scripture-preview consent.
 - [ ] Verify Gloo inference entitlement; configure server-side credentials.
 - [ ] Curated calendar and optional city weather; exact dataset Scripture and prepared fallback.
-- [ ] Web Push subscriptions, service-worker handling, scheduled worker, bounded retries, and duplicate prevention.
+- [x] Web Push subscriptions, service-worker handling, scheduled worker, bounded delivery window and concurrent delivery claims.
 - [ ] Authorized Realtime updates for prayer/community; catch-up fetch after reconnect.
 - [ ] Sharing preview for prayer/testimony; no automatic publishing of private reflections.
 - [ ] Protected presenter controls and physical-device reminder verification.
 
-The current correction pass stabilizes the existing app. The daily rhythm extension requires its own implementation and validation; installation alone does not enable reminders.
+Hosted notification deployment, physical-device delivery and student validation remain unchecked. Installation alone does not enable reminders; each device must opt in.

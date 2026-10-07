@@ -38,9 +38,9 @@
   },
   "reminders": {
     "title": "Un recordatorio amable, dos veces al día",
-    "morning": "Una Palabra para llevar en tu día",
-    "evening": "Un momento para llevar tu día a Jesús",
-    "privacy": "Los recordatorios solo dicen “Un momento para ti”. No se muestra nada de tu diario.",
+    "morning": "Respira la Palabra",
+    "evening": "Lleva tu día a Jesús",
+    "privacy": "Los recordatorios discretos están activados por defecto. Las vistas previas bíblicas son opcionales. Tu diario nunca aparece en las notificaciones.",
     "turnOn": "Activar recordatorios",
     "turningOn": "Activando…",
     "notNow": "Ahora no",
@@ -66,18 +66,18 @@
     "errors": {
       "blocked": "Las notificaciones fueron bloqueadas. Puedes permitirlas en la configuración del sitio en tu navegador.",
       "dismissed": "No hay problema. Puedes activar los recordatorios cuando quieras.",
-      "not_ready": "Los recordatorios funcionan en la app instalada. Abre Ebenezer desde tu pantalla de inicio o la app instalada e inténtalo de nuevo.",
+      "not_ready": "Las notificaciones no están listas. Recarga Ebenezer y vuelve a activar los recordatorios.",
       "failed": "No se pudieron actualizar los recordatorios. Inténtalo de nuevo."
     },
     "settings": {
       "title": "Recordatorios",
-      "description": "Un recordatorio amable cada mañana y cada noche, en tu zona horaria.",
+      "description": "Recordatorios de mañana y noche en {{timeZone}}. Cambia las horas o desactívalos cuando quieras.",
       "on": "Recordatorios activos",
       "off": "Recordatorios desactivados",
       "morning": "Mañana",
       "evening": "Noche",
       "discreet": "Texto discreto",
-      "discreetNote": "Tu pantalla de bloqueo solo muestra “Un momento para ti”.",
+      "discreetNote": "Activado: solo “Un momento para ti”. Desactivado: la Escritura pública en inglés puede aparecer en tu pantalla bloqueada después de tu consentimiento.",
       "turnOff": "Desactivar recordatorios",
       "tryTitle": "Prueba un recordatorio ahora",
       "try": {
@@ -85,7 +85,21 @@
         "evening": "Recordatorio de la noche"
       },
       "sent": "Enviado. Debería llegar en unos segundos.",
-      "saved": "Guardado."
+      "saved": "Guardado.",
+      "previewTitle": "¿Mostrar la Escritura en tu pantalla bloqueada?",
+      "previewDescription": "Las notificaciones de la mañana incluirán un versículo en inglés, su referencia y el crédito editorial. Las de la noche mencionan a Jesús. Cualquier persona que vea tu pantalla bloqueada podría verlos. Tu diario y tus pensamientos personales nunca se incluyen. Puedes volver al texto discreto cuando quieras.",
+      "previewAllow": "Permitir vistas previas bíblicas",
+      "previewCancel": "Mantener texto discreto"
+    },
+    "encounter": {
+      "morning": "Respira la Palabra",
+      "evening": "Lleva tu día a Jesús",
+      "description": "Tu Palabra del {{date}}. Toma un momento de calma cuando quieras.",
+      "invitation": "Haz una pausa con este pasaje. ¿Qué te ayuda a descubrir sobre el amor de Jesús? Tus preguntas son bienvenidas.",
+      "reflect": "Ora, reflexiona y guarda una piedra",
+      "today": "Ir a Hoy",
+      "missing": "El pasaje original de la notificación ya no está disponible en este dispositivo. Puedes abrir Hoy para elegir una nueva lectura.",
+      "loading": "Abriendo tu pasaje…"
     }
   }
 }

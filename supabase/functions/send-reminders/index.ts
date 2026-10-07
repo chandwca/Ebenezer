@@ -3,6 +3,7 @@ import { deliver, vapidFromEnv } from '../_shared/push.ts';
 import { json, sameSecret } from '../_shared/http.ts';
 import { runReminders } from '../_shared/scheduler.ts';
 import { createStore } from '../_shared/store.ts';
+import { createReminderPayloads } from '../_shared/notification-word.ts';
 
 const store = createStore(
   Deno.env.get('SUPABASE_URL')!,
@@ -16,7 +17,16 @@ Deno.serve(async (request) => {
   const vapid = vapidFromEnv((name) => Deno.env.get(name));
   if (!vapid) return json({ error: 'unavailable' }, 503);
   try {
-    return json(await runReminders({ store, vapid, deliver, now: () => new Date() }), 200);
+    return json(
+      await runReminders({
+        store,
+        vapid,
+        deliver,
+        now: () => new Date(),
+        payloadFor: createReminderPayloads(Deno.env.get('SCRIPTURE_API_URL')),
+      }),
+      200,
+    );
   } catch {
     return json({ error: 'unavailable' }, 503);
   }

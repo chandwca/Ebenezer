@@ -11,6 +11,7 @@ export * from './community.js';
 export * from './encouragement.js';
 export * from './journey-summary.js';
 export * from './songs.js';
+export * from './notifications.js';
 import { worshipSongIds } from './songs.js';
 import { publicPassageReferenceSchema } from './journey-summary.js';
 
@@ -51,6 +52,8 @@ export const scriptureSnapshotSchema = z
         .max(200),
     }),
     inputKey: z.string().max(3000),
+    // Push stores the selected verse, not a whole chapter. Readers must label this honestly.
+    chapterComplete: z.boolean().optional(),
   })
   .refine(
     (value) =>

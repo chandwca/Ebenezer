@@ -8,6 +8,20 @@ import { deliver, requestFor, type Target } from './push.ts';
 import { dueReminder, messageFor, settledSentDates, type Subscription } from './reminders.ts';
 import { runReminders } from './scheduler.ts';
 import { handleSubscriptionRequest, type NewRow, type Row } from './subscriptions.ts';
+import { createReminderPayloads } from './notification-word.ts';
+
+const notificationWord = {
+  date: '2026-10-07',
+  book: '1 John',
+  chapter: 4,
+  verse: 19,
+  reference: '1 John 4:19',
+  text: 'We love because He first loved us.',
+  translation: 'BSB',
+  provider: 'youversion',
+  attribution: 'Fixture public domain attribution.',
+  sourceUrl: 'https://www.bible.com/bible/3034/1JN.4.BSB',
+} as const;
 
 const chicago: Subscription = {
   time_zone: 'America/Chicago',
@@ -28,7 +42,10 @@ test('morning and evening are due at her local time, once a day, within a 3-hour
     date: '2026-10-07',
     marks: { last_morning_sent: '2026-10-07' },
   });
-  assert.equal(dueReminder({ ...chicago, last_morning_sent: '2026-10-07' }, at('07:45')), undefined);
+  assert.equal(
+    dueReminder({ ...chicago, last_morning_sent: '2026-10-07' }, at('07:45')),
+    undefined,
+  );
   assert.equal(dueReminder(chicago, at('10:31')), undefined, 'never hours late');
   assert.equal(dueReminder(chicago, at('20:44'))?.kind, 'evening');
   // The same instant is morning in Chicago and night in Kolkata.
@@ -69,13 +86,16 @@ test('wording: discreet by default, fuller on request, English and Spanish, righ
     tag: 'morning',
   });
   const full = { ...chicago, discreet: false };
-  assert.equal(messageFor('evening', full).body, 'How was your day? Bring it to Jesus tonight.');
+  assert.equal(messageFor('evening', full).body, 'Pause, pray, and build a stone.');
   assert.equal(messageFor('evening', full).url, '/reflection?from=today');
   assert.equal(
     messageFor('welcome', full).body,
     'We’ll meet you at 7:30 AM each morning and 8:30 PM each evening.',
   );
-  assert.equal(messageFor('morning', { ...full, language: 'es' }).body, 'Tu Palabra para hoy está lista.');
+  assert.equal(
+    messageFor('morning', { ...full, language: 'es' }).body,
+    'Haz una pausa con la Escritura cuando quieras.',
+  );
   assert.doesNotMatch(JSON.stringify(messageFor('welcome', chicago)), /Jesus|Word|God/);
 });
 
@@ -128,7 +148,10 @@ test('a reminder is encrypted for the phone and signed with the VAPID key', () =
       Buffer.from(signature, 'base64url'),
     ),
   );
-  assert.equal(JSON.parse(Buffer.from(claims, 'base64url').toString()).aud, 'https://push.example.test');
+  assert.equal(
+    JSON.parse(Buffer.from(claims, 'base64url').toString()).aud,
+    'https://push.example.test',
+  );
   assert.equal(request.headers.TTL, 14400);
 });
 
@@ -151,6 +174,30 @@ test('delivery outcomes: accepted, gone (404/410) and failed', async () => {
 function memoryStore(rows: Row[] = []) {
   return {
     rows,
+    claims: new Map<string, string>(),
+    async claim(id: string, kind: string, date: string, token: string) {
+      const row = rows.find((r) => r.id === id);
+      if (
+        !row ||
+        this.claims.has(id) ||
+        (kind === 'morning' ? row.last_morning_sent : row.last_evening_sent) === date
+      )
+        return false;
+      this.claims.set(id, token);
+      return true;
+    },
+    async finish(id: string, token: string, marks: Partial<Row>) {
+      if (this.claims.get(id) === token) {
+        Object.assign(
+          rows.find((r) => r.id === id)!,
+          marks,
+        );
+        this.claims.delete(id);
+      }
+    },
+    async release(id: string, token: string) {
+      if (this.claims.get(id) === token) this.claims.delete(id);
+    },
     async find(endpoint: string) {
       return rows.find((row) => row.endpoint === endpoint);
     },
@@ -166,7 +213,10 @@ function memoryStore(rows: Row[] = []) {
       return [...rows];
     },
     async mark(id: string, marks: Partial<Row>) {
-      Object.assign(rows.find((row) => row.id === id)!, marks);
+      Object.assign(
+        rows.find((row) => row.id === id)!,
+        marks,
+      );
     },
     async removeById(id: string) {
       rows.splice(0, rows.length, ...rows.filter((row) => row.id !== id));
@@ -197,22 +247,36 @@ test('the app saves settings, gets one welcome, can test now and turn reminders 
     status: 200,
     body: { created: true, welcome: 'sent' },
   });
-  assert.deepEqual(sent.map((item) => item.tag), ['welcome']);
+  assert.deepEqual(
+    sent.map((item) => item.tag),
+    ['welcome'],
+  );
   assert.equal(store.rows[0].discreet, true);
   assert.equal(store.rows[0].last_morning_sent, '2026-10-07', 'no morning reminder right after');
   // Changing times later: no second welcome.
-  await handleSubscriptionRequest({ ...save, eveningTime: '21:15', discreet: false }, deps);
+  await handleSubscriptionRequest(
+    { ...save, eveningTime: '21:15', discreet: false, scripturePreviewConsent: true },
+    deps,
+  );
   assert.equal(sent.length, 1);
   assert.equal(store.rows[0].evening_time, '21:15');
   assert.equal(store.rows.length, 1, 'each phone appears once');
 
   assert.deepEqual(
-    await handleSubscriptionRequest({ action: 'test', endpoint: target.endpoint, kind: 'evening' }, deps),
+    await handleSubscriptionRequest(
+      { action: 'test', endpoint: target.endpoint, kind: 'evening' },
+      deps,
+    ),
     { status: 200, body: { delivery: 'sent' } },
   );
-  assert.equal(sent[1].body, 'How was your day? Bring it to Jesus tonight.');
+  assert.equal(sent[1].body, 'Pause, pray, and build a stone.');
   assert.equal(
-    (await handleSubscriptionRequest({ action: 'test', endpoint: 'https://push.example.test/unknown', kind: 'morning' }, deps)).status,
+    (
+      await handleSubscriptionRequest(
+        { action: 'test', endpoint: 'https://push.example.test/unknown', kind: 'morning' },
+        deps,
+      )
+    ).status,
     404,
   );
   for (const invalid of [
@@ -235,7 +299,10 @@ test('a phone that is gone is forgotten when a welcome or test cannot reach it',
   await handleSubscriptionRequest(
     {
       action: 'save',
-      subscription: { endpoint: target.endpoint, keys: { p256dh: target.p256dh, auth: target.auth } },
+      subscription: {
+        endpoint: target.endpoint,
+        keys: { p256dh: target.p256dh, auth: target.auth },
+      },
       timeZone: 'UTC',
       language: 'es',
     },
@@ -272,4 +339,97 @@ test('the scheduled run sends what is due, marks it, retries failures and forget
   assert.equal(byId.failing.last_morning_sent, null, 'retried on the next run');
   assert.equal(byId.gone, undefined);
   assert.equal(byId.elsewhere.last_morning_sent, null);
+});
+
+test('Scripture previews require explicit consent, preserve the complete verse and attribution, and label English for Spanish users', () => {
+  const preview = messageFor(
+    'morning',
+    { ...chicago, discreet: false, scripture_preview_consent: true },
+    notificationWord,
+  );
+  assert.equal(preview.title, 'Breathe in the Word');
+  assert.ok(preview.body.includes(notificationWord.text));
+  assert.ok(preview.body.includes(notificationWord.attribution));
+  assert.equal(preview.url, '/notification/morning/2026-10-07');
+  assert.equal(preview.word?.text, notificationWord.text);
+  assert.match(
+    messageFor(
+      'morning',
+      { ...chicago, language: 'es', discreet: false, scripture_preview_consent: true },
+      notificationWord,
+    ).body,
+    /Inglés/,
+  );
+  assert.doesNotMatch(messageFor('morning', chicago, notificationWord).body, /love|BSB|John/);
+  assert.doesNotMatch(
+    messageFor('morning', { ...chicago, discreet: false }, notificationWord).body,
+    /John/,
+  );
+  assert.ok(new TextEncoder().encode(JSON.stringify(preview)).length < 3500);
+});
+
+test('missing Scripture and API failures retain an invitation without inventing or truncating verses', async () => {
+  const row = {
+    ...chicago,
+    ...phone().target,
+    id: 'test',
+    discreet: false,
+    scripture_preview_consent: true,
+  };
+  const failed = createReminderPayloads(
+    'https://api.example.test',
+    async () => new Response('unavailable', { status: 503 }),
+  );
+  assert.equal((await failed('morning', row, at('07:30'))).word, undefined);
+  let requests = 0;
+  const ready = createReminderPayloads('https://api.example.test', async (_url, init) => {
+    requests++;
+    assert.deepEqual(JSON.parse(String(init?.body)), { date: '2026-10-07' });
+    return Response.json(notificationWord);
+  });
+  const [morning, evening] = await Promise.all([
+    ready('morning', row, at('07:30')),
+    ready('evening', row, at('20:30')),
+  ]);
+  assert.equal(requests, 1);
+  assert.equal(morning.word?.text, evening.word?.text);
+  assert.equal(evening.url, '/notification/evening/2026-10-07');
+});
+
+test('overlapping scheduler runs claim a phone once and replays do not send again', async () => {
+  const store = memoryStore([{ ...chicago, ...phone().target, id: 'same-phone' }]);
+  let sent = 0;
+  const deps = {
+    store,
+    vapid,
+    now: () => at('07:35'),
+    deliver: async () => {
+      sent++;
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      return 'sent' as const;
+    },
+  };
+  await Promise.all([runReminders(deps), runReminders(deps)]);
+  await runReminders(deps);
+  assert.equal(sent, 1);
+});
+
+test('legacy non-discreet requests cannot enable Scripture without fresh consent', async () => {
+  const { target } = phone();
+  const request = {
+    action: 'save',
+    subscription: { endpoint: target.endpoint, keys: { p256dh: target.p256dh, auth: target.auth } },
+    timeZone: 'UTC',
+    language: 'en',
+    discreet: false,
+  };
+  const store = memoryStore();
+  const deps = { store, vapid, now: () => at('07:35'), deliver: async () => 'sent' as const };
+  assert.equal((await handleSubscriptionRequest(request, deps)).status, 400);
+  assert.equal(store.rows.length, 0);
+  assert.equal(
+    (await handleSubscriptionRequest({ ...request, scripturePreviewConsent: true }, deps)).status,
+    200,
+  );
+  assert.equal(store.rows[0].scripture_preview_consent, true);
 });
