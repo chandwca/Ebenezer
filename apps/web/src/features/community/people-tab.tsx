@@ -50,7 +50,7 @@ export function PeopleTab({
   const friends = community.connections.filter((item) => item.status === 'accepted');
 
   return (
-    <ContentLayout layout="split">
+    <ContentLayout layout="columns">
       <ContentLayout>
         {incoming.length > 0 && (
           <SectionCard title={t('people.requests')}>

@@ -3,7 +3,7 @@ import { ChevronDown, Download } from 'lucide-react';
 import { usePwa } from '@/pwa/use-pwa';
 import { Alert } from './alert';
 import { Button } from './button';
-export function PwaStatus() {
+export function PwaStatus({ showInstall = true }: { showInstall?: boolean }) {
   const { t } = useTranslation('common');
   const pwa = usePwa();
   return (
@@ -25,7 +25,7 @@ export function PwaStatus() {
           </div>
         </Alert>
       )}
-      {!pwa.installed && (
+      {showInstall && !pwa.installed && (
         <details className="group/install justify-self-start text-sm text-muted-foreground">
           <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-2 rounded-full border border-border/80 bg-card px-3.5 text-xs font-medium transition-colors hover:text-foreground [&::-webkit-details-marker]:hidden">
             <Download aria-hidden="true" className="size-3.5 text-teal" />

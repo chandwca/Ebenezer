@@ -160,6 +160,13 @@
     "thoughtPlaceholder": "Un pequeño pensamiento para el día…",
     "carry": "Llevarlo conmigo hoy",
     "thoughtSaved": "Tu pensamiento está guardado",
+    "carriedTitle": "Hoy llevas esto contigo",
+    "carryWays": [
+      "Antes de tu primera clase o tarea, léelo otra vez y respira despacio.",
+      "Cuando el día se sienta pesado, haz una pausa y dilo como una oración corta.",
+      "Esta noche te lo recordaremos para que notes cómo Dios te encontró."
+    ],
+    "changeThought": "Cambiar mi pensamiento",
     "prayerLabel": "Una breve oración"
   }
 }

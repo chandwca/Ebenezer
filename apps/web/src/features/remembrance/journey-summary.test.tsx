@@ -47,7 +47,6 @@ it('sends each stone’s day, Scripture and words, signed out, but never prayer-
     </AuthProvider>,
   );
   await screen.findByText('Hard days have a place in your journey.');
-  expect(screen.getByText(/Written with Google AI from your stones/)).toBeTruthy();
   const [url, options] = fetch.mock.calls[0] as unknown as [string, RequestInit];
   expect(url).toContain('/v1/journey-summary');
   expect(new Headers(options.headers).has('Authorization')).toBe(false);

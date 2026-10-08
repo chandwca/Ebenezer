@@ -175,7 +175,7 @@ export function GroupsTab({
       .catch(fail);
 
   return (
-    <ContentLayout layout="split">
+    <ContentLayout layout="columns">
       <ContentLayout>
         {invited.length > 0 && (
           <SectionCard title={t('groups.invitations')} plain>

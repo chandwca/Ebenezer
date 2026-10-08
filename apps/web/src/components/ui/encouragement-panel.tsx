@@ -1,5 +1,6 @@
 import { quoted } from '@/lib/scripture';
 import { useTranslation } from 'react-i18next';
+import { HeartHandshake, Moon, Sunrise } from 'lucide-react';
 import {
   morningPassage,
   type EncouragementRequest,
@@ -8,6 +9,8 @@ import {
 import { Button } from './button';
 import { Card } from './card';
 import { ScriptureCredit } from './scripture-credit';
+
+const carryIcons = [Sunrise, HeartHandshake, Moon];
 
 export function EncouragementPanel({
   input,
@@ -77,25 +80,42 @@ export function EncouragementPanel({
           <h3 className="text-xs font-semibold uppercase tracking-widest text-teal">
             {t('morning.thoughtTitle')}
           </h3>
-          <label htmlFor="morning-thought" className="mt-3 block text-sm font-medium">
-            {result?.encouragement.question ?? t('morning.preparedQuestion')}
-          </label>
-          <textarea
-            id="morning-thought"
-            value={thought}
-            maxLength={500}
-            rows={2}
-            onChange={(event) => onThoughtChange(event.target.value)}
-            placeholder={t('morning.thoughtPlaceholder')}
-            className="mt-3 w-full rounded-xl border bg-background p-3 text-sm leading-6"
-          />
-          <Button
-            className="mt-3"
-            disabled={!thought.trim() || thoughtSaved || savingThought}
-            onClick={onCarry}
-          >
-            {t(thoughtSaved ? 'morning.thoughtSaved' : 'morning.carry')}
-          </Button>
+          {thoughtSaved ? (
+            <div className="mt-3 rounded-2xl bg-gold/10 p-5 ring-1 ring-gold/25">
+              <p role="status" className="sr-only">
+                {t('morning.thoughtSaved')}
+              </p>
+              <p className="text-xs font-semibold text-muted-foreground">
+                {t('morning.carriedTitle')}
+              </p>
+              <p className="mt-2 break-words font-serif text-xl leading-relaxed">
+                {quoted(thought.trim())}
+              </p>
+              
+            </div>
+          ) : (
+            <>
+              <label htmlFor="morning-thought" className="mt-3 block text-sm font-medium">
+                {result?.encouragement.question ?? t('morning.preparedQuestion')}
+              </label>
+              <textarea
+                id="morning-thought"
+                value={thought}
+                maxLength={500}
+                rows={2}
+                onChange={(event) => onThoughtChange(event.target.value)}
+                placeholder={t('morning.thoughtPlaceholder')}
+                className="mt-3 w-full rounded-xl border bg-background p-3 text-sm leading-6"
+              />
+              <Button
+                className="mt-3"
+                disabled={!thought.trim() || savingThought}
+                onClick={onCarry}
+              >
+                {t('morning.carry')}
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </Card>

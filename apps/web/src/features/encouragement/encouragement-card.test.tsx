@@ -119,7 +119,7 @@ it('keeps the same Word and carried thought all day instead of choosing a new ve
     </AuthProvider>,
   );
   expect(await screen.findByText('“Remember me according to your loving kindness.”')).toBeTruthy();
-  expect(screen.getByRole('textbox')).toHaveProperty('value', 'I am remembered.');
+  expect(screen.getByText('“I am remembered.”')).toBeTruthy();
   await waitFor(async () =>
     expect(
       JSON.parse(String((await journal.getPreference('today:morningWord'))?.value)).thought,

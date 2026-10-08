@@ -33,9 +33,6 @@ export function RemembrancePanel({
         {result && (
           <p className="mt-4 text-sm font-medium text-teal">{result.reflection.question}</p>
         )}
-        {result?.source === 'ai' && (
-          <p className="mt-3 text-xs text-muted-foreground">{t('summary.aiNote')}</p>
-        )}
         {busy && (
           <p role="status" className="mt-3 text-sm text-muted-foreground">
             {t('summary.gathering')}

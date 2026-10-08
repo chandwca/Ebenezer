@@ -15,6 +15,8 @@ import { BoardTab } from './board-tab';
 import { GroupsTab } from './groups-tab';
 import { PeopleTab, usePrayerContacts } from './people-tab';
 import { useCommunity } from './use-community';
+import { ContentLayout } from '@/components/ui/content-layout';
+import { ViewDescription } from '@/components/ui/view-description';
 
 type Tab = 'board' | 'groups' | 'people';
 
@@ -50,29 +52,30 @@ function AccountBoard({ initialTab }: { initialTab: Tab }) {
 
   const gate =
     community.status === 'signed_out' || community.status === 'profile_required' ? (
-      <>
+      <ContentLayout>
         <Alert variant="info">
           {t(community.status === 'signed_out' ? 'status.signIn' : 'status.profile')}
         </Alert>
-        <AccountCard />
-      </>
+        <AccountCard returnTo="/community" />
+      </ContentLayout>
     ) : community.status === 'offline' ? (
       <Alert variant="info">{t('status.offline')}</Alert>
     ) : community.status === 'error' ? (
-      <>
+      <ContentLayout>
         <Alert>{t(`errors.${community.error ?? 'request_failed'}`)}</Alert>
         <Button variant="outline" onClick={community.actions.reload}>
           {t('status.retry')}
         </Button>
-      </>
+      </ContentLayout>
     ) : community.status === 'loading' ? (
       <Alert variant="info">{t('status.loading')}</Alert>
     ) : null;
 
   return (
-    <>
+    <ContentLayout>
       {notice && <Alert variant={notice.error ? 'error' : 'success'}>{notice.message}</Alert>}
       <SegmentedTabs
+        flush
         label={t('tabs.label')}
         value={tab}
         onChange={(value) => {
@@ -85,6 +88,10 @@ function AccountBoard({ initialTab }: { initialTab: Tab }) {
           { value: 'people', label: t('tabs.people'), icon: HandHeart, count: incoming },
         ]}
       />
+
+      <ViewDescription>
+        {t(`tabs.description.${tab}`)}
+      </ViewDescription>
 
       {tab === 'people' ? (
         <PeopleTab community={community} onAsk={setAsking} onNotice={onNotice} />
@@ -154,6 +161,6 @@ function AccountBoard({ initialTab }: { initialTab: Tab }) {
           onClose={() => setAsking(undefined)}
         />
       )}
-    </>
+    </ContentLayout>
   );
 }

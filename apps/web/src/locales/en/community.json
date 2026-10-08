@@ -7,7 +7,12 @@
     "label": "Together views",
     "board": "Board",
     "groups": "Groups",
-    "people": "My people"
+    "people": "My people",
+    "description": {
+      "board": "Share an experience, a stone or a prayer request with the audience you choose.",
+      "groups": "Find a group to pray, share and walk with.",
+      "people": "Start with someone you trust. Add your people and ask them to pray with you."
+    }
   },
   "status": {
     "loading": "Loading…",

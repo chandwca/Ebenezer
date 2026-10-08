@@ -80,7 +80,7 @@ export function BoardTab({
   }
 
   return (
-    <ContentLayout layout="split">
+    <ContentLayout layout="columns">
       <ContentLayout>
         <PostComposer
           authorName={community.profileName ?? t('post.you')}

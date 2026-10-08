@@ -120,14 +120,11 @@ export function AppShell({
       <div className="md:ml-64">
         <header
           ref={headerRef}
-          className="sticky top-0 z-30 flex min-h-24 flex-wrap items-center justify-between gap-3 border-b bg-background px-5 py-4 sm:px-9"
+          className="sticky top-0 z-30 flex min-h-24 flex-wrap items-center justify-between gap-3 border-b bg-background px-5 py-4 sm:px-9 md:justify-end"
         >
           <div className="md:hidden">
             <Brand />
           </div>
-          <p className="hidden text-sm text-muted-foreground md:block">
-            {t('common:headerTagline')}
-          </p>
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSelect id="header-language" />
             <Button
@@ -149,7 +146,7 @@ export function AppShell({
           id="main-content"
           className="mx-auto max-w-6xl scroll-mt-[calc(var(--app-header-height,6rem)+1.5rem)] px-5 py-9 pb-32 outline-none sm:px-9 md:pb-12"
         >
-          <PwaStatus />
+          <PwaStatus showInstall={!['/', '/story'].includes(location.pathname)} />
           {children}
           <footer className="mt-10 flex items-center gap-2 border-t pt-5 text-xs text-muted-foreground">
             <Check size={14} /> {t('common:footer')}

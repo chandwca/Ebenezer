@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { ReminderInvite } from '@/components/ui/reminder-invite';
+import { ReminderDock } from '@/components/ui/reminder-dock';
 import { useReminders } from './use-reminders';
 
 /** "7:30 AM" or "7:30" in her language. */
@@ -22,12 +22,20 @@ export function ReminderPrompt({ placement }: { placement: 'today' | 'after-ston
   const { t, i18n } = useTranslation('settings');
   const reminders = useReminders();
   const [justTurnedOn, setJustTurnedOn] = React.useState(false);
+  const [confirmedSeen, setConfirmedSeen] = React.useState(false);
+  // The confirmation floats over the page, so it steps aside after a few seconds.
+  React.useEffect(() => {
+    if (!justTurnedOn) return;
+    const timer = setTimeout(() => setConfirmedSeen(true), 6000);
+    return () => clearTimeout(timer);
+  }, [justTurnedOn]);
   const { status, settings, busy, error } = reminders;
   const language = i18n.resolvedLanguage ?? 'en';
 
+  if (confirmedSeen) return null;
   if (justTurnedOn)
     return (
-      <ReminderInvite
+      <ReminderDock
         title={t('reminders.title')}
         confirmed={t('reminders.confirmed', {
           time: formatReminderTime(settings.morningTime, language),
@@ -39,31 +47,31 @@ export function ReminderPrompt({ placement }: { placement: 'today' | 'after-ston
   if (!askable || !shown) return null;
 
   const notNow = (
-    <Button variant="ghost" onClick={() => void reminders.dismiss()}>
+    <Button variant="ghost" size="sm" onClick={() => void reminders.dismiss()}>
       {t('reminders.notNow')}
     </Button>
   );
   if (status === 'install-first')
     return (
-      <ReminderInvite
+      <ReminderDock
         title={t('reminders.install.title')}
         steps={t('reminders.install.steps', { returnObjects: true }) as string[]}
         note={t('reminders.privacy')}
       >
         {notNow}
-      </ReminderInvite>
+      </ReminderDock>
     );
   if (status === 'blocked')
     return (
-      <ReminderInvite
+      <ReminderDock
         title={t('reminders.blocked.title')}
         steps={t('reminders.blocked.steps', { returnObjects: true }) as string[]}
       >
         {notNow}
-      </ReminderInvite>
+      </ReminderDock>
     );
   return (
-    <ReminderInvite
+    <ReminderDock
       title={t('reminders.title')}
       lines={[
         {
@@ -79,15 +87,15 @@ export function ReminderPrompt({ placement }: { placement: 'today' | 'after-ston
       ]}
       note={t('reminders.privacy')}
       message={error ? t(`reminders.errors.${error}`) : undefined}
-      footnote={t('reminders.changeLater')}
     >
       <Button
+        size="sm"
         onClick={() => void reminders.turnOn().then((done) => done && setJustTurnedOn(true))}
         disabled={busy}
       >
         {t(busy ? 'reminders.turningOn' : 'reminders.turnOn')}
       </Button>
       {notNow}
-    </ReminderInvite>
+    </ReminderDock>
   );
 }

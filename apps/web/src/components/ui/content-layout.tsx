@@ -4,7 +4,12 @@ import { cn } from '@/lib/utils';
 
 const stackVariants = cva('grid', {
   variants: {
-    layout: { stack: 'gap-5', split: 'mt-7 items-start gap-6 lg:grid-cols-[1.4fr_1fr]' },
+    layout: {
+      stack: 'gap-5',
+      spacious: 'gap-7',
+      split: 'mt-7 items-start gap-6 lg:grid-cols-[1.4fr_1fr]',
+      columns: 'items-start gap-6 lg:grid-cols-[1.4fr_1fr]',
+    },
   },
   defaultVariants: { layout: 'stack' },
 });

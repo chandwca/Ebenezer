@@ -160,6 +160,13 @@
     "thoughtPlaceholder": "One small thought for the day ahead…",
     "carry": "Carry this today",
     "thoughtSaved": "Your thought is saved",
+    "carriedTitle": "You’re carrying this today",
+    "carryWays": [
+      "Before your first class or task, read it once more and take a slow breath.",
+      "When the day feels heavy, pause and say it again as a short prayer.",
+      "Tonight, we’ll bring it back so you can notice how God met you."
+    ],
+    "changeThought": "Change my thought",
     "prayerLabel": "A short prayer"
   }
 }

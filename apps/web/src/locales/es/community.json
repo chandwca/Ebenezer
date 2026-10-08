@@ -7,7 +7,12 @@
     "label": "Vistas de Juntos",
     "board": "Tablero",
     "groups": "Grupos",
-    "people": "Mi gente"
+    "people": "Mi gente",
+    "description": {
+      "board": "Comparte una experiencia, una piedra o una petición de oración con las personas que elijas.",
+      "groups": "Encuentra un grupo para orar, compartir y caminar juntos.",
+      "people": "Empieza con alguien de confianza. Añade a tu gente y pídeles que oren contigo."
+    }
   },
   "status": {
     "loading": "Cargando…",
