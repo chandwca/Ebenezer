@@ -10,7 +10,7 @@ export function PreferenceCard({
   children,
 }: {
   title: string;
-  description?: string;
+  description: string;
   note?: string;
   icon?: LucideIcon;
   children?: React.ReactNode;
@@ -22,9 +22,7 @@ export function PreferenceCard({
           {Icon && <Icon className="shrink-0 text-teal" aria-hidden="true" />}
           <div>
             <h2 className="font-semibold">{title}</h2>
-            {description && (
-              <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">{description}</p>
-            )}
+            <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">{description}</p>
           </div>
         </div>
         {children}

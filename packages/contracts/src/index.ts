@@ -172,4 +172,3 @@ export const eveningWordResponseSchema = z.strictObject({
   source: z.literal('ai'),
 });
 export type EveningWordResponse = z.infer<typeof eveningWordResponseSchema>;
-export * from './word.js';

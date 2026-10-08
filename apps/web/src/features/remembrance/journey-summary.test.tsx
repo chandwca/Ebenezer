@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { beforeEach, it, expect, vi } from 'vitest';
 import { db } from '@/db/database';
 import { emptyReflection } from '@ebenezer/contracts';
@@ -46,8 +46,6 @@ it('sends each stone’s day, Scripture and words, signed out, but never prayer-
       <JourneySummary stones={[{ ...stones[0], partner: 'Priya' }]} />
     </AuthProvider>,
   );
-  expect(fetch).not.toHaveBeenCalled();
-  fireEvent.click(await screen.findByRole('button', { name: 'Write me a reflection with AI' }));
   await screen.findByText('Hard days have a place in your journey.');
   expect(screen.getByText(/Written with Google AI from your stones/)).toBeTruthy();
   const [url, options] = fetch.mock.calls[0] as unknown as [string, RequestInit];
@@ -71,9 +69,11 @@ it('sends each stone’s day, Scripture and words, signed out, but never prayer-
   expect(String(options.body)).not.toContain('Priya');
 });
 
-it('keeps a gentle remembrance and sends nothing until asked, even when AI is unavailable', async () => {
-  const fetch = vi.fn(async () => new Response('{}', { status: 503 }));
-  vi.stubGlobal('fetch', fetch);
+it('keeps a gentle remembrance without a generate button when AI is unavailable', async () => {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async () => new Response('{}', { status: 503 })),
+  );
   const fixture = authFixture(accountSession());
   renderWithProviders(
     <AuthProvider client={fixture.client}>
@@ -81,10 +81,7 @@ it('keeps a gentle remembrance and sends nothing until asked, even when AI is un
     </AuthProvider>,
   );
   await screen.findByRole('heading', { name: 'Remembering His faithfulness' });
-  expect(fetch).not.toHaveBeenCalled();
-  expect(screen.getByText(/room here for both the hard days/)).toBeTruthy();
-  fireEvent.click(screen.getByRole('button', { name: 'Write me a reflection with AI' }));
-  await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+  expect(screen.queryByRole('button')).toBeNull();
   expect(screen.getByText(/room here for both the hard days/)).toBeTruthy();
 });
 
@@ -104,7 +101,6 @@ it('when the AI is busy, her last AI reflection stays instead of generic text', 
       <JourneySummary stones={[{ ...stones[0], tone: 'mixed' }]} />
     </AuthProvider>,
   );
-  fireEvent.click(await screen.findByRole('button', { name: 'Write me a reflection with AI' }));
   await screen.findByText('Hard days have a place in your journey.');
   await waitFor(async () => expect(await db.preferences.get('remembrance:last')).toBeTruthy());
   first.unmount();
@@ -119,7 +115,6 @@ it('when the AI is busy, her last AI reflection stays instead of generic text', 
       />
     </AuthProvider>,
   );
-  fireEvent.click(await screen.findByRole('button', { name: 'Write me a reflection with AI' }));
   await waitFor(() => expect(screen.queryByText('Taking a moment with your journey…')).toBeNull());
   expect(screen.getByText('Hard days have a place in your journey.')).toBeTruthy();
   expect(screen.queryByText('Generic prepared words.')).toBeNull();

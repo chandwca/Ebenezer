@@ -3,12 +3,9 @@ import { ChevronDown, Download } from 'lucide-react';
 import { usePwa } from '@/pwa/use-pwa';
 import { Alert } from './alert';
 import { Button } from './button';
-export function PwaStatus({ showInstall = false }: { showInstall?: boolean }) {
+export function PwaStatus() {
   const { t } = useTranslation('common');
   const pwa = usePwa();
-  const visible =
-    !pwa.online || pwa.ready || pwa.failed || pwa.waiting || (showInstall && !pwa.installed);
-  if (!visible) return null;
   return (
     <div className="mb-6 grid gap-3">
       {!pwa.online && <Alert variant="info">{t('pwa.offline')}</Alert>}
@@ -28,7 +25,7 @@ export function PwaStatus({ showInstall = false }: { showInstall?: boolean }) {
           </div>
         </Alert>
       )}
-      {showInstall && !pwa.installed && (
+      {!pwa.installed && (
         <details className="group/install justify-self-start text-sm text-muted-foreground">
           <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-2 rounded-full border border-border/80 bg-card px-3.5 text-xs font-medium transition-colors hover:text-foreground [&::-webkit-details-marker]:hidden">
             <Download aria-hidden="true" className="size-3.5 text-teal" />

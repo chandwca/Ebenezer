@@ -1,19 +1,24 @@
 {
+  "brandTagline": "Un pequeño recuerdo",
   "navigation": {
     "today": "Hoy",
-    "story": "Mis piedras",
+    "story": "Mi historia",
     "community": "Juntos",
     "settings": "Ajustes",
     "reflection": "Reflexión",
-    "bibleSearch": "Buscar en la Biblia",
-    "send": "Enviar"
+    "bibleSearch": "Buscar en la Biblia"
   },
   "mainNavigation": "Navegación principal",
   "mobileNavigation": "Navegación móvil",
   "skipContent": "Saltar al contenido",
+  "dailyWalk": "Tu camino diario",
+  "sidebarTitle": "Pequeñas piedras. Una historia que perdura.",
+  "sidebarDescription": "Recuerda lo que te ha sostenido hasta aquí.",
+  "headerTagline": "Recorre el camino. Coloca una piedra.",
   "preview": "Vista previa inicial",
   "backToday": "Volver a Hoy",
   "returnToday": "Volver a Hoy",
+  "footer": "Un espacio para la Escritura, la reflexión y el recuerdo.",
   "stepOf": "Paso {{current}} de {{total}} · {{step}}",
   "steps": {
     "feel": "Sentir",

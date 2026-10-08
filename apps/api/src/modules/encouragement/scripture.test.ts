@@ -61,37 +61,3 @@ test('reference-only Scripture route works signed out and rejects personal input
     await app.close();
   }
 });
-
-test('Word cards resolve a reviewed moment once, cache it, and refuse anything else', async () => {
-  let calls = 0;
-  const counting: ScriptureProvider = {
-    passage: (...args) => {
-      calls += 1;
-      return scriptureProvider.passage(...args);
-    },
-  };
-  const app = createApp({ logger: false, scriptureProvider: counting });
-  try {
-    const first = await app.inject({ method: 'GET', url: '/v1/word/hard' });
-    assert.equal(first.statusCode, 200);
-    assert.equal(first.json().reference.startsWith('Psalm'), true);
-    assert.equal(first.json().provider, 'youversion');
-    assert.match(first.headers['cache-control']!, /public/);
-    const second = await app.inject({ method: 'GET', url: '/v1/word/hard' });
-    assert.equal(second.statusCode, 200);
-    assert.equal(calls, 1);
-    assert.equal((await app.inject({ method: 'GET', url: '/v1/word/nope' })).statusCode, 404);
-  } finally {
-    await app.close();
-  }
-});
-
-test('the Word card route is not limited like free-form Scripture lookups', async () => {
-  const app = createApp({ logger: false, scriptureProvider });
-  try {
-    for (let index = 0; index < 60; index++)
-      assert.equal((await app.inject({ method: 'GET', url: '/v1/word/new' })).statusCode, 200);
-  } finally {
-    await app.close();
-  }
-});

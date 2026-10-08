@@ -13,12 +13,18 @@ export function EncouragementPanel({
   input,
   result,
   thought,
+  thoughtSaved,
+  savingThought,
   onThoughtChange,
+  onCarry,
 }: {
   input: EncouragementRequest;
   result?: EncouragementResponse;
   thought: string;
+  thoughtSaved: boolean;
+  savingThought: boolean;
   onThoughtChange: (value: string) => void;
+  onCarry: () => void;
 }) {
   const { t } = useTranslation('today');
   const passage = result?.scripture ?? morningPassage(input);
@@ -42,7 +48,7 @@ export function EncouragementPanel({
         </p>
       )}
       <ScriptureCredit {...result?.scripture} />
-      <Button asChild variant="ghost" className="mb-1 mt-2 px-0">
+      <Button asChild variant="ghost" className="my-3 px-0">
         <a
           href={
             result?.scripture.sourceUrl ??
@@ -54,21 +60,24 @@ export function EncouragementPanel({
           {t('morning.read')}
         </a>
       </Button>
-      <div className="mt-2 space-y-4" aria-live="polite">
+      <div className="mt-4 space-y-4" aria-live="polite">
+        <p className="leading-7">
+          {result?.encouragement.message ??
+            t(`morning.prepared.${input.occasion ? 'occasion' : input.theme}`)}
+        </p>
         <details>
           <summary className="cursor-pointer text-sm font-semibold text-teal">
-            {t('morning.more')}
+            {t('morning.prayerLabel')}
           </summary>
-          <p className="mt-3 leading-7">
-            {result?.encouragement.message ??
-              t(`morning.prepared.${input.occasion ? 'occasion' : input.theme}`)}
-          </p>
-          <p className="mt-3 leading-6">
+          <p className="mt-2 leading-6">
             {result?.encouragement.prayer ?? t('morning.preparedPrayer')}
           </p>
         </details>
         <div className="border-t pt-5">
-          <label htmlFor="morning-thought" className="block text-sm font-medium">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-teal">
+            {t('morning.thoughtTitle')}
+          </h3>
+          <label htmlFor="morning-thought" className="mt-3 block text-sm font-medium">
             {result?.encouragement.question ?? t('morning.preparedQuestion')}
           </label>
           <textarea
@@ -80,6 +89,13 @@ export function EncouragementPanel({
             placeholder={t('morning.thoughtPlaceholder')}
             className="mt-3 w-full rounded-xl border bg-background p-3 text-sm leading-6"
           />
+          <Button
+            className="mt-3"
+            disabled={!thought.trim() || thoughtSaved || savingThought}
+            onClick={onCarry}
+          >
+            {t(thoughtSaved ? 'morning.thoughtSaved' : 'morning.carry')}
+          </Button>
         </div>
       </div>
     </Card>

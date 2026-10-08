@@ -43,7 +43,7 @@ export function HeartSpace({
           </p>
         </div>
       </div>
-      <div className="rounded-2xl bg-card px-5 py-4 shadow-[0_8px_30px_-12px_#062a3326] ring-1 ring-border/50 transition-shadow focus-within:ring-2 focus-within:ring-teal/50 motion-reduce:transition-none">
+      <div className="rounded-2xl bg-card px-5 py-4 shadow-[0_8px_30px_-12px_#173b4d26] ring-1 ring-border/50 transition-shadow focus-within:ring-2 focus-within:ring-teal/50 motion-reduce:transition-none">
         <WritingArea
           {...props}
           ref={input}

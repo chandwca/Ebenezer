@@ -82,7 +82,9 @@ describe('bundled language support', () => {
     await screen.findByRole('heading', { level: 1 });
     fireEvent.click(screen.getByRole('button', { name: 'Switch to dark' }));
     await selectSpanish(screen.getAllByRole('combobox')[0]);
-    expect((await screen.findByRole('heading', { level: 1 })).textContent).toBe('Ajustes.');
+    expect((await screen.findByRole('heading', { level: 1 })).textContent).toBe(
+      'Tus preferencias.',
+    );
     expect(screen.getByRole('navigation', { name: 'Navegación principal' })).toBeTruthy();
     expect(screen.getAllByRole('combobox', { name: 'Idioma de la aplicación' })).toHaveLength(2);
     expect(document.title).toBe('Ajustes · Ebenezer');
@@ -98,15 +100,16 @@ describe('bundled language support', () => {
     for (const [route, heading] of [
       ['/', /^(Buenos días|Buenas tardes|Buenas noches)$/],
       ['/reflection', 'Recorre el camino.'],
-      ['/story', 'Mi historia'],
-      ['/community', 'Juntos'],
+      ['/story', 'Hasta aquí me ha ayudado el Señor.'],
+      ['/community', '¿Quién caminará contigo?'],
       ['/missing', 'Este camino no existe.'],
     ] as const) {
       renderWithProviders(<App />, { route });
       expect(await screen.findByRole('heading', { level: 1, name: heading })).toBeTruthy();
       if (route === '/') {
-        expect(screen.getByRole('link', { name: /^Enviar una Palabra/ })).toBeTruthy();
-        expect(screen.getByRole('link', { name: /^Reflexionar/ })).toBeTruthy();
+        expect(
+          screen.getByRole('link', { name: 'Comenzar la reflexión de esta noche' }),
+        ).toBeTruthy();
         expect(screen.getByRole('heading', { name: 'Una Palabra para hoy' })).toBeTruthy();
         expect(screen.getByText(/^“.+”$/, { selector: 'blockquote' }).getAttribute('lang')).toBe(
           'en',

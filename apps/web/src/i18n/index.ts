@@ -39,7 +39,7 @@ void i18n.init({
   fallbackLng: 'en',
   supportedLngs: ['en', 'es'],
   defaultNS: 'common',
-  ns: ['common', 'today', 'settings', 'journal', 'community', 'errors', 'bible', 'account', 'word'],
+  ns: ['common', 'today', 'settings', 'journal', 'community', 'errors', 'bible', 'account'],
   interpolation: { escapeValue: false }, // React escapes rendered text.
   react: { useSuspense: false },
 });

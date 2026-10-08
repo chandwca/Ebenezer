@@ -39,13 +39,9 @@ function AccountProfile() {
 }
 
 /** `returnTo`: where Google sign-in should come back to (Settings by default). */
-export function AccountCard({
-  returnTo,
-  hideWhenUnavailable = false,
-}: { returnTo?: string; hideWhenUnavailable?: boolean } = {}) {
+export function AccountCard({ returnTo }: { returnTo?: string } = {}) {
   const { t } = useTranslation('account');
   const { status, session, online, pending, error, signIn, signOut, retry } = useAccountActions();
-  if (hideWhenUnavailable && status === 'unavailable') return null;
   return (
     <AccountPanel
       title={t(session ? 'signedInTitle' : 'title')}

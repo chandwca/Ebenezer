@@ -6,7 +6,7 @@ export function TogetherPage() {
   const { t } = useTranslation('community');
   return (
     <>
-      <PageHeading title={t('title')} />
+      <PageHeading eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
       <TogetherBoard />
     </>
   );

@@ -22,23 +22,19 @@ export function ReminderPrompt({ placement }: { placement: 'today' | 'after-ston
   const { t, i18n } = useTranslation('settings');
   const reminders = useReminders();
   const [justTurnedOn, setJustTurnedOn] = React.useState(false);
-  const [attempted, setAttempted] = React.useState(false);
   const { status, settings, busy, error } = reminders;
   const language = i18n.resolvedLanguage ?? 'en';
 
   if (justTurnedOn)
     return (
       <ReminderInvite
-        compact
         title={t('reminders.title')}
         confirmed={t('reminders.confirmed', {
           time: formatReminderTime(settings.morningTime, language),
         })}
       />
     );
-  const askable =
-    status === 'off' ||
-    ((placement !== 'today' || attempted) && (status === 'blocked' || status === 'install-first'));
+  const askable = status === 'off' || status === 'blocked' || status === 'install-first';
   const shown = placement === 'today' ? !settings.dismissed : settings.dismissed === 'once';
   if (!askable || !shown) return null;
 
@@ -68,15 +64,25 @@ export function ReminderPrompt({ placement }: { placement: 'today' | 'after-ston
     );
   return (
     <ReminderInvite
-      compact
       title={t('reminders.title')}
+      lines={[
+        {
+          kind: 'morning',
+          time: formatReminderTime(settings.morningTime, language),
+          text: t('reminders.morning'),
+        },
+        {
+          kind: 'evening',
+          time: formatReminderTime(settings.eveningTime, language),
+          text: t('reminders.evening'),
+        },
+      ]}
+      note={t('reminders.privacy')}
       message={error ? t(`reminders.errors.${error}`) : undefined}
+      footnote={t('reminders.changeLater')}
     >
       <Button
-        onClick={() => {
-          setAttempted(true);
-          void reminders.turnOn().then((done) => done && setJustTurnedOn(true));
-        }}
+        onClick={() => void reminders.turnOn().then((done) => done && setJustTurnedOn(true))}
         disabled={busy}
       >
         {t(busy ? 'reminders.turningOn' : 'reminders.turnOn')}

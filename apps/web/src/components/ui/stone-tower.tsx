@@ -12,12 +12,9 @@ const RAIL = 26;
 const tones = ['hard', 'mixed', 'bright'] as const;
 type Tone = (typeof tones)[number];
 
-const light = (tone: Tone, share: string) =>
-  `color-mix(in oklch, ${stoneColors[tone].fill} ${share}, white)`;
-const deep = (tone: Tone, share: string) =>
-  `color-mix(in oklch, ${stoneColors[tone].fill} ${share}, #020d14)`;
-
-const STAR_COUNT = 34;
+/** Earthy versions of the tone colors, so stones read as rock rather than buttons. */
+const shade = (tone: Tone, mix: string) =>
+  `color-mix(in oklch, ${stoneColors[tone].fill} ${mix}, #b4a993)`;
 
 /** Small deterministic noise from a stone's id, so each stone keeps its shape between visits. */
 function seeded(id: string) {
@@ -37,7 +34,7 @@ function stoneWidth(stone: StoneItem) {
     stone.prayer,
     stone.partner,
   ].join('').length;
-  return 124 + 120 * Math.min(1, Math.sqrt(written / 900));
+  return 100 + 120 * Math.min(1, Math.sqrt(written / 900));
 }
 
 /** A flat-bottomed, round-shouldered pebble built from four cubic curves. */
@@ -98,37 +95,24 @@ export function StoneTower<T extends StoneItem>({
     lastX = x;
     return { stone, noise, tone, w, h, x, y, rotation: noise(6) * 4 };
   });
-  const height = Math.max(430, -top + 70);
+  const height = Math.max(240, -top + 44);
   const ground = height - 20;
-  const sky = seeded('night-sky');
-  const stars = Array.from({ length: STAR_COUNT }, (_, index) => ({
-    x: (sky(index * 3 + 1) + 1) / 2,
-    y: (sky(index * 3 + 2) + 1) / 2,
-    r: 0.6 + ((sky(index * 3 + 3) + 1) / 2) * 1.4,
-    delay: ((sky(index + 90) + 1) / 2) * 3,
-  }));
-  const embers = Array.from({ length: 7 }, (_, index) => ({
-    dx: sky(index + 200) * 46,
-    r: 1.4 + ((sky(index + 300) + 1) / 2) * 1.6,
-    delay: index * 0.65,
-  }));
   let previousYear = '';
 
   return (
-    <Card className="night-sky relative -mx-5 overflow-hidden rounded-none border-x-0 border-white/10 p-4 text-white shadow-[0_30px_80px_-30px_#00e0c6aa] sm:mx-0 sm:rounded-3xl sm:border-x sm:p-7">
-      <div className="mx-auto max-w-xl">
-        <ul className="flex flex-wrap justify-center gap-2" hidden={ordered.length === 0}>
+    <Card className="overflow-hidden rounded-3xl border-border/60 bg-[radial-gradient(120%_80%_at_50%_0%,var(--card),var(--muted))] p-5 sm:p-7">
+      <div className="mx-auto max-w-lg">
+        <ul className="flex flex-wrap justify-center gap-2">
           {tones.map((tone) => (
             <li
               key={tone}
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/15 backdrop-blur"
+              className="inline-flex items-center gap-2 rounded-full bg-card/80 px-3 py-1.5 text-xs font-medium text-muted-foreground ring-1 ring-border/60"
             >
               <span
                 aria-hidden="true"
-                className="h-2.5 w-4 rounded-[50%]"
+                className="h-2.5 w-4 rounded-[50%] shadow-[inset_0_-1px_1px_#0003]"
                 style={{
-                  background: `radial-gradient(circle at 35% 30%, ${light(tone, '40%')}, ${stoneColors[tone].fill})`,
-                  boxShadow: `0 0 10px ${stoneColors[tone].fill}`,
+                  background: `radial-gradient(circle at 35% 30%, ${shade(tone, '35%')}, ${shade(tone, '70%')})`,
                 }}
               />
               {t(`tower.${tone}Days`)}
@@ -136,14 +120,14 @@ export function StoneTower<T extends StoneItem>({
           ))}
         </ul>
 
-        <div className="mt-5 max-h-[74dvh] overflow-y-auto rounded-2xl">
+        <div className="mt-5 max-h-[65dvh] overflow-y-auto rounded-2xl">
           {!placedToday && (
             <div className="flex flex-col items-center gap-2 pb-2 pl-6">
-              <span className="text-xs font-medium text-white/70">{t('tower.today')}</span>
+              <span className="text-xs font-medium text-muted-foreground">{t('tower.today')}</span>
               <Link
                 to="/reflection"
                 aria-label={t('tower.setToday')}
-                className="grid h-14 w-36 place-items-center rounded-[50%] border-2 border-dashed border-white/30 text-white/60 shadow-[0_0_24px_-6px_var(--gold)] transition-colors hover:border-gold hover:text-gold"
+                className="grid h-14 w-36 place-items-center rounded-[50%] border-2 border-dashed border-muted-foreground/30 text-muted-foreground/60 transition-colors hover:border-gold hover:text-gold"
               >
                 <Plus aria-hidden="true" className="size-5" />
               </Link>
@@ -157,72 +141,39 @@ export function StoneTower<T extends StoneItem>({
           >
             <defs>
               {tones.map((tone) => (
-                <radialGradient key={tone} id={`${uid}-${tone}`} cx="32%" cy="20%" r="95%">
-                  <stop offset="0%" stopColor={light(tone, '38%')} />
-                  <stop offset="38%" stopColor={stoneColors[tone].fill} />
-                  <stop offset="100%" stopColor={deep(tone, '52%')} />
+                <radialGradient key={tone} id={`${uid}-${tone}`} cx="34%" cy="22%" r="85%">
+                  <stop offset="0%" stopColor={shade(tone, '30%')} />
+                  <stop offset="55%" stopColor={shade(tone, '58%')} />
+                  <stop offset="100%" stopColor={shade(tone, '82%')} />
                 </radialGradient>
               ))}
-              <radialGradient id={`${uid}-beam`} cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#ffd98a" stopOpacity="0.38" />
-                <stop offset="100%" stopColor="#ffd98a" stopOpacity="0" />
-              </radialGradient>
               <filter id={`${uid}-grain`} x="0" y="0" width="100%" height="100%">
-                <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves={2} seed={7} />
-                <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0" />
+                <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves={2} seed={7} />
+                <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.16 0" />
                 <feComposite in2="SourceGraphic" operator="in" />
               </filter>
               <filter id={`${uid}-soft`} x="-30%" y="-100%" width="160%" height="300%">
                 <feGaussianBlur stdDeviation="4" />
               </filter>
-              <filter id={`${uid}-glow`} x="-60%" y="-90%" width="220%" height="280%">
-                <feGaussianBlur stdDeviation="11" />
-              </filter>
             </defs>
 
-            <g aria-hidden="true">
-              {stars.map((star, index) => (
-                <circle
-                  key={index}
-                  cx={star.x * WIDTH}
-                  cy={star.y * height}
-                  r={star.r}
-                  fill="#fff"
-                  className="motion-safe:animate-[star-twinkle_3.2s_ease-in-out_infinite]"
-                  style={{ animationDelay: `${star.delay}s` }}
-                />
-              ))}
-              <circle cx={CENTER} cy={ground + top - 24} r={140} fill={`url(#${uid}-beam)`} />
-              {embers.map((ember, index) => (
-                <circle
-                  key={index}
-                  cx={CENTER + ember.dx}
-                  cy={ground + top + 6}
-                  r={ember.r}
-                  fill="#ffd98a"
-                  opacity={0}
-                  className="motion-safe:animate-[ember-rise_4.5s_ease-out_infinite]"
-                  style={{ animationDelay: `${ember.delay}s` }}
-                />
-              ))}
-            </g>
             <line
               x1={RAIL}
               x2={RAIL}
               y1={ground + top}
               y2={ground}
-              stroke="#ffffff"
-              opacity={0.16}
+              stroke="currentColor"
+              opacity={0.12}
               strokeWidth={1.5}
             />
             <ellipse
               cx={CENTER}
               cy={ground + 4}
               rx={150}
-              ry={12}
-              fill="#00e0c6"
-              opacity={0.45}
-              filter={`url(#${uid}-glow)`}
+              ry={10}
+              fill="currentColor"
+              opacity={0.07}
+              filter={`url(#${uid}-soft)`}
             />
 
             {laid.map(({ stone, noise, tone, w, h, x, y, rotation }, index) => {
@@ -240,21 +191,15 @@ export function StoneTower<T extends StoneItem>({
               });
               return (
                 <g key={stone.id}>
-                  <circle
-                    cx={RAIL}
-                    cy={cy}
-                    r={3.5}
-                    fill={stoneColors[tone].fill}
-                    style={{ filter: `drop-shadow(0 0 4px ${stoneColors[tone].fill})` }}
-                  />
+                  <circle cx={RAIL} cy={cy} r={3.5} fill={shade(tone, '70%')} />
                   {showYear && (
                     <text
                       x={RAIL + 10}
                       y={cy + 4}
                       fontSize={11}
                       fontWeight={600}
-                      fill="#ffffff"
-                      opacity={0.6}
+                      fill="currentColor"
+                      opacity={0.55}
                     >
                       {year}
                     </text>
@@ -281,29 +226,22 @@ export function StoneTower<T extends StoneItem>({
                     >
                       <title>{label}</title>
                       <g transform={`rotate(${rotation} ${x} ${cy})`}>
-                        <path
-                          d={path}
-                          fill={stoneColors[tone].fill}
-                          opacity={latest ? undefined : 0.4}
-                          filter={`url(#${uid}-glow)`}
-                          className={
-                            latest
-                              ? 'motion-safe:animate-[stone-pulse_2.8s_ease-in-out_infinite]'
-                              : undefined
-                          }
+                        <ellipse
+                          cx={x + 4}
+                          cy={cy + h * 0.42}
+                          rx={w * 0.42}
+                          ry={h * 0.16}
+                          fill="#1a2a30"
+                          opacity={0.28}
+                          filter={`url(#${uid}-soft)`}
                         />
                         <path d={path} fill={`url(#${uid}-${tone})`} />
                         <path d={path} filter={`url(#${uid}-grain)`} fill="#000" />
                         <path
-                          d={stonePath(x, cy - h * 0.04, w * 0.7, h * 0.62, noise)}
-                          fill={light(tone, '30%')}
-                          opacity={0.2}
-                        />
-                        <path
                           d={path}
                           fill="none"
-                          stroke={light(tone, '45%')}
-                          strokeOpacity={0.75}
+                          stroke={shade(tone, '100%')}
+                          strokeOpacity={0.35}
                           strokeWidth={1.2}
                           className="transition-[stroke,stroke-width] group-focus-visible:stroke-gold group-focus-visible:stroke-[3] group-focus-visible:[stroke-opacity:1]"
                         />
@@ -313,7 +251,7 @@ export function StoneTower<T extends StoneItem>({
                           rx={w * 0.2}
                           ry={h * 0.1}
                           fill="#fff"
-                          opacity={0.42}
+                          opacity={0.16}
                           filter={`url(#${uid}-soft)`}
                         />
                       </g>
@@ -324,15 +262,13 @@ export function StoneTower<T extends StoneItem>({
             })}
           </svg>
         </div>
-        {ordered.length > 0 && (
-          <Button
-            variant="gold"
-            className="mt-5 w-full"
-            onClick={() => onOpen(ordered[ordered.length - 1])}
-          >
-            {t('tower.remember')}
-          </Button>
-        )}
+        <p className="mb-5 mt-4 text-center text-xs text-muted-foreground">
+          {t('tower.order', { count: stones.length })}
+        </p>
+        <Button className="w-full" onClick={() => onOpen(ordered[ordered.length - 1])}>
+          {t('tower.remember')}
+        </Button>
+        <p className="mt-2 text-center text-xs text-muted-foreground">{t('tower.latest')}</p>
       </div>
     </Card>
   );
