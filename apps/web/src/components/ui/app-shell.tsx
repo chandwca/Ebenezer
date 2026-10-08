@@ -146,7 +146,7 @@ export function AppShell({
           id="main-content"
           className="mx-auto max-w-6xl scroll-mt-[calc(var(--app-header-height,6rem)+1.5rem)] px-5 py-9 pb-32 outline-none sm:px-9 md:pb-12"
         >
-          <PwaStatus showInstall={!['/', '/story'].includes(location.pathname)} />
+          <PwaStatus showInstall={location.pathname === '/settings'} />
           {children}
           <footer className="mt-10 flex items-center gap-2 border-t pt-5 text-xs text-muted-foreground">
             <Check size={14} /> {t('common:footer')}

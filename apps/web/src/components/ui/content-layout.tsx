@@ -7,6 +7,8 @@ const stackVariants = cva('grid', {
     layout: {
       stack: 'gap-5',
       spacious: 'gap-7',
+      /** One centred reading column, for feeds and simple lists. */
+      narrow: 'mx-auto w-full max-w-2xl gap-5',
       split: 'mt-7 items-start gap-6 lg:grid-cols-[1.4fr_1fr]',
       columns: 'items-start gap-6 lg:grid-cols-[1.4fr_1fr]',
     },

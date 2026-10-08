@@ -1,18 +1,13 @@
 {
   "eyebrow": "Together",
   "title": "Who will walk with you?",
-  "description": "Jesus met people one by one, then gathered them. Share what God is doing, carry one another in prayer, and find a group to walk with.",
+  "description": "Share what God is doing and pray for one another.",
   "cancel": "Cancel",
   "tabs": {
     "label": "Together views",
     "board": "Board",
     "groups": "Groups",
-    "people": "My people",
-    "description": {
-      "board": "Share an experience, a stone or a prayer request with the audience you choose.",
-      "groups": "Find a group to pray, share and walk with.",
-      "people": "Start with someone you trust. Add your people and ask them to pray with you."
-    }
+    "people": "My people"
   },
   "status": {
     "loading": "Loading…",
@@ -98,13 +93,6 @@
     "empty": "Nothing here yet. Be the first to share.",
     "more": "Show more"
   },
-  "side": {
-    "askTitle": "Ask someone to pray",
-    "askDescription": "Your people, with or without an Ebenezer account.",
-    "seeAll": "See all",
-    "groupsTitle": "Groups you can join",
-    "noPeople": "Add your people under My people."
-  },
   "search": {
     "hint": "Search by handle, for example @hannah.",
     "placeholder": "@handle",
@@ -119,7 +107,6 @@
     "manage": "Manage",
     "manageDescription": "Members, invitations and settings.",
     "discover": "Open groups",
-    "discoverHint": "Anyone on Ebenezer can join an open group. Private groups are invite-only.",
     "noneOpen": "No open groups to join right now. Start one!",
     "join": "Join",
     "joined": "You joined {{name}}.",
@@ -171,10 +158,8 @@
   "people": {
     "requests": "Friend requests",
     "known": "Someone I know",
-    "knownHint": "Family and friends without an account. They stay on this device and receive requests through your own messaging app.",
     "noContacts": "No one yet. Add someone like Mom or a mentor.",
     "friends": "Friends on Ebenezer",
-    "friendsHint": "People who accepted your friend request. They can receive requests inside Ebenezer.",
     "noFriends": "No friends yet. Find someone by their handle.",
     "signInForFriends": "Sign in to add friends who use Ebenezer.",
     "find": "Find a friend",
@@ -207,11 +192,6 @@
       "email": "Email",
       "share": "Choose an app"
     },
-    "linkTitle": "Mom doesn’t need an account",
-    "linkDescription": "When you ask someone without Ebenezer to pray, you can include a private prayer link. It opens only that request, never your journal, and expires after 14 days.",
-    "linkStep1": "You send it",
-    "linkStep2": "They open and pray",
-    "linkStep3": "You see “I prayed for you”",
     "form": {
       "intro": "Add someone you’d like beside you in prayer. Adding them never sends a message, and their details stay on this device.",
       "name": "What do you call them?",

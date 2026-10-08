@@ -8,9 +8,7 @@ import { Button } from '@/components/ui/button';
 import { CommunityPostCard } from '@/components/ui/community-post-card';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { ContentLayout } from '@/components/ui/content-layout';
-import { GroupCard } from '@/components/ui/group-card';
 import { PostComposer, type ShareableStone } from '@/components/ui/post-composer';
-import { SectionCard } from '@/components/ui/section-card';
 import { ToggleChips } from '@/components/ui/toggle-chips';
 import { journal } from '@/db/repositories';
 import { EditPostDialog } from './community-dialogs';
@@ -44,13 +42,11 @@ export function BoardTab({
   filter,
   onFilter,
   onNotice,
-  aside,
 }: {
   community: Community;
   filter: 'all' | PostKind;
   onFilter: (filter: 'all' | PostKind) => void;
   onNotice: (message: string, error?: boolean) => void;
-  aside: React.ReactNode;
 }) {
   const { t } = useTranslation('community');
   const stones = useShareableStones();
@@ -80,114 +76,86 @@ export function BoardTab({
   }
 
   return (
-    <ContentLayout layout="columns">
-      <ContentLayout>
-        <PostComposer
-          authorName={community.profileName ?? t('post.you')}
-          groups={myGroups}
-          friends={friends}
-          stones={stones}
-          onSubmit={async (post) => {
-            try {
-              await actions.publish(post);
-              onNotice(t(`composer.shared.${post.audience}`));
-            } catch (error) {
-              fail(error);
-              throw error;
+    <ContentLayout layout="narrow">
+      <PostComposer
+        authorName={community.profileName ?? t('post.you')}
+        groups={myGroups}
+        friends={friends}
+        stones={stones}
+        onSubmit={async (post) => {
+          try {
+            await actions.publish(post);
+            onNotice(t(`composer.shared.${post.audience}`));
+          } catch (error) {
+            fail(error);
+            throw error;
+          }
+        }}
+      />
+      <ToggleChips
+        label={t('filter.label')}
+        value={filter}
+        onChange={onFilter}
+        options={[
+          { value: 'all', label: t('filter.all') },
+          { value: 'prayer_request', label: t('filter.prayer_request'), icon: HandHeart },
+          { value: 'stone', label: t('filter.stone'), icon: BookOpen },
+          { value: 'experience', label: t('filter.experience'), icon: Sparkles },
+        ]}
+      />
+      {community.status === 'loading' && !community.posts.length ? (
+        <Alert variant="info">{t('status.loading')}</Alert>
+      ) : community.posts.length ? (
+        community.posts.map((post) => (
+          <CommunityPostCard
+            key={post.id}
+            post={post}
+            busy={busyPost === post.id}
+            commentsOpen={openComments === post.id}
+            onPray={(item) => void pray(item)}
+            onToggleComments={(item) =>
+              setOpenComments((current) => (current === item.id ? undefined : item.id))
             }
-          }}
-        />
-        <ToggleChips
-          label={t('filter.label')}
-          value={filter}
-          onChange={onFilter}
-          options={[
-            { value: 'all', label: t('filter.all') },
-            { value: 'prayer_request', label: t('filter.prayer_request'), icon: HandHeart },
-            { value: 'stone', label: t('filter.stone'), icon: BookOpen },
-            { value: 'experience', label: t('filter.experience'), icon: Sparkles },
-          ]}
-        />
-        {community.status === 'loading' && !community.posts.length ? (
-          <Alert variant="info">{t('status.loading')}</Alert>
-        ) : community.posts.length ? (
-          community.posts.map((post) => (
-            <CommunityPostCard
-              key={post.id}
-              post={post}
-              busy={busyPost === post.id}
-              commentsOpen={openComments === post.id}
-              onPray={(item) => void pray(item)}
-              onToggleComments={(item) =>
-                setOpenComments((current) => (current === item.id ? undefined : item.id))
-              }
-              onEdit={post.isOwn ? setEditing : undefined}
-              onDelete={post.isOwn ? setDeleting : undefined}
-              onReport={
-                post.isOwn
-                  ? undefined
-                  : (item) =>
-                      void actions
-                        .report(item)
-                        .then(() => onNotice(t('post.reported')))
-                        .catch(fail)
-              }
-            >
-              {api && (
-                <PostComments
-                  api={api}
-                  post={post}
-                  onError={(code) => onNotice(t(`errors.${code}`), true)}
-                  onCountChange={(count) => actions.setCommentCount(post.id, count)}
-                />
-              )}
-            </CommunityPostCard>
-          ))
-        ) : (
-          <Alert variant="info">{t('filter.empty')}</Alert>
-        )}
-        {community.nextCursor && (
-          <Button
-            variant="outline"
-            disabled={loadingMore}
-            onClick={() => {
-              setLoadingMore(true);
-              actions
-                .loadMore()
-                .catch(fail)
-                .finally(() => setLoadingMore(false));
-            }}
+            onEdit={post.isOwn ? setEditing : undefined}
+            onDelete={post.isOwn ? setDeleting : undefined}
+            onReport={
+              post.isOwn
+                ? undefined
+                : (item) =>
+                    void actions
+                      .report(item)
+                      .then(() => onNotice(t('post.reported')))
+                      .catch(fail)
+            }
           >
-            {t(loadingMore ? 'status.loading' : 'filter.more')}
-          </Button>
-        )}
-      </ContentLayout>
-      <ContentLayout>
-        {aside}
-        {community.groups.some((group) => group.visibility === 'open' && !group.viewerRole) && (
-          <SectionCard title={t('side.groupsTitle')} plain>
-            {community.groups
-              .filter((group) => group.visibility === 'open' && !group.viewerRole)
-              .slice(0, 3)
-              .map((group) => (
-                <GroupCard key={group.id} group={group} compact>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      void actions
-                        .joinGroup(group)
-                        .then(() => onNotice(t('groups.joined', { name: group.name })))
-                        .catch(fail)
-                    }
-                  >
-                    {t('groups.join')}
-                  </Button>
-                </GroupCard>
-              ))}
-          </SectionCard>
-        )}
-      </ContentLayout>
+            {api && (
+              <PostComments
+                api={api}
+                post={post}
+                onError={(code) => onNotice(t(`errors.${code}`), true)}
+                onCountChange={(count) => actions.setCommentCount(post.id, count)}
+              />
+            )}
+          </CommunityPostCard>
+        ))
+      ) : (
+        <Alert variant="info">{t('filter.empty')}</Alert>
+      )}
+      {community.nextCursor && (
+        <Button
+          variant="outline"
+          disabled={loadingMore}
+          onClick={() => {
+            setLoadingMore(true);
+            actions
+              .loadMore()
+              .catch(fail)
+              .finally(() => setLoadingMore(false));
+          }}
+        >
+          {t(loadingMore ? 'status.loading' : 'filter.more')}
+        </Button>
+      )}
 
       {editing && (
         <EditPostDialog

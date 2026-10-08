@@ -7,10 +7,8 @@ import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { ContentLayout } from '@/components/ui/content-layout';
-import { FeatureCard } from '@/components/ui/feature-card';
 import { PersonList, PersonRow } from '@/components/ui/person-row';
 import { SectionCard } from '@/components/ui/section-card';
-import { Link2 } from 'lucide-react';
 import { contacts } from '@/db/contacts';
 import type { PrayerTarget } from './ask-to-pray';
 import { ContactDialog } from './community-dialogs';
@@ -50,170 +48,159 @@ export function PeopleTab({
   const friends = community.connections.filter((item) => item.status === 'accepted');
 
   return (
-    <ContentLayout layout="columns">
-      <ContentLayout>
-        {incoming.length > 0 && (
-          <SectionCard title={t('people.requests')}>
-            <PersonList>
-              {incoming.map((connection) => (
-                <PersonRow
-                  key={connection.id}
-                  name={connection.person.displayName}
-                  detail={`@${connection.person.handle}`}
-                >
-                  <Button
-                    size="sm"
-                    onClick={() =>
-                      void actions
-                        .respond(connection, true)
-                        .then(() =>
-                          onNotice(t('people.nowFriends', { name: connection.person.displayName })),
-                        )
-                        .catch(fail)
-                    }
-                  >
-                    {t('people.accept')}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => void actions.respond(connection, false).catch(fail)}
-                  >
-                    {t('people.decline')}
-                  </Button>
-                </PersonRow>
-              ))}
-            </PersonList>
-          </SectionCard>
-        )}
-        <SectionCard
-          title={t('people.known')}
-          description={t('people.knownHint')}
-          action={
-            <Button variant="outline" size="sm" onClick={() => setEditing({})}>
-              <UserPlus aria-hidden="true" />
-              {t('people.addContact')}
-            </Button>
-          }
-        >
-          <PersonList empty={t('people.noContacts')}>
-            {(people ?? []).map((contact) => (
+    <ContentLayout layout="narrow">
+      {incoming.length > 0 && (
+        <SectionCard title={t('people.requests')}>
+          <PersonList>
+            {incoming.map((connection) => (
               <PersonRow
-                key={contact.id}
-                name={contact.displayName}
-                detail={[contact.relationship, t(`people.channel.${contact.channel}`)]
-                  .filter(Boolean)
-                  .join(' · ')}
+                key={connection.id}
+                name={connection.person.displayName}
+                detail={`@${connection.person.handle}`}
               >
                 <Button
-                  variant="outline"
                   size="sm"
-                  aria-label={t('people.askNamed', { name: contact.displayName })}
-                  onClick={() => onAsk({ kind: 'contact', contact })}
+                  onClick={() =>
+                    void actions
+                      .respond(connection, true)
+                      .then(() =>
+                        onNotice(t('people.nowFriends', { name: connection.person.displayName })),
+                      )
+                      .catch(fail)
+                  }
                 >
-                  <HandHeart aria-hidden="true" />
-                  {t('people.ask')}
+                  {t('people.accept')}
                 </Button>
                 <Button
                   variant="ghost"
-                  size="icon"
-                  aria-label={t('people.editNamed', { name: contact.displayName })}
-                  onClick={() => setEditing({ contact })}
+                  size="sm"
+                  onClick={() => void actions.respond(connection, false).catch(fail)}
                 >
-                  <Pencil aria-hidden="true" />
+                  {t('people.decline')}
                 </Button>
+              </PersonRow>
+            ))}
+          </PersonList>
+        </SectionCard>
+      )}
+      <SectionCard
+        title={t('people.known')}
+        action={
+          <Button variant="outline" size="sm" onClick={() => setEditing({})}>
+            <UserPlus aria-hidden="true" />
+            {t('people.addContact')}
+          </Button>
+        }
+      >
+        <PersonList empty={t('people.noContacts')}>
+          {(people ?? []).map((contact) => (
+            <PersonRow
+              key={contact.id}
+              name={contact.displayName}
+              detail={[contact.relationship, t(`people.channel.${contact.channel}`)]
+                .filter(Boolean)
+                .join(' · ')}
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                aria-label={t('people.askNamed', { name: contact.displayName })}
+                onClick={() => onAsk({ kind: 'contact', contact })}
+              >
+                <HandHeart aria-hidden="true" />
+                {t('people.ask')}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={t('people.editNamed', { name: contact.displayName })}
+                onClick={() => setEditing({ contact })}
+              >
+                <Pencil aria-hidden="true" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={t('people.removeNamed', { name: contact.displayName })}
+                onClick={() => setRemoving({ kind: 'contact', contact })}
+              >
+                <Trash2 aria-hidden="true" />
+              </Button>
+            </PersonRow>
+          ))}
+        </PersonList>
+      </SectionCard>
+      <SectionCard title={t('people.friends')}>
+        {signedIn ? (
+          <PersonList empty={t('people.noFriends')}>
+            {[...friends, ...outgoing].map((connection) => (
+              <PersonRow
+                key={connection.id}
+                name={connection.person.displayName}
+                detail={`@${connection.person.handle}`}
+                badge={connection.status === 'pending' ? t('people.requested') : undefined}
+              >
+                {connection.status === 'accepted' && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    aria-label={t('people.askNamed', { name: connection.person.displayName })}
+                    onClick={() => onAsk({ kind: 'friend', connection })}
+                  >
+                    <HandHeart aria-hidden="true" />
+                    {t('people.ask')}
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   size="icon"
-                  aria-label={t('people.removeNamed', { name: contact.displayName })}
-                  onClick={() => setRemoving({ kind: 'contact', contact })}
+                  aria-label={t(
+                    connection.status === 'pending' ? 'people.cancelNamed' : 'people.removeNamed',
+                    { name: connection.person.displayName },
+                  )}
+                  onClick={() => setRemoving({ kind: 'friend', connection })}
                 >
                   <Trash2 aria-hidden="true" />
                 </Button>
               </PersonRow>
             ))}
           </PersonList>
-        </SectionCard>
-        <SectionCard title={t('people.friends')} description={t('people.friendsHint')}>
-          {signedIn ? (
-            <PersonList empty={t('people.noFriends')}>
-              {[...friends, ...outgoing].map((connection) => (
-                <PersonRow
-                  key={connection.id}
-                  name={connection.person.displayName}
-                  detail={`@${connection.person.handle}`}
-                  badge={connection.status === 'pending' ? t('people.requested') : undefined}
-                >
-                  {connection.status === 'accepted' && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      aria-label={t('people.askNamed', { name: connection.person.displayName })}
-                      onClick={() => onAsk({ kind: 'friend', connection })}
-                    >
-                      <HandHeart aria-hidden="true" />
-                      {t('people.ask')}
-                    </Button>
-                  )}
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={t(
-                      connection.status === 'pending' ? 'people.cancelNamed' : 'people.removeNamed',
-                      { name: connection.person.displayName },
-                    )}
-                    onClick={() => setRemoving({ kind: 'friend', connection })}
-                  >
-                    <Trash2 aria-hidden="true" />
-                  </Button>
-                </PersonRow>
-              ))}
-            </PersonList>
-          ) : (
-            <Alert variant="info">{t('people.signInForFriends')}</Alert>
-          )}
-        </SectionCard>
-      </ContentLayout>
-      <ContentLayout>
-        {signedIn && api && (
-          <PeopleSearch
-            api={api}
-            label={t('people.find')}
-            refreshKey={community.connections}
-            action={(person) =>
-              person.connection ? (
-                <Button variant="ghost" size="sm" disabled>
-                  {t(
-                    person.connection.status === 'accepted'
-                      ? 'people.alreadyFriends'
-                      : 'people.requested',
-                  )}
-                </Button>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() =>
-                    void actions
-                      .requestFriend(person.id)
-                      .then(() => onNotice(t('people.requestSent', { name: person.displayName })))
-                      .catch(fail)
-                  }
-                >
-                  <UserPlus aria-hidden="true" />
-                  {t('people.addFriend')}
-                </Button>
-              )
-            }
-          />
+        ) : (
+          <Alert variant="info">{t('people.signInForFriends')}</Alert>
         )}
-        <FeatureCard
-          icon={Link2}
-          title={t('people.linkTitle')}
-          description={t('people.linkDescription')}
-          steps={[t('people.linkStep1'), t('people.linkStep2'), t('people.linkStep3')]}
+      </SectionCard>
+      {signedIn && api && (
+        <PeopleSearch
+          api={api}
+          label={t('people.find')}
+          refreshKey={community.connections}
+          action={(person) =>
+            person.connection ? (
+              <Button variant="ghost" size="sm" disabled>
+                {t(
+                  person.connection.status === 'accepted'
+                    ? 'people.alreadyFriends'
+                    : 'people.requested',
+                )}
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  void actions
+                    .requestFriend(person.id)
+                    .then(() => onNotice(t('people.requestSent', { name: person.displayName })))
+                    .catch(fail)
+                }
+              >
+                <UserPlus aria-hidden="true" />
+                {t('people.addFriend')}
+              </Button>
+            )
+          }
         />
-      </ContentLayout>
+      )}
 
       {editing && (
         <ContactDialog

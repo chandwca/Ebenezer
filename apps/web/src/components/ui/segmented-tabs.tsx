@@ -1,8 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
-import { Button } from './button';
 import { cn } from '@/lib/utils';
 
-/** Page-level view switcher; matches the Story tower/list switcher. */
+/** Page-level view switcher; matches the Story view switcher. */
 export function SegmentedTabs<T extends string>({
   label,
   value,
@@ -20,25 +19,30 @@ export function SegmentedTabs<T extends string>({
     <div
       role="group"
       aria-label={label}
-      className={cn('grid gap-1 rounded-2xl border bg-card p-1', !flush && 'mb-6')}
+      className={cn('grid gap-1 rounded-2xl bg-muted p-1', !flush && 'mb-6')}
       style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}
     >
       {options.map(({ value: option, label: text, icon: Icon, count }) => (
-        <Button
+        <button
           key={option}
-          variant={option === value ? 'default' : 'ghost'}
+          type="button"
           aria-pressed={option === value}
           onClick={() => onChange(option)}
-          className="px-2"
+          className={cn(
+            'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-2 text-sm font-semibold transition-[background-color,color,box-shadow] motion-reduce:transition-none',
+            option === value
+              ? 'bg-card text-foreground shadow-[0_2px_8px_-2px_#173b4d26]'
+              : 'text-muted-foreground hover:text-foreground',
+          )}
         >
-          <Icon aria-hidden="true" />
+          <Icon aria-hidden="true" className="size-4 shrink-0" />
           <span className="truncate">{text}</span>
           {count ? (
             <span className="rounded-full bg-gold px-1.5 text-xs text-gold-foreground">
               {count}
             </span>
           ) : null}
-        </Button>
+        </button>
       ))}
     </div>
   );

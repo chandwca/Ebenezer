@@ -175,56 +175,54 @@ export function GroupsTab({
       .catch(fail);
 
   return (
-    <ContentLayout layout="columns">
-      <ContentLayout>
-        {invited.length > 0 && (
-          <SectionCard title={t('groups.invitations')} plain>
-            {invited.map((group) => (
-              <GroupCard key={group.id} group={group}>
-                <Button size="sm" onClick={() => join(group)}>
-                  {t('groups.accept')}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() =>
-                    void actions
-                      .leaveGroup(group)
-                      .then(() => onNotice(t('groups.declined')))
-                      .catch(fail)
-                  }
-                >
-                  {t('groups.decline')}
-                </Button>
-              </GroupCard>
-            ))}
-          </SectionCard>
-        )}
-        <SectionCard
-          title={t('groups.mine')}
-          plain
-          action={
-            <Button onClick={() => setForm({})}>
-              <Plus aria-hidden="true" />
-              {t('groups.start')}
-            </Button>
-          }
-        >
-          {mine.length ? (
-            mine.map((group) => (
-              <GroupCard key={group.id} group={group}>
-                <Button variant="outline" size="sm" onClick={() => setManaging(group)}>
-                  <Settings aria-hidden="true" />
-                  {t('groups.manage')}
-                </Button>
-              </GroupCard>
-            ))
-          ) : (
-            <Alert variant="info">{t('groups.none')}</Alert>
-          )}
+    <ContentLayout layout="narrow">
+      {invited.length > 0 && (
+        <SectionCard title={t('groups.invitations')} plain>
+          {invited.map((group) => (
+            <GroupCard key={group.id} group={group}>
+              <Button size="sm" onClick={() => join(group)}>
+                {t('groups.accept')}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() =>
+                  void actions
+                    .leaveGroup(group)
+                    .then(() => onNotice(t('groups.declined')))
+                    .catch(fail)
+                }
+              >
+                {t('groups.decline')}
+              </Button>
+            </GroupCard>
+          ))}
         </SectionCard>
-      </ContentLayout>
-      <SectionCard title={t('groups.discover')} description={t('groups.discoverHint')} plain>
+      )}
+      <SectionCard
+        title={t('groups.mine')}
+        plain
+        action={
+          <Button onClick={() => setForm({})}>
+            <Plus aria-hidden="true" />
+            {t('groups.start')}
+          </Button>
+        }
+      >
+        {mine.length ? (
+          mine.map((group) => (
+            <GroupCard key={group.id} group={group}>
+              <Button variant="outline" size="sm" onClick={() => setManaging(group)}>
+                <Settings aria-hidden="true" />
+                {t('groups.manage')}
+              </Button>
+            </GroupCard>
+          ))
+        ) : (
+          <Alert variant="info">{t('groups.none')}</Alert>
+        )}
+      </SectionCard>
+      <SectionCard title={t('groups.discover')} plain>
         {open.length ? (
           open.map((group) => (
             <GroupCard key={group.id} group={group}>

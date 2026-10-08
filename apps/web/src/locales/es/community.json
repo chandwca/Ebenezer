@@ -1,18 +1,13 @@
 {
   "eyebrow": "Juntos",
   "title": "¿Quién caminará contigo?",
-  "description": "Jesús se encontró con las personas una por una y luego las reunió. Comparte lo que Dios está haciendo, apóyense en oración y encuentra un grupo con quien caminar.",
+  "description": "Comparte lo que Dios está haciendo y oren unos por otros.",
   "cancel": "Cancelar",
   "tabs": {
     "label": "Vistas de Juntos",
     "board": "Tablero",
     "groups": "Grupos",
-    "people": "Mi gente",
-    "description": {
-      "board": "Comparte una experiencia, una piedra o una petición de oración con las personas que elijas.",
-      "groups": "Encuentra un grupo para orar, compartir y caminar juntos.",
-      "people": "Empieza con alguien de confianza. Añade a tu gente y pídeles que oren contigo."
-    }
+    "people": "Mi gente"
   },
   "status": {
     "loading": "Cargando…",
@@ -98,13 +93,6 @@
     "empty": "Aún no hay nada aquí. Sé la primera persona en compartir.",
     "more": "Mostrar más"
   },
-  "side": {
-    "askTitle": "Pide a alguien que ore",
-    "askDescription": "Tu gente, con o sin cuenta de Ebenezer.",
-    "seeAll": "Ver todo",
-    "groupsTitle": "Grupos a los que puedes unirte",
-    "noPeople": "Añade a tu gente en Mi gente."
-  },
   "search": {
     "hint": "Busca por usuario, por ejemplo @hannah.",
     "placeholder": "@usuario",
@@ -119,7 +107,6 @@
     "manage": "Administrar",
     "manageDescription": "Miembros, invitaciones y ajustes.",
     "discover": "Grupos abiertos",
-    "discoverHint": "Cualquier persona en Ebenezer puede unirse a un grupo abierto. Los grupos privados son solo por invitación.",
     "noneOpen": "No hay grupos abiertos ahora. ¡Crea uno!",
     "join": "Unirme",
     "joined": "Te uniste a {{name}}.",
@@ -171,10 +158,8 @@
   "people": {
     "requests": "Solicitudes de amistad",
     "known": "Alguien que conozco",
-    "knownHint": "Familia y amigos sin cuenta. Se guardan en este dispositivo y reciben peticiones por tu propia app de mensajes.",
     "noContacts": "Aún no hay nadie. Añade a alguien como tu mamá o un mentor.",
     "friends": "Amigos en Ebenezer",
-    "friendsHint": "Personas que aceptaron tu solicitud. Pueden recibir peticiones dentro de Ebenezer.",
     "noFriends": "Aún no tienes amigos. Busca a alguien por su usuario.",
     "signInForFriends": "Inicia sesión para añadir amigos que usan Ebenezer.",
     "find": "Buscar a un amigo",
@@ -207,11 +192,6 @@
       "email": "Correo",
       "share": "Elegir una app"
     },
-    "linkTitle": "Mamá no necesita una cuenta",
-    "linkDescription": "Cuando pides oración a alguien sin Ebenezer, puedes incluir un enlace de oración privado. Abre solo esa petición, nunca tu diario, y vence a los 14 días.",
-    "linkStep1": "Tú lo envías",
-    "linkStep2": "Lo abre y ora",
-    "linkStep3": "Ves “Oré por ti”",
     "form": {
       "intro": "Añade a alguien que quieras a tu lado en oración. Añadirlo nunca envía un mensaje y sus datos se quedan en este dispositivo.",
       "name": "¿Cómo le llamas?",

@@ -1,6 +1,5 @@
 import { quoted } from '@/lib/scripture';
 import { useTranslation } from 'react-i18next';
-import { HeartHandshake, Moon, Sunrise } from 'lucide-react';
 import {
   morningPassage,
   type EncouragementRequest,
@@ -9,8 +8,6 @@ import {
 import { Button } from './button';
 import { Card } from './card';
 import { ScriptureCredit } from './scripture-credit';
-
-const carryIcons = [Sunrise, HeartHandshake, Moon];
 
 export function EncouragementPanel({
   input,
@@ -91,7 +88,6 @@ export function EncouragementPanel({
               <p className="mt-2 break-words font-serif text-xl leading-relaxed">
                 {quoted(thought.trim())}
               </p>
-              
             </div>
           ) : (
             <>
