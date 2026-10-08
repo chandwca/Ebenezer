@@ -21,7 +21,7 @@ it('opens a standalone entry, saves the optional profile, and bypasses onboardin
   expect(screen.queryByRole('navigation')).toBeNull();
   expect(screen.queryByRole('textbox')).toBeNull();
   expect(screen.queryByText('Foundation preview')).toBeNull();
-  fireEvent.click(screen.getByRole('button', { name: /Add my name/ }));
+  fireEvent.click(screen.getByRole('button', { name: /Use my name and city/ }));
   await screen.findByRole('textbox', { name: 'What should we call you?' });
   fireEvent.change(screen.getByRole('textbox', { name: 'What should we call you?' }), {
     target: { value: 'Alex' },
@@ -38,7 +38,7 @@ it('opens a standalone entry, saves the optional profile, and bypasses onboardin
   await act(async () => {
     await i18n.changeLanguage('en');
   });
-  fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
+  fireEvent.click(screen.getByRole('button', { name: 'Enter my space' }));
   await screen.findByRole('heading', { name: /Good (morning|afternoon|evening), Alex/ });
   expect(screen.queryByRole('heading', { name: 'Welcome to Ebenezer.' })).toBeNull();
   view.unmount();
@@ -49,7 +49,7 @@ it('opens a standalone entry, saves the optional profile, and bypasses onboardin
 
 it('allows exploring without a profile and remembers the choice', async () => {
   const view = mount();
-  fireEvent.click(await screen.findByRole('button', { name: /Get started/ }));
+  fireEvent.click(await screen.findByRole('button', { name: /Just look around/ }));
   await screen.findByRole('heading', { name: /^Good (morning|afternoon|evening)$/ });
   await waitFor(async () =>
     expect((await db.preferences.get('onboardingComplete'))?.value).toBe(true),
@@ -71,8 +71,8 @@ it('keeps deep links accessible and provides a welcome preview for returning use
 
 it('offers an account path that returns to the welcome after Google sign-in', async () => {
   mount();
-  fireEvent.click(await screen.findByRole('button', { name: /Sign in/ }));
-  await screen.findByRole('heading', { name: 'Sign in.' });
+  fireEvent.click(await screen.findByRole('button', { name: /Create an account/ }));
+  await screen.findByRole('heading', { name: 'Walk together with others.' });
   fireEvent.click(screen.getByRole('button', { name: 'Back' }));
   await screen.findByRole('heading', { name: 'Welcome to Ebenezer.' });
   expect(screen.getByRole('group', { name: 'How would you like to begin?' })).toBeTruthy();

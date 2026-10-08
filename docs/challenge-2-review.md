@@ -4,8 +4,6 @@ Reviewed October 7, 2026 against the challenge text supplied by the user.
 
 Implementation follow-up: the audience is now international students new to Christian faith who want to understand Jesus’ love. YouVersion BSB integration has been added to the main Scripture flows; see [setup and live verification](youversion-setup.md). The original assessment below records the pre-integration findings. Platform credentials and live verification are still needed, and community validation remains outstanding.
 
-> Update October 7, 2026: the Word card ([word-card.md](./word-card.md)) now implements recommendations 2 and 3 and part of 1 and 6. Validation (4) and Scripture review (5) remain open.
-
 ## Assessment
 
 Ebenezer partly meets the challenge. Scripture, response, and continuation are strong foundations. The main gaps are a demonstrated encounter in an existing digital environment, YouVersion as the core Scripture layer, evidence of real community validation, and accurate privacy controls for newer AI features.

@@ -1,41 +1,41 @@
 :root {
   color-scheme: light;
-  --background: #f1fbf9;
+  --background: #f7f6f2;
   --card: #ffffff;
-  --foreground: #062a33;
-  --primary: #00d4b8;
-  --primary-foreground: #032a26;
-  --secondary: #cffaf1;
-  --secondary-foreground: #006b5d;
-  --teal: #008577;
-  --gold: #ffa51f;
-  --gold-foreground: #2b1500;
-  --stone-bright: #ffb627;
-  --stone-mixed: #00e0c6;
-  --stone-hard: #2f7bff;
-  --muted: #e3f6f3;
-  --muted-foreground: #44656b;
-  --border: #cde8e4;
-  --destructive: #d6334a;
+  --foreground: #182b36;
+  --primary: #173b4d;
+  --primary-foreground: #ffffff;
+  --secondary: #e3efeb;
+  --secondary-foreground: #245b50;
+  --teal: #287568;
+  --gold: #d9a441;
+  --gold-foreground: #30230d;
+  --stone-bright: #d9a441;
+  --stone-mixed: #287568;
+  --stone-hard: #173b4d;
+  --muted: #eeefe9;
+  --muted-foreground: #596b75;
+  --border: #dce3df;
+  --destructive: #b83d45;
   --radius: 1rem;
-  --hero: #04212e;
+  --hero: #173b4d;
   --hero-foreground: #ffffff;
-  --hero-muted: #7ff5e3;
+  --hero-muted: #b9e1d6;
 }
 :root.dark {
   color-scheme: dark;
-  --background: #03111a;
-  --card: #0a2230;
-  --foreground: #e9fffb;
-  --primary: #19f0d3;
-  --primary-foreground: #022822;
-  --secondary: #0e3a3f;
-  --secondary-foreground: #aef8ec;
-  --teal: #3df2d8;
-  --muted: #0d2c38;
-  --muted-foreground: #8fb8bd;
-  --border: #174455;
-  --destructive: #ff8a98;
+  --background: #101b23;
+  --card: #172832;
+  --foreground: #edf3f0;
+  --primary: #8dcdbe;
+  --primary-foreground: #102a24;
+  --secondary: #233d38;
+  --secondary-foreground: #b9e1d6;
+  --teal: #8dcdbe;
+  --muted: #21343e;
+  --muted-foreground: #a7b9be;
+  --border: #31444e;
+  --destructive: #f1939a;
 }
 @theme inline {
   --color-background: var(--background);
@@ -88,39 +88,5 @@
   }
   100% {
     transform: none;
-  }
-}
-
-@keyframes star-twinkle {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes ember-rise {
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(0.6);
-  }
-  20% {
-    opacity: 0.95;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-120px) scale(1.1);
-  }
-}
-
-@keyframes stone-pulse {
-  0%,
-  100% {
-    opacity: 0.45;
-  }
-  50% {
-    opacity: 0.95;
   }
 }

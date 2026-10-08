@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useTranslation } from 'react-i18next';
+import { Layers } from 'lucide-react';
 import { journal } from '@/db/repositories';
 import type { Stone } from '@/db/database';
 import { Alert } from '@/components/ui/alert';
-import { Disclosure } from '@/components/ui/disclosure';
+import { EmptyState } from '@/components/ui/empty-state';
 import { PageHeading } from '@/components/ui/page-heading';
 import { StoneTower } from '@/components/ui/stone-tower';
 import { StoneDetail } from '@/components/ui/stone-detail';
@@ -34,8 +35,15 @@ export function StoryPage() {
   const selected = stones.find((stone) => stone.id === selectedId);
   return (
     <>
-      <PageHeading hidden title={t('tower.heading')} />
+      <PageHeading
+        eyebrow={t('story.eyebrow')}
+        title={t('tower.heading')}
+        description={t('tower.description')}
+      />
       {justSaved && <ReminderPrompt placement="after-stone" />}
+      {!editing && result && !result.failed && stones.length > 0 && (
+        <JourneySummary stones={result.stones} />
+      )}
       {notice && <Alert variant={notice.error ? 'error' : 'success'}>{t(notice.key)}</Alert>}
       {editing ? (
         <StoneEditor
@@ -51,14 +59,15 @@ export function StoryPage() {
       ) : result.failed ? (
         <Alert>{t('errors:storageUnavailable')}</Alert>
       ) : stones.length ? (
-        <>
-          <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
-          <Disclosure label={t('summary.eyebrow')}>
-            <JourneySummary stones={result.stones} />
-          </Disclosure>
-        </>
+        <StoneTower stones={stones} onOpen={(stone) => setSelectedId(stone.id)} />
       ) : (
-        <StoneTower stones={[]} onOpen={() => undefined} />
+        <EmptyState
+          icon={Layers}
+          title={t('story.heading')}
+          description={t('story.empty')}
+          action={t('form.begin')}
+          to="/reflection"
+        />
       )}
       {selected && (
         <StoneDetail

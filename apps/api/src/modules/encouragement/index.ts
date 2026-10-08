@@ -10,8 +10,6 @@ import {
   type EveningPromptResponse,
   type JourneySummaryResponse,
   scriptureSnapshotSchema,
-  wordMoments,
-  type ScriptureSnapshot,
 } from '@ebenezer/contracts';
 import { z } from 'zod';
 import type { ScriptureProvider } from '../../shared/bible/provider.js';
@@ -87,36 +85,6 @@ export function registerEncouragementRoutes(
           await resolve(book, chapter, firstVerse, lastVerse, 'reference'),
         );
       } catch {
-        throw new ApiError(503, 'unavailable', 'Scripture is unavailable.');
-      }
-    },
-  );
-  const wordCache = new Map<string, { expires: number; value: ScriptureSnapshot }>();
-  app.get(
-    '/word/:moment',
-    { onRequest: rateLimit({ max: 240, windowMs: 60000 }) },
-    async (request, reply) => {
-      const moment = wordMoments.find(
-        (item) => item.id === (request.params as { moment?: string }).moment,
-      );
-      if (!moment) throw new ApiError(404, 'not_found', 'Unknown Word.');
-      const cached = wordCache.get(moment.id);
-      reply.header('Cache-Control', 'public, max-age=300');
-      if (cached && cached.expires > Date.now()) return cached.value;
-      try {
-        const value = scriptureSnapshotSchema.parse(
-          await resolve(
-            moment.book,
-            moment.chapter,
-            moment.firstVerse,
-            moment.lastVerse,
-            `word:${moment.id}`,
-          ),
-        );
-        wordCache.set(moment.id, { expires: Date.now() + 6 * 3600000, value });
-        return value;
-      } catch {
-        reply.header('Cache-Control', 'no-store');
         throw new ApiError(503, 'unavailable', 'Scripture is unavailable.');
       }
     },

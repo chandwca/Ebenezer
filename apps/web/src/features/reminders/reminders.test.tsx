@@ -81,9 +81,13 @@ afterEach(() => {
 it('one tap asks permission, subscribes with the app key and saves default times without an account', async () => {
   const browser = pushBrowser();
   renderWithProviders(<ReminderPrompt placement="today" />);
-  expect(await screen.findByText('Get a Word each day')).toBeTruthy();
-  fireEvent.click(screen.getByRole('button', { name: 'Turn on' }));
-  expect(await screen.findByText('Reminder on for 7:30 AM.')).toBeTruthy();
+  expect(await screen.findByText('A gentle reminder, twice a day')).toBeTruthy();
+  expect(screen.getByText('7:30 AM')).toBeTruthy();
+  expect(screen.getByText('8:30 PM')).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: 'Turn on reminders' }));
+  expect(
+    await screen.findByText('Reminders are on. We’ll meet you tomorrow at 7:30 AM.'),
+  ).toBeTruthy();
   expect(browser.Notification.requestPermission).toHaveBeenCalled();
   const options = browser.pushManager.subscribe.mock.calls[0][0]!;
   expect(options.userVisibleOnly).toBe(true);
@@ -107,32 +111,32 @@ it('“Not now” is respected: asked again once after a stone, then never', asy
   pushBrowser();
   const today = renderWithProviders(<ReminderPrompt placement="today" />);
   fireEvent.click(await screen.findByRole('button', { name: 'Not now' }));
-  await waitFor(() => expect(screen.queryByText('Get a Word each day')).toBeNull());
+  await waitFor(() => expect(screen.queryByText('A gentle reminder, twice a day')).toBeNull());
   expect((await stored()).dismissed).toBe('once');
   today.unmount();
   renderWithProviders(<ReminderPrompt placement="after-stone" />);
   fireEvent.click(await screen.findByRole('button', { name: 'Not now' }));
   await waitFor(async () => expect((await stored()).dismissed).toBe('after-stone'));
-  await waitFor(() => expect(screen.queryByText('Get a Word each day')).toBeNull());
+  await waitFor(() => expect(screen.queryByText('A gentle reminder, twice a day')).toBeNull());
 });
 
 it('a refused permission explains how to allow notifications', async () => {
   pushBrowser({ answer: 'denied' });
   renderWithProviders(<ReminderPrompt placement="today" />);
-  fireEvent.click(await screen.findByRole('button', { name: 'Turn on' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Turn on reminders' }));
   expect(await screen.findByText('Notifications are blocked for Ebenezer')).toBeTruthy();
   expect(screen.getByText('Allow notifications.')).toBeTruthy();
   expect((await stored()).enabled).toBe(false);
 });
 
-it('on an iPhone browser tab Today stays quiet and never asks for permission', async () => {
+it('on an iPhone browser tab it shows the Home Screen steps instead of asking', async () => {
   const browser = pushBrowser({
     userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)',
   });
   renderWithProviders(<ReminderPrompt placement="today" />);
-  await new Promise((resolve) => setTimeout(resolve, 50));
-  expect(screen.queryByText('Get reminders on your iPhone')).toBeNull();
-  expect(screen.queryByRole('button', { name: 'Turn on' })).toBeNull();
+  expect(await screen.findByText('Get reminders on your iPhone')).toBeTruthy();
+  expect(screen.getByText('Choose Add to Home Screen.')).toBeTruthy();
+  expect(screen.queryByRole('button', { name: 'Turn on reminders' })).toBeNull();
   expect(browser.Notification.requestPermission).not.toHaveBeenCalled();
 });
 

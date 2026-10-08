@@ -1,32 +1,95 @@
 {
+  "eyebrow": "Haz espacio para lo que importa",
+  "title": "Un momento para recordar.",
+  "description": "Ven como estás.",
+  "hero": {
+    "tagline": "Esta noche",
+    "title": "Trae tu día.",
+    "description": "Cuando el día termine, mira atrás con el Señor y coloca una piedra para recordarlo.",
+    "begin": "Comenzar la reflexión de esta noche"
+  },
+  "scripture": {
+    "heading": "Una Palabra para llevar contigo",
+    "description": "Empieza con el pasaje de hoy. Hay espacio para tus preguntas al explorar el cuidado de Dios.",
+    "reflect": "Reflexionar sobre este pasaje",
+    "note": "La Escritura se muestra en inglés (KJV)."
+  },
+  "invitation": {
+    "title": "Empieza donde estás.",
+    "description": "Con gratitud, con incertidumbre o entre ambas. Hay espacio para todos tus días."
+  },
+  "next": {
+    "title": "Tu próximo pequeño paso",
+    "wordTitle": "Encontrar una Palabra",
+    "wordDescription": "Empieza por cómo te sientes.",
+    "storyTitle": "Volver a tu historia",
+    "storyDescription": "Recuerda lo que te sostuvo.",
+    "communityTitle": "Caminar juntos",
+    "communityDescription": "Haz espacio para el ánimo."
+  },
   "greeting": {
     "morning": "Buenos días",
     "afternoon": "Buenas tardes",
     "evening": "Buenas noches",
     "named": "{{greeting}}, {{name}}"
   },
+  "onboarding": {
+    "title": "Encuentra calma, estés donde estés.",
+    "description": "Un país nuevo. Gente nueva. Algunos días llenos de posibilidades; otros, lejos de casa. Da espacio a lo que sientes, encuentra ánimo en las Escrituras y recuerda lo que te sostiene.",
+    "privacy": "No necesitas una cuenta. Tu diario se guarda en este dispositivo. Puedes añadir tu nombre y ciudad después en Ajustes.",
+    "skip": "Empezar sin perfil",
+    "start": "Comenzar mi camino",
+    "personalize": "Hacer mío este espacio",
+    "personalizeNote": "¿Cómo te gustaría que te llamáramos y dónde vives ahora? Estos datos se guardan en tu dispositivo.",
+    "back": "Volver a la bienvenida",
+    "word": "Encuentra ánimo en las Escrituras",
+    "reflect": "Da espacio a tus sentimientos",
+    "remember": "Recuerda momentos de esperanza"
+  },
   "entry": {
-    "visualTitle": "Una Palabra para los momentos que importan.",
-    "title": "Te damos la bienvenida a Ebenezer.",
-    "description": "Recibe la Escritura. Compártela.",
-    "choose": "¿Cómo quieres empezar?",
-    "options": {
-      "explore": {
-        "title": "Empezar"
+    "eyebrow": "Una piedra para recordar",
+    "visualTitle": "Dios te ama. Nunca te olvida.",
+    "visualNote": "Dondequiera que esté tu hogar, Jesús es tu proveedor. Piedra a piedra, recuerda la fidelidad del Señor.",
+    "title": "Bienvenido a Ebenezer.",
+    "description": "¿Estás comenzando en la fe, lejos de casa o con muchas preguntas? Explora el amor de Jesús a través de la Escritura, la oración y pequeños momentos de reflexión.",
+    "reminders": {
+      "loved": {
+        "title": "Dios siempre te ama.",
+        "description": "Cerca o lejos de casa, el amor de Dios te acompaña."
       },
-      "local": {
-        "title": "Añadir mi nombre"
+      "provided": {
+        "title": "Jesús es tu proveedor.",
+        "description": "Entrégale tus preocupaciones. Recuerda cómo te ha sostenido."
       },
-      "account": {
-        "title": "Iniciar sesión"
+      "together": {
+        "title": "No tienes que caminar a solas.",
+        "description": "Invita a quienes te apoyan en oración a orar contigo y a darse ánimo mutuamente."
       }
     },
-    "profileTitle": "Tu nombre.",
-    "profileDescription": "Se queda en este dispositivo.",
-    "accountTitle": "Inicia sesión.",
-    "accountDescription": "Ora con amigos y únete a grupos.",
-    "finish": "Continuar",
-    "back": "Atrás"
+    "privacy": "Tu diario es privado y se guarda en este dispositivo. No necesitas una cuenta.",
+    "profileTitle": "Vamos a conocerte un poco.",
+    "profileDescription": "Hagamos que este espacio se sienta un poco más tuyo. También puedes saltar este paso y ponerte cómodo primero.",
+    "finish": "Entrar en mi espacio",
+    "stepOne": "Una bienvenida · 1 de 2",
+    "stepTwo": "Tu espacio · 2 de 2",
+    "choose": "¿Cómo te gustaría empezar?",
+    "options": {
+      "account": {
+        "title": "Crear una cuenta",
+        "description": "Inicia sesión con Google para compartir piedras, orar con amigos y unirte a grupos."
+      },
+      "local": {
+        "title": "Usar mi nombre y ciudad",
+        "description": "Sin cuenta. Tu nombre y ciudad se quedan en este dispositivo."
+      },
+      "explore": {
+        "title": "Solo mirar",
+        "description": "Entra directamente. Puedes añadir tus datos cuando quieras en Ajustes."
+      }
+    },
+    "accountTitle": "Camina junto a otros.",
+    "accountDescription": "Una cuenta te permite compartir en el tablero, orar con amigos y unirte a grupos. Tu diario sigue privado en este dispositivo.",
+    "back": "Volver"
   },
   "encouragement": {
     "title": "Un poco de ánimo",
@@ -95,12 +158,8 @@
     "translationNote": "Escritura en inglés · {{translation}}",
     "thoughtTitle": "Un pensamiento para llevar",
     "thoughtPlaceholder": "Un pequeño pensamiento para el día…",
-    "prayerLabel": "Una breve oración",
-    "more": "Más"
-  },
-  "tiles": {
-    "reflect": "Reflexionar",
-    "sendHint": "Comparte la Escritura con un amigo",
-    "reflectHint": "Ora, escribe, añade una piedra"
+    "carry": "Llevarlo conmigo hoy",
+    "thoughtSaved": "Tu pensamiento está guardado",
+    "prayerLabel": "Una breve oración"
   }
 }

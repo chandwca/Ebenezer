@@ -5,6 +5,6 @@ export type StoneItem = ReflectionValues & { id: string; journalDate: string; cr
 
 export const stoneColors = {
   bright: { fill: 'var(--stone-bright)', text: 'var(--gold-foreground)' },
-  mixed: { fill: 'var(--stone-mixed)', text: '#062f2a' },
+  mixed: { fill: 'var(--stone-mixed)', text: '#FFFFFF' },
   hard: { fill: 'var(--stone-hard)', text: '#FFFFFF' },
 };

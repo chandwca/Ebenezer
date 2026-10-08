@@ -1,8 +1,6 @@
 # Ebenezer
 
-Ebenezer sends **Scripture beyond the app**: a trusted person shares a *Word card* link into a group chat, and a student opens it with no install or account, reads a reviewed passage, replies from their own messaging app, and chooses what happens next. See [Word card](docs/word-card.md) for the pitch, design decisions and demo checklist, and [validation log](docs/validation-log.md). The journaling PWA below (reflection journey, stones, reminders) is the optional "keep going" layer.
-
-The rebuild below currently implements the **stages 1–8**: preserved prototype, typed workspace, Node API, common theme/components, responsive routed screens, and bundled English/Spanish interface translations.
+A Christian reflection and journaling PWA. The React rebuild currently implements the **stages 1–8**: preserved prototype, typed workspace, Node API, common theme/components, responsive routed screens, and bundled English/Spanish interface translations.
 
 The primary audience is international students who are new to Christian faith and want to understand Jesus’ love. The main morning/evening Scripture flows and guided reader now support YouVersion BSB, with backend-only credentials, publisher attribution, and verified WEB fallback. See [YouVersion setup and live verification](docs/youversion-setup.md). Community needs still require validation with students; this audience statement is not a claim of completed user research.
 

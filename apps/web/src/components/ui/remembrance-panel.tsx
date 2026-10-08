@@ -1,17 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { Heart, Leaf } from 'lucide-react';
 import type { JourneySummaryResponse } from '@ebenezer/contracts';
-import { Button } from './button';
 import { Card } from './card';
 export function RemembrancePanel({
   busy,
   result,
-  consent,
 }: {
   busy: boolean;
   result?: JourneySummaryResponse;
   language: string;
-  consent?: { label: string; note: string; onRequest: () => void };
 }) {
   const { t } = useTranslation('journal');
   return (
@@ -45,14 +42,6 @@ export function RemembrancePanel({
           </p>
         )}
       </div>
-      {consent && (
-        <div className="mt-5 grid justify-items-start gap-2">
-          <Button variant="outline" onClick={consent.onRequest}>
-            {consent.label}
-          </Button>
-          <p className="text-xs leading-5 text-muted-foreground">{consent.note}</p>
-        </div>
-      )}
       <div className="mt-5 flex items-center gap-2 border-t border-teal/10 pt-4 text-sm text-muted-foreground">
         <Heart size={16} aria-hidden="true" />
         <span>{t('summary.revisit')}</span>

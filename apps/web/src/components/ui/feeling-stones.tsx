@@ -58,7 +58,7 @@ export function FeelingStones({
               ref={index === 0 ? inputRef : undefined}
               className="peer sr-only"
             />
-            <span className="relative mx-auto flex h-16 w-full max-w-32 rotate-[var(--stone-tilt)] items-center justify-center rounded-[52%_48%_45%_55%/62%_55%_45%_38%] border border-border bg-card text-2xl shadow-[0_5px_0_-2px_var(--border),0_9px_14px_-8px_#062a3330] transition-[translate,rotate,background-color,box-shadow,border-color] duration-200 group-hover:-translate-y-1 group-hover:bg-secondary peer-checked:-translate-y-1 peer-checked:rotate-0 peer-checked:border-gold peer-checked:bg-gold/25 peer-checked:shadow-[0_5px_0_-2px_var(--gold),0_12px_22px_-10px_#ffb22460] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-teal motion-reduce:transition-none motion-reduce:translate-y-0">
+            <span className="relative mx-auto flex h-16 w-full max-w-32 rotate-[var(--stone-tilt)] items-center justify-center rounded-[52%_48%_45%_55%/62%_55%_45%_38%] border border-border bg-card text-2xl shadow-[0_5px_0_-2px_var(--border),0_9px_14px_-8px_#173b4d30] transition-[translate,rotate,background-color,box-shadow,border-color] duration-200 group-hover:-translate-y-1 group-hover:bg-secondary peer-checked:-translate-y-1 peer-checked:rotate-0 peer-checked:border-gold peer-checked:bg-gold/25 peer-checked:shadow-[0_5px_0_-2px_var(--gold),0_12px_22px_-10px_#d9a44160] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-teal motion-reduce:transition-none motion-reduce:translate-y-0">
               <span
                 aria-hidden="true"
                 className="absolute left-5 top-2 h-2 w-8 rounded-[50%] bg-secondary/60"
